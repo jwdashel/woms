@@ -71,13 +71,23 @@ def handler(event: Dict, context: Dict) -> Response:
 
     # parameters = event.get('queryStringParameters', None)
 
-    if 'queryStringParameters' in event:
-        xml = event['queryStringParameters']['xml_contents']
-        xml = urllib.parse.unquote(xml)
+    verb = event['httpMethod']
+
+    if verb == 'GET':
+        if 'queryStringParameters' in event:
+            xml = event['queryStringParameters']['xml_contents']
+            xml = urllib.parse.unquote(xml)
+
+    elif verb == 'POST':
+        if 'body' in event:
+            xml = event['body']
+
+    else:
+        return None # error state
 
     if xml:
         xmldict = xmltodict.parse(xml)
         j = json.dumps(xmldict)
-        return j
+        return j # save to redis here
 
-    return None
+    return None # error state
