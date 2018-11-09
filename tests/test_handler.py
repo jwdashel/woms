@@ -12,6 +12,7 @@ class client1:
     def get(query_string_parameters):
         return handler({'queryStringParameters': query_string_parameters, 'httpMethod': 'GET'}, {})
 
+
 class client2:
     @staticmethod
     def get(body):
@@ -63,9 +64,9 @@ class TestHandler:
         # dynamically create variables from querystring param dict
         # params = Namespace(**path_parameters)
 
-        expected_response = 'id_3189206699_30701071'
+        expected_response = '978416'
 
-        assert j['audio']['@ID'] == expected_response
+        assert j['mm_uid'] == expected_response
 
     @pytest.mark.parametrize(
         'body',
@@ -79,6 +80,6 @@ class TestHandler:
         # dynamically create variables from querystring param dict
         # params = Namespace(**path_parameters)
 
-        expected_response = '109921'
+        expected_response = '126753'
 
-        assert j['wddxPacket']['item'][0]['Music_MusicID'] == expected_response
+        assert j['mm_uid'] == expected_response
