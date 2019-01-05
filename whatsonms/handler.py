@@ -111,9 +111,45 @@ def handler(event: Dict, context: Dict) -> Response:
 
     # parameters = event.get('queryStringParameters', None)
 
+    path = event['path']
     verb = event['httpMethod']
+    response = None
 
+    if path == '/update':
+        response = update_metadata(event, verb)
+    elif path == '/whats-on':
+        response = get_metadata()
+
+    return response
+
+
+def get_metadata(event: Dict) -> Response:
+    """ Fetch cached JSON metadata from Redis
+    """
+    # TODO: get from Redis
+    pass
+
+
+def update_metadata(event: Dict, verb: str) -> Response:
+    """ Import new metadata from DAVID or NexGen and save it to Redis.
+    """
+    metadata_json = import_metadata(verb)
+
+    if metadata_json:
+        # TODO: save to Redis
+        print('saving to redis')
+
+    # This will return either the JSON, which will be discarded but signify
+    # an OK response, or it will return None, signifying an error
+    return metadata_json
+
+
+def import_metadata(event: Dict, verb: str) -> str:
+    """ Import new metadata from DAVID or NexGen, format it as JSON
+        and return it.
+    """
     if verb == 'GET':
+        # Request is coming from NexGen
         if 'queryStringParameters' in event:
             xml = event['queryStringParameters']['xml_contents']
             xml = urllib.parse.unquote(xml)
@@ -124,6 +160,7 @@ def handler(event: Dict, context: Dict) -> Response:
             return json.dumps(normalized)
 
     elif verb == 'POST':
+        # Request is coming from DAVID
         if 'body' in event:
             xml = event['body']
         if xml:

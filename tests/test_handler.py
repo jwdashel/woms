@@ -61,6 +61,8 @@ class TestHandler:
     def test_valid_request_client1(self, query_string_parameters):
         j = json.loads(client1.get(query_string_parameters))
 
+        print('nexgen json = ', j)
+
         # dynamically create variables from querystring param dict
         # params = Namespace(**path_parameters)
 
@@ -76,6 +78,8 @@ class TestHandler:
     )
     def test_valid_response_client2(self, body):
         j = json.loads(client2.get(body))
+
+        print('david json = ', j)
 
         # dynamically create variables from querystring param dict
         # params = Namespace(**path_parameters)

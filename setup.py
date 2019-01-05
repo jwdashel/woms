@@ -26,6 +26,7 @@ setup(
     },
     install_requires=[
         'raven',
+        'redis',
         'xmltodict',
     ],
     license='BSD',
@@ -34,8 +35,11 @@ setup(
     package_data={},
     packages=['whatsonms'],
     scripts=[],
-    setup_requires=['nyprsetuptools>=0.0.0'],
+    setup_requires=[
+        'nyprsetuptools>=0.0.0'
+    ],
     tests_require=[
+        'mockredispy',
         'pytest>=3.0.6',
         'pytest-cov',
         'pytest-env',
