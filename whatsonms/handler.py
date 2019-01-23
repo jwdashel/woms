@@ -8,6 +8,7 @@ import logging
 import xmltodict
 import urllib
 
+from whatsonms.config import redis_client
 
 
 DAVID_MUSIC_ELEMS = {
@@ -118,7 +119,7 @@ def handler(event: Dict, context: Dict) -> Response:
     if path == '/update':
         response = update_metadata(event, verb)
     elif path == '/whats-on':
-        response = get_metadata()
+        response = get_metadata(event)
 
     return response
 
@@ -126,18 +127,20 @@ def handler(event: Dict, context: Dict) -> Response:
 def get_metadata(event: Dict) -> Response:
     """ Fetch cached JSON metadata from Redis
     """
-    # TODO: get from Redis
-    pass
+    print('fetching from redis')
+    return redis_client.get('whats-on')
 
 
 def update_metadata(event: Dict, verb: str) -> Response:
     """ Import new metadata from DAVID or NexGen and save it to Redis.
     """
-    metadata_json = import_metadata(verb)
+    metadata_json = import_metadata(event, verb)
 
     if metadata_json:
-        # TODO: save to Redis
-        print('saving to redis')
+        redis_client.set('whats-on', metadata_json)
+        print('*** saving to redis ***')
+    else:
+        print('*** No metadata_json ***')
 
     # This will return either the JSON, which will be discarded but signify
     # an OK response, or it will return None, signifying an error
