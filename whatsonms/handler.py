@@ -117,7 +117,7 @@ def handler(event: Dict, context: Dict) -> Response:
     response = None
 
     if path == '/update':
-        response = update_metadata(event, verb)
+        response = set_metadata(event, verb)
     elif path == '/whats-on':
         response = get_metadata(event)
 
@@ -131,10 +131,10 @@ def get_metadata(event: Dict) -> Response:
     return redis_client.get('whats-on')
 
 
-def update_metadata(event: Dict, verb: str) -> Response:
+def set_metadata(event: Dict, verb: str) -> Response:
     """ Import new metadata from DAVID or NexGen and save it to Redis.
     """
-    metadata_json = import_metadata(event, verb)
+    metadata_json = parse_metadata(event, verb)
 
     if metadata_json:
         redis_client.set('whats-on', metadata_json)
@@ -147,8 +147,8 @@ def update_metadata(event: Dict, verb: str) -> Response:
     return metadata_json
 
 
-def import_metadata(event: Dict, verb: str) -> str:
-    """ Import new metadata from DAVID or NexGen, format it as JSON
+def parse_metadata(event: Dict, verb: str) -> str:
+    """ Parse new metadata from DAVID or NexGen -- format it as JSON
         and return it.
     """
     if verb == 'GET':
