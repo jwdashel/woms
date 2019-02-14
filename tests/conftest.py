@@ -8,8 +8,8 @@ from whatsonms.handler import handler
 
 @pytest.fixture(autouse=True, scope='function')
 def mock_redis(mocker):
-    redis = mocker.patch('redis.StrictRedis', mock_strict_redis_client)
-    yield redis
+    redis_client = mocker.patch('redis.StrictRedis', mock_strict_redis_client)
+    yield redis_client
 
 @pytest.fixture
 def mock_david(mock_redis):
