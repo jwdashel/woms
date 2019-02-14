@@ -3,16 +3,16 @@ import pytest
 
 from mockredis import mock_strict_redis_client
 
-from whatsonms.handler import handler
 
+@pytest.fixture(autouse=True)
+def handler(mocker):
+    mocker.patch('redis.StrictRedis', mock_strict_redis_client)
+    import whatsonms.handler
+    yield whatsonms.handler
 
-@pytest.fixture(autouse=True, scope='function')
-def mock_redis(mocker):
-    redis_client = mocker.patch('redis.StrictRedis', mock_strict_redis_client)
-    yield redis_client
 
 @pytest.fixture
-def mock_david(mock_redis):
+def mock_david(handler):
 
     def event_dict(body):
         return {
@@ -33,8 +33,9 @@ def mock_david(mock_redis):
 
     yield get
 
+
 @pytest.fixture
-def mock_nexgen(mock_redis):
+def mock_nexgen(handler):
 
     def get(qs_params):
         """ Simulate a request from NexGen with new metadata
@@ -50,8 +51,10 @@ def mock_nexgen(mock_redis):
 
     yield get
 
+
 @pytest.fixture
-def mock_web_client(mock_redis):
+def mock_web_client(handler):
+
     def get():
         """ Simulate a request from a web client for latest "whats on" metadata
         """
@@ -61,6 +64,7 @@ def mock_web_client(mock_redis):
         }, {})
         return json_from_str(resp)
     yield get
+
 
 def json_from_str(obj):
     return json.loads(obj) if isinstance(obj, str) else obj

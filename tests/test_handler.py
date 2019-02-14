@@ -4,7 +4,6 @@ import pytest
 
 from argparse import Namespace
 
-from whatsonms.handler import handler
 
 
 DAVID_SAMPLE = './tests/david_archive_sample.xml'
@@ -41,8 +40,3 @@ class TestHandler:
         mock_update = mock_nexgen(NEXGEN_SAMPLE_QS)
         whats_on = mock_web_client()
         assert whats_on == mock_update
-
-    def test_simple(self, mock_redis):
-        client = mock_redis()
-        client.set('foo', 'bar')
-        assert client.get('foo').decode('utf-8') == 'bar'
