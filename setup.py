@@ -39,7 +39,7 @@ setup(
         'nyprsetuptools>=0.0.0'
     ],
     tests_require=[
-        'mockredispy',
+        'fakeredis',
         'pytest>=3.0.6',
         'pytest-cov',
         'pytest-env',

@@ -1,12 +1,12 @@
 import json
 import pytest
 
-from mockredis import mock_strict_redis_client
+import fakeredis
 
 
 @pytest.fixture(autouse=True)
 def handler(mocker):
-    mocker.patch('redis.StrictRedis', mock_strict_redis_client)
+    mocker.patch('redis.StrictRedis', fakeredis.FakeStrictRedis)
     import whatsonms.handler
     yield whatsonms.handler
 
