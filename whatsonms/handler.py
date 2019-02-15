@@ -151,7 +151,7 @@ def set_metadata(event: Dict, verb: str) -> Response:
     if metadata_json:
         redis_client.set('whats-on', metadata_json)
     else:
-        print('*** No metadata_json ***')
+        logger.error('Error: no metadata JSON to save')
 
     # This will return either the JSON, which will be discarded but signify
     # an OK response, or it will return None, signifying an error
