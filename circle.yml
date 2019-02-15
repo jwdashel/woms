@@ -1,0 +1,112 @@
+version: 2
+jobs:
+
+  test:
+    working_directory: ~/whats-on-microservice
+    docker:
+      - image: circleci/python:3.6
+    steps:
+      - checkout
+      - restore_cache:
+          key: deps-{{ checksum "setup.py" }}
+      - run:
+          name: Install Requirements
+          command: |
+            if [[ ! -d ~/.venv ]]; then
+              python -m venv ~/.venv
+              . ~/.venv/bin/activate
+              pip install -e .
+              python setup.py test_requirements
+            fi
+      - run:
+          name: Test
+          command: |
+            . ~/.venv/bin/activate
+            python setup.py test
+      - save_cache:
+          key: deps-{{ checksum "setup.py" }}
+          paths:
+            - ~/.venv
+            - ~/whats-on-microservice/.eggs
+            - ~/whats-on-microservice/whats_on_microservice.egg-info
+
+
+  build_lambda:
+    working_directory: ~/whats-on-microservice
+    docker:
+      - image: circleci/python:3.6
+    steps:
+      - checkout
+      - run:
+          name: Build Lambda
+          command: |
+            mkdir -p workspace/pkg
+            pip install . -t workspace/pkg
+      - persist_to_workspace:
+          root: workspace
+          paths:
+            - pkg
+
+
+  deploy_lambda:
+    working_directory: ~/whats-on-microservice
+    docker:
+      - image: circleci/python:3.6
+    steps:
+      - checkout
+      - attach_workspace:
+          at: workspace
+      - restore_cache:
+          key: deps-{{ checksum "setup.py" }}-{{ checksum "circle.yml" }}
+      - run:
+          name: Deploy Lambda
+          command: |
+            if [[ "${CIRCLE_BRANCH}" == "master" ]]; then
+              export ENV=demo
+              export TAG=demo
+            elif echo "$CIRCLE_TAG" | grep -q "v[0-9]\+\.[0-9]\+\.[0-9]\+"; then
+              export ENV=prod
+              export TAG=$CIRCLE_TAG
+            else
+              exit 1
+            fi
+            . ~/.venv/bin/activate
+            python setup.py deploy \
+              --environment=$ENV \
+              --function-name=dfpna \
+              --function-handler=dfpna.handler \
+              --package-dir=workspace/pkg \
+              --no-s3
+
+
+workflows:
+  version: 2
+  build-test-deploy:
+    jobs:
+      - test:
+          filters:
+            tags:
+              only: /.*/
+#      - build_lambda:
+#          requires:
+#            - test
+#          filters:
+#            tags:
+#              only: /^v[0-9]+\.[0-9]+\.[0-9]+/
+#            branches:
+#              only: master
+#      - deploy_lambda:
+#          requires:
+#            - build_lambda
+#          filters:
+#            tags:
+#              only: /^v[0-9]+\.[0-9]+\.[0-9]+/
+#            branches:
+#              only: master
+
+
+experimental:
+  notify:
+    branches:
+      only:
+        - master

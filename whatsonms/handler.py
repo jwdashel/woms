@@ -140,9 +140,6 @@ def get_metadata(event: Dict) -> Response:
     """ Fetch cached JSON metadata from Redis
     """
     thing = redis_client.get('whats-on')
-    print('>>>>>> fetching from redis: ', thing)
-    if thing is None:
-        print('NONE')
     return redis_client.get('whats-on')
 
 
@@ -153,7 +150,6 @@ def set_metadata(event: Dict, verb: str) -> Response:
 
     if metadata_json:
         redis_client.set('whats-on', metadata_json)
-        print('*** saving to redis: ***', metadata_json)
     else:
         print('*** No metadata_json ***')
 
