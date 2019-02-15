@@ -11,6 +11,9 @@ import urllib
 from whatsonms.config import redis_client
 
 
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
+
 DAVID_MUSIC_ELEMS = {
     # Blank keys are to normalize json output between DAVID and NexGen
     'Music_Album'           : 'album',
@@ -118,11 +121,7 @@ def handler(event: Dict, context: Dict) -> Response:
         A 301 redirect to the appropriate Google DFP ad server with only a subset
         of those parameters in a specific order
     """
-    logger = logging.getLogger()
-    logger.setLevel(logging.INFO)
     logger.info('Event: {}'.format(event))
-
-    # parameters = event.get('queryStringParameters', None)
 
     path = event['path']
     verb = event['httpMethod']
