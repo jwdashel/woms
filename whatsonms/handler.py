@@ -115,11 +115,12 @@ def handler(event: Dict, context: Dict) -> Response:
     """
     The primary lambda handler.
     Args:
-        event: A dictionary with a structure including query string parameters.
+        event: A dictionary with a structure including query string parameters
+            and path.
         context: A dictionary, the contents are not important.
     Returns:
-        A 301 redirect to the appropriate Google DFP ad server with only a subset
-        of those parameters in a specific order
+        A JSON string, which will be discarded but signify an OK response,
+        or None, which will signify an error.
     """
     logger.info('Event: {}'.format(event))
 
@@ -138,7 +139,6 @@ def handler(event: Dict, context: Dict) -> Response:
 def get_metadata(event: Dict) -> Response:
     """ Fetch cached JSON metadata from Redis
     """
-    thing = redis_client.get('whats-on')
     return redis_client.get('whats-on')
 
 
