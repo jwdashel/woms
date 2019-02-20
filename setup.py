@@ -49,5 +49,5 @@ setup(
     ],
     url='https://github.com/nypublicradio/whats-on-microservice',
     version='0.0.0',
-    zip_safe=False,
+    zip_safe=True,
 )
