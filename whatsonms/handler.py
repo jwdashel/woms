@@ -139,16 +139,18 @@ def handler(event: Dict, context: Dict) -> Response:
 def get_metadata(event: Dict) -> Response:
     """ Fetch cached JSON metadata from Redis
     """
-    return redis_client.get('whats-on')
+    client = redis_client()
+    return client.get('whats-on')
 
 
 def set_metadata(event: Dict, verb: str) -> Response:
     """ Import new metadata from DAVID or NexGen and save it to Redis.
     """
     metadata_json = parse_metadata(event, verb)
+    client = redis_client()
 
     if metadata_json:
-        redis_client.set('whats-on', metadata_json)
+        client.set('whats-on', metadata_json)
     else:
         logger.error('Error: no metadata JSON to save')
 
