@@ -47,7 +47,7 @@ setup(
         'pytest-mock',
         'pytest-sugar',
     ],
-    url='https://github.com/nypublicradio/whats_on_microservice',
+    url='https://github.com/nypublicradio/whats-on-microservice',
     version='0.0.0',
     zip_safe=False,
 )
