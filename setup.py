@@ -41,7 +41,7 @@ setup(
     tests_require=[
         'fakeredis',
         'pytest==4.0.2',
-        'pytest-cov>2.6.1',
+        'pytest-cov>=2.6.1',
         'pytest-env',
         'pytest-flake8>=1.0.4',
         'pytest-mock',
