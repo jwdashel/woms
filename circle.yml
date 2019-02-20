@@ -79,8 +79,8 @@ jobs:
             . ~/.venv/bin/activate
             python setup.py deploy \
               --environment=$ENV \
-              --function-name=dfpna \
-              --function-handler=dfpna.handler \
+              --function-name=whats-on \
+              --function-handler=whatsonms.handler \
               --package-dir=workspace/pkg \
               --no-s3
 
@@ -93,14 +93,14 @@ workflows:
           filters:
             tags:
               only: /.*/
-#      - build_lambda:
-#          requires:
-#            - test
-#          filters:
-#            tags:
-#              only: /^v[0-9]+\.[0-9]+\.[0-9]+/
-#            branches:
-#              only: master
+      - build_lambda:
+          requires:
+            - test
+          filters:
+            tags:
+              only: /^v[0-9]+\.[0-9]+\.[0-9]+/
+            branches:
+              only: master
 #      - deploy_lambda:
 #          requires:
 #            - build_lambda
