@@ -7,7 +7,7 @@ setup(
     author='NYPR Digital',
     author_email='digitalops@nypublicradio.org',
     dependency_links=[
-        'https://github.com/nypublicradio/nyprsetuptools/tarball/master#egg=nyprsetuptools-0.0.0'
+        'https://github.com/nypublicradio/nyprsetuptools/tarball/master#egg=nyprsetuptools'
     ],
     description=__doc__,
     entry_points={
@@ -36,7 +36,7 @@ setup(
     packages=['whatsonms'],
     scripts=[],
     setup_requires=[
-        'nyprsetuptools>=0.0.0'
+        'nyprsetuptools'
     ],
     tests_require=[
         'fakeredis',
