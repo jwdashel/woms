@@ -1,4 +1,3 @@
-import datetime
 import json
 import logging
 import urllib
@@ -57,6 +56,7 @@ NEXGEN_MUSIC_ELEMS = (
     ('title', 'title'),
 )
 
+
 class Response(dict):
     """
     Simple dictionary class that represents a standard Lambda response
@@ -65,7 +65,7 @@ class Response(dict):
         status: An integer HTTP status code.
         message: A string containing the metadata JSON, default is empty.
     """
-    def __init__(self, status: int, message: str=''):
+    def __init__(self, status: int, message: str = ''):
         if message:
             message = json.dumps({'message': message})
         data = {
@@ -152,7 +152,9 @@ def parse_metadata(event: Dict, verb: str) -> Dict:
             xml = urllib.parse.unquote(xml)
         if xml:
             xmldict = xmltodict.parse(xml)
-            normalized = {v: xmldict['audio'].get(k, '') for k, v in NEXGEN_MUSIC_ELEMS}
+            normalized = {
+                v: xmldict['audio'].get(k, '') for k, v in NEXGEN_MUSIC_ELEMS
+            }
             return normalized
 
     elif verb == 'POST':
@@ -161,7 +163,8 @@ def parse_metadata(event: Dict, verb: str) -> Dict:
             xml = event['body']
         if xml:
             xmldict = xmltodict.parse(xml)
-            present, = (x for x in xmldict['wddxPacket']['item'] if x['@sequence'] == 'present')
+            present, = (x for x in xmldict['wddxPacket']['item']
+                        if x['@sequence'] == 'present')
             normalized = {v: present.get(k, '') for k, v in DAVID_MUSIC_ELEMS}
             return normalized
 
