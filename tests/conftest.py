@@ -18,7 +18,7 @@ def mock_david(handler):
         return {
             'body': body,
             'httpMethod': 'POST',
-            'path': '/update',
+            'pathParameters': { 'proxy': '/update' },
         }
 
     def get(sample_file=None, body=None):
@@ -45,7 +45,7 @@ def mock_nexgen(handler):
                 'xml_contents': qs_params
             },
             'httpMethod': 'GET',
-            'path': '/update',
+            'pathParameters': { 'proxy': '/update' },
         }, {})
         return json_from_str(resp)
 
@@ -60,7 +60,7 @@ def mock_web_client(handler):
         """
         resp = handler({
             'httpMethod': 'GET',
-            'path': '/whats-on',
+            'pathParameters': { 'proxy': '/whats-on' },
         }, {})
         return json_from_str(resp)
     yield get
