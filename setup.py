@@ -7,7 +7,7 @@ setup(
     author='NYPR Digital',
     author_email='digitalops@nypublicradio.org',
     dependency_links=[
-        'https://github.com/nypublicradio/nyprsetuptools/tarball/master#egg=nyprsetuptools-0.0.0'
+        'https://github.com/nypublicradio/nyprsetuptools/tarball/master#egg=nyprsetuptools'
     ],
     description=__doc__,
     entry_points={
@@ -26,6 +26,7 @@ setup(
     },
     install_requires=[
         'raven',
+        'redis',
         'xmltodict',
     ],
     license='BSD',
@@ -34,16 +35,19 @@ setup(
     package_data={},
     packages=['whatsonms'],
     scripts=[],
-    setup_requires=['nyprsetuptools>=0.0.0'],
+    setup_requires=[
+        'nyprsetuptools'
+    ],
     tests_require=[
-        'pytest>=3.0.6',
-        'pytest-cov',
+        'fakeredis',
+        'pytest==4.0.2',
+        'pytest-cov>=2.6.1',
         'pytest-env',
-        'pytest-flake8',
+        'pytest-flake8>=1.0.4',
         'pytest-mock',
         'pytest-sugar',
     ],
-    url='https://github.com/nypublicradio/whats_on_microservice',
+    url='https://github.com/nypublicradio/whats-on-microservice',
     version='0.0.0',
-    zip_safe=False,
+    zip_safe=True,
 )

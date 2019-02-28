@@ -1,85 +1,64 @@
-from argparse import Namespace
-
 import json
-import os
 import pytest
-
-from whatsonms.handler import handler, Response
-
-
-class client1:
-    @staticmethod
-    def get(query_string_parameters):
-        return handler({'queryStringParameters': query_string_parameters, 'httpMethod': 'GET'}, {})
+from urllib import parse
 
 
-class client2:
-    @staticmethod
-    def get(body):
-        return handler({'body': body, 'httpMethod': 'POST'}, {})
-
-
-DAVID_SAMPLE = open('./tests/david_archive_sample.xml', 'rb')
+DAVID_SAMPLE = './tests/david_archive_sample.xml'
+NEXGEN_SAMPLE_XML = """
+<audio ID="id_3189206699_30701071">
+<type>Song</type>
+<status>None</status>
+<played_date>11/06/2018</played_date>
+<played_time>15:48:40</played_time>
+<length>00:03:31</length>
+<title>I Concentrate On You</title>
+<composer>Steve Lawrence</composer>
+<number>978416</number>
+</audio>
+"""
+NEXGEN_SAMPLE_QS = parse.quote(NEXGEN_SAMPLE_XML, safe=())
 
 
 class TestHandler:
 
-    @pytest.mark.parametrize(
-        'query_string_parameters',
-        [
-            {
-                'xml_contents': ''
-            }
-        ]
-    )
-    def test_invalid_request_client1(self, query_string_parameters):
-        print(query_string_parameters)
+    @pytest.mark.parametrize('qs_parameters', [''])
+    def test_invalid_request_nexgen(self, qs_parameters, mock_nexgen):
+        resp = mock_nexgen(qs_parameters)
+        assert resp['statusCode'] == 404
 
-        j = client1.get(query_string_parameters)
+    @pytest.mark.parametrize('body', [{}])
+    def test_invalid_request_david(self, body, mock_david):
+        resp = mock_david(body=body)
+        assert resp['statusCode'] == 404
 
-        assert j is None
-
-    @pytest.mark.parametrize(
-        'body',
-        [
-            {}
-        ]
-    )
-    def test_invalid_request_client2(self, body):
-        j = client2.get(body)
-
-        assert j is None
-
-    @pytest.mark.parametrize(
-        'query_string_parameters',
-        [
-            {
-                'xml_contents': '%0A%3Caudio%20ID%3D%22id_3189206699_30701071%22%3E%0A%3Ctype%3ESong%3C%2Ftype%3E%0A%3Cstatus%3ENone%3C%2Fstatus%3E%0A%3Cplayed_date%3E11%2F06%2F2018%3C%2Fplayed_date%3E%0A%3Cplayed_time%3E15%3A48%3A40%3C%2Fplayed_time%3E%0A%3Clength%3E00%3A03%3A31%3C%2Flength%3E%0A%3Ctitle%3EI%20Concentrate%20On%20You%3C%2Ftitle%3E%0A%3Ccomposer%3ESteve%20Lawrence%3C%2Fcomposer%3E%0A%3Cnumber%3E978416%3C%2Fnumber%3E%0A%3C%2Faudio%3E%0A'
-            }
-        ]
-    )
-    def test_valid_request_client1(self, query_string_parameters):
-        j = json.loads(client1.get(query_string_parameters))
-
-        # dynamically create variables from querystring param dict
-        # params = Namespace(**path_parameters)
-
+    def test_valid_request_nexgen(self, mock_nexgen):
+        mock_update = mock_nexgen(NEXGEN_SAMPLE_QS)
         expected_response = '978416'
+        response_body = json.loads(mock_update['body'])
+        assert response_body['message']['mm_uid'] == expected_response
 
-        assert j['mm_uid'] == expected_response
-
-    @pytest.mark.parametrize(
-        'body',
-        [
-            DAVID_SAMPLE
-        ]
-    )
-    def test_valid_response_client2(self, body):
-        j = json.loads(client2.get(body))
-
-        # dynamically create variables from querystring param dict
-        # params = Namespace(**path_parameters)
-
+    def test_valid_response_david(self, mock_david):
+        mock_update = mock_david(sample_file=DAVID_SAMPLE)
         expected_response = '126753'
+        response_body = json.loads(mock_update['body'])
+        assert response_body['message']['mm_uid'] == expected_response
 
-        assert j['mm_uid'] == expected_response
+    def test_valid_response_web_client(self, mock_david, mock_web_client):
+        mock_update = mock_david(sample_file=DAVID_SAMPLE)
+        whats_on = mock_web_client()
+        assert whats_on == mock_update
+
+    def test_valid_response_web_client_2(self, mock_nexgen, mock_web_client):
+        mock_update = mock_nexgen(NEXGEN_SAMPLE_QS)
+        whats_on = mock_web_client()
+        assert whats_on == mock_update
+
+    def test_normalized_keys(self, mock_david, mock_nexgen):
+        mock_update_david = mock_david(sample_file=DAVID_SAMPLE)
+        mock_update_nexgen = mock_nexgen(NEXGEN_SAMPLE_QS)
+
+        response_body_david = json.loads(mock_update_david['body'])
+        response_body_nexgen = json.loads(mock_update_nexgen['body'])
+
+        assert [*response_body_david['message']] == \
+            [*response_body_nexgen['message']]
