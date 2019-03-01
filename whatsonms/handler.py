@@ -4,8 +4,7 @@ from functools import wraps
 from typing import Callable, Dict
 from raven import Client
 
-from whatsonms import v1
-from whatsonms.config import ENV, RELEASE, URL_PREFIX
+from whatsonms import config, dynamodb, v1
 
 
 logger = logging.getLogger()
@@ -38,7 +37,7 @@ def normalize_request_path(path: str) -> str:
     Returns:
         The path with trailing slash and URL_PREFIX removed.
     """
-    return path.rstrip('/').replace(URL_PREFIX, '', 1)
+    return path.rstrip('/').replace(config.URL_PREFIX, '', 1)
 
 
 def sentry(func: Callable) -> Callable:
@@ -48,7 +47,7 @@ def sentry(func: Callable) -> Callable:
     """
     @wraps(func)
     def wrapped(*args, **kwargs):
-        sentry = Client(environment=ENV, release=RELEASE)
+        sentry = Client(environment=config.ENV, release=config.RELEASE)
         with sentry.capture_exceptions():
             return func(*args, **kwargs)
     return wrapped
@@ -67,15 +66,16 @@ def handler(event: Dict, context: Dict) -> Response:
         or None, which will signify an error.
     """
     logger.info('Event: {}'.format(event))
+    db = dynamodb.connect(config.DYNAMODB_TABLE)
 
     path = normalize_request_path(event['pathParameters']['proxy'])
     verb = event['httpMethod']
     metadata = None
 
     if path == '/v1/update':
-        metadata = v1.set_metadata(event, verb)
+        metadata = db.set('whats-on', v1.parse_metadata(event, verb))
     elif path == '/v1/whats-on':
-        metadata = v1.get_metadata()
+        metadata = db.get('whats-on')
 
     if metadata:
         return Response(200, message=metadata)

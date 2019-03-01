@@ -1,11 +1,8 @@
 import logging
-import json
 import urllib.parse
 from typing import Dict
 
 import xmltodict
-
-from whatsonms.config import redis_client
 
 
 logger = logging.getLogger()
@@ -55,30 +52,6 @@ NEXGEN_MUSIC_ELEMS = (
     ('played_time', 'start_time'),
     ('title', 'title'),
 )
-
-
-def get_metadata() -> Dict:
-    """ Fetch cached JSON metadata from Redis
-    """
-    client = redis_client()
-    metadata = json.loads(client.get('whats-on'))
-    return metadata
-
-
-def set_metadata(event: Dict, verb: str) -> Dict:
-    """ Import new metadata from DAVID or NexGen and save it to Redis.
-    """
-    metadata = parse_metadata(event, verb)
-    client = redis_client()
-
-    if metadata:
-        client.set('whats-on', json.dumps(metadata, sort_keys=True))
-    else:
-        logger.error('Error: no metadata JSON to save')
-
-    # This will return either the JSON, which will be discarded but signify
-    # an OK response, or it will return None, signifying an error
-    return metadata
 
 
 def parse_metadata(event: Dict, verb: str) -> Dict:
