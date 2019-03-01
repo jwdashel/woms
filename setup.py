@@ -25,8 +25,8 @@ setup(
         ],
     },
     install_requires=[
+        'boto3',
         'raven',
-        'redis',
         'xmltodict',
     ],
     license='BSD',
@@ -39,7 +39,7 @@ setup(
         'nyprsetuptools'
     ],
     tests_require=[
-        'fakeredis',
+        'moto',
         'pytest==4.0.2',
         'pytest-cov>=2.6.1',
         'pytest-env',

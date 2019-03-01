@@ -1,16 +1,18 @@
 import json
 import pytest
 
-import fakeredis
+from moto import mock_dynamodb2
 
-from whatsonms.config import URL_PREFIX
+from whatsonms.config import DYNAMODB_TABLE, URL_PREFIX
 
 
 @pytest.fixture(autouse=True)
 def handler(mocker):
-    mocker.patch('redis.StrictRedis', fakeredis.FakeStrictRedis)
-    import whatsonms.handler
-    yield whatsonms.handler
+    with mock_dynamodb2():
+        from whatsonms.dynamodb import DB
+        import whatsonms.handler
+        DB(DYNAMODB_TABLE)
+        yield whatsonms.handler
 
 
 @pytest.fixture
