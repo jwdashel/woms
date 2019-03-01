@@ -16,7 +16,7 @@ class DB:
     pkey = 'pkey'
 
     def __init__(self, table_name: str) -> None:
-        _db = boto3.resource('dynamodb')
+        _db = boto3.Session().resource('dynamodb')
         try:
             _db.meta.client.describe_table(TableName=table_name)
         except _db.meta.client.exceptions.ResourceNotFoundException:
