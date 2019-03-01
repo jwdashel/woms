@@ -4,6 +4,10 @@ import os
 import redis
 
 
+# The URL_PREFIX is the path behind which the app will be served
+# when using a reverse proxy (eg. API Gateway).
+URL_PREFIX = os.environ.get('URL_PREFIX', '/whats-on')
+
 REDIS_HOST = os.environ.get('REDIS_HOST', 'localhost')
 REDIS_PORT = os.environ.get('REDIS_PORT', 6379)
 REDIS_DB = os.environ.get('REDIS_DB', 0)

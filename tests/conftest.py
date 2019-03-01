@@ -3,6 +3,8 @@ import pytest
 
 import fakeredis
 
+from whatsonms.config import URL_PREFIX
+
 
 @pytest.fixture(autouse=True)
 def handler(mocker):
@@ -18,7 +20,7 @@ def mock_david(handler):
         return {
             'body': body,
             'httpMethod': 'POST',
-            'pathParameters': {'proxy': '/update'},
+            'pathParameters': {'proxy': URL_PREFIX + '/v1/update'},
         }
 
     def get(sample_file=None, body=None):
@@ -45,7 +47,7 @@ def mock_nexgen(handler):
                 'xml_contents': qs_params
             },
             'httpMethod': 'GET',
-            'pathParameters': {'proxy': '/update'},
+            'pathParameters': {'proxy': URL_PREFIX + '/v1/update'},
         }, {})
         return json_from_str(resp)
 
@@ -60,7 +62,7 @@ def mock_web_client(handler):
         """
         resp = handler({
             'httpMethod': 'GET',
-            'pathParameters': {'proxy': '/whats-on'},
+            'pathParameters': {'proxy': URL_PREFIX + '/v1/whats-on'},
         }, {})
         return json_from_str(resp)
     yield get
