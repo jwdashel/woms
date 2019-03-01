@@ -28,7 +28,7 @@ jobs:
           name: Test
           command: |
             . ~/.venv/bin/activate
-            python setup.py test
+            pytest
       - save_cache:
           <<: *cache
           paths:
