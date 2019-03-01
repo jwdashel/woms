@@ -70,9 +70,11 @@ jobs:
             if [[ "${CIRCLE_BRANCH}" == "master" ]]; then
               export ENV=demo
               export TAG=demo
+              export DEMO_RELEASE=$CIRCLE_SHA1
             elif echo "$CIRCLE_TAG" | grep -q "v[0-9]\+\.[0-9]\+\.[0-9]\+"; then
               export ENV=prod
               export TAG=$CIRCLE_TAG
+              export PROD_RELEASE=$TAG
             else
               exit 1
             fi
@@ -101,14 +103,14 @@ workflows:
               only: /^v[0-9]+\.[0-9]+\.[0-9]+/
             branches:
               only: master
-#      - deploy_lambda:
-#          requires:
-#            - build_lambda
-#          filters:
-#            tags:
-#              only: /^v[0-9]+\.[0-9]+\.[0-9]+/
-#            branches:
-#              only: master
+      - deploy_lambda:
+          requires:
+            - build_lambda
+          filters:
+            tags:
+              only: /^v[0-9]+\.[0-9]+\.[0-9]+/
+            branches:
+              only: master
 
 
 experimental:

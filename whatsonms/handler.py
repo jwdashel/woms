@@ -6,7 +6,7 @@ from functools import wraps
 from typing import Callable, Dict
 from raven import Client
 
-from whatsonms.config import redis_client
+from whatsonms.config import ENV, RELEASE, redis_client
 
 
 logger = logging.getLogger()
@@ -82,7 +82,7 @@ def sentry(func: Callable) -> Callable:
     """
     @wraps(func)
     def wrapped(*args, **kwargs):
-        sentry = Client()
+        sentry = Client(environment=ENV, release=RELEASE)
         with sentry.capture_exceptions():
             return func(*args, **kwargs)
     return wrapped
