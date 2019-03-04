@@ -11,6 +11,8 @@ jobs:
     working_directory: ~/whats-on-microservice
     docker:
       - image: circleci/python:3.6
+    environment:
+      CC_REPORTER: https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64
     steps:
       - checkout
       - restore_cache:
@@ -23,12 +25,18 @@ jobs:
               . ~/.venv/bin/activate
               pip install -e .
               python setup.py test_requirements
+              curl -L "$CC_REPORTER" > ~/.venv/bin/cc-test-reporter
+              chmod +x ~/.venv/bin/cc-test-reporter
             fi
       - run:
           name: Test
           command: |
             . ~/.venv/bin/activate
-            pytest
+            cc-test-reporter before-build
+            pytest \
+              --junitxml=test-results/pytest/results.xml \
+              --cov-report=xml:coverage.xml
+            cc-test-reporter after-build --coverage-input-type coverage.py --exit-code $?
       - save_cache:
           <<: *cache
           paths:
