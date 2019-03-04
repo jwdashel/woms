@@ -68,7 +68,7 @@ def handler(event: Dict, context: Dict) -> Response:
     logger.info('Event: {}'.format(event))
     db = dynamodb.connect(config.DYNAMODB_TABLE)
 
-    path = normalize_request_path(event['pathParameters']['proxy'])
+    path = normalize_request_path(event['path'])
     verb = event['httpMethod']
     metadata = None
 
