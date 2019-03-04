@@ -43,6 +43,8 @@ jobs:
             - ~/.venv
             - ~/whats-on-microservice/.eggs
             - ~/whats-on-microservice/whats_on_microservice.egg-info
+      - store_test_results:
+          path: ~/whats-on-microservice/test-results/
 
 
   build_lambda:
