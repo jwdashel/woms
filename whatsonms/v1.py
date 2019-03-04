@@ -1,5 +1,4 @@
 import logging
-import urllib.parse
 from typing import Dict
 
 import xmltodict
@@ -60,9 +59,7 @@ def parse_metadata(event: Dict, verb: str) -> Dict:
     """
     if verb == 'GET':
         # Request is coming from NexGen
-        if 'queryStringParameters' in event:
-            xml = event['queryStringParameters']['xml_contents']
-            xml = urllib.parse.unquote(xml)
+        xml = event.get('queryStringParameters', {}).get('xml_contents')
         if xml:
             xmldict = xmltodict.parse(xml)
             normalized = {

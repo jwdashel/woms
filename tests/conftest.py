@@ -1,6 +1,7 @@
 import json
-import pytest
+import urllib.parse
 
+import pytest
 from moto import mock_dynamodb2
 
 from whatsonms.config import DYNAMODB_TABLE, URL_PREFIX
@@ -46,7 +47,7 @@ def mock_nexgen(handler):
         """
         resp = handler({
             'queryStringParameters': {
-                'xml_contents': qs_params
+                'xml_contents': urllib.parse.unquote(qs_params)
             },
             'httpMethod': 'GET',
             'pathParameters': {'proxy': URL_PREFIX + '/v1/update'},
