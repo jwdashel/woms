@@ -69,8 +69,7 @@ def parse_metadata(event: Dict, verb: str) -> Dict:
 
     elif verb == 'POST':
         # Request is coming from DAVID
-        if 'body' in event:
-            xml = event['body']
+        xml = event.get('body')
         if xml:
             xmldict = xmltodict.parse(xml)
             present, = (x for x in xmldict['wddxPacket']['item']
