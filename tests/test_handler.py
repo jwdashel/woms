@@ -62,3 +62,13 @@ class TestHandler:
 
         assert [*response_body_david['message']] == \
             [*response_body_nexgen['message']]
+
+    def test_invalid_metadata_no_overwrite(self, mock_nexgen, mock_web_client):
+        """
+        Tests that providing invalid metadata does not result in valid
+        data being overwritten.
+        """
+        resp_1 = mock_nexgen(NEXGEN_SAMPLE_QS)
+        mock_nexgen('')
+        resp_2 = mock_web_client()
+        assert resp_1 == resp_2

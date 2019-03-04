@@ -73,7 +73,9 @@ def handler(event: Dict, context: Dict) -> Response:
     metadata = None
 
     if path == '/v1/update':
-        metadata = db.set('whats-on', v1.parse_metadata(event, verb))
+        metadata = v1.parse_metadata(event, verb)
+        if metadata:
+            db.set('whats-on', metadata)
     elif path == '/v1/whats-on':
         metadata = db.get('whats-on')
 

@@ -76,6 +76,3 @@ def parse_metadata(event: Dict, verb: str) -> Dict:
                         if x['@sequence'] == 'present')
             normalized = {v: present.get(k, '') for k, v in DAVID_MUSIC_ELEMS}
             return normalized
-
-    else:
-        return None
