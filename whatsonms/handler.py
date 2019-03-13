@@ -21,12 +21,17 @@ class Response(dict):
     """
     def __init__(self, status: int, message: str = ''):
         if message:
-            message = json.dumps({'message': message})
-        data = {
-            'statusCode': status,
-            'body': message,
+            message = json.dumps(
+                {"data": {"type": "metadata", "id": "1", "attributes": message}}
+            )
+        response = {
+            "statusCode": status,
+            "headers": {
+                "Content-Type": "application/vnd.api+json"
+            },
+            "body": message,
         }
-        dict.__init__(self, **data)
+        dict.__init__(self, **response)
 
 
 def normalize_request_path(path: str) -> str:
