@@ -35,13 +35,15 @@ class TestHandler:
         mock_update = mock_nexgen(NEXGEN_SAMPLE_QS)
         expected_response = '978416'
         response_body = json.loads(mock_update['body'])
-        assert response_body['message']['mm_uid'] == expected_response
+        assert response_body['data']['attributes']['mm_uid'] == \
+            expected_response
 
     def test_valid_response_david(self, mock_david):
         mock_update = mock_david(sample_file=DAVID_SAMPLE)
         expected_response = '126753'
         response_body = json.loads(mock_update['body'])
-        assert response_body['message']['mm_uid'] == expected_response
+        assert response_body['data']['attributes']['mm_uid'] == \
+            expected_response
 
     def test_valid_response_web_client(self, mock_david, mock_web_client):
         mock_update = mock_david(sample_file=DAVID_SAMPLE)
@@ -60,8 +62,8 @@ class TestHandler:
         response_body_david = json.loads(mock_update_david['body'])
         response_body_nexgen = json.loads(mock_update_nexgen['body'])
 
-        assert [*response_body_david['message']] == \
-            [*response_body_nexgen['message']]
+        assert [*response_body_david['data']] == \
+            [*response_body_nexgen['data']]
 
     def test_invalid_metadata_no_overwrite(self, mock_nexgen, mock_web_client):
         """
