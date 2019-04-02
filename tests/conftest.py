@@ -6,6 +6,8 @@ from moto import mock_dynamodb2
 
 from whatsonms.config import DYNAMODB_TABLE, URL_PREFIX
 
+WQXR_STREAM_SLUG = 'wqxr'
+
 
 @pytest.fixture(autouse=True)
 def handler(mocker):
@@ -24,6 +26,9 @@ def mock_david(handler):
             'body': body,
             'httpMethod': 'POST',
             'path': URL_PREFIX + '/v1/update',
+            'queryStringParameters': {
+                'stream': WQXR_STREAM_SLUG
+            },
         }
 
     def get(sample_file=None, body=None):
@@ -46,11 +51,12 @@ def mock_nexgen(handler):
         """ Simulate a request from NexGen with new metadata
         """
         resp = handler({
-            'queryStringParameters': {
-                'xml_contents': urllib.parse.unquote(qs_params)
-            },
             'httpMethod': 'GET',
             'path': URL_PREFIX + '/v1/update',
+            'queryStringParameters': {
+                'stream': WQXR_STREAM_SLUG,
+                'xml_contents': urllib.parse.unquote(qs_params)
+            },
         }, {})
         return json_from_str(resp)
 
@@ -60,12 +66,15 @@ def mock_nexgen(handler):
 @pytest.fixture
 def mock_web_client(handler):
 
-    def get():
+    def get(stream_slug=WQXR_STREAM_SLUG):
         """ Simulate a request from a web client for latest "whats on" metadata
         """
         resp = handler({
             'httpMethod': 'GET',
             'path': URL_PREFIX + '/v1/whats-on',
+            'queryStringParameters': {
+                'stream': stream_slug
+            },
         }, {})
         return json_from_str(resp)
     yield get

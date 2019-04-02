@@ -74,15 +74,17 @@ def handler(event: Dict, context: Dict) -> Response:
     db = dynamodb.connect(config.DYNAMODB_TABLE)
 
     path = normalize_request_path(event['path'])
+    stream_slug = event.get('queryStringParameters', {}).get('stream')
     verb = event['httpMethod']
     metadata = None
 
     if path == '/v1/update':
         metadata = v1.parse_metadata(event, verb)
-        if metadata:
-            db.set('whats-on', metadata)
+        if metadata and stream_slug:
+            db.set(stream_slug, metadata)
     elif path == '/v1/whats-on':
-        metadata = db.get('whats-on')
+        if stream_slug:
+            metadata = db.get(stream_slug)
 
     if metadata:
         return Response(200, message=metadata)
