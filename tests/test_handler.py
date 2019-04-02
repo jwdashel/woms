@@ -38,19 +38,23 @@ class TestHandler:
         assert response_body['data']['attributes']['mm_uid'] == \
             expected_response
 
-    def test_valid_response_david(self, mock_david):
+    def test_valid_request_david(self, mock_david):
         mock_update = mock_david(sample_file=DAVID_SAMPLE)
         expected_response = '126753'
         response_body = json.loads(mock_update['body'])
         assert response_body['data']['attributes']['mm_uid'] == \
             expected_response
 
-    def test_valid_response_web_client(self, mock_david, mock_web_client):
+    def test_invalid_request_web_client(self, mock_web_client):
+        resp = mock_web_client(stream_slug='foobar')
+        assert resp['statusCode'] == 404
+
+    def test_valid_request_web_client(self, mock_david, mock_web_client):
         mock_update = mock_david(sample_file=DAVID_SAMPLE)
         whats_on = mock_web_client()
         assert whats_on == mock_update
 
-    def test_valid_response_web_client_2(self, mock_nexgen, mock_web_client):
+    def test_valid_request_web_client_2(self, mock_nexgen, mock_web_client):
         mock_update = mock_nexgen(NEXGEN_SAMPLE_QS)
         whats_on = mock_web_client()
         assert whats_on == mock_update

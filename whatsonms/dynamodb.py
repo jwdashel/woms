@@ -41,7 +41,7 @@ class DB:
         """
         resp = self.table.get_item(Key={self.pkey: key})
         value = resp.get('Item', {}).get('value_')
-        return json.loads(value) or {}
+        return json.loads(value) if value else {}
 
     def set(self, key: str, value: Dict) -> Dict:
         """
