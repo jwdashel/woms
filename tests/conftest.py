@@ -6,8 +6,8 @@ from moto import mock_dynamodb2
 
 from whatsonms.config import DYNAMODB_TABLE, URL_PREFIX
 
-
 WQXR_STREAM_SLUG = 'wqxr'
+
 
 @pytest.fixture(autouse=True)
 def handler(mocker):
@@ -26,7 +26,7 @@ def mock_david(handler):
             'body': body,
             'httpMethod': 'POST',
             'path': URL_PREFIX + '/v1/update',
-            'queryStringParameters' : {
+            'queryStringParameters': {
                 'stream': WQXR_STREAM_SLUG
             },
         }
@@ -72,7 +72,7 @@ def mock_web_client(handler):
         resp = handler({
             'httpMethod': 'GET',
             'path': URL_PREFIX + '/v1/whats-on',
-            'queryStringParameters' : {
+            'queryStringParameters': {
                 'stream': stream_slug
             },
         }, {})
