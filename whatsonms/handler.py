@@ -9,7 +9,6 @@ from whatsonms import config, dynamodb, v1
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
-sentry_client = Client(environment=config.ENV, release=config.RELEASE)
 
 
 class Response(dict):
@@ -58,7 +57,7 @@ def sentry(func: Callable) -> Callable:
     return wrapped
 
 
-@sentry
+#@sentry
 def handler(event: Dict, context: Dict) -> Response:
     """
     The primary lambda handler.
@@ -72,6 +71,7 @@ def handler(event: Dict, context: Dict) -> Response:
     """
     logger.info('Event: {}'.format(event))
 
+    sentry_client = Client(environment=config.ENV, release=config.RELEASE)
     sentry_client.captureMessage(event)
 
     return Response(200, message=event)
