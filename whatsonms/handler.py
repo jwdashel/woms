@@ -9,6 +9,7 @@ from whatsonms import config, dynamodb, v1
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
+sentry_client = Client(environment=config.ENV, release=config.RELEASE)
 
 
 class Response(dict):
@@ -52,8 +53,7 @@ def sentry(func: Callable) -> Callable:
     """
     @wraps(func)
     def wrapped(*args, **kwargs):
-        sentry = Client(environment=config.ENV, release=config.RELEASE)
-        with sentry.capture_exceptions():
+        with sentry_client.capture_exceptions():
             return func(*args, **kwargs)
     return wrapped
 
@@ -71,6 +71,11 @@ def handler(event: Dict, context: Dict) -> Response:
         or None, which will signify an error.
     """
     logger.info('Event: {}'.format(event))
+
+    sentry_client.capture_messages(event)
+
+    return Response(200, message=event)
+
     db = dynamodb.connect(config.DYNAMODB_TABLE)
 
     path = normalize_request_path(event['path'])

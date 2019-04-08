@@ -26,3 +26,5 @@ lib/*
 resizer/bin/*
 !resizer/bin/.gitkeep
 test_images/
+
+deploy_demo.sh
