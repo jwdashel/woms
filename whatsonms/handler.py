@@ -72,7 +72,7 @@ def handler(event: Dict, context: Dict) -> Response:
     """
     logger.info('Event: {}'.format(event))
 
-    sentry_client.captureMessages(event)
+    sentry_client.captureMessage(event)
 
     return Response(200, message=event)
 
