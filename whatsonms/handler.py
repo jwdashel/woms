@@ -52,12 +52,13 @@ def sentry(func: Callable) -> Callable:
     """
     @wraps(func)
     def wrapped(*args, **kwargs):
-        with sentry_client.capture_exceptions():
+        sentry = Client(environment=config.ENV, release=config.RELEASE)
+        with sentry.capture_exceptions():
             return func(*args, **kwargs)
     return wrapped
 
 
-#@sentry
+@sentry
 def handler(event: Dict, context: Dict) -> Response:
     """
     The primary lambda handler.
@@ -71,23 +72,31 @@ def handler(event: Dict, context: Dict) -> Response:
     """
     logger.info('Event: {}'.format(event))
 
-    sentry_client = Client(environment=config.ENV, release=config.RELEASE)
-    sentry_client.captureMessage(event)
+    route_key = event.get('requestContext', {}).get('routeKey')
+    path = normalize_request_path(event.get('path', ''))
+    stream_slug = event.get('queryStringParameters', {}).get('stream')
+    verb = event.get('httpMethod', '')
 
-    return Response(200, message=event)
+    # Testing request output
+    sentry_client = Client(environment=config.ENV, release=config.RELEASE)
+    if route_key and route_key == '$connect':
+        return Response(200, message=event)
+    else:
+        try:
+            raise
+        except Exception:
+            sentry_client.captureException(event)
+    #####
 
     db = dynamodb.connect(config.DYNAMODB_TABLE)
 
-    path = normalize_request_path(event['path'])
-    stream_slug = event.get('queryStringParameters', {}).get('stream')
-    verb = event['httpMethod']
     metadata = None
 
-    if path == '/v1/update':
+    if path and path == '/v1/update':
         metadata = v1.parse_metadata(event, verb)
         if metadata and stream_slug:
             db.set(stream_slug, metadata)
-    elif path == '/v1/whats-on':
+    elif path and path == '/v1/whats-on':
         if stream_slug:
             metadata = db.get(stream_slug)
 
