@@ -53,26 +53,27 @@ NEXGEN_MUSIC_ELEMS = (
 )
 
 
-def parse_metadata(event: Dict, verb: str) -> Dict:
-    """ Parse new metadata from DAVID or NexGen -- format it as JSON
-        and return it.
+def parse_metadata_nexgen(event: Dict) -> Dict:
     """
-    if verb == 'GET':
-        # Request is coming from NexGen
-        xml = event.get('queryStringParameters', {}).get('xml_contents')
-        if xml:
-            xmldict = xmltodict.parse(xml)
-            normalized = {
-                v: xmldict['audio'].get(k, '') for k, v in NEXGEN_MUSIC_ELEMS
-            }
-            return normalized
+    Parse new metadata from NexGen -- format it as JSON and return it.
+    """
+    xml = event.get('queryStringParameters', {}).get('xml_contents')
+    if xml:
+        xmldict = xmltodict.parse(xml)
+        normalized = {
+            v: xmldict['audio'].get(k, '') for k, v in NEXGEN_MUSIC_ELEMS
+        }
+        return normalized
 
-    elif verb == 'POST':
-        # Request is coming from DAVID
-        xml = event.get('body')
-        if xml:
-            xmldict = xmltodict.parse(xml)
-            present, = (x for x in xmldict['wddxPacket']['item']
-                        if x['@sequence'] == 'present')
-            normalized = {v: present.get(k, '') for k, v in DAVID_MUSIC_ELEMS}
-            return normalized
+
+def parse_metadata_david(event: Dict) -> Dict:
+    """
+    Parse new metadata from DAVID -- format it as JSON and return it.
+    """
+    xml = event.get('body')
+    if xml:
+        xmldict = xmltodict.parse(xml)
+        present, = (x for x in xmldict['wddxPacket']['item']
+                    if x['@sequence'] == 'present')
+        normalized = {v: present.get(k, '') for k, v in DAVID_MUSIC_ELEMS}
+        return normalized

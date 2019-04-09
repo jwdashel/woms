@@ -1,37 +1,15 @@
-import json
 import logging
 from functools import wraps
 from typing import Callable, Dict
 from raven import Client
 
-from whatsonms import config, dynamodb, v1
+from whatsonms import config
+from whatsonms.http import HttpRouter, Response
+from whatsonms.ws import WebSocketRouter
 
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
-
-
-class Response(dict):
-    """
-    Simple dictionary class that represents a standard Lambda response
-    structure.
-    Args:
-        status: An integer HTTP status code.
-        message: A string containing the metadata JSON, default is empty.
-    """
-    def __init__(self, status: int, message: str = ''):
-        if message:
-            message = json.dumps(
-                {"data": {"type": "metadata", "id": "1", "attributes": message}}
-            )
-        response = {
-            "statusCode": status,
-            "headers": {
-                "Content-Type": "application/vnd.api+json"
-            },
-            "body": message,
-        }
-        dict.__init__(self, **response)
 
 
 def normalize_request_path(path: str) -> str:
@@ -74,33 +52,9 @@ def handler(event: Dict, context: Dict) -> Response:
 
     route_key = event.get('requestContext', {}).get('routeKey')
     path = normalize_request_path(event.get('path', ''))
-    stream_slug = event.get('queryStringParameters', {}).get('stream')
     verb = event.get('httpMethod', '')
 
-    # Testing request output
-    sentry_client = Client(environment=config.ENV, release=config.RELEASE)
-    if route_key and route_key == '$connect':
-        return Response(200, message=event)
-    else:
-        try:
-            raise
-        except Exception:
-            sentry_client.captureException(event)
-    #####
-
-    db = dynamodb.connect(config.DYNAMODB_TABLE)
-
-    metadata = None
-
-    if path and path == '/v1/update':
-        metadata = v1.parse_metadata(event, verb)
-        if metadata and stream_slug:
-            db.set(stream_slug, metadata)
-    elif path and path == '/v1/whats-on':
-        if stream_slug:
-            metadata = db.get(stream_slug)
-
-    if metadata:
-        return Response(200, message=metadata)
-
-    return Response(404, message='No metadata found')
+    if route_key:
+        return WebSocketRouter.dispatch(route_key, event)
+    elif verb and path:
+        return HttpRouter.dispatch(verb, path, event)
