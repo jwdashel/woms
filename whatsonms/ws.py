@@ -6,6 +6,11 @@ from whatsonms.http import Response
 
 
 def route(route_key: str) -> Callable:
+    """
+    Decorator for use on WebSocketRouter static methods.
+    Defines how a method should be dispatched.
+    See the WebSocket class docs for information.
+    """
     def decorator(func):
         @wraps(func)
         def wrapper(*args, **kwargs):
@@ -27,6 +32,16 @@ class WebSocketRouter:
     @classmethod
     @lru_cache()
     def _dispatcher(cls):
+        """
+        Returns a function dispatch dictionary in the form:
+            {
+                'route_key_1': route_func_1,
+                'route_key_2': route_func_2,
+            }
+
+        This method is cached using lru_cache to prevent re-doing the
+        class introspection on every call.
+        """
         return {
             func.route_key: func
             for _, func in inspect.getmembers(cls, predicate=inspect.isfunction)
@@ -35,6 +50,10 @@ class WebSocketRouter:
 
     @classmethod
     def dispatch(cls, route_key, event):
+        """
+        Dispatches the function decorated with:
+            @route(route_key)
+        """
         return cls._dispatcher()[route_key](event)
 
     @staticmethod

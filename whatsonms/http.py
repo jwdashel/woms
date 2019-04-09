@@ -2,7 +2,7 @@ import inspect
 import json
 from collections import defaultdict
 from functools import lru_cache, wraps
-from typing import Callable
+from typing import Callable, Dict
 
 from whatsonms import v1
 from whatsonms.dynamodb import db
@@ -32,6 +32,11 @@ class Response(dict):
 
 
 def route(verb: str, path: str) -> Callable:
+    """
+    Decorator for use on HttpRouter static methods.
+    Defines how a method should be dispatched.
+    See the HttpRouter class docs for information.
+    """
     def decorator(func):
         @wraps(func)
         def wrapper(*args, **kwargs):
@@ -54,6 +59,21 @@ class HttpRouter:
     @classmethod
     @lru_cache()
     def _dispatcher(cls):
+        """
+        Returns a function dispatch dictionary in the form:
+            {
+                'GET: {
+                    '/path/1': get_func_1,
+                    '/path/2': get_func_2,
+                },
+                'POST': {
+                    '/path/1': post_func_1,
+                },
+            }
+
+        This method is cached using lru_cache to prevent re-doing the
+        class introspection on every call.
+        """
         functions = (
             func for _, func in inspect.getmembers(cls, predicate=inspect.isfunction)
             if hasattr(func, 'verb') and hasattr(func, 'path')
@@ -65,7 +85,11 @@ class HttpRouter:
         return dispatcher
 
     @classmethod
-    def dispatch(cls, verb, path, event):
+    def dispatch(cls, verb: str, path: str, event: Dict):
+        """
+        Dispatches the function decorated with:
+            @route(verb, path)
+        """
         params = event.get('queryStringParameters', {})
         return cls._dispatcher()[verb.upper()][path](event, params)
 
