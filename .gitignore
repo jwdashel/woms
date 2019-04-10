@@ -20,11 +20,14 @@
 .tox/
 __pycache__
 build/
+coverage.xml
 deploy.ini
+deploy.sh
 dist/
 lib/*
 resizer/bin/*
 !resizer/bin/.gitkeep
 test_images/
+test-results/
 
 deploy_demo.sh

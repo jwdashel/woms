@@ -4,6 +4,8 @@ from typing import Dict
 
 import boto3
 
+from whatsonms import config
+
 
 class DB:
     """
@@ -68,3 +70,23 @@ def connect(table_name: str) -> DB:
     repeated calls to "describe_table".
     """
     return DB(table_name)
+
+
+class db:
+    """
+    Provides a lazy-loading interface for the default DynamoDB table.
+    Use this to avoid import and passing config in every file.
+
+    Usage:
+
+        from whatsonms.dynamodb import db
+        db.get(...)
+        db.set(...)
+    """
+    @staticmethod
+    def get(*args, **kwargs):
+        return connect(config.DYNAMODB_TABLE).get(*args, **kwargs)
+
+    @staticmethod
+    def set(*args, **kwargs):
+        return connect(config.DYNAMODB_TABLE).set(*args, **kwargs)
