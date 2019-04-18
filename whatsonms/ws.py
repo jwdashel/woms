@@ -73,5 +73,7 @@ class WebSocketRouter:
     @staticmethod
     @route('$default')
     def default(event):
-        connection_id = event.get('data', {}).get('attributes', {}).get('connectionID')
-        ws_client.post_to_connection(Data='hello world', ConnectionID=connection_id)
+        connection_id = event.get('requestContext', {}).get('connectionId')
+        ws_client.post_to_connection(
+            Data=b'hello world', ConnectionId=connection_id
+        )
