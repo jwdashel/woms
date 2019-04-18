@@ -1,8 +1,12 @@
+import boto3
 import inspect
 from functools import lru_cache, wraps
 from typing import Callable
 
 from whatsonms.http import Response
+
+
+ws_client = boto3.Session().client('apigatewaymanagementapi')
 
 
 def route(route_key: str) -> Callable:
@@ -69,4 +73,5 @@ class WebSocketRouter:
     @staticmethod
     @route('$default')
     def default(event):
-        return Response(200, message=event)
+        connection_id = event.get('data', {}).get('attributes', {}).get('connectionID')
+        ws_client.post_to_connection(Data='hello world', ConnectionID=connection_id)

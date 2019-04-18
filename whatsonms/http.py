@@ -18,9 +18,7 @@ class Response(dict):
     """
     def __init__(self, status: int, message: str = ''):
         if message:
-            message = json.dumps(
-                {"data": {"type": "metadata", "id": "1", "attributes": message}}
-            )
+            message = jsonify_message(message)
         response = {
             "statusCode": status,
             "headers": {
@@ -30,6 +28,11 @@ class Response(dict):
         }
         dict.__init__(self, **response)
 
+
+def jsonify_message(message):
+    return json.dumps(
+        {"data": {"type": "metadata", "id": "1", "attributes": message}}
+    )
 
 def route(verb: str, path: str) -> Callable:
     """
