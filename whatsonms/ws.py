@@ -3,10 +3,8 @@ import inspect
 from functools import lru_cache, wraps
 from typing import Callable
 
+from whatsonms.dynamodb import db
 from whatsonms.http import Response
-
-
-ws_client = boto3.Session().client('apigatewaymanagementapi')
 
 
 def route(route_key: str) -> Callable:
@@ -63,17 +61,30 @@ class WebSocketRouter:
     @staticmethod
     @route('$connect')
     def connect(event):
+        connection_id = event['requestContext']['connectionId']
+        # TODO: add connectionId to db
         return Response(200, message=event)
 
     @staticmethod
     @route('$disconnect')
     def disconnect(event):
+        # TODO: remove connectionId from db
         return Response(200, message=event)
 
     @staticmethod
     @route('$default')
     def default(event):
-        connection_id = event.get('requestContext', {}).get('connectionId')
-        ws_client.post_to_connection(
-            Data=b'hello world', ConnectionId=connection_id
+        connection_id = event['requestContext']['connectionId']
+        # TODO: scan db, publish message to all connectionIds
+
+        ws_client = boto3.Session().client(
+            'apigatewaymanagementapi',
+            endpoint_url='https://{}/{}'.format(
+                event['requestContext']['domainName'],
+                event['requestContext']['stage']
+            )
         )
+        ws_client.post_to_connection(
+            Data=b'updated metadata', ConnectionId=connection_id
+        )
+        return Response(200, message='message sent')
