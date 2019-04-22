@@ -3,7 +3,6 @@ import inspect
 from functools import lru_cache, wraps
 from typing import Callable
 
-from whatsonms.dynamodb import db
 from whatsonms.http import Response
 
 
@@ -61,7 +60,6 @@ class WebSocketRouter:
     @staticmethod
     @route('$connect')
     def connect(event):
-        connection_id = event['requestContext']['connectionId']
         # TODO: add connectionId to db
         return Response(200, message=event)
 

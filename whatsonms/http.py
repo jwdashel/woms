@@ -34,6 +34,7 @@ def jsonify_message(message):
         {"data": {"type": "metadata", "id": "1", "attributes": message}}
     )
 
+
 def route(verb: str, path: str) -> Callable:
     """
     Decorator for use on HttpRouter static methods.
