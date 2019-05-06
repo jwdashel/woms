@@ -1,6 +1,6 @@
 import json
 from functools import lru_cache
-from typing import Dict
+from typing import Dict, List
 
 import boto3
 
@@ -15,7 +15,10 @@ class DB:
     Warning: This class will attempt to create a DynamoDB table if the
         specified table does not exist.
     """
-    pkey = 'pkey'
+    stream_key = 'stream'
+    data_type_key = 'data-type'
+    type_metadata = 'metadata'
+    type_subscribers = 'subscribers'
 
     def __init__(self, table_name: str) -> None:
         _db = boto3.Session().resource('dynamodb')
@@ -24,8 +27,14 @@ class DB:
         except _db.meta.client.exceptions.ResourceNotFoundException:
             _db.create_table(
                 TableName=table_name,
-                KeySchema=[{'AttributeName': self.pkey, 'KeyType': 'HASH'}],
-                AttributeDefinitions=[{'AttributeName': self.pkey, 'AttributeType': 'S'}],
+                KeySchema=[
+                    {'AttributeName': self.stream_key, 'KeyType': 'HASH'},
+                    {'AttributeName': self.data_type_key, 'KeyType': 'RANGE'}
+                ],
+                AttributeDefinitions=[
+                    {'AttributeName': self.stream_key, 'AttributeType': 'S'},
+                    {'AttributeName': self.data_type_key, 'AttributeType': 'S'}
+                ],
                 ProvisionedThroughput={'ReadCapacityUnits': 5, 'WriteCapacityUnits': 5},
             )
             _db.meta.client.get_waiter('table_exists').wait(TableName=table_name)
@@ -33,34 +42,85 @@ class DB:
         self.table = _db.Table(table_name)
         self.table.load()
 
-    def get(self, key: str) -> Dict:
+    def get_metadata(self, stream: str) -> Dict:
         """
         Args:
-            key: The key to retreive from DynamoDB.
+            stream: The slug of the stream to retreive from DynamoDB.
 
         Returns:
             A python dictionary generated from the JSON DynamoDB value.
         """
-        resp = self.table.get_item(Key={self.pkey: key})
-        value = resp.get('Item', {}).get('value_')
-        return json.loads(value) if value else {}
+        resp = self.table.get_item(
+            Key={
+                self.stream_key: key,
+                self.data_type_key: self.type_metadata
+            }
+        )
+        metadata = resp.get('Item', {}).get(self.type_metadata)
+        return json.loads(metadata) if metadata else {}
 
-    def set(self, key: str, value: Dict) -> Dict:
+    def set_metadata(self, stream: str, metadata: Dict) -> Dict:
         """
         Args:
-            key: The key to create.
-            value: The value to set the key to (will be JSON-serialized).
+            stream: The stream to create or update.
+            metadata: The value to set the key to (will be JSON-serialized).
 
         Returns:
             The value that they key was set to.
         """
         self.table.update_item(
-            Key={self.pkey: key},
-            UpdateExpression='SET value_ = :value',
-            ExpressionAttributeValues={':value': json.dumps(value, sort_keys=True)},
+            Key={
+                self.stream_key: key,
+                self.data_type_key: self.type_metadata
+            },
+            UpdateExpression='SET metadata = :value',
+            ExpressionAttributeValues={
+                ':value': json.dumps(metadata, sort_keys=True)
+            },
             ReturnValues='NONE',
         )
-        return value
+        return metadata
+
+    def subscribe(self, stream: str, connection_id: str) -> List:
+        """
+        Args:
+            stream: The stream slug.
+            connection_id: The websocket connectionId of the user.
+
+        Returns:
+            The updated subscribers list with the new connection_id appended.
+        """
+        subscribers = self.table.update_item(
+            Key={
+                self.stream_key: stream,
+                self.data_type_key: self.type_subscribers
+            }
+            UpdateExpression='ADD subscribers :value)',
+            ExpressionAttributeValues={':value': {"SS": [connection_id]}},
+            ReturnValues='ALL_NEW',
+        )
+
+        return subscribers
+
+    def unsubscribe(self, connection_id: str) -> List:
+        """
+        Args:
+            connection_id: The websocket connectionId of the user
+
+        Returns:
+            The updated subscribers list with the connection_id removed.
+        """
+        subscribers = self.table.update_item(
+            Key={
+                self.stream_key: stream,
+                self.data_type_key: self.type_subscribers
+            }
+            UpdateExpression='DELETE subscribers :value)',
+            ExpressionAttributeValues={':value': {"SS": [connection_id]}},
+            ReturnValues='ALL_NEW',
+        )
+
+        return subscribers
 
 
 @lru_cache()
@@ -84,9 +144,21 @@ class db:
         db.set(...)
     """
     @staticmethod
-    def get(*args, **kwargs):
-        return connect(config.DYNAMODB_TABLE).get(*args, **kwargs)
+    def get_metadata(*args, **kwargs):
+        return connect(config.DYNAMODB_TABLE).get_metadata(*args, **kwargs)
 
     @staticmethod
-    def set(*args, **kwargs):
-        return connect(config.DYNAMODB_TABLE).set(*args, **kwargs)
+    def set_metadata(*args, **kwargs):
+        return connect(config.DYNAMODB_TABLE).set_metadata(*args, **kwargs)
+
+    # @staticmethod
+    # def get_subscribers(*args, **kwargs):
+    #     return connect(config.DYNAMODB_TABLE).get_subscribers(*args, **kwargs)
+
+    @staticmethod
+    def subscribe(*args, **kwargs):
+        return connect(config.DYNAMODB_TABLE).subscribe(*args, **kwargs)
+
+    @staticmethod
+    def unsubscribe(*args, **kwargs):
+        return connect(config.DYNAMODB_TABLE).unsubscribe(*args, **kwargs)

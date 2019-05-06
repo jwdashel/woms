@@ -1,8 +1,9 @@
 import boto3
 import inspect
 from functools import lru_cache, wraps
-from typing import Callable
+from typing import Callable, List
 
+from whatsonms.dynamodb import db
 from whatsonms.http import Response
 
 
@@ -60,29 +61,45 @@ class WebSocketRouter:
     @staticmethod
     @route('$connect')
     def connect(event):
-        # TODO: add connectionId to db
+        connection_id = event['requestContext']['connectionId']
+        db.subscribe(connection_id)
         return Response(200, message=event)
 
     @staticmethod
     @route('$disconnect')
     def disconnect(event):
-        # TODO: remove connectionId from db
+        connection_id = event['requestContext']['connectionId']
+        db.unsubscribe(connection_id)
         return Response(200, message=event)
 
     @staticmethod
     @route('$default')
     def default(event):
         connection_id = event['requestContext']['connectionId']
-        # TODO: scan db, publish message to all connectionIds
+        # This is a single client's initial connect, so just send
+        # metadata to that connection
+        body = json.loads(event['body'])
+        stream = body['data']['stream']
+        metadata = db.get_metadata(stream)
+        broadcast([connection_id], metadata)
 
-        ws_client = boto3.Session().client(
-            'apigatewaymanagementapi',
-            endpoint_url='https://{}/{}'.format(
-                event['requestContext']['domainName'],
-                event['requestContext']['stage']
-            )
+
+def broadcast(recipient_ids: List = [], data: str = '', stream: str = '') -> Response:
+    # TODO: figure out how to build enpoint_url for the case
+    # when this fx is called by a http.py method. i.e.
+    # is domainName always t5xpql2hqf.execute-api.us-east-1.amazonaws.com ?
+    ws_client = boto3.Session().client(
+        'apigatewaymanagementapi',
+        endpoint_url='https://{}/{}'.format(
+            # Does domainName always stay the same for all websocket requests?
+            event['requestContext']['domainName'],
+            event['requestContext']['stage']
         )
+    )
+    # TODO: make this async:
+    for recipient_id in recipient_ids:
         ws_client.post_to_connection(
-            Data=b'updated metadata', ConnectionId=connection_id
+            # Data=b'updated metadata', ConnectionId=recipient_id
+            Data=event, ConnectionId=recipient_id
         )
-        return Response(200, message='message sent')
+    return Response(200, message='message sent')

@@ -6,6 +6,7 @@ from typing import Callable, Dict
 
 from whatsonms import v1
 from whatsonms.dynamodb import db
+from whatsonms.ws import broadcast
 
 
 class Response(dict):
@@ -103,7 +104,8 @@ class HttpRouter:
         metadata = v1.parse_metadata_nexgen(event)
         stream_slug = params.get('stream')
         if metadata and stream_slug:
-            db.set(stream_slug, metadata)
+            db.set_metadata(stream_slug, metadata)
+            # TODO: trigger a broadcast to all all websocket connections
             return Response(200, message=metadata)
         return Response(404, message='No metadata found')
 
@@ -113,7 +115,8 @@ class HttpRouter:
         metadata = v1.parse_metadata_david(event)
         stream_slug = params.get('stream')
         if metadata and stream_slug:
-            db.set(stream_slug, metadata)
+            db.set_metadata(stream_slug, metadata)
+            # TODO: trigger a broadcast to all all websocket connections
             return Response(200, message=metadata)
         return Response(404, message='No metadata found')
 
@@ -121,7 +124,7 @@ class HttpRouter:
     @route('GET', '/v1/whats-on')
     def get(event, params):
         stream_slug = params.get('stream')
-        metadata = db.get(stream_slug)
+        metadata = db.get_metadata(stream_slug)
         if metadata:
             return Response(200, message=metadata)
         return Response(404, message='No metadata found')
