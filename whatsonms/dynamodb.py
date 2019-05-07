@@ -3,6 +3,7 @@ from functools import lru_cache
 from typing import Dict, List
 
 import boto3
+from boto3.dynamodb.conditions import Attr
 
 from whatsonms import config
 
@@ -16,7 +17,7 @@ class DB:
         specified table does not exist.
     """
     stream_key = 'stream'
-    data_type_key = 'data-type'
+    data_type_key = 'datatype'
     type_metadata = 'metadata'
     type_subscribers = 'subscribers'
 
@@ -35,7 +36,9 @@ class DB:
                     {'AttributeName': self.stream_key, 'AttributeType': 'S'},
                     {'AttributeName': self.data_type_key, 'AttributeType': 'S'}
                 ],
-                ProvisionedThroughput={'ReadCapacityUnits': 5, 'WriteCapacityUnits': 5},
+                ProvisionedThroughput={
+                    'ReadCapacityUnits': 5, 'WriteCapacityUnits': 5
+                },
             )
             _db.meta.client.get_waiter('table_exists').wait(TableName=table_name)
 
@@ -50,14 +53,15 @@ class DB:
         Returns:
             A python dictionary generated from the JSON DynamoDB value.
         """
-        resp = self.table.get_item(
+        metadata = self.table.get_item(
             Key={
-                self.stream_key: key,
+                self.stream_key: stream,
                 self.data_type_key: self.type_metadata
-            }
+            },
+            # return metadata attribute only:
+            ProjectionExpression=self.type_metadata
         )
-        metadata = resp.get('Item', {}).get(self.type_metadata)
-        return json.loads(metadata) if metadata else {}
+        return str(metadata) # TODO if metadata else ''
 
     def set_metadata(self, stream: str, metadata: Dict) -> Dict:
         """
@@ -70,7 +74,7 @@ class DB:
         """
         self.table.update_item(
             Key={
-                self.stream_key: key,
+                self.stream_key: stream,
                 self.data_type_key: self.type_metadata
             },
             UpdateExpression='SET metadata = :value',
@@ -94,10 +98,10 @@ class DB:
             Key={
                 self.stream_key: stream,
                 self.data_type_key: self.type_subscribers
-            }
-            UpdateExpression='ADD subscribers :value)',
-            ExpressionAttributeValues={':value': {"SS": [connection_id]}},
-            ReturnValues='ALL_NEW',
+            },
+            UpdateExpression="ADD subscribers :value",
+            ExpressionAttributeValues={":value": set([connection_id])},
+            ReturnValues="ALL_NEW",
         )
 
         return subscribers
@@ -110,15 +114,22 @@ class DB:
         Returns:
             The updated subscribers list with the connection_id removed.
         """
-        subscribers = self.table.update_item(
-            Key={
-                self.stream_key: stream,
-                self.data_type_key: self.type_subscribers
-            }
-            UpdateExpression='DELETE subscribers :value)',
-            ExpressionAttributeValues={':value': {"SS": [connection_id]}},
-            ReturnValues='ALL_NEW',
+
+        resp = self.table.scan(
+            FilterExpression=Attr('subscribers').contains(connection_id)
         )
+        items = resp['Items']
+
+        for item in items:
+            subscribers = self.table.update_item(
+                Key={
+                    self.stream_key: item[self.stream_key],
+                    self.data_type_key: self.type_subscribers
+                },
+                UpdateExpression='DELETE subscribers :value',
+                ExpressionAttributeValues={':value': set([connection_id])},
+                ReturnValues='ALL_NEW',
+            )
 
         return subscribers
 

@@ -4,7 +4,8 @@ from typing import Callable, Dict
 from raven import Client
 
 from whatsonms import config
-from whatsonms.http import HttpRouter, Response
+from whatsonms.http import HttpRouter
+from whatsonms.utils import Response
 from whatsonms.ws import WebSocketRouter
 
 

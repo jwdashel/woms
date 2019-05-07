@@ -1,10 +1,10 @@
-import boto3
 import inspect
+import json
 from functools import lru_cache, wraps
-from typing import Callable, List
+from typing import Callable
 
 from whatsonms.dynamodb import db
-from whatsonms.http import Response
+from whatsonms.utils import broadcast, Response
 
 
 def route(route_key: str) -> Callable:
@@ -62,7 +62,8 @@ class WebSocketRouter:
     @route('$connect')
     def connect(event):
         connection_id = event['requestContext']['connectionId']
-        db.subscribe(connection_id)
+        stream = event['queryStringParameters']['stream']
+        db.subscribe(stream, connection_id)
         return Response(200, message=event)
 
     @staticmethod
@@ -81,25 +82,4 @@ class WebSocketRouter:
         body = json.loads(event['body'])
         stream = body['data']['stream']
         metadata = db.get_metadata(stream)
-        broadcast([connection_id], metadata)
-
-
-def broadcast(recipient_ids: List = [], data: str = '', stream: str = '') -> Response:
-    # TODO: figure out how to build enpoint_url for the case
-    # when this fx is called by a http.py method. i.e.
-    # is domainName always t5xpql2hqf.execute-api.us-east-1.amazonaws.com ?
-    ws_client = boto3.Session().client(
-        'apigatewaymanagementapi',
-        endpoint_url='https://{}/{}'.format(
-            # Does domainName always stay the same for all websocket requests?
-            event['requestContext']['domainName'],
-            event['requestContext']['stage']
-        )
-    )
-    # TODO: make this async:
-    for recipient_id in recipient_ids:
-        ws_client.post_to_connection(
-            # Data=b'updated metadata', ConnectionId=recipient_id
-            Data=event, ConnectionId=recipient_id
-        )
-    return Response(200, message='message sent')
+        broadcast(event, recipient_ids=[connection_id], data=metadata)

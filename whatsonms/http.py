@@ -1,39 +1,11 @@
 import inspect
-import json
 from collections import defaultdict
 from functools import lru_cache, wraps
 from typing import Callable, Dict
 
 from whatsonms import v1
 from whatsonms.dynamodb import db
-from whatsonms.ws import broadcast
-
-
-class Response(dict):
-    """
-    Simple dictionary class that represents a standard Lambda response
-    structure.
-    Args:
-        status: An integer HTTP status code.
-        message: A string containing the metadata JSON, default is empty.
-    """
-    def __init__(self, status: int, message: str = ''):
-        if message:
-            message = jsonify_message(message)
-        response = {
-            "statusCode": status,
-            "headers": {
-                "Content-Type": "application/vnd.api+json"
-            },
-            "body": message,
-        }
-        dict.__init__(self, **response)
-
-
-def jsonify_message(message):
-    return json.dumps(
-        {"data": {"type": "metadata", "id": "1", "attributes": message}}
-    )
+from whatsonms.utils import broadcast, Response
 
 
 def route(verb: str, path: str) -> Callable:
