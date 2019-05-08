@@ -45,7 +45,6 @@ def broadcast(event: dict, stream: str, recipient_ids: List = [],
     ws_client = boto3.Session().client(
         'apigatewaymanagementapi',
         endpoint_url='https://{}/{}'.format(
-            # Does domainName always stay the same for all websocket requests?
             event['requestContext']['domainName'],
             event['requestContext']['stage']
         )
