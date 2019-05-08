@@ -61,7 +61,19 @@ class DB:
             # return metadata attribute only:
             ProjectionExpression=self.type_metadata
         )
-        return str(metadata) # TODO if metadata else ''
+        return metadata if metadata else {}
+
+    def get_subscribers(self, stream: str) -> List:
+        """
+        """
+        subscribers = self.table.get_item(
+            Key={
+                self.stream_key: stream,
+                self.data_type_key: self.type_subscribers
+            },
+            ProjectionExpression=self.type_subscribers
+        )
+        return subscribers
 
     def set_metadata(self, stream: str, metadata: Dict) -> Dict:
         """
@@ -162,9 +174,9 @@ class db:
     def set_metadata(*args, **kwargs):
         return connect(config.DYNAMODB_TABLE).set_metadata(*args, **kwargs)
 
-    # @staticmethod
-    # def get_subscribers(*args, **kwargs):
-    #     return connect(config.DYNAMODB_TABLE).get_subscribers(*args, **kwargs)
+    @staticmethod
+    def get_subscribers(*args, **kwargs):
+        return connect(config.DYNAMODB_TABLE).get_subscribers(*args, **kwargs)
 
     @staticmethod
     def subscribe(*args, **kwargs):

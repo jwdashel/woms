@@ -2,6 +2,8 @@ import boto3
 import json
 from typing import List
 
+from whatsonms.dynamodb import db
+
 
 class Response(dict):
     """
@@ -30,11 +32,16 @@ def jsonify_message(message):
     )
 
 
-def broadcast(event: dict, recipient_ids: List = [], data: str = '',
-              stream: str = '') -> Response:
-    # TODO: figure out how to build enpoint_url for the case
-    # when this fx is called by a http.py method. i.e.
-    # is domainName always t5xpql2hqf.execute-api.us-east-1.amazonaws.com ?
+def broadcast(event: dict, stream: str, recipient_ids: List = [],
+              data: dict = {}) -> Response:
+    # TODO:
+    # 1. get WS domainName from an environment variable, not the event obj, bc
+    #    http events have a different domainName than WS events.
+    #    WS demo domainName is: t5xpql2hqf.execute-api.us-east-1.amazonaws.com
+    #
+    # 2. figure out how to allow lambda-whats-on access to post to WS connection.
+    #    See error: https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#logEventViewer:group=/aws/lambda/whats-on-demo;stream=2019/05/08/%5B$LATEST%5D3b75698cf7d64f84b9802456cd91fa78;refid=34729721423684293438146518589248016774549751497988046850;reftime=1557334569518
+
     ws_client = boto3.Session().client(
         'apigatewaymanagementapi',
         endpoint_url='https://{}/{}'.format(
@@ -44,9 +51,13 @@ def broadcast(event: dict, recipient_ids: List = [], data: str = '',
         )
     )
 
+    recipient_ids = recipient_ids or db.get_subscribers(stream)
+    data = data or db.get_metadata(stream)
+    data_bytes = bytes(json.dumps(data), 'utf-8')
+
     # TODO: make this async:
     for recipient_id in recipient_ids:
         ws_client.post_to_connection(
-            Data=bytes(data, 'utf-8'), ConnectionId=recipient_id
+            Data=data_bytes, ConnectionId=recipient_id
         )
     return Response(200, message='message sent')

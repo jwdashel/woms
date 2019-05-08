@@ -74,10 +74,10 @@ class HttpRouter:
     @route('GET', '/v1/update')
     def get_update(event, params):
         metadata = v1.parse_metadata_nexgen(event)
-        stream_slug = params.get('stream')
-        if metadata and stream_slug:
-            db.set_metadata(stream_slug, metadata)
-            # TODO: trigger a broadcast to all all websocket connections
+        stream = params.get('stream')
+        if metadata and stream:
+            db.set_metadata(stream, metadata)
+            broadcast(event, stream, data=metadata)
             return Response(200, message=metadata)
         return Response(404, message='No metadata found')
 
@@ -85,18 +85,18 @@ class HttpRouter:
     @route('POST', '/v1/update')
     def post_update(event, params):
         metadata = v1.parse_metadata_david(event)
-        stream_slug = params.get('stream')
-        if metadata and stream_slug:
-            db.set_metadata(stream_slug, metadata)
-            # TODO: trigger a broadcast to all all websocket connections
+        stream = params.get('stream')
+        if metadata and stream:
+            db.set_metadata(stream, metadata)
+            broadcast(event, stream, data=metadata)
             return Response(200, message=metadata)
         return Response(404, message='No metadata found')
 
     @staticmethod
     @route('GET', '/v1/whats-on')
     def get(event, params):
-        stream_slug = params.get('stream')
-        metadata = db.get_metadata(stream_slug)
+        stream = params.get('stream')
+        metadata = db.get_metadata(stream)
         if metadata:
             return Response(200, message=metadata)
         return Response(404, message='No metadata found')
