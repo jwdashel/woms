@@ -2,6 +2,7 @@ import boto3
 import json
 from typing import List
 
+from whatsonms import config
 from whatsonms.dynamodb import db
 
 
@@ -32,22 +33,13 @@ def jsonify_message(message):
     )
 
 
-def broadcast(event: dict, stream: str, recipient_ids: List = [],
+def broadcast(stream: str, recipient_ids: List = [],
               data: dict = {}) -> Response:
-    # TODO:
-    # 1. get WS domainName from an environment variable, not the event obj, bc
-    #    http events have a different domainName than WS events.
-    #    WS demo domainName is: t5xpql2hqf.execute-api.us-east-1.amazonaws.com
-    #
-    # 2. figure out how to allow lambda-whats-on access to post to WS connection.
-    #    See error: https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#logEventViewer:group=/aws/lambda/whats-on-demo;stream=2019/05/08/%5B$LATEST%5D3b75698cf7d64f84b9802456cd91fa78;refid=34729721423684293438146518589248016774549751497988046850;reftime=1557334569518
-
+    """
+    """
     ws_client = boto3.Session().client(
         'apigatewaymanagementapi',
-        endpoint_url='https://{}/{}'.format(
-            event['requestContext']['domainName'],
-            event['requestContext']['stage']
-        )
+        endpoint_url='https://{}/{}'.format(config.WS_DOMAIN, config.WS_STAGE)
     )
 
     recipient_ids = recipient_ids or db.get_subscribers(stream)

@@ -66,13 +66,15 @@ class DB:
     def get_subscribers(self, stream: str) -> List:
         """
         """
-        subscribers = self.table.get_item(
+        resp = self.table.get_item(
             Key={
                 self.stream_key: stream,
                 self.data_type_key: self.type_subscribers
             },
             ProjectionExpression=self.type_subscribers
         )
+        subscribers = resp['Item']['subscribers']
+
         return subscribers
 
     def set_metadata(self, stream: str, metadata: Dict) -> Dict:

@@ -77,7 +77,7 @@ class HttpRouter:
         stream = params.get('stream')
         if metadata and stream:
             db.set_metadata(stream, metadata)
-            broadcast(event, stream, data=metadata)
+            broadcast(stream, data=metadata)
             return Response(200, message=metadata)
         return Response(404, message='No metadata found')
 
@@ -88,7 +88,7 @@ class HttpRouter:
         stream = params.get('stream')
         if metadata and stream:
             db.set_metadata(stream, metadata)
-            broadcast(event, stream, data=metadata)
+            broadcast(stream, data=metadata)
             return Response(200, message=metadata)
         return Response(404, message='No metadata found')
 

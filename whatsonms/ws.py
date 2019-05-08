@@ -82,4 +82,4 @@ class WebSocketRouter:
         body = json.loads(event['body'])
         stream = body['data']['stream']
         metadata = db.get_metadata(stream)
-        broadcast(event, stream, recipient_ids=[connection_id], data=metadata)
+        broadcast(stream, recipient_ids=[connection_id], data=metadata)
