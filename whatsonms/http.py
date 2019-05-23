@@ -3,9 +3,9 @@ from collections import defaultdict
 from functools import lru_cache, wraps
 from typing import Callable, Dict
 
+import whatsonms.utils
 from whatsonms import v1
 from whatsonms.dynamodb import db
-from whatsonms.utils import broadcast, Response
 
 
 def route(verb: str, path: str) -> Callable:
@@ -76,10 +76,10 @@ class HttpRouter:
         metadata = v1.parse_metadata_nexgen(event)
         stream = params.get('stream')
         if metadata and stream:
-            db.set_metadata(stream, metadata)
-            broadcast(stream, data=metadata)
-            return Response(200, message=metadata)
-        return Response(404, message='No metadata found')
+            metadata = db.set_metadata(stream, metadata)
+            whatsonms.utils.broadcast(stream, data=metadata)
+            return whatsonms.utils.Response(200, message=metadata)
+        return whatsonms.utils.Response(404, message='No metadata found')
 
     @staticmethod
     @route('POST', '/v1/update')
@@ -87,10 +87,10 @@ class HttpRouter:
         metadata = v1.parse_metadata_david(event)
         stream = params.get('stream')
         if metadata and stream:
-            db.set_metadata(stream, metadata)
-            broadcast(stream, data=metadata)
-            return Response(200, message=metadata)
-        return Response(404, message='No metadata found')
+            metadata = db.set_metadata(stream, metadata)
+            whatsonms.utils.broadcast(stream, data=metadata)
+            return whatsonms.utils.Response(200, message=metadata)
+        return whatsonms.utils.Response(404, message='No metadata found')
 
     @staticmethod
     @route('GET', '/v1/whats-on')
@@ -98,5 +98,5 @@ class HttpRouter:
         stream = params.get('stream')
         metadata = db.get_metadata(stream)
         if metadata:
-            return Response(200, message=metadata)
-        return Response(404, message='No metadata found')
+            return whatsonms.utils.Response(200, message=metadata)
+        return whatsonms.utils.Response(404, message='No metadata found')

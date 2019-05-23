@@ -97,7 +97,7 @@ class DB:
             },
             ReturnValues='NONE',
         )
-        return metadata
+        return self.get_metadata(stream)
 
     def subscribe(self, stream: str, connection_id: str) -> List:
         """

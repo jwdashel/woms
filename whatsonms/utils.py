@@ -28,9 +28,7 @@ class Response(dict):
 
 
 def jsonify_message(message):
-    return json.dumps(
-        {"data": {"type": "metadata", "id": "1", "attributes": message}}
-    )
+    return {"data": {"type": "metadata", "id": "1", "attributes": message}}
 
 
 def broadcast(stream: str, recipient_ids: List = [],
