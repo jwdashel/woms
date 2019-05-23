@@ -3,6 +3,10 @@ import os
 
 DYNAMODB_TABLE = os.environ.get('DYNAMODB_TABLE')
 
+# The domainName and stage that comprise the websocket endpoint
+WS_DOMAIN = os.environ.get('WS_DOMAIN')
+WS_STAGE = os.environ.get('WS_STAGE')
+
 # The URL_PREFIX is the path behind which the app will be served
 # when using a reverse proxy (eg. API Gateway).
 URL_PREFIX = os.environ.get('URL_PREFIX', '/whats-on')

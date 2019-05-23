@@ -39,6 +39,7 @@ setup(
         'nyprsetuptools'
     ],
     tests_require=[
+        'mocket',
         'moto',
         'pytest==4.0.2',
         'pytest-cov>=2.6.1',

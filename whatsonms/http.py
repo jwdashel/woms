@@ -1,38 +1,11 @@
 import inspect
-import json
 from collections import defaultdict
 from functools import lru_cache, wraps
 from typing import Callable, Dict
 
+import whatsonms.utils
 from whatsonms import v1
 from whatsonms.dynamodb import db
-
-
-class Response(dict):
-    """
-    Simple dictionary class that represents a standard Lambda response
-    structure.
-    Args:
-        status: An integer HTTP status code.
-        message: A string containing the metadata JSON, default is empty.
-    """
-    def __init__(self, status: int, message: str = ''):
-        if message:
-            message = jsonify_message(message)
-        response = {
-            "statusCode": status,
-            "headers": {
-                "Content-Type": "application/vnd.api+json"
-            },
-            "body": message,
-        }
-        dict.__init__(self, **response)
-
-
-def jsonify_message(message):
-    return json.dumps(
-        {"data": {"type": "metadata", "id": "1", "attributes": message}}
-    )
 
 
 def route(verb: str, path: str) -> Callable:
@@ -101,27 +74,29 @@ class HttpRouter:
     @route('GET', '/v1/update')
     def get_update(event, params):
         metadata = v1.parse_metadata_nexgen(event)
-        stream_slug = params.get('stream')
-        if metadata and stream_slug:
-            db.set(stream_slug, metadata)
-            return Response(200, message=metadata)
-        return Response(404, message='No metadata found')
+        stream = params.get('stream')
+        if metadata and stream:
+            metadata = db.set_metadata(stream, metadata)
+            whatsonms.utils.broadcast(stream, data=metadata)
+            return whatsonms.utils.Response(200, message=metadata)
+        return whatsonms.utils.Response(404, message='No metadata found')
 
     @staticmethod
     @route('POST', '/v1/update')
     def post_update(event, params):
         metadata = v1.parse_metadata_david(event)
-        stream_slug = params.get('stream')
-        if metadata and stream_slug:
-            db.set(stream_slug, metadata)
-            return Response(200, message=metadata)
-        return Response(404, message='No metadata found')
+        stream = params.get('stream')
+        if metadata and stream:
+            metadata = db.set_metadata(stream, metadata)
+            whatsonms.utils.broadcast(stream, data=metadata)
+            return whatsonms.utils.Response(200, message=metadata)
+        return whatsonms.utils.Response(404, message='No metadata found')
 
     @staticmethod
     @route('GET', '/v1/whats-on')
     def get(event, params):
-        stream_slug = params.get('stream')
-        metadata = db.get(stream_slug)
+        stream = params.get('stream')
+        metadata = db.get_metadata(stream)
         if metadata:
-            return Response(200, message=metadata)
-        return Response(404, message='No metadata found')
+            return whatsonms.utils.Response(200, message=metadata)
+        return whatsonms.utils.Response(404, message='No metadata found')

@@ -1,9 +1,10 @@
-import boto3
 import inspect
+import json
 from functools import lru_cache, wraps
 from typing import Callable
 
-from whatsonms.http import Response
+from whatsonms.dynamodb import db
+from whatsonms.utils import broadcast, Response
 
 
 def route(route_key: str) -> Callable:
@@ -60,29 +61,25 @@ class WebSocketRouter:
     @staticmethod
     @route('$connect')
     def connect(event):
-        # TODO: add connectionId to db
+        connection_id = event['requestContext']['connectionId']
+        stream = event['queryStringParameters']['stream']
+        db.subscribe(stream, connection_id)
         return Response(200, message=event)
 
     @staticmethod
     @route('$disconnect')
     def disconnect(event):
-        # TODO: remove connectionId from db
+        connection_id = event['requestContext']['connectionId']
+        db.unsubscribe(connection_id)
         return Response(200, message=event)
 
     @staticmethod
     @route('$default')
     def default(event):
         connection_id = event['requestContext']['connectionId']
-        # TODO: scan db, publish message to all connectionIds
-
-        ws_client = boto3.Session().client(
-            'apigatewaymanagementapi',
-            endpoint_url='https://{}/{}'.format(
-                event['requestContext']['domainName'],
-                event['requestContext']['stage']
-            )
-        )
-        ws_client.post_to_connection(
-            Data=b'updated metadata', ConnectionId=connection_id
-        )
-        return Response(200, message='message sent')
+        # This is a single client's initial connect, so just send
+        # metadata to that connection
+        body = json.loads(event['body'])
+        stream = body['data']['stream']
+        metadata = db.get_metadata(stream)
+        broadcast(stream, recipient_ids=[connection_id], data=metadata)
