@@ -1,4 +1,5 @@
 import boto3
+import concurrent.futures
 import json
 from typing import List
 
@@ -42,11 +43,28 @@ def broadcast(stream: str, recipient_ids: List = [],
 
     recipient_ids = recipient_ids or db.get_subscribers(stream)
     data = data or db.get_metadata(stream)
-    data_bytes = bytes(json.dumps(data), 'utf-8')
+    data_in_bytes = bytes(json.dumps(data), 'utf-8')
 
     # TODO: make this async:
-    for recipient_id in recipient_ids:
-        ws_client.post_to_connection(
-            Data=data_bytes, ConnectionId=recipient_id
-        )
+    # for recipient_id in recipient_ids:
+    #     ws_client.post_to_connection(
+    #         Data=data_in_bytes, ConnectionId=recipient_id
+    #     )
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
+        future_to_connex_id = {
+            executor.submit(_send_message, client, connex_id, data_in_bytes):
+            connex_id for connex_id in recipient_ids
+        }
+        for future in concurrent.futures.as_completed(future_to_connex_id):
+            connex_id = future_to_connex_id[future]
+        try:
+            data = future.result()
+        except Exception as e:
+            print('{} threw an exception: {}'.format(connex_id, e))
+
     return Response(200, message='message sent')
+
+
+def _send_message(client, connection_id, data):
+    client.post_to_connection(Data=data_in_bytes, ConnectionId=recipient_id)

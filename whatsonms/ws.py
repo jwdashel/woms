@@ -64,7 +64,7 @@ class WebSocketRouter:
         connection_id = event['requestContext']['connectionId']
         stream = event['queryStringParameters']['stream']
         db.subscribe(stream, connection_id)
-        return Response(200, message=event)
+        return Response(200)
 
     @staticmethod
     @route('$disconnect')
