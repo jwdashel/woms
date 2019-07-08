@@ -67,4 +67,4 @@ def broadcast(stream: str, recipient_ids: List = [],
 
 
 def _send_message(client, connection_id, data):
-    client.post_to_connection(Data=data_in_bytes, ConnectionId=recipient_id)
+    client.post_to_connection(Data=data, ConnectionId=connection_id)
