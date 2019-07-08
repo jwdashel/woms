@@ -53,7 +53,7 @@ def broadcast(stream: str, recipient_ids: List = [],
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
         future_to_connex_id = {
-            executor.submit(_send_message, client, connex_id, data_in_bytes):
+            executor.submit(_send_message, ws_client, connex_id, data_in_bytes):
             connex_id for connex_id in recipient_ids
         }
         for future in concurrent.futures.as_completed(future_to_connex_id):
