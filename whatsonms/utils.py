@@ -45,25 +45,24 @@ def broadcast(stream: str, recipient_ids: List = [],
     data = data or db.get_metadata(stream)
     data_in_bytes = bytes(json.dumps(data), 'utf-8')
 
-    # TODO: make this async:
-    # for recipient_id in recipient_ids:
-    #     ws_client.post_to_connection(
-    #         Data=data_in_bytes, ConnectionId=recipient_id
-    #     )
+    if recipient_ids:
+        with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
+            future_to_connex_id = {
+                executor.submit(_send_message, ws_client, connex_id,
+                                data_in_bytes):
+                connex_id for connex_id in recipient_ids
+            }
+            for future in concurrent.futures.as_completed(future_to_connex_id):
+                connex_id = future_to_connex_id[future]
+            try:
+                data = future.result()
+            except Exception as e:
+                print('{} threw an exception: {}'.format(connex_id, e))
 
-    with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
-        future_to_connex_id = {
-            executor.submit(_send_message, ws_client, connex_id, data_in_bytes):
-            connex_id for connex_id in recipient_ids
-        }
-        for future in concurrent.futures.as_completed(future_to_connex_id):
-            connex_id = future_to_connex_id[future]
-        try:
-            data = future.result()
-        except Exception as e:
-            print('{} threw an exception: {}'.format(connex_id, e))
+        return Response(200, message='Broadcast sent')
 
-    return Response(200, message='message sent')
+    else:
+        return Response(200, message='No subscribers to broadcast to')
 
 
 def _send_message(client, connection_id, data):
