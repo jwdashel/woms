@@ -65,6 +65,11 @@ class DB:
 
     def get_subscribers(self, stream: str) -> List:
         """
+        Args:
+            stream: The slug of the stream to retreive from DynamoDB.
+
+        Returns:
+            A list of subscribers to that stream.
         """
         resp = self.table.get_item(
             Key={

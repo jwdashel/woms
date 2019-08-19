@@ -73,30 +73,48 @@ class HttpRouter:
     @staticmethod
     @route('GET', '/v1/update')
     def get_update(event, params):
+        """
+        Handles updates from NexGen, which are received via GET requests
+        with the data in the params.
+        """
         metadata = v1.parse_metadata_nexgen(event)
-        stream = params.get('stream')
-        if metadata and stream:
-            metadata = db.set_metadata(stream, metadata)
-            whatsonms.utils.broadcast(stream, data=metadata)
-            return whatsonms.utils.Response(200, message=metadata)
-        return whatsonms.utils.Response(404, message='No metadata found')
+        return _update(metadata, params)
 
     @staticmethod
     @route('POST', '/v1/update')
     def post_update(event, params):
+        """
+        Handles updates from DAVID, which are received via POST requests
+        with the data in the request body.
+        """
         metadata = v1.parse_metadata_david(event)
-        stream = params.get('stream')
-        if metadata and stream:
-            metadata = db.set_metadata(stream, metadata)
-            whatsonms.utils.broadcast(stream, data=metadata)
-            return whatsonms.utils.Response(200, message=metadata)
-        return whatsonms.utils.Response(404, message='No metadata found')
+        return _update(metadata, params)
 
     @staticmethod
     @route('GET', '/v1/whats-on')
     def get(event, params):
+        """
+        Handles a regular HTTP GET request from a client for the current
+        metadata for a stream.
+        """
         stream = params.get('stream')
         metadata = db.get_metadata(stream)
         if metadata:
-            return whatsonms.utils.Response(200, message=metadata)
+            return whatsonms.utils.Response(200, data=metadata)
         return whatsonms.utils.Response(404, message='No metadata found')
+
+def _update(metadata, params):
+    stream = params.get('stream')
+    if not metadata:
+        print("No metadata found")
+        return whatsonms.utils.Response(404, message='No metadata found')
+    if not stream:
+        print("Missing required parameter 'stream'")
+        return whatsonms.utils.Response(
+            500,
+            message="Missing required parameter 'stream'"
+        )
+
+    metadata = db.set_metadata(stream, metadata)
+    broadcast_response = whatsonms.utils.broadcast(stream, data=metadata)
+    return broadcast_response
