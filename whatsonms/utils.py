@@ -35,9 +35,9 @@ def jsonify_body(message, data):
     Formats the response body to the JSONAPI spec for easy consumption by
     Ember clients.
     """
-    return ('{"meta": {"message": "%s"}},'
-            '{"data": {"type": "metadata", "id": "1", "attributes": "%s"}}'
-            ) % (message, data)
+    return (
+        '{"meta": {"message": "%s"}, "data": {"type": "metadata", "id": "1", "attributes": "%s"}}'
+    ) % (message, data)
 
 
 def broadcast(stream: str, recipient_ids: List = [],
@@ -66,6 +66,8 @@ def broadcast(stream: str, recipient_ids: List = [],
     data_in_bytes = bytes(json.dumps(data), 'utf-8')
 
     if recipient_ids:
+        print('****** RECIPIENT IDS found ******* ', recipient_ids)
+
         with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
             future_to_connex_id = {
                 executor.submit(_send_message, ws_client, connex_id,
@@ -94,4 +96,12 @@ def _send_message(client, connection_id, data):
         connection_id: The connection id of the recipient
         data: The message to send, in bytes
     """
-    client.post_to_connection(Data=data, ConnectionId=connection_id)
+    try:
+        client.post_to_connection(Data=data, ConnectionId=connection_id)
+    except Exception as e:
+        for arg in e.args:
+            if 'GoneException' in arg:
+                # Remove stale connection
+                print('*** Subscriber ', connection_id,
+                      ' returned response 410: GoneException. Removing subscriber.')
+                db.unsubscribe(connection_id)

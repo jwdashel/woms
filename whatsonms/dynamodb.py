@@ -78,7 +78,7 @@ class DB:
             },
             ProjectionExpression=self.type_subscribers
         )
-        subscribers = resp['Item'].get('subscribers', [])
+        subscribers = resp.get('Item', {}).get('subscribers', [])
 
         return subscribers
 
