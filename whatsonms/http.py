@@ -103,6 +103,7 @@ class HttpRouter:
             return whatsonms.utils.Response(200, data=metadata)
         return whatsonms.utils.Response(404, message='No metadata found')
 
+
 def _update(metadata, params):
     stream = params.get('stream')
     if not metadata:
@@ -116,5 +117,9 @@ def _update(metadata, params):
         )
 
     metadata = db.set_metadata(stream, metadata)
-    broadcast_response = whatsonms.utils.broadcast(stream, data=metadata)
-    return broadcast_response
+    whatsonms.utils.broadcast(stream, data=metadata)
+    return whatsonms.utils.Response(
+        200,
+        data=metadata,
+        message=('Broadcast sent to %s subscribers' % stream)
+    )

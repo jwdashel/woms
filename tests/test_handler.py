@@ -21,6 +21,17 @@ NEXGEN_SAMPLE_QS = parse.quote(NEXGEN_SAMPLE_XML, safe=())
 
 
 class TestHandler:
+    def clean_json_from_str(self, json_str: str):
+        """
+        Cleans up the escaped-single-quote json that AWS produces.
+        Args:
+            json_str: A string containing the single-quote syntax
+        Returns: A tidy double-quoted json dict
+        """
+        json_str = json_str.replace("\'{\"", "{\"")
+        json_str = json_str.replace("\"}\'", "\"}")
+        json_str = json_str.replace("\'", "\"")
+        return json.loads(json_str)
 
     @pytest.mark.parametrize('qs_parameters', [''])
     def test_invalid_request_nexgen(self, qs_parameters, mock_nexgen):
@@ -36,25 +47,24 @@ class TestHandler:
         mocker.patch('whatsonms.utils.broadcast',
                      return_value=Response(200, message='mock response'))
         mock_update = mock_nexgen(NEXGEN_SAMPLE_QS)
+        mock_update_body = self.clean_json_from_str(mock_update['body'])
+        metadata = mock_update_body['data']['attributes']['Item']['metadata']
         expected_response = '978416'
-        metadata = json.loads(
-            mock_update['body']['data']['attributes']['Item']['metadata']
-        )
         assert metadata['mm_uid'] == expected_response
 
     def test_valid_request_david(self, mocker, mock_david):
         mocker.patch('whatsonms.utils.broadcast',
                      return_value=Response(200, message='mock response'))
         mock_update = mock_david(sample_file=DAVID_SAMPLE)
+        mock_update_body = self.clean_json_from_str(mock_update['body'])
+        metadata = mock_update_body['data']['attributes']['Item']['metadata']
         expected_response = '126753'
-        metadata = json.loads(
-            mock_update['body']['data']['attributes']['Item']['metadata']
-        )
         assert metadata['mm_uid'] == expected_response
 
     def test_invalid_request_web_client(self, mock_web_client):
         resp = mock_web_client(stream_slug='foobar')
-        metadata = resp['body']['data'].get('metadata', None)
+        resp_body = self.clean_json_from_str(resp['body'])
+        metadata = resp_body['data'].get('metadata', None)
         # assert resp['statusCode'] == 404
         #
         # TODO: figure out why mock_dynamodb2 is sending back a different
@@ -70,27 +80,35 @@ class TestHandler:
         mocker.patch('whatsonms.utils.broadcast',
                      return_value=Response(200, message='mock response'))
         mock_update = mock_david(sample_file=DAVID_SAMPLE)
+        mock_update_body = self.clean_json_from_str(mock_update['body'])
         whats_on = mock_web_client()
-        assert whats_on['body']['data']['attributes']['Item'] == \
-            mock_update['body']['data']['attributes']['Item']
+        whats_on_body = self.clean_json_from_str(whats_on['body'])
+        assert whats_on_body['data']['attributes']['Item'] == \
+            mock_update_body['data']['attributes']['Item']
 
     def test_valid_request_web_client_2(self, mocker, mock_nexgen,
                                         mock_web_client):
         mocker.patch('whatsonms.utils.broadcast',
                      return_value=Response(200, message='mock response'))
         mock_update = mock_nexgen(NEXGEN_SAMPLE_QS)
+        mock_update_body = self.clean_json_from_str(mock_update['body'])
+
         whats_on = mock_web_client()
-        assert whats_on['body']['data']['attributes']['Item'] == \
-            mock_update['body']['data']['attributes']['Item']
+        whats_on_body = self.clean_json_from_str(whats_on['body'])
+
+        assert whats_on_body['data']['attributes']['Item'] == \
+            mock_update_body['data']['attributes']['Item']
 
     def test_normalized_keys(self, mocker, mock_david, mock_nexgen):
         mocker.patch('whatsonms.utils.broadcast',
                      return_value=Response(200, message='mock response'))
         mock_update_david = mock_david(sample_file=DAVID_SAMPLE)
-        mock_update_nexgen = mock_nexgen(NEXGEN_SAMPLE_QS)
+        mock_update_david_body = self.clean_json_from_str(mock_update_david['body'])
+        data_david = mock_update_david_body['data']['attributes']['Item']
 
-        data_david = mock_update_david['body']['data']['attributes']['Item']
-        data_nexgen = mock_update_nexgen['body']['data']['attributes']['Item']
+        mock_update_nexgen = mock_nexgen(NEXGEN_SAMPLE_QS)
+        mock_update_nexgen_body = self.clean_json_from_str(mock_update_nexgen['body'])
+        data_nexgen = mock_update_nexgen_body['data']['attributes']['Item']
 
         assert [*data_david] == [*data_nexgen]
 
@@ -103,7 +121,11 @@ class TestHandler:
         mocker.patch('whatsonms.utils.broadcast',
                      return_value=Response(200, message='mock response'))
         resp_1 = mock_nexgen(NEXGEN_SAMPLE_QS)
+        resp_1_body = self.clean_json_from_str(resp_1['body'])
+
         mock_nexgen('')
         resp_2 = mock_web_client()
-        assert resp_1['body']['data']['attributes']['Item'] == \
-            resp_2['body']['data']['attributes']['Item']
+        resp_2_body = self.clean_json_from_str(resp_2['body'])
+
+        assert resp_1_body['data']['attributes']['Item'] == \
+            resp_2_body['data']['attributes']['Item']

@@ -18,7 +18,7 @@ class Response(dict):
              is empty.
     """
 
-    def __init__(self, status: int, message: str = '', data: str = ''):
+    def __init__(self, status: int, message: str = '', data: dict = {}):
         body = jsonify_body(message, data)
         response = {
             "statusCode": status,
@@ -36,7 +36,7 @@ def jsonify_body(message, data):
     Ember clients.
     """
     return (
-        '{"meta": {"message": "%s"}, "data": {"type": "metadata", "id": "1", "attributes": "%s"}}'
+        '{"meta": {"message": "%s"}, "data": {"type": "metadata", "id": "1", "attributes": %s}}'
     ) % (message, data)
 
 
