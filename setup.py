@@ -41,10 +41,10 @@ setup(
     tests_require=[
         'mocket',
         'moto',
-        'pytest==4.0.2',
-        'pytest-cov>=2.6.1',
+        'pytest',
+        'pytest-cov',
         'pytest-env',
-        'pytest-flake8>=1.0.4',
+        'pytest-flake8',
         'pytest-mock',
         'pytest-sugar',
     ],

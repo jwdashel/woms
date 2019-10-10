@@ -61,25 +61,34 @@ class WebSocketRouter:
     @staticmethod
     @route('$connect')
     def connect(event):
+        """
+        AWS API Gateway calls this route when a client connects via WebSockets.
+        """
         connection_id = event['requestContext']['connectionId']
         stream = event['queryStringParameters']['stream']
         db.subscribe(stream, connection_id)
-        return Response(200, message=event)
+        return Response(200)
 
     @staticmethod
     @route('$disconnect')
     def disconnect(event):
+        """
+        AWS API Gateway calls this route when a WebSocket client disconnects.
+        """
         connection_id = event['requestContext']['connectionId']
         db.unsubscribe(connection_id)
-        return Response(200, message=event)
+        return Response(200)
 
     @staticmethod
     @route('$default')
     def default(event):
+        """
+        Route a WebSocket client calls after initial connect to get back the
+        latest metdata for a stream.
+        """
         connection_id = event['requestContext']['connectionId']
-        # This is a single client's initial connect, so just send
-        # metadata to that connection
         body = json.loads(event['body'])
         stream = body['data']['stream']
         metadata = db.get_metadata(stream)
         broadcast(stream, recipient_ids=[connection_id], data=metadata)
+        return Response(200)
