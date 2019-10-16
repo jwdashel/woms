@@ -1,7 +1,8 @@
 import os
 
 
-DYNAMODB_TABLE = os.environ.get('DYNAMODB_TABLE')
+TABLE_METADATA = os.environ.get('TABLE_METADATA')
+TABLE_SUBSCRIBERS = os.environ.get('TABLE_SUBSCRIBERS')
 
 # The domainName and stage that comprise the websocket endpoint
 WS_DOMAIN = os.environ.get('WS_DOMAIN')

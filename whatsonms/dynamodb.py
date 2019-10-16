@@ -12,75 +12,50 @@ class DB:
     """
     The DB class provides an abstraction around the simple operations
     the lambda handler must perform.
-
-    Warning: This class will attempt to create a DynamoDB table if the
-        specified table does not exist.
     """
-    stream_key = 'stream'
-    data_type_key = 'datatype'
-    type_metadata = 'metadata'
-    type_subscribers = 'subscribers'
+    stream_key = 'stream_slug'
+    metadata_key = 'metadata'
+    subscriber_key = 'connection_id'
+    subscriber_index = 'connection_id-INDEX'
 
     def __init__(self, table_name: str) -> None:
         _db = boto3.Session().resource('dynamodb')
-        try:
-            _db.meta.client.describe_table(TableName=table_name)
-        except _db.meta.client.exceptions.ResourceNotFoundException:
-            _db.create_table(
-                TableName=table_name,
-                KeySchema=[
-                    {'AttributeName': self.stream_key, 'KeyType': 'HASH'},
-                    {'AttributeName': self.data_type_key, 'KeyType': 'RANGE'}
-                ],
-                AttributeDefinitions=[
-                    {'AttributeName': self.stream_key, 'AttributeType': 'S'},
-                    {'AttributeName': self.data_type_key, 'AttributeType': 'S'}
-                ],
-                ProvisionedThroughput={
-                    'ReadCapacityUnits': 5, 'WriteCapacityUnits': 5
-                },
-            )
-            _db.meta.client.get_waiter('table_exists').wait(TableName=table_name)
-
         self.table = _db.Table(table_name)
         self.table.load()
 
     def get_metadata(self, stream: str) -> Dict:
         """
         Args:
-            stream: The slug of the stream to retreive from DynamoDB.
+            stream: The slug of the stream whose metadata to retrieve from
+            DynamoDB.
 
         Returns:
             A python dictionary generated from the JSON DynamoDB value.
         """
         metadata = self.table.get_item(
-            Key={
-                self.stream_key: stream,
-                self.data_type_key: self.type_metadata
-            },
+            Key={self.stream_key: stream},
             # return metadata attribute only:
-            ProjectionExpression=self.type_metadata
+            ProjectionExpression=self.metadata_key
         )
         return metadata if metadata else {}
 
     def get_subscribers(self, stream: str) -> List:
         """
         Args:
-            stream: The slug of the stream to retreive from DynamoDB.
+            stream: The slug of the stream whose subscribers to retrieve from
+            DynamoDB.
 
         Returns:
             A list of subscribers to that stream.
         """
-        resp = self.table.get_item(
-            Key={
-                self.stream_key: stream,
-                self.data_type_key: self.type_subscribers
-            },
-            ProjectionExpression=self.type_subscribers
+        resp = self.table.query(
+            KeyConditionExpression='stream_slug = :name',
+            ExpressionAttributeValues={":name": {"S": stream}}
+            ProjectionExpression=self.subscriber_key
         )
-        subscribers = resp.get('Item', {}).get('subscribers', [])
+        subscribers = resp.get('Items', [])
 
-        return subscribers
+        return [s["connection_id"]["S"] for s in subscribers]
 
     def set_metadata(self, stream: str, metadata: Dict) -> Dict:
         """
@@ -94,7 +69,6 @@ class DB:
         self.table.update_item(
             Key={
                 self.stream_key: stream,
-                self.data_type_key: self.type_metadata
             },
             UpdateExpression='SET metadata = :value',
             ExpressionAttributeValues={
@@ -113,10 +87,10 @@ class DB:
         Returns:
             The updated subscribers list with the new connection_id appended.
         """
+        # TODO: update
         subscribers = self.table.update_item(
             Key={
                 self.stream_key: stream,
-                self.data_type_key: self.type_subscribers
             },
             UpdateExpression="ADD subscribers :value",
             ExpressionAttributeValues={":value": set([connection_id])},
@@ -129,28 +103,21 @@ class DB:
         """
         Args:
             connection_id: The websocket connectionId of the user
-
-        Returns:
-            The updated subscribers list with the connection_id removed.
         """
-
-        resp = self.table.scan(
-            FilterExpression=Attr('subscribers').contains(connection_id)
+        resp = self.table.query(
+            IndexName=self.subscriber_index,
+            KeyConditionExpression='{} = :value'.format(self.subscriber_key),
+            ExpressionAttributeValues={':value': {'S': connection_id}}
+            ProjectionExpression=self.subscriber_key
         )
-        items = resp['Items']
 
-        for item in items:
-            subscribers = self.table.update_item(
-                Key={
-                    self.stream_key: item[self.stream_key],
-                    self.data_type_key: self.type_subscribers
-                },
-                UpdateExpression='DELETE subscribers :value',
-                ExpressionAttributeValues={':value': set([connection_id])},
-                ReturnValues='ALL_NEW',
-            )
+        items = resp.get("Items", [])
 
-        return subscribers
+        # TODO:
+        # for item in items:
+            # delete item
+
+        # return subscribers
 
 
 @lru_cache()
@@ -175,20 +142,20 @@ class db:
     """
     @staticmethod
     def get_metadata(*args, **kwargs):
-        return connect(config.DYNAMODB_TABLE).get_metadata(*args, **kwargs)
+        return connect(config.TABLE_METADATA).get_metadata(*args, **kwargs)
 
     @staticmethod
     def set_metadata(*args, **kwargs):
-        return connect(config.DYNAMODB_TABLE).set_metadata(*args, **kwargs)
+        return connect(config.TABLE_METADATA).set_metadata(*args, **kwargs)
 
     @staticmethod
     def get_subscribers(*args, **kwargs):
-        return connect(config.DYNAMODB_TABLE).get_subscribers(*args, **kwargs)
+        return connect(config.TABLE_SUBSCRIBERS).get_subscribers(*args, **kwargs)
 
     @staticmethod
     def subscribe(*args, **kwargs):
-        return connect(config.DYNAMODB_TABLE).subscribe(*args, **kwargs)
+        return connect(config.TABLE_SUBSCRIBERS).subscribe(*args, **kwargs)
 
     @staticmethod
     def unsubscribe(*args, **kwargs):
-        return connect(config.DYNAMODB_TABLE).unsubscribe(*args, **kwargs)
+        return connect(config.TABLE_SUBSCRIBERS).unsubscribe(*args, **kwargs)
