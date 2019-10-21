@@ -50,7 +50,7 @@ class DB:
         """
         resp = self.table.query(
             KeyConditionExpression='stream_slug = :name',
-            ExpressionAttributeValues={":name": {"S": stream}}
+            ExpressionAttributeValues={":name": {"S": stream}},
             ProjectionExpression=self.subscriber_key
         )
         subscribers = resp.get('Items', [])
@@ -107,7 +107,7 @@ class DB:
         resp = self.table.query(
             IndexName=self.subscriber_index,
             KeyConditionExpression='{} = :value'.format(self.subscriber_key),
-            ExpressionAttributeValues={':value': {'S': connection_id}}
+            ExpressionAttributeValues={':value': {'S': connection_id}},
             ProjectionExpression=self.subscriber_key
         )
 
