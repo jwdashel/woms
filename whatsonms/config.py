@@ -1,9 +1,6 @@
 import os
 
 
-TABLE_METADATA = os.environ.get('TABLE_METADATA')
-TABLE_SUBSCRIBERS = os.environ.get('TABLE_SUBSCRIBERS')
-
 # The domainName and stage that comprise the websocket endpoint
 WS_DOMAIN = os.environ.get('WS_DOMAIN')
 WS_STAGE = os.environ.get('WS_STAGE')
@@ -15,3 +12,6 @@ URL_PREFIX = os.environ.get('URL_PREFIX', '/whats-on')
 # These settings are optional and will be strictly used for Sentry reporting.
 RELEASE = os.environ.get('RELEASE', None)
 ENV = os.environ.get('ENV', None)
+
+TABLE_METADATA = os.environ.get(ENV.upper() + '_' + 'TABLE_METADATA')
+TABLE_SUBSCRIBERS = os.environ.get(ENV.upper() + '_' + 'TABLE_SUBSCRIBERS')
