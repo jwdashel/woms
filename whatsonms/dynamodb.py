@@ -3,7 +3,6 @@ from functools import lru_cache
 from typing import Dict, List
 
 import boto3
-from boto3.dynamodb.conditions import Attr
 
 from whatsonms import config
 
@@ -139,18 +138,19 @@ class DB:
         Args:
             connection_id: The websocket connectionId of the user
         """
-        resp = self.table.query(
-            IndexName=self.subscriber_index,
-            KeyConditionExpression='{} = :value'.format(self.subscriber_key),
-            ExpressionAttributeValues={':value': {'S': connection_id}},
-            ProjectionExpression=self.subscriber_key
-        )
+        pass
+        # resp = self.table.query(
+        #     IndexName=self.subscriber_index,
+        #     KeyConditionExpression='{} = :value'.format(self.subscriber_key),
+        #     ExpressionAttributeValues={':value': {'S': connection_id}},
+        #     ProjectionExpression=self.subscriber_key
+        # )
 
-        items = resp.get("Items", [])
+        # items = resp.get("Items", [])
 
         # TODO:
         # for item in items:
-            # delete item
+        #   delete item
 
         # return subscribers
 
