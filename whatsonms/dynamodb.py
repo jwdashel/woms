@@ -24,7 +24,7 @@ class DB:
         except _db.meta.client.exceptions.ResourceNotFoundException:
             # [10/22/19 - jd] this create statement is required for tests.
             # We thought we could get rid of it (since this is infrastructure
-            # defined in application code ???) but without it, test tables 
+            # defined in application code ???) but without it, test tables
             # don't get created when running pytest. Maybe there is a solution
             # but I am fine leaving it like this for now.
             if 'subscribers' in table_name:
