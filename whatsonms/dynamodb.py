@@ -20,6 +20,41 @@ class DB:
 
     def __init__(self, table_name: str) -> None:
         _db = boto3.Session().resource('dynamodb')
+        try:
+            _db.meta.client.describe_table(TableName=table_name)
+        except _db.meta.client.exceptions.ResourceNotFoundException:
+            # [10/22/19 - jd] this create statement is required for tests.
+            # We thought we could get rid of it (since this is infrastructure
+            # defined in application code ???) but without it, test tables 
+            # don't get created when running pytest. Maybe there is a solution
+            # but I am fine leaving it like this for now.
+            if 'subscribers' in table_name:
+                key_schema = [
+                    {'AttributeName': self.stream_key, 'KeyType': 'HASH'},
+                    {'AttributeName': self.subscriber_key, 'KeyType': 'RANGE'}
+                ]
+                attr_definitions = [
+                    {'AttributeName': self.stream_key, 'AttributeType': 'S'},
+                    {'AttributeName': self.subscriber_key, 'AttributeType': 'S'}
+                ]
+            elif 'metadata' in table_name:
+                key_schema = [
+                    {'AttributeName': self.stream_key, 'KeyType': 'HASH'}
+                ]
+                attr_definitions = [
+                    {'AttributeName': self.stream_key, 'AttributeType': 'S'}
+                ]
+
+            _db.create_table(
+                TableName=table_name,
+                KeySchema=key_schema,
+                AttributeDefinitions=attr_definitions,
+                ProvisionedThroughput={
+                    'ReadCapacityUnits': 5, 'WriteCapacityUnits': 5
+                },
+            )
+            _db.meta.client.get_waiter('table_exists').wait(TableName=table_name)
+
         self.table = _db.Table(table_name)
         self.table.load()
 
