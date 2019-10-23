@@ -4,7 +4,7 @@ import urllib.parse
 import pytest
 from moto import mock_dynamodb2
 
-from whatsonms.config import TABLE_METADATA, URL_PREFIX
+from whatsonms.config import TABLE_METADATA, TABLE_SUBSCRIBERS, URL_PREFIX
 
 WQXR_STREAM_SLUG = 'wqxr'
 
@@ -12,9 +12,10 @@ WQXR_STREAM_SLUG = 'wqxr'
 @pytest.fixture(autouse=True)
 def handler(mocker):
     with mock_dynamodb2():
-        from whatsonms.dynamodb import DB
+        from whatsonms.dynamodb import MetadataDB, SubscriberDB
         import whatsonms.handler
-        DB(TABLE_METADATA)
+        MetadataDB(TABLE_METADATA)
+        SubscriberDB(TABLE_SUBSCRIBERS)
         yield whatsonms.handler
 
 

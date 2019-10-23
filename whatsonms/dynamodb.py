@@ -3,6 +3,7 @@ from functools import lru_cache
 from typing import Dict, List
 
 import boto3
+from boto3.dynamodb.conditions import Key
 
 from whatsonms import config
 
@@ -12,10 +13,12 @@ class DB:
     The DB class provides an abstraction around the simple operations
     the lambda handler must perform.
     """
+    pass
+
+
+class MetadataDB:
     stream_key = 'stream_slug'
     metadata_key = 'metadata'
-    subscriber_key = 'connection_id'
-    subscriber_index = 'connection_id-INDEX'
 
     def __init__(self, table_name: str) -> None:
         _db = boto3.Session().resource('dynamodb')
@@ -27,27 +30,14 @@ class DB:
             # defined in application code ???) but without it, test tables
             # don't get created when running pytest. Maybe there is a solution
             # but I am fine leaving it like this for now.
-            if 'subscribers' in table_name:
-                key_schema = [
-                    {'AttributeName': self.stream_key, 'KeyType': 'HASH'},
-                    {'AttributeName': self.subscriber_key, 'KeyType': 'RANGE'}
-                ]
-                attr_definitions = [
-                    {'AttributeName': self.stream_key, 'AttributeType': 'S'},
-                    {'AttributeName': self.subscriber_key, 'AttributeType': 'S'}
-                ]
-            elif 'metadata' in table_name:
-                key_schema = [
-                    {'AttributeName': self.stream_key, 'KeyType': 'HASH'}
-                ]
-                attr_definitions = [
-                    {'AttributeName': self.stream_key, 'AttributeType': 'S'}
-                ]
-
             _db.create_table(
                 TableName=table_name,
-                KeySchema=key_schema,
-                AttributeDefinitions=attr_definitions,
+                KeySchema=[
+                    {'AttributeName': self.stream_key, 'KeyType': 'HASH'}
+                ],
+                AttributeDefinitions=[
+                    {'AttributeName': self.stream_key, 'AttributeType': 'S'}
+                ],
                 ProvisionedThroughput={
                     'ReadCapacityUnits': 5, 'WriteCapacityUnits': 5
                 },
@@ -71,25 +61,10 @@ class DB:
             # return metadata attribute only:
             ProjectionExpression=self.metadata_key
         )
-        return metadata if metadata else {}
-
-    def get_subscribers(self, stream: str) -> List:
-        """
-        Args:
-            stream: The slug of the stream whose subscribers to retrieve from
-            DynamoDB.
-
-        Returns:
-            A list of subscribers to that stream.
-        """
-        resp = self.table.query(
-            KeyConditionExpression='stream_slug = :name',
-            ExpressionAttributeValues={":name": {"S": stream}},
-            ProjectionExpression=self.subscriber_key
-        )
-        subscribers = resp.get('Items', [])
-
-        return [s["connection_id"]["S"] for s in subscribers]
+        try:
+            return json.loads(metadata['Item']['metadata']) if metadata else {}
+        except KeyError:
+            return {}
 
     def set_metadata(self, stream: str, metadata: Dict) -> Dict:
         """
@@ -112,6 +87,73 @@ class DB:
         )
         return self.get_metadata(stream)
 
+class SubscriberDB(DB):
+    stream_key = 'stream_slug'
+    subscriber_key = 'connection_id'
+    stream_index = 'stream-INDEX'
+
+    def __init__(self, table_name: str) -> None:
+        _db = boto3.Session().resource('dynamodb')
+        try:
+            _db.meta.client.describe_table(TableName=table_name)
+        except _db.meta.client.exceptions.ResourceNotFoundException:
+            # [10/22/19 - jd] this create statement is required for tests.
+            # We thought we could get rid of it (since this is infrastructure
+            # defined in application code ???) but without it, test tables
+            # don't get created when running pytest. Maybe there is a solution
+            # but I am fine leaving it like this for now.
+            key_schema = [
+                # {'AttributeName': self.stream_key, 'KeyType': 'HASH'},
+                {'AttributeName': self.subscriber_key, 'KeyType': 'HASH'}
+            ]
+            attr_definitions = [
+                {'AttributeName': self.stream_key, 'AttributeType': 'S'},
+                {'AttributeName': self.subscriber_key, 'AttributeType': 'S'}
+            ]
+            gsi = [
+                {
+                    'IndexName': self.stream_index,
+                    'KeySchema': [
+                        {'AttributeName': self.stream_key, 'KeyType': 'HASH'},
+                        {'AttributeName': self.subscriber_key, 'KeyType': 'RANGE'}
+                    ],
+                    'Projection': {'ProjectionType': 'KEYS_ONLY'}
+                }
+            ]
+
+            _db.create_table(
+                TableName=table_name,
+                KeySchema=key_schema,
+                GlobalSecondaryIndexes=gsi,
+                AttributeDefinitions=attr_definitions,
+                ProvisionedThroughput={
+                    'ReadCapacityUnits': 5, 'WriteCapacityUnits': 5
+                },
+            )
+            _db.meta.client.get_waiter('table_exists').wait(TableName=table_name)
+
+        self.table = _db.Table(table_name)
+        self.table.load()
+
+    def get_subscribers(self, stream: str) -> List:
+        """
+        Args:
+            stream: The slug of the stream whose subscribers to retrieve from
+            DynamoDB.
+
+        Returns:
+            A list of subscribers to that stream.
+        """
+        resp = self.table.query(
+            IndexName=self.stream_index,
+            KeyConditionExpression=Key(self.stream_key).eq(stream)
+        )
+        subscribers = resp.get('Items', [])
+
+        # return [s["connection_id"]["S"] for s in subscribers]
+        # will amzn give back the weird type bs? if so, need to reflect in tests
+        return [s["connection_id"] for s in subscribers]
+
     def subscribe(self, stream: str, connection_id: str) -> List:
         """
         Args:
@@ -121,38 +163,21 @@ class DB:
         Returns:
             The updated subscribers list with the new connection_id appended.
         """
-        # TODO: update
-        subscribers = self.table.update_item(
-            Key={
+        return self.table.put_item(
+            Item={
                 self.stream_key: stream,
+                self.subscriber_key: connection_id
             },
-            UpdateExpression="ADD subscribers :value",
-            ExpressionAttributeValues={":value": set([connection_id])},
-            ReturnValues="ALL_NEW",
         )
-
-        return subscribers
 
     def unsubscribe(self, connection_id: str) -> List:
         """
         Args:
             connection_id: The websocket connectionId of the user
         """
-        pass
-        # resp = self.table.query(
-        #     IndexName=self.subscriber_index,
-        #     KeyConditionExpression='{} = :value'.format(self.subscriber_key),
-        #     ExpressionAttributeValues={':value': {'S': connection_id}},
-        #     ProjectionExpression=self.subscriber_key
-        # )
-
-        # items = resp.get("Items", [])
-
-        # TODO:
-        # for item in items:
-        #   delete item
-
-        # return subscribers
+        resp = self.table.delete_item(
+            Key={self.subscriber_key: connection_id}
+        )
 
 
 @lru_cache()
