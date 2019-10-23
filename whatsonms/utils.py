@@ -4,7 +4,7 @@ import json
 from typing import List
 
 from whatsonms import config
-from whatsonms.dynamodb import db
+from whatsonms.dynamodb import subdb, metadb
 
 
 class Response(dict):
@@ -61,8 +61,8 @@ def broadcast(stream: str, recipient_ids: List = [],
         endpoint_url='https://{}/{}'.format(config.WS_DOMAIN, config.WS_STAGE)
     )
 
-    recipient_ids = recipient_ids or db.get_subscribers(stream)
-    data = data or db.get_metadata(stream)
+    recipient_ids = recipient_ids or subdb.get_subscribers(stream)
+    data = data or metadb.get_metadata(stream)
     data_in_bytes = bytes(json.dumps(data), 'utf-8')
 
     if recipient_ids:
@@ -104,4 +104,4 @@ def _send_message(client, connection_id, data):
                 # Remove stale connection
                 print('*** Subscriber ', connection_id,
                       ' returned response 410: GoneException. Removing subscriber.')
-                db.unsubscribe(connection_id)
+                subdb.unsubscribe(connection_id)

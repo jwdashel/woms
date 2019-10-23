@@ -16,7 +16,7 @@ class DB:
     pass
 
 
-class MetadataDB:
+class MetadataDB(DB):
     stream_key = 'stream_slug'
     metadata_key = 'metadata'
 
@@ -61,10 +61,11 @@ class MetadataDB:
             # return metadata attribute only:
             ProjectionExpression=self.metadata_key
         )
-        try:
-            return json.loads(metadata['Item']['metadata']) if metadata else {}
-        except KeyError:
-            return {}
+        return metadata if metadata else {}
+        # try:
+        #     return json.loads(metadata['Item']['metadata']) if metadata else {}
+        # except KeyError:
+        #     return {}
 
     def set_metadata(self, stream: str, metadata: Dict) -> Dict:
         """
@@ -86,6 +87,7 @@ class MetadataDB:
             ReturnValues='NONE',
         )
         return self.get_metadata(stream)
+
 
 class SubscriberDB(DB):
     stream_key = 'stream_slug'
@@ -175,7 +177,7 @@ class SubscriberDB(DB):
         Args:
             connection_id: The websocket connectionId of the user
         """
-        resp = self.table.delete_item(
+        return self.table.delete_item(
             Key={self.subscriber_key: connection_id}
         )
 
@@ -186,10 +188,13 @@ def connect(table_name: str) -> DB:
     This method allows an initialized DB to persist in memory, avoiding
     repeated calls to "describe_table".
     """
-    return DB(table_name)
+    if 'metadata' in table_name:
+        return MetadataDB(table_name)
+    elif 'subscribers' in table_name:
+        return SubscriberDB(table_name)
 
 
-class db:
+class metadb:
     """
     Provides a lazy-loading interface for the default DynamoDB table.
     Use this to avoid import and passing config in every file.
@@ -208,6 +213,18 @@ class db:
     def set_metadata(*args, **kwargs):
         return connect(config.TABLE_METADATA).set_metadata(*args, **kwargs)
 
+
+class subdb:
+    """
+    Provides a lazy-loading interface for the default DynamoDB table.
+    Use this to avoid import and passing config in every file.
+
+    Usage:
+
+        from whatsonms.dynamodb import db
+        db.get(...)
+        db.set(...)
+    """
     @staticmethod
     def get_subscribers(*args, **kwargs):
         return connect(config.TABLE_SUBSCRIBERS).get_subscribers(*args, **kwargs)
