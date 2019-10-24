@@ -32,6 +32,8 @@ jobs:
           name: Test
           command: |
             . ~/.venv/bin/activate
+            export TABLE_METADATA=whats-on-table-metadata-demo
+            export TABLE_SUBSCRIBERS=whats-on-table-subscribers-demo
             cc-test-reporter before-build
             pytest \
               --junitxml=test-results/pytest/results.xml \
