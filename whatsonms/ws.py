@@ -3,7 +3,7 @@ import json
 from functools import lru_cache, wraps
 from typing import Callable
 
-from whatsonms.dynamodb import db
+from whatsonms.dynamodb import metadb, subdb
 from whatsonms.utils import broadcast, Response
 
 
@@ -66,7 +66,7 @@ class WebSocketRouter:
         """
         connection_id = event['requestContext']['connectionId']
         stream = event['queryStringParameters']['stream']
-        db.subscribe(stream, connection_id)
+        subdb.subscribe(stream, connection_id)
         return Response(200)
 
     @staticmethod
@@ -76,7 +76,7 @@ class WebSocketRouter:
         AWS API Gateway calls this route when a WebSocket client disconnects.
         """
         connection_id = event['requestContext']['connectionId']
-        db.unsubscribe(connection_id)
+        subdb.unsubscribe(connection_id)
         return Response(200)
 
     @staticmethod
@@ -89,6 +89,6 @@ class WebSocketRouter:
         connection_id = event['requestContext']['connectionId']
         body = json.loads(event['body'])
         stream = body['data']['stream']
-        metadata = db.get_metadata(stream)
+        metadata = metadb.get_metadata(stream)
         broadcast(stream, recipient_ids=[connection_id], data=metadata)
         return Response(200)

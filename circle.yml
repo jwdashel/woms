@@ -32,6 +32,8 @@ jobs:
           name: Test
           command: |
             . ~/.venv/bin/activate
+            export TABLE_METADATA=whats-on-table-metadata-demo
+            export TABLE_SUBSCRIBERS=whats-on-table-subscribers-demo
             cc-test-reporter before-build
             pytest \
               --junitxml=test-results/pytest/results.xml \
@@ -77,7 +79,7 @@ jobs:
       - run:
           name: Deploy Lambda
           command: |
-            if [[ "${CIRCLE_BRANCH}" == "master" ]]; then
+            if [[ "${CIRCLE_BRANCH}" == "master" ]] || [[ "${CIRCLE_TAG}" == "demo" ]]; then
               export ENV=demo
               export TAG=demo
               export DEMO_RELEASE=$CIRCLE_SHA1
@@ -110,15 +112,17 @@ workflows:
             - test
           filters:
             tags:
-              only: /^v[0-9]+\.[0-9]+\.[0-9]+/
+              only: /.*/
             branches:
-              only: master
+              only: /.*/
       - deploy_lambda:
           requires:
             - build_lambda
           filters:
             tags:
-              only: /^v[0-9]+\.[0-9]+\.[0-9]+/
+              only: 
+                - /^v[0-9]+\.[0-9]+\.[0-9]+/
+                - demo
             branches:
               only: master
 

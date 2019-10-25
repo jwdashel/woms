@@ -5,7 +5,7 @@ from typing import Callable, Dict
 
 import whatsonms.utils
 from whatsonms import v1
-from whatsonms.dynamodb import db
+from whatsonms.dynamodb import metadb
 
 
 def route(verb: str, path: str) -> Callable:
@@ -98,7 +98,7 @@ class HttpRouter:
         metadata for a stream.
         """
         stream = params.get('stream')
-        metadata = db.get_metadata(stream)
+        metadata = metadb.get_metadata(stream)
         if metadata:
             return whatsonms.utils.Response(200, data=metadata)
         return whatsonms.utils.Response(404, message='No metadata found')
@@ -116,7 +116,7 @@ def _update(metadata, params):
             message="Missing required parameter 'stream'"
         )
 
-    metadata = db.set_metadata(stream, metadata)
+    metadata = metadb.set_metadata(stream, metadata)
     whatsonms.utils.broadcast(stream, data=metadata)
     return whatsonms.utils.Response(
         200,
