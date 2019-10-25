@@ -30,19 +30,20 @@ class MetadataDB(DB):
             # defined in application code ???) but without it, test tables
             # don't get created when running pytest. Maybe there is a solution
             # but I am fine leaving it like this for now.
-            _db.create_table(
-                TableName=table_name,
-                KeySchema=[
-                    {'AttributeName': self.stream_key, 'KeyType': 'HASH'}
-                ],
-                AttributeDefinitions=[
-                    {'AttributeName': self.stream_key, 'AttributeType': 'S'}
-                ],
-                ProvisionedThroughput={
-                    'ReadCapacityUnits': 5, 'WriteCapacityUnits': 5
-                },
-            )
-            _db.meta.client.get_waiter('table_exists').wait(TableName=table_name)
+            if config.ENV != 'demo' and config.ENV != 'prod':
+                _db.create_table(
+                    TableName=table_name,
+                    KeySchema=[
+                        {'AttributeName': self.stream_key, 'KeyType': 'HASH'}
+                    ],
+                    AttributeDefinitions=[
+                        {'AttributeName': self.stream_key, 'AttributeType': 'S'}
+                    ],
+                    ProvisionedThroughput={
+                        'ReadCapacityUnits': 5, 'WriteCapacityUnits': 5
+                    },
+                )
+                _db.meta.client.get_waiter('table_exists').wait(TableName=table_name)
 
         self.table = _db.Table(table_name)
         self.table.load()
