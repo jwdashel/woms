@@ -62,10 +62,6 @@ class MetadataDB(DB):
             ProjectionExpression=self.metadata_key
         )
         return metadata if metadata else {}
-        # try:
-        #     return json.loads(metadata['Item']['metadata']) if metadata else {}
-        # except KeyError:
-        #     return {}
 
     def set_metadata(self, stream: str, metadata: Dict) -> Dict:
         """
