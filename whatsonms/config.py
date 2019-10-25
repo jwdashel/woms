@@ -14,5 +14,4 @@ RELEASE = os.environ.get('RELEASE', None)
 ENV = os.environ.get('ENV', None)
 
 TABLE_METADATA = os.environ.get('TABLE_METADATA')
-# TABLE_METADATA = os.environ.get(os.environ.get('ENV', None).upper() + '_' + 'TABLE_METADATA')
 TABLE_SUBSCRIBERS = os.environ.get('TABLE_SUBSCRIBERS')
