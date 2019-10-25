@@ -101,7 +101,6 @@ class SubscriberDB(DB):
             # don't get created when running pytest. Maybe there is a solution
             # but I am fine leaving it like this for now.
             key_schema = [
-                # {'AttributeName': self.stream_key, 'KeyType': 'HASH'},
                 {'AttributeName': self.subscriber_key, 'KeyType': 'HASH'}
             ]
             attr_definitions = [
