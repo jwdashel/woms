@@ -73,7 +73,10 @@ def parse_metadata_david(event: Dict) -> Dict:
     xml = event.get('body')
     if xml:
         xmldict = xmltodict.parse(xml)
-        present, = (x for x in xmldict['wddxPacket']['item']
-                    if x['@sequence'] == 'present')
-        normalized = {v: present.get(k, '') for k, v in DAVID_MUSIC_ELEMS}
-        return normalized
+        try:
+            present, = (x for x in xmldict['wddxPacket']['item']
+                        if x['@sequence'] == 'present')
+            normalized = {v: present.get(k, '') for k, v in DAVID_MUSIC_ELEMS}
+            return normalized
+        except ValueError:
+            raise Exception('ERROR unpacking DAVID body: ' + xml)
