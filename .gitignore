@@ -31,3 +31,5 @@ test_images/
 test-results/
 
 deploy_demo.sh
+
+.gitignore
