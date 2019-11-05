@@ -61,7 +61,7 @@ def parse_metadata_nexgen(event: Dict) -> Dict:
     if xml:
         xmldict = xmltodict.parse(xml)
         normalized = {
-            v: xmldict['audio'].get(k, '') for k, v in NEXGEN_MUSIC_ELEMS
+            v: xmldict['audio'].get(k) for k, v in NEXGEN_MUSIC_ELEMS if k in xmldict['audio']
         }
         return normalized
 
@@ -76,7 +76,7 @@ def parse_metadata_david(event: Dict) -> Dict:
         try:
             present, = (x for x in xmldict['wddxPacket']['item']
                         if x['@sequence'] == 'present')
-            normalized = {v: present.get(k, '') for k, v in DAVID_MUSIC_ELEMS}
+            normalized = {v: present.get(k) for k, v in DAVID_MUSIC_ELEMS if k in present}
             return normalized
         except ValueError:
-            raise Exception('ERROR unpacking DAVID body: ' + xml)
+            return {"air_break": True}

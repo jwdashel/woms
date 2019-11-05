@@ -1,4 +1,3 @@
-import json
 from functools import lru_cache
 from typing import Dict, List
 
@@ -79,7 +78,7 @@ class MetadataDB(DB):
             },
             UpdateExpression='SET metadata = :value',
             ExpressionAttributeValues={
-                ':value': json.dumps(metadata, sort_keys=True)
+                ':value': metadata
             },
             ReturnValues='NONE',
         )
