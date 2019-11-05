@@ -116,10 +116,10 @@ def _update(metadata, params):
             message="Missing required parameter 'stream'"
         )
 
-    new_metadata = metadb.set_metadata(stream, metadata)
-    whatsonms.utils.broadcast(stream, data=new_metadata)
+    metadata = metadb.set_metadata(stream, metadata)
+    whatsonms.utils.broadcast(stream, data=metadata)
     return whatsonms.utils.Response(
         200,
-        data=new_metadata,
+        data=metadata,
         message=('Broadcast sent to %s subscribers' % stream)
     )
