@@ -75,6 +75,12 @@ class TestHandler:
         # that metadata is None.
         assert metadata is None
 
+    def test_no_metadata(self, mocker, mock_nexgen,
+                         mock_web_client):
+        mocker.patch('whatsonms.utils.broadcast',
+                     return_value=Response(200, message='mock response'))
+        mock_update = mock_david(sample_file=DAVID_SAMPLE)
+
     def test_valid_request_web_client(self, mocker, mock_david,
                                       mock_web_client):
         mocker.patch('whatsonms.utils.broadcast',
