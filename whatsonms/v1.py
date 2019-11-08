@@ -79,4 +79,4 @@ def parse_metadata_david(event: Dict) -> Dict:
             normalized = {v: present.get(k, '') for k, v in DAVID_MUSIC_ELEMS}
             return normalized
         except ValueError:
-            raise Exception('ERROR unpacking DAVID body: ' + xml)
+            return {"air_break": True}
