@@ -1,6 +1,5 @@
 from whatsonms.dynamodb import MetadataDB, SubscriberDB
 from whatsonms import config
-import json
 
 
 class TestMetadataDDB:
@@ -16,7 +15,7 @@ class TestMetadataDDB:
         metadatabase = MetadataDB(config.TABLE_METADATA)
         metadatabase.set_metadata(slug, metadata)
         md = metadatabase.get_metadata(slug)
-        md = json.loads(md['Item']['metadata'])
+        md = md['Item']['metadata']
         assert md['Artist'] == 'Soccer Mommy'
 
 

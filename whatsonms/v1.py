@@ -62,7 +62,7 @@ def parse_metadata_nexgen(event: Dict) -> Dict:
     if xml:
         xmldict = xmltodict.parse(xml)
         normalized = {
-            v: xmldict['audio'].get(k, '') for k, v in NEXGEN_MUSIC_ELEMS
+            v: xmldict['audio'].get(k) for k, v in NEXGEN_MUSIC_ELEMS if k in xmldict['audio']
         }
         normalized['start_time'] = convert_date_time(normalized['start_date'],
                                                      normalized['start_time'])
@@ -80,7 +80,7 @@ def parse_metadata_david(event: Dict) -> Dict:
         try:
             present, = (x for x in xmldict['wddxPacket']['item']
                         if x['@sequence'] == 'present')
-            normalized = {v: present.get(k, '') for k, v in DAVID_MUSIC_ELEMS}
+            normalized = {v: present.get(k) for k, v in DAVID_MUSIC_ELEMS if k in present}
             normalized['start_time'] = convert_time(normalized['start_time'])
             normalized['real_start_time'] = convert_time(normalized['real_start_time'])
             return normalized

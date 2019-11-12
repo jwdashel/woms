@@ -43,9 +43,14 @@ def jsonify_body(message, data):
     Formats the response body to the JSONAPI spec for easy consumption by
     Ember clients.
     """
-    return (
-        '{"meta": {"message": "%s"}, "data": {"type": "metadata", "id": "1", "attributes": %s}}'
-    ) % (message, data)
+    metadata = {"meta": {"message": message},
+                "data": {
+                    "type": "metadata",
+                    "id": "1",
+                    "attributes": data
+                        }
+                }
+    return json.dumps(metadata)
 
 
 def convert_time(time_str):
