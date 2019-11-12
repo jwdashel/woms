@@ -1,4 +1,4 @@
-import json
+import simplejson as json
 from unittest.mock import patch
 import whatsonms.utils as utils
 

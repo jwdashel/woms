@@ -1,6 +1,6 @@
 import boto3
 import concurrent.futures
-import json
+import simplejson as json
 from typing import List
 
 import pytz
