@@ -11,7 +11,6 @@ from whatsonms import config
 from whatsonms.dynamodb import subdb, metadb
 
 # TIMESTAMP_FMT = "2013-04-11 18:19:07.986"
-TIMESTAMP_FSTR = '{year}-{month}-{day} {time_}.000'
 TIMESTAMP_FMT = "%Y-%m-%d %H:%M:%S.%f"
 
 
