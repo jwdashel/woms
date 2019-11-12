@@ -1,5 +1,5 @@
 import inspect
-import json
+import simplejson as json
 from functools import lru_cache, wraps
 from typing import Callable
 

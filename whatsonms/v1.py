@@ -1,8 +1,9 @@
 import logging
 from typing import Dict
 
-import xmltodict
+from whatsonms.utils import convert_time, convert_date_time
 
+import xmltodict
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -63,6 +64,8 @@ def parse_metadata_nexgen(event: Dict) -> Dict:
         normalized = {
             v: xmldict['audio'].get(k) for k, v in NEXGEN_MUSIC_ELEMS if k in xmldict['audio']
         }
+        normalized['epoch_start_time'] = convert_date_time(normalized['start_date'],
+                                                           normalized['start_time'])
         return normalized
 
 
@@ -77,6 +80,8 @@ def parse_metadata_david(event: Dict) -> Dict:
             present, = (x for x in xmldict['wddxPacket']['item']
                         if x['@sequence'] == 'present')
             normalized = {v: present.get(k) for k, v in DAVID_MUSIC_ELEMS if k in present}
+            normalized['epoch_start_time'] = convert_time(normalized['start_time'])
+            normalized['epoch_real_start_time'] = convert_time(normalized['real_start_time'])
             return normalized
         except ValueError:
             return {"air_break": True}

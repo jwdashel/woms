@@ -28,6 +28,8 @@ setup(
         'boto3',
         'raven',
         'xmltodict',
+        'simplejson',
+        'pytz',
     ],
     license='BSD',
     long_description=__doc__,
