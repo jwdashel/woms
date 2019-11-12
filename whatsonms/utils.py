@@ -3,8 +3,16 @@ import concurrent.futures
 import json
 from typing import List
 
+import pytz
+import math
+from datetime import datetime
+
 from whatsonms import config
 from whatsonms.dynamodb import subdb, metadb
+
+# TIMESTAMP_FMT = "2013-04-11 18:19:07.986"
+TIMESTAMP_FSTR = '{year}-{month}-{day} {time_}.000'
+TIMESTAMP_FMT = "%Y-%m-%d %H:%M:%S.%f"
 
 
 class Response(dict):
@@ -38,6 +46,44 @@ def jsonify_body(message, data):
     return (
         '{"meta": {"message": "%s"}, "data": {"type": "metadata", "id": "1", "attributes": %s}}'
     ) % (message, data)
+
+
+def convert_time(time_str):
+    """
+    Convert (david fmt) datetime str to Epoch time.
+
+    Args:
+        time_str: Required. Of the format YYYY-MM-DD HH:MM:SS.fff
+    Returns: seconds since the Epoch
+    """
+    track_time = datetime.strptime(time_str, TIMESTAMP_FMT)
+
+    est = pytz.timezone('America/New_York')
+    utc = pytz.UTC
+
+    track_time = est.localize(track_time)
+    track_time = track_time.astimezone(utc)
+
+    epoch = datetime(1970, 1, 1)
+    epoch = utc.localize(epoch)
+
+    epoch_time = math.floor((track_time - epoch).total_seconds())
+
+    return epoch_time
+
+
+def convert_date_time(date_, time_):
+    """
+    Convert (nexgen fmt) date str and time str to Epoch time.
+
+    Args:
+        date_: Required. Of the format MM/DD/YYYY
+        time_: Required. Of the format HH:MM:SS
+    Returns: seconds since the Epoch
+    """
+    month, day, year = date_.split('/')
+    date_time = f'{year}-{month}-{day} {time_}.00'
+    return convert_time(date_time)
 
 
 def broadcast(stream: str, recipient_ids: List = [],

@@ -40,3 +40,14 @@ class TestUtils:
         response = utils.broadcast('wqxr', [conn_id], data)
         assert response['statusCode'] == 200
         subscriptiondb.unsubscribe.assert_called_with(conn_id)
+
+    def test_convert_datetime(self):
+        current_date = "2019-11-08 12:29:42.986"
+        epoch_time = 1573234182
+        assert epoch_time == utils.convert_time(current_date)
+
+    def test_convert_date_and_time(self):
+        current_date = "11/12/2018"
+        current_time = "12:22:19"
+        epoch_time = 1542043339
+        assert epoch_time == utils.convert_date_time(current_date, current_time)
