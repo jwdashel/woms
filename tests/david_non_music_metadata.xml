@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wddxPacket version="1.0">
+ <item sequence="past">
+  <ARCHIVED>0</ARCHIVED>
+  <ARCHIVING>0</ARCHIVING>
+  <Audio_Bitrate>0</Audio_Bitrate>
+  <Audio_Filetype>WAV</Audio_Filetype>
+  <Audio_Format>LINEAR</Audio_Format>
+  <Audio_Mode>STEREO</Audio_Mode>
+  <Audio_Resolution>16</Audio_Resolution>
+  <Audio_Samplerate>44100</Audio_Samplerate>
+  <BROADCASTINGS>20</BROADCASTINGS>
+  <BufferFlag>0</BufferFlag>
+  <CDINFO.LABEL>Angel/EMI</CDINFO.LABEL>
+  <Class>Music</Class>
+  <Create_ChangeTime>2011-06-28 19:34:16</Create_ChangeTime>
+  <Create_ChangeUser>MUSICTMP</Create_ChangeUser>
+  <Create_CreateTime>2009-09-15 14:55:36</Create_CreateTime>
+  <Create_Creator>MUSICTMP</Create_Creator>
+  <Create_Generator>DBM</Create_Generator>
+  <DBRef>DigaSystem\Music_Catalog_Valid\109921</DBRef>
+  <Fade_DefaultFadeIn>0</Fade_DefaultFadeIn>
+  <Fade_DefaultFadeOut>0</Fade_DefaultFadeOut>
+  <Fade_DefaultLinkIn>0</Fade_DefaultLinkIn>
+  <Fade_DefaultLinkOut>0</Fade_DefaultLinkOut>
+  <Fade_DefaultMarkIn>0</Fade_DefaultMarkIn>
+  <Fade_DefaultMarkOut>586960</Fade_DefaultMarkOut>
+  <Fade_FadeIn>0</Fade_FadeIn>
+  <Fade_FadeOut>0</Fade_FadeOut>
+  <Fade_Gain>0.00</Fade_Gain>
+  <Fade_Intro>0</Fade_Intro>
+  <Fade_Intro2>0</Fade_Intro2>
+  <Fade_LinkIn>0</Fade_LinkIn>
+  <Fade_LinkOut>0</Fade_LinkOut>
+  <Fade_MarkIn>0</Fade_MarkIn>
+  <Fade_MarkOut>586960</Fade_MarkOut>
+  <FCTS>2013-04-10 16:48:35.980</FCTS>
+  <File_Converted>0</File_Converted>
+  <File_Filename0>\\wnycdavidmedia\media$\Music_Catalog_Valid\SB8-MCUL-DAW2_8D30150B72B140748F7E1F5F04B1F617.WAV</File_Filename0>
+  <File_Filename1>\\wnycdavidmedia\media$\Media Directories\WQXR_FM\FM 105.9\20130411\SB8-MCUL-DAW2_8D30150B72B140748F7E1F5F04B1F617_BR.WAV</File_Filename1>
+  <File_Filename2>\\wnycdavidoa01\media directories$\FM 105.9\20130411\SB8-MCUL-DAW2_8D30150B72B140748F7E1F5F04B1F617_41.WAV</File_Filename2>
+  <File_Filename3>\\wnycdavidoancr5\e$\MEDIA DIRECTORIES\WQXR\20130411\SB8-MCUL-DAW2_8D30150B72B140748F7E1F5F04B1F617_3R.WAV</File_Filename3>
+  <File_Filesize0>104418228</File_Filesize0>
+  <File_Filesize1>104418228</File_Filesize1>
+  <File_OnAirFile>2,3</File_OnAirFile>
+  <File_PrimFilename>1</File_PrimFilename>
+  <FileState>Mirrored</FileState>
+  <FORARCHIVE>0</FORARCHIVE>
+  <GROWING>0</GROWING>
+  <GUID>{77EC862C-438E-40D2-A0B5-852249830F4F}</GUID>
+  <ID>00000065</ID>
+  <ImportedBy>BUS\FlexIE.dll</ImportedBy>
+  <KEYFRAMEEXISTS>0</KEYFRAMEEXISTS>
+  <LASTSENDTIME>00:00:00</LASTSENDTIME>
+  <Loc_FCTS>2013-04-10 17:44:26.685</Loc_FCTS>
+  <LOWRESEXISTS>0</LOWRESEXISTS>
+  <MediaType>Audio</MediaType>
+  <MEDIUM.FILE1.FILEREF>\\wnycdavidmedia\media$\Music_Catalog_Valid\SB8-MCUL-DAW2_8D30150B72B140748F7E1F5F04B1F617.DBX</MEDIUM.FILE1.FILEREF>
+  <MEDIUM.FILE1.TITLE>SB8-MCUL-DAW2_8D30150B72B140748F7E1F5F04B1F617.DBX</MEDIUM.FILE1.TITLE>
+  <MEDIUM.FILE1.TYPE>Data.DB-Info</MEDIUM.FILE1.TYPE>
+  <Music_CDID>69857</Music_CDID>
+  <Music_Composer>Johannes Brahms</Music_Composer>
+  <Music_Loop>0</Music_Loop>
+  <Music_MusicID>109921</Music_MusicID>
+  <Music_Texter>MUSICTMP</Music_Texter>
+  <NEW>0</NEW>
+  <News_Author>MUSICTMP</News_Author>
+  <News_Editor>MUSICTMP</News_Editor>
+  <NODELETE>0</NODELETE>
+  <OnAirPlayedBySta>MGMT_WS1</OnAirPlayedBySta>
+  <OnAirPlayedByUsr>TURBO</OnAirPlayedByUsr>
+  <OnAirPlayedOnAir>1</OnAirPlayedOnAir>
+  <PD_LastChangeTime_Hi>30291673</PD_LastChangeTime_Hi>
+  <PD_LastChangeTime_Lo>2937293792</PD_LastChangeTime_Lo>
+  <PERFECT>0</PERFECT>
+  <PERSONALRADIO>0</PERSONALRADIO>
+  <READY>0</READY>
+  <REQUESTDEARCHIVE>0</REQUESTDEARCHIVE>
+  <Reserve>No</Reserve>
+  <ROYALTIES>0</ROYALTIES>
+  <SendState>Sent</SendState>
+  <Source>Digas</Source>
+  <Time_DoNotUse>0</Time_DoNotUse>
+  <Time_Duration>586960</Time_Duration>
+  <Time_DurationMode>1</Time_DurationMode>
+  <Time_FixedDuration>0</Time_FixedDuration>
+  <Time_IIRS>0</Time_IIRS>
+  <Time_Joined>0</Time_Joined>
+  <Time_OnAirStartMode></Time_OnAirStartMode>
+  <Time_OnAirStartType></Time_OnAirStartType>
+  <Time_Overlaid>0</Time_Overlaid>
+  <Time_RealDuration>586978</Time_RealDuration>
+  <Time_RealStart>2013-04-11 17:16:34.007</Time_RealStart>
+  <Time_RealStop>2013-04-11 17:26:20.985</Time_RealStop>
+  <Time_RecStart>2013-04-11 17:16:34.007</Time_RecStart>
+  <Time_RecStop>2013-04-11 17:26:20.985</Time_RecStop>
+  <Time_Scheduled>14:55:36</Time_Scheduled>
+  <Time_Start>2013-04-11 17:15:54.973</Time_Start>
+  <Time_StartMode>Manual</Time_StartMode>
+  <Time_StartTimeOffset>0</Time_StartTimeOffset>
+  <Time_StartType>Floating</Time_StartType>
+  <Time_Stop>2013-04-11 17:25:41.951</Time_Stop>
+  <Time_TakeDuration>591939</Time_TakeDuration>
+  <Time_TextDuration>0</Time_TextDuration>
+  <Title>&quot;Academic Festival Overture,&quot; Op. 80</Title>
+  <USA.WNYC.CONDUCTOR>Wolfgang Sawallisch, conductor</USA.WNYC.CONDUCTOR>
+  <USA.WNYC.ORCHESTRA>London Philharmonic Orchestra</USA.WNYC.ORCHESTRA>
+  <USA.WNYC.SONGID>109921</USA.WNYC.SONGID>
+  <USA.WNYC.VOCAL>0</USA.WNYC.VOCAL>
+ </item>
+ <item sequence="present">
+  <ARCHIVED>0</ARCHIVED>
+  <ARCHIVING>0</ARCHIVING>
+  <Audio_Bitrate>1411</Audio_Bitrate>
+  <Audio_Filetype>WAV</Audio_Filetype>
+  <Audio_Format>LINEAR</Audio_Format>
+  <Audio_Mode>STEREO</Audio_Mode>
+  <Audio_Resolution>16</Audio_Resolution>
+  <Audio_Samplerate>44100</Audio_Samplerate>
+  <BROADCASTINGS>0</BROADCASTINGS>
+  <BufferFlag>0</BufferFlag>
+  <Class>Audio</Class>
+  <Create_ChangeTime>2019-11-13 16:26:56</Create_ChangeTime>
+  <Create_ChangeUser>MFINE</Create_ChangeUser>
+  <Create_CreateTime>2019-11-13 16:06:49</Create_CreateTime>
+  <Create_Creator>MFINE</Create_Creator>
+  <Create_Generator>DBM</Create_Generator>
+  <DBRef>DigaSystem\\WQXR_Productions\\42860</DBRef>
+  <Fade_DefaultMarkIn>0</Fade_DefaultMarkIn>
+  <Fade_DefaultMarkOut>115681</Fade_DefaultMarkOut>
+  <Fade_LinkIn>0</Fade_LinkIn>
+  <Fade_LinkOut>0</Fade_LinkOut>
+  <Fade_MarkIn>0</Fade_MarkIn>
+  <Fade_MarkOut>115681</Fade_MarkOut>
+  <FCTS>2019-11-13 17:36:11.576</FCTS>
+  <File_Converted>1</File_Converted>
+  <File_Filename1>\\\\wnycdavidmedia\\media$\\Media Directories\\WQXR_FM\\FM 105.9\\20191114\\WQXR-MFINE-S8_C0B65F55EFB441E59DDA164F5EF4AA01_5K.WAV</File_Filename1>
+  <File_Filename2>\\\\nydavidoa01\\d$\\Media_Directories\\WQXR\\20191114\\WQXR-MFINE-S8_C0B65F55EFB441E59DDA164F5EF4AA01_4H.WAV</File_Filename2>
+  <File_Filename3>\\\\nydavidoancr5\\d$\\Media_Directories\\WQXR\\20191114\\WQXR-MFINE-S8_C0B65F55EFB441E59DDA164F5EF4AA01_3P.WAV</File_Filename3>
+  <File_Filename4>\\\\wnycdavidoan1\\f$\\Media_Directories\\WQXR\\20191114\\WQXR-MFINE-S8_C0B65F55EFB441E59DDA164F5EF4AA01_3N.WAV</File_Filename4>
+  <File_Filesize1>20570024</File_Filesize1>
+  <File_OnAirFile>2,3,4</File_OnAirFile>
+  <File_PrimFilename>1</File_PrimFilename>
+  <FileState>Mirrored</FileState>
+  <FORARCHIVE>0</FORARCHIVE>
+  <GROWING>0</GROWING>
+  <GUID>{3E0B5BFA-87DB-4EC9-AB22-563F6C6A7CC9}</GUID>
+  <ID>00000065</ID>
+  <INVALID>0</INVALID>
+  <KEYFRAMEEXISTS>0</KEYFRAMEEXISTS>
+  <Loc_FCTS>2019-11-13 17:36:11.999</Loc_FCTS>
+  <LOWRESEXISTS>0</LOWRESEXISTS>
+  <MediaType>Audio</MediaType>
+  <MEDIUM.FILE1.FILEREF>\\\\wnycdavidmedia\\media$\\WQXR_Productions\\WQXR-MFINE-S8_C0B65F55EFB441E59DDA164F5EF4AA01.DBX</MEDIUM.FILE1.FILEREF>
+  <MEDIUM.FILE1.TITLE>WQXR-MFINE-S8_C0B65F55EFB441E59DDA164F5EF4AA01.DBX</MEDIUM.FILE1.TITLE>
+  <MEDIUM.FILE1.TYPE>Data.DB-Info</MEDIUM.FILE1.TYPE>
+  <Music_Loop>0</Music_Loop>
+  <Music_Texter>MFINE</Music_Texter>
+  <NEW>0</NEW>
+  <News_Author>MFINE</News_Author>
+  <News_Editor>MFINE</News_Editor>
+  <NODELETE>1</NODELETE>
+  <PD_LastChangeTime_Hi>30775884</PD_LastChangeTime_Hi>
+  <PD_LastChangeTime_Lo>3325090336</PD_LastChangeTime_Lo>
+  <PERFECT>0</PERFECT>
+  <PERSONALRADIO>0</PERSONALRADIO>
+  <READY>0</READY>
+  <REQUESTDEARCHIVE>0</REQUESTDEARCHIVE>
+  <Reserve>No</Reserve>
+  <ROYALTIES>0</ROYALTIES>
+  <SendState>Planned</SendState>
+  <Source>Digas</Source>
+  <Time_DoNotUse>0</Time_DoNotUse>
+  <Time_Duration>115681</Time_Duration>
+  <Time_DurationMode>1</Time_DurationMode>
+  <Time_FixedDuration>0</Time_FixedDuration>
+  <Time_IIRS>0</Time_IIRS>
+  <Time_Joined>0</Time_Joined>
+  <Time_OnAirStartMode></Time_OnAirStartMode>
+  <Time_OnAirStartType></Time_OnAirStartType>
+  <Time_Overlaid>0</Time_Overlaid>
+  <Time_RealDuration></Time_RealDuration>
+  <Time_RealStart></Time_RealStart>
+  <Time_RealStop></Time_RealStop>
+  <Time_Scheduled>16:06:49</Time_Scheduled>
+  <Time_Start>2019-11-14 08:36:33.202</Time_Start>
+  <Time_StartMode>Manual</Time_StartMode>
+  <Time_StartTimeOffset>0</Time_StartTimeOffset>
+  <Time_StartType>Floating</Time_StartType>
+  <Time_Stop>2019-11-14 08:38:28.883</Time_Stop>
+  <Time_TakeDuration>115681</Time_TakeDuration>
+  <Time_TextDuration>0</Time_TextDuration>
+  <Title>Fanny-Mendelssohn-Module-V1</Title>
+ </item>
+</wddxPacket>
