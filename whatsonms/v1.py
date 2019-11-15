@@ -58,6 +58,13 @@ def air_break():
     return {"air_break": True}
 
 
+def normalize_david_dict(present_track_info):
+    normalized = {v: present_track_info.get(k) for k, v in DAVID_MUSIC_ELEMS if k in present_track_info}
+    normalized['epoch_start_time'] = convert_time(normalized['start_time'])
+    normalized['epoch_real_start_time'] = convert_time(normalized['real_start_time'])
+    return normalized
+
+
 def parse_metadata_nexgen(event: Dict) -> Dict:
     """
     Parse new metadata from NexGen -- format it as JSON and return it.
@@ -83,11 +90,11 @@ def parse_metadata_david(event: Dict) -> Dict:
         try:
             present, = (x for x in xmldict['wddxPacket']['item']
                         if x['@sequence'] == 'present')
+
             if present['Class'] == "Audio":
                 return air_break()
-            normalized = {v: present.get(k) for k, v in DAVID_MUSIC_ELEMS if k in present}
-            normalized['epoch_start_time'] = convert_time(normalized['start_time'])
-            normalized['epoch_real_start_time'] = convert_time(normalized['real_start_time'])
-            return normalized
+
+            return normalize_david_dict(present)
         except ValueError:
+            # ValueError thrown if no 'present' track in xmldict
             return air_break()
