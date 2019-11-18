@@ -69,6 +69,7 @@ def normalize_encodings(present_track_info):
     for key in present_track_info.keys():
         if present_track_info[key]:
             present_track_info[key] = convert_encoding(present_track_info[key])
+    return present_track_info
 
 
 def parse_metadata_nexgen(event: Dict) -> Dict:
@@ -100,8 +101,9 @@ def parse_metadata_david(event: Dict) -> Dict:
             if present['Class'] == "Audio":
                 return air_break()
 
-            normalize_encodings(present)
-            return normalize_david_dict(present)
+            present = normalize_encodings(present)
+            present = normalize_david_dict(present)
+            return present
         except ValueError:
             # ValueError thrown if no 'present' track in xmldict
             return air_break()
