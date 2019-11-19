@@ -8,6 +8,7 @@ DAVID_SAMPLE = './tests/david_archive_sample.xml'
 DAVID_NO_PRESENT_TRACK = './tests/david_archive_sample__no_present_track.xml'
 DAVID_NON_MUSIC_METADATA = './tests/david_non_music_metadata.xml'
 DAVID_SPECIAL_CHARS = './tests/david_special_chars.xml'
+DAVID_WEIRD_CDATA = './tests/david_weird_cdata.xml'
 NEXGEN_SAMPLE_XML = """
 <audio ID="id_3189206699_30701071">
 <type>Song</type>
@@ -132,6 +133,18 @@ class TestHandler:
         data_nexgen = mock_update_nexgen_body['data']['attributes']['Item']
 
         assert [*data_david] == [*data_nexgen]
+
+    def test_weird_david_cdata(self, mocker, mock_david, mock_web_client):
+        # sometimes (on the weekend) we get xml with double escaped CDATA
+        # blocks. xmltodict chokes on these. gotta be able to handle it.
+        mocker.patch('whatsonms.utils.broadcast',
+                     return_value=Response(200, message='mock response'))
+        mock_david(sample_file=DAVID_WEIRD_CDATA)
+        whats_on = mock_web_client()
+        whats_on_body = self.clean_json_from_str(whats_on['body'])
+        assert whats_on_body['data']['attributes']['Item']['metadata']['air_break'] is True
+
+        assert whats_on_body['data']['attributes']['Item']['metadata']['air_break'] is True
 
     def test_time_stamp_converted_to_unix_time_david(self, mocker, mock_david):
         mocker.patch('whatsonms.utils.broadcast',
