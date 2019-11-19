@@ -104,7 +104,7 @@ class HttpRouter:
         return whatsonms.utils.Response(404, message='No metadata found')
 
 
-def _update(metadata: dict, params: dict) -> Response:
+def _update(metadata: dict, params: dict) -> whatsonms.utils.Response:
     stream = params.get('stream')
     if not metadata:
         print("No metadata found")
