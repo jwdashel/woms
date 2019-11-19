@@ -90,6 +90,19 @@ def convert_date_time(date_, time_):
     return convert_time(date_time)
 
 
+def convert_encoding(win1252str: str) -> str:
+    """
+    Convert a string encoded with windows-1252 to utf8.
+
+    Args:
+        win1252str: Required. A str formatted in windows-1252
+    Returns: utf8 string
+    """
+    encoded_str = win1252str.encode('windows-1252')
+    utf_str = encoded_str.decode('utf8')
+    return utf_str
+
+
 def broadcast(stream: str, recipient_ids: List = [],
               data: dict = {}) -> Response:
     """

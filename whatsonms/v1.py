@@ -1,7 +1,7 @@
 import logging
 from typing import Dict
 
-from whatsonms.utils import convert_time, convert_date_time
+from whatsonms.utils import convert_time, convert_date_time, convert_encoding
 
 import xmltodict
 
@@ -65,6 +65,13 @@ def normalize_david_dict(present_track_info):
     return normalized
 
 
+def normalize_encodings(present_track_info):
+    for key in present_track_info.keys():
+        if present_track_info[key]:
+            present_track_info[key] = convert_encoding(present_track_info[key])
+    return present_track_info
+
+
 def parse_metadata_nexgen(event: Dict) -> Dict:
     """
     Parse new metadata from NexGen -- format it as JSON and return it.
@@ -94,7 +101,9 @@ def parse_metadata_david(event: Dict) -> Dict:
             if present['Class'] == "Audio":
                 return air_break()
 
-            return normalize_david_dict(present)
+            present = normalize_encodings(present)
+            present = normalize_david_dict(present)
+            return present
         except ValueError:
             # ValueError thrown if no 'present' track in xmldict
             return air_break()

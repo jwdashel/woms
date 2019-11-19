@@ -51,3 +51,8 @@ class TestUtils:
         current_time = "12:22:19"
         epoch_time = 1542043339
         assert epoch_time == utils.convert_date_time(current_date, current_time)
+
+    def test_convert_encoding(self):
+        win1252str = 'Lucien-LÃ©on-Guillaume Lambert'
+        utf8str = utils.convert_encoding(win1252str)
+        assert utf8str == 'Lucien-Léon-Guillaume Lambert'

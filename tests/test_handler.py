@@ -7,6 +7,7 @@ from whatsonms.utils import Response
 DAVID_SAMPLE = './tests/david_archive_sample.xml'
 DAVID_NO_PRESENT_TRACK = './tests/david_archive_sample__no_present_track.xml'
 DAVID_NON_MUSIC_METADATA = './tests/david_non_music_metadata.xml'
+DAVID_SPECIAL_CHARS = './tests/david_special_chars.xml'
 NEXGEN_SAMPLE_XML = """
 <audio ID="id_3189206699_30701071">
 <type>Song</type>
@@ -143,6 +144,16 @@ class TestHandler:
         # ASSUME david Real_Start_Time = 2013-04-11 18:19:20.111
         assert mock_update_david_body['data']['attributes']['Item']['metadata']['epoch_real_start_time'] \
             == 1365718760
+
+    def test_composer_name_correctly_displayed(self, mocker, mock_david):
+        # So...
+        # The composer/pianist Lucien-Léon-Guillaume Lambert is displaying as
+        # Lucien-LÃ©on-Guillaume Lambert ... because that's how it comes from DAVID
+        # Turns out publisher is using trusty windows-1252 encoding
+        mock_update_david = mock_david(sample_file=DAVID_SPECIAL_CHARS)
+        mock_update_david_body = self.clean_json_from_str(mock_update_david['body'])
+        assert mock_update_david_body['data']['attributes']['Item']['metadata']['mm_composer1'] == \
+            'Lucien-Léon-Guillaume Lambert'
 
     def test_time_stamp_converted_to_unix_time_nexgen(self, mocker, mock_nexgen):
         mocker.patch('whatsonms.utils.broadcast',

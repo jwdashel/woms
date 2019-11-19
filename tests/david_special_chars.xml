@@ -1,0 +1,1083 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wddxPacket version="1.0">
+ <item sequence="past">
+  <ARCHIVED>0</ARCHIVED>
+  <ARCHIVING>0</ARCHIVING>
+  <Audio_Bitrate>1411</Audio_Bitrate>
+  <Audio_Filetype>WAV</Audio_Filetype>
+  <Audio_Format>LINEAR</Audio_Format>
+  <Audio_Mode>STEREO</Audio_Mode>
+  <Audio_Resolution>16</Audio_Resolution>
+  <Audio_Samplerate>44100</Audio_Samplerate>
+  <BROADCASTINGS>0</BROADCASTINGS>
+  <BufferFlag>0</BufferFlag>
+  <Class>Audio</Class>
+  <Create_ChangeTime>2019-11-13 16:26:56</Create_ChangeTime>
+  <Create_ChangeUser>MFINE</Create_ChangeUser>
+  <Create_CreateTime>2019-11-13 16:06:49</Create_CreateTime>
+  <Create_Creator>MFINE</Create_Creator>
+  <Create_Generator>DBM</Create_Generator>
+  <DBRef>DigaSystem\\WQXR_Productions\\42860</DBRef>
+  <Fade_DefaultMarkIn>0</Fade_DefaultMarkIn>
+  <Fade_DefaultMarkOut>115681</Fade_DefaultMarkOut>
+  <Fade_LinkIn>0</Fade_LinkIn>
+  <Fade_LinkOut>0</Fade_LinkOut>
+  <Fade_MarkIn>0</Fade_MarkIn>
+  <Fade_MarkOut>115681</Fade_MarkOut>
+  <FCTS>2019-11-13 17:36:12.107</FCTS>
+  <File_Converted>1</File_Converted>
+  <File_Filename1>\\\\wnycdavidmedia\\media$\\Media Directories\\WQXR_FM\\FM 105.9\\20191114\\WQXR-MFINE-S8_C0B65F55EFB441E59DDA164F5EF4AA01_5L.WAV</File_Filename1>
+  <File_Filename2>\\\\nydavidoa01\\d$\\Media_Directories\\WQXR\\20191114\\WQXR-MFINE-S8_C0B65F55EFB441E59DDA164F5EF4AA01_4I.WAV</File_Filename2>
+  <File_Filename3>\\\\nydavidoancr5\\d$\\Media_Directories\\WQXR\\20191114\\WQXR-MFINE-S8_C0B65F55EFB441E59DDA164F5EF4AA01_3Q.WAV</File_Filename3>
+  <File_Filename4>\\\\wnycdavidoan1\\f$\\Media_Directories\\WQXR\\20191114\\WQXR-MFINE-S8_C0B65F55EFB441E59DDA164F5EF4AA01_3O.WAV</File_Filename4>
+  <File_Filesize1>20570024</File_Filesize1>
+  <File_OnAirFile>2,3,4</File_OnAirFile>
+  <File_PrimFilename>1</File_PrimFilename>
+  <FileState>Mirrored</FileState>
+  <FORARCHIVE>0</FORARCHIVE>
+  <GROWING>0</GROWING>
+  <GUID>{259B390C-CF11-4B11-B8EA-0E02EF6C2CE4}</GUID>
+  <ID>00000065</ID>
+  <INVALID>0</INVALID>
+  <KEYFRAMEEXISTS>0</KEYFRAMEEXISTS>
+  <Loc_FCTS>2019-11-13 17:45:10.468</Loc_FCTS>
+  <LOWRESEXISTS>0</LOWRESEXISTS>
+  <MediaType>Audio</MediaType>
+  <MEDIUM.FILE1.FILEREF>\\\\wnycdavidmedia\\media$\\WQXR_Productions\\WQXR-MFINE-S8_C0B65F55EFB441E59DDA164F5EF4AA01.DBX</MEDIUM.FILE1.FILEREF>
+  <MEDIUM.FILE1.TITLE>WQXR-MFINE-S8_C0B65F55EFB441E59DDA164F5EF4AA01.DBX</MEDIUM.FILE1.TITLE>
+  <MEDIUM.FILE1.TYPE>Data.DB-Info</MEDIUM.FILE1.TYPE>
+  <Music_Loop>0</Music_Loop>
+  <Music_Texter>MFINE</Music_Texter>
+  <NEW>0</NEW>
+  <News_Author>MFINE</News_Author>
+  <News_Editor>MFINE</News_Editor>
+  <NODELETE>1</NODELETE>
+  <OnAirPlayedBySta>MGMT_WS1</OnAirPlayedBySta>
+  <OnAirPlayedByUsr>TURBO</OnAirPlayedByUsr>
+  <OnAirPlayedOnAir>1</OnAirPlayedOnAir>
+  <PD_LastChangeTime_Hi>30776029</PD_LastChangeTime_Hi>
+  <PD_LastChangeTime_Lo>115412416</PD_LastChangeTime_Lo>
+  <PERFECT>0</PERFECT>
+  <PERSONALRADIO>0</PERSONALRADIO>
+  <READY>0</READY>
+  <REQUESTDEARCHIVE>0</REQUESTDEARCHIVE>
+  <Reserve>No</Reserve>
+  <ROYALTIES>0</ROYALTIES>
+  <SendState>Sent</SendState>
+  <Source>Digas</Source>
+  <Time_DoNotUse>0</Time_DoNotUse>
+  <Time_Duration>115681</Time_Duration>
+  <Time_DurationMode>1</Time_DurationMode>
+  <Time_FixedDuration>0</Time_FixedDuration>
+  <Time_IIRS>0</Time_IIRS>
+  <Time_Joined>0</Time_Joined>
+  <Time_MarkDuration>115666</Time_MarkDuration>
+  <Time_MarkStart>2019-11-14 11:15:01.603</Time_MarkStart>
+  <Time_MarkStop>2019-11-14 11:16:57.269</Time_MarkStop>
+  <Time_OnAirStartMode></Time_OnAirStartMode>
+  <Time_OnAirStartType></Time_OnAirStartType>
+  <Time_Overlaid>0</Time_Overlaid>
+  <Time_RealDuration>115666</Time_RealDuration>
+  <Time_RealStart>2019-11-14 11:15:01.603</Time_RealStart>
+  <Time_RealStop>2019-11-14 11:16:57.269</Time_RealStop>
+  <Time_RecStart>2019-11-14 11:15:01.603</Time_RecStart>
+  <Time_RecStop>2019-11-14 11:16:57.269</Time_RecStop>
+  <Time_Scheduled>16:06:49</Time_Scheduled>
+  <Time_Start>2019-11-14 11:14:46.188</Time_Start>
+  <Time_StartMode>Manual</Time_StartMode>
+  <Time_StartTimeOffset>0</Time_StartTimeOffset>
+  <Time_StartType>Floating</Time_StartType>
+  <Time_Stop>2019-11-14 11:16:41.854</Time_Stop>
+  <Time_TakeDuration>115681</Time_TakeDuration>
+  <Time_TextDuration>0</Time_TextDuration>
+  <Title>Fanny-Mendelssohn-Module-V1</Title>
+ </item>
+ <item sequence="past">
+  <ARCHIVED>0</ARCHIVED>
+  <ARCHIVING>0</ARCHIVING>
+  <Audio_Bitrate>1411</Audio_Bitrate>
+  <Audio_Filetype>WAV</Audio_Filetype>
+  <Audio_Format>LINEAR</Audio_Format>
+  <Audio_Mode>STEREO</Audio_Mode>
+  <Audio_Resolution>16</Audio_Resolution>
+  <Audio_Samplerate>44100</Audio_Samplerate>
+  <BROADCASTINGS>101</BROADCASTINGS>
+  <BufferFlag>0</BufferFlag>
+  <CDINFO.LABEL>Koch International Classics</CDINFO.LABEL>
+  <Class>Music</Class>
+  <Create_ChangeTime>2019-03-07 16:30:43</Create_ChangeTime>
+  <Create_ChangeUser>ROBW</Create_ChangeUser>
+  <Create_CreateTime>2012-09-10 13:29:42</Create_CreateTime>
+  <Create_Creator>RLOHR</Create_Creator>
+  <Create_Generator>EasyTrack</Create_Generator>
+  <DBRef>DigaSystem\\Music_Catalog_Valid\\129803</DBRef>
+  <Fade_DefaultMarkIn>0</Fade_DefaultMarkIn>
+  <Fade_DefaultMarkOut>629921</Fade_DefaultMarkOut>
+  <Fade_LinkIn>0</Fade_LinkIn>
+  <Fade_LinkOut>0</Fade_LinkOut>
+  <Fade_MarkIn>0</Fade_MarkIn>
+  <Fade_MarkOut>629921</Fade_MarkOut>
+  <FCTS>2019-11-13 11:55:50.833</FCTS>
+  <File_Converted>1</File_Converted>
+  <File_Filename1>\\\\wnycdavidmedia\\media$\\Media Directories\\WQXR_FM\\FM 105.9\\20191114\\WQXRMUSIC-PRO_3A46EA5E4949400C8426AC04CDECDE42_1N.WAV</File_Filename1>
+  <File_Filename2>\\\\nydavidoa01\\d$\\Media_Directories\\WQXR\\20191114\\WQXRMUSIC-PRO_3A46EA5E4949400C8426AC04CDECDE42_1N.WAV</File_Filename2>
+  <File_Filename3>\\\\nydavidoancr5\\d$\\Media_Directories\\WQXR\\20191114\\WQXRMUSIC-PRO_3A46EA5E4949400C8426AC04CDECDE42_1N.WAV</File_Filename3>
+  <File_Filename4>\\\\wnycdavidoan1\\f$\\Media_Directories\\WQXR\\20191114\\WQXRMUSIC-PRO_3A46EA5E4949400C8426AC04CDECDE42_1L.WAV</File_Filename4>
+  <File_Filesize1>111118920</File_Filesize1>
+  <File_OnAirFile>2,3,4</File_OnAirFile>
+  <File_PrimFilename>1</File_PrimFilename>
+  <FileState>Mirrored</FileState>
+  <FORARCHIVE>0</FORARCHIVE>
+  <GENERATION>2</GENERATION>
+  <GROWING>0</GROWING>
+  <GUID>{7073F7B9-2346-4703-ABA5-23B10F45A034}</GUID>
+  <ID>00000064</ID>
+  <ImportedBy>BUS\\FlexIE.dll\\DigaSQL.dll</ImportedBy>
+  <INVALID>0</INVALID>
+  <KEYFRAMEEXISTS>0</KEYFRAMEEXISTS>
+  <LASTSENDTIME>00:00:00</LASTSENDTIME>
+  <Loc_FCTS>2019-11-13 12:41:55.048</Loc_FCTS>
+  <LOWRESEXISTS>0</LOWRESEXISTS>
+  <MediaType>Audio</MediaType>
+  <MEDIUM.FILE1.FILEREF>\\\\wnycdavidmedia\\media$\\Music_Catalog_Valid\\WQXRMUSIC-PRO_3A46EA5E4949400C8426AC04CDECDE42.DBX</MEDIUM.FILE1.FILEREF>
+  <MEDIUM.FILE1.TITLE>WQXRMUSIC-PRO_3A46EA5E4949400C8426AC04CDECDE42.DBX</MEDIUM.FILE1.TITLE>
+  <MEDIUM.FILE1.TYPE>Data.DB-Info</MEDIUM.FILE1.TYPE>
+  <Music_Album>Mendelssohn, Schumann / Falletta, The Women&apos;s Philharmonic</Music_Album>
+  <Music_CDID>7169</Music_CDID>
+  <Music_Composer>Fanny Mendelssohn</Music_Composer>
+  <Music_Loop>0</Music_Loop>
+  <Music_MusicID>129803</Music_MusicID>
+  <Music_Texter>RLOHR</Music_Texter>
+  <NEW>0</NEW>
+  <News_Author>RLOHR</News_Author>
+  <News_Editor>RLOHR</News_Editor>
+  <NODELETE>0</NODELETE>
+  <OnAirPlayedBySta>MGMT_WS1</OnAirPlayedBySta>
+  <OnAirPlayedByUsr>TURBO</OnAirPlayedByUsr>
+  <OnAirPlayedOnAir>1</OnAirPlayedOnAir>
+  <PD_LastChangeTime_Hi>30776030</PD_LastChangeTime_Hi>
+  <PD_LastChangeTime_Lo>2142545120</PD_LastChangeTime_Lo>
+  <PERFECT>0</PERFECT>
+  <PERSONALRADIO>0</PERSONALRADIO>
+  <READY>0</READY>
+  <REQUESTDEARCHIVE>0</REQUESTDEARCHIVE>
+  <Reserve>No</Reserve>
+  <ROYALTIES>0</ROYALTIES>
+  <SendState>Sent</SendState>
+  <Source>Digas</Source>
+  <Time_DoNotUse>0</Time_DoNotUse>
+  <Time_Duration>629921</Time_Duration>
+  <Time_DurationMode>1</Time_DurationMode>
+  <Time_FixedDuration>0</Time_FixedDuration>
+  <Time_IIRS>0</Time_IIRS>
+  <Time_Joined>0</Time_Joined>
+  <Time_MarkDuration>629935</Time_MarkDuration>
+  <Time_MarkStart>2019-11-14 11:16:59.546</Time_MarkStart>
+  <Time_MarkStop>2019-11-14 11:27:29.481</Time_MarkStop>
+  <Time_OnAirStartMode></Time_OnAirStartMode>
+  <Time_OnAirStartType></Time_OnAirStartType>
+  <Time_Overlaid>0</Time_Overlaid>
+  <Time_RealDuration>629935</Time_RealDuration>
+  <Time_RealStart>2019-11-14 11:16:59.546</Time_RealStart>
+  <Time_RealStop>2019-11-14 11:27:29.481</Time_RealStop>
+  <Time_RecStart>2019-11-14 11:16:59.546</Time_RecStart>
+  <Time_RecStop>2019-11-14 11:27:29.481</Time_RecStop>
+  <Time_Scheduled>13:29:42</Time_Scheduled>
+  <Time_Start>2019-11-14 11:16:57.269</Time_Start>
+  <Time_StartMode>Manual</Time_StartMode>
+  <Time_StartTimeOffset>0</Time_StartTimeOffset>
+  <Time_StartType>Floating</Time_StartType>
+  <Time_Stop>2019-11-14 11:27:27.204</Time_Stop>
+  <Time_TakeDuration>629921</Time_TakeDuration>
+  <Time_TextDuration>0</Time_TextDuration>
+  <Title>Overture</Title>
+  <USA.WNYC.CONDUCTOR>JoAnn Falletta, conductor</USA.WNYC.CONDUCTOR>
+  <USA.WNYC.ORCHESTRA>Bay Area Women&apos;s Philharmonic Orchestra</USA.WNYC.ORCHESTRA>
+  <USA.WNYC.SONGID>129803</USA.WNYC.SONGID>
+  <USA.WNYC.VOCAL>0</USA.WNYC.VOCAL>
+ </item>
+ <item sequence="past">
+  <Advert_Motive>004680</Advert_Motive>
+  <ARCHIVED>0</ARCHIVED>
+  <ARCHIVING>0</ARCHIVING>
+  <Audio_Bitrate>1411</Audio_Bitrate>
+  <Audio_DBTP>-7.5</Audio_DBTP>
+  <Audio_Filetype>WAV</Audio_Filetype>
+  <Audio_Format>LINEAR</Audio_Format>
+  <Audio_ILK>-24.0</Audio_ILK>
+  <Audio_LRA>3.2</Audio_LRA>
+  <Audio_MAXML>-18.1</Audio_MAXML>
+  <Audio_MAXSL>-22.3</Audio_MAXSL>
+  <Audio_Mode>STEREO</Audio_Mode>
+  <Audio_Resolution>16</Audio_Resolution>
+  <Audio_Samplerate>44100</Audio_Samplerate>
+  <BROADCASTINGS>0</BROADCASTINGS>
+  <BufferFlag>0</BufferFlag>
+  <Class>Cart</Class>
+  <Create_ChangeTime>2019-11-13 17:14:41</Create_ChangeTime>
+  <Create_ChangeUser>ROBW</Create_ChangeUser>
+  <Create_CreateTime>2019-11-13 17:14:35</Create_CreateTime>
+  <Create_Creator>ROBW</Create_Creator>
+  <Create_Generator>EasyTrack</Create_Generator>
+  <DBRef>DigaSystem\\WQXR_Promos\\20785</DBRef>
+  <Fade_DefaultMarkIn>0</Fade_DefaultMarkIn>
+  <Fade_DefaultMarkOut>32000</Fade_DefaultMarkOut>
+  <Fade_LinkIn>0</Fade_LinkIn>
+  <Fade_LinkOut>0</Fade_LinkOut>
+  <Fade_MarkIn>0</Fade_MarkIn>
+  <Fade_MarkOut>32000</Fade_MarkOut>
+  <FCTS>2019-11-13 17:36:17.189</FCTS>
+  <File_Converted>1</File_Converted>
+  <File_Filename1>\\\\wnycdavidmedia\\media$\\Media Directories\\WQXR_FM\\FM 105.9\\20191114\\PCRE-DAW-S9_D670B50A8EBE4AB4A549101D377DEB05_5T.WAV</File_Filename1>
+  <File_Filename2>\\\\nydavidoa01\\d$\\Media_Directories\\WQXR\\20191114\\PCRE-DAW-S9_D670B50A8EBE4AB4A549101D377DEB05_4O.WAV</File_Filename2>
+  <File_Filename3>\\\\nydavidoancr5\\d$\\Media_Directories\\WQXR\\20191114\\PCRE-DAW-S9_D670B50A8EBE4AB4A549101D377DEB05_40.WAV</File_Filename3>
+  <File_Filename4>\\\\wnycdavidoan1\\f$\\Media_Directories\\WQXR\\20191114\\PCRE-DAW-S9_D670B50A8EBE4AB4A549101D377DEB05_3U.WAV</File_Filename4>
+  <File_Filesize1>5645480</File_Filesize1>
+  <File_OnAirFile>2,3,4</File_OnAirFile>
+  <File_PrimFilename>1</File_PrimFilename>
+  <FileState>Mirrored</FileState>
+  <FORARCHIVE>0</FORARCHIVE>
+  <GENERATION>2</GENERATION>
+  <GROWING>0</GROWING>
+  <GUID>{F41C8B0A-80DE-42E4-B101-AF3A8646BABB}</GUID>
+  <ID>00000064</ID>
+  <ImportedBy>BUS\\AutoReplace</ImportedBy>
+  <INVALID>0</INVALID>
+  <KEYFRAMEEXISTS>0</KEYFRAMEEXISTS>
+  <LASTSENDTIME>00:00:00</LASTSENDTIME>
+  <Loc_FCTS>2019-11-13 17:45:53.728</Loc_FCTS>
+  <LOWRESEXISTS>0</LOWRESEXISTS>
+  <MediaType>Audio</MediaType>
+  <MEDIUM.FILE1.FILEREF>\\\\wnycdavidmedia\\media$\\WQXR_Promos\\PCRE-DAW-S9_D670B50A8EBE4AB4A549101D377DEB05.DBX</MEDIUM.FILE1.FILEREF>
+  <MEDIUM.FILE1.TITLE>PCRE-DAW-S9_D670B50A8EBE4AB4A549101D377DEB05.DBX</MEDIUM.FILE1.TITLE>
+  <MEDIUM.FILE1.TYPE>Data.DB-Info</MEDIUM.FILE1.TYPE>
+  <Music_Loop>0</Music_Loop>
+  <Music_Texter>ROBW</Music_Texter>
+  <NEW>0</NEW>
+  <News_Author>ROBW</News_Author>
+  <News_Editor>ROBW</News_Editor>
+  <NODELETE>0</NODELETE>
+  <OnAirPlayedBySta>MGMT_WS1</OnAirPlayedBySta>
+  <OnAirPlayedByUsr>TURBO</OnAirPlayedByUsr>
+  <OnAirPlayedOnAir>1</OnAirPlayedOnAir>
+  <PD_LastChangeTime_Hi>30776030</PD_LastChangeTime_Hi>
+  <PD_LastChangeTime_Lo>2614615120</PD_LastChangeTime_Lo>
+  <PERFECT>0</PERFECT>
+  <PERSONALRADIO>0</PERSONALRADIO>
+  <READY>0</READY>
+  <REQUESTDEARCHIVE>0</REQUESTDEARCHIVE>
+  <Reserve>No</Reserve>
+  <ROYALTIES>0</ROYALTIES>
+  <SendState>Sent</SendState>
+  <Source>Digas</Source>
+  <Time_DoNotUse>0</Time_DoNotUse>
+  <Time_Duration>32000</Time_Duration>
+  <Time_DurationMode>1</Time_DurationMode>
+  <Time_FixedDuration>0</Time_FixedDuration>
+  <Time_IIRS>0</Time_IIRS>
+  <Time_Joined>0</Time_Joined>
+  <Time_MarkDuration>31975</Time_MarkDuration>
+  <Time_MarkStart>2019-11-14 11:27:44.713</Time_MarkStart>
+  <Time_MarkStop>2019-11-14 11:28:16.688</Time_MarkStop>
+  <Time_OnAirStartMode></Time_OnAirStartMode>
+  <Time_OnAirStartType></Time_OnAirStartType>
+  <Time_Overlaid>0</Time_Overlaid>
+  <Time_RealDuration>31975</Time_RealDuration>
+  <Time_RealStart>2019-11-14 11:27:44.713</Time_RealStart>
+  <Time_RealStop>2019-11-14 11:28:16.688</Time_RealStop>
+  <Time_RecStart>2019-11-14 11:27:44.713</Time_RecStart>
+  <Time_RecStop>2019-11-14 11:28:16.688</Time_RecStop>
+  <Time_Scheduled>17:14:35</Time_Scheduled>
+  <Time_Start>2019-11-14 11:27:29.481</Time_Start>
+  <Time_StartMode>Manual</Time_StartMode>
+  <Time_StartTimeOffset>0</Time_StartTimeOffset>
+  <Time_StartType>Floating</Time_StartType>
+  <Time_Stop>2019-11-14 11:28:01.456</Time_Stop>
+  <Time_TakeDuration>32000</Time_TakeDuration>
+  <Time_TextDuration>0</Time_TextDuration>
+  <Title>Together We Sing TGS tix (Monday) (11/11-11/16) [Clemency]</Title>
+ </item>
+ <item sequence="past">
+  <ARCHIVED>0</ARCHIVED>
+  <ARCHIVING>0</ARCHIVING>
+  <Audio_Bitrate>1411</Audio_Bitrate>
+  <Audio_Filetype>WAV</Audio_Filetype>
+  <Audio_Format>LINEAR</Audio_Format>
+  <Audio_Mode>STEREO</Audio_Mode>
+  <Audio_Resolution>16</Audio_Resolution>
+  <Audio_Samplerate>44100</Audio_Samplerate>
+  <BROADCASTINGS>84</BROADCASTINGS>
+  <BufferFlag>0</BufferFlag>
+  <CDINFO.LABEL>Deutsche Grammophon</CDINFO.LABEL>
+  <Class>Music</Class>
+  <Create_ChangeTime>2010-01-26 12:13:42</Create_ChangeTime>
+  <Create_ChangeUser>MUSICTMP</Create_ChangeUser>
+  <Create_CreateTime>2010-01-26 12:12:34</Create_CreateTime>
+  <Create_Creator>MUSICTMP</Create_Creator>
+  <Create_Generator>EasyTrack</Create_Generator>
+  <DBRef>DigaSystem\\Music_Catalog_Valid\\113265</DBRef>
+  <Fade_DefaultMarkIn>0</Fade_DefaultMarkIn>
+  <Fade_DefaultMarkOut>1088518</Fade_DefaultMarkOut>
+  <Fade_LinkIn>0</Fade_LinkIn>
+  <Fade_LinkOut>0</Fade_LinkOut>
+  <Fade_MarkIn>0</Fade_MarkIn>
+  <Fade_MarkOut>1088518</Fade_MarkOut>
+  <FCTS>2019-11-13 11:43:25.338</FCTS>
+  <File_Converted>0</File_Converted>
+  <File_Filename0>\\\\wnycdavidmedia\\media$\\Music_Catalog_Valid\\SB8-PROG-DAW_1BE2BC8D380E46B3AF1E83D8AAD55510.WAV</File_Filename0>
+  <File_Filename1>\\\\wnycdavidmedia\\media$\\Media Directories\\WQXR_FM\\FM 105.9\\20191114\\SB8-PROG-DAW_1BE2BC8D380E46B3AF1E83D8AAD55510_47.WAV</File_Filename1>
+  <File_Filename2>\\\\nydavidoa01\\d$\\Media_Directories\\WQXR\\20191114\\SB8-PROG-DAW_1BE2BC8D380E46B3AF1E83D8AAD55510_47.WAV</File_Filename2>
+  <File_Filename3>\\\\nydavidoancr5\\d$\\Media_Directories\\WQXR\\20191114\\SB8-PROG-DAW_1BE2BC8D380E46B3AF1E83D8AAD55510_3H.WAV</File_Filename3>
+  <File_Filename4>\\\\wnycdavidoan1\\f$\\Media_Directories\\WQXR\\20191114\\SB8-PROG-DAW_1BE2BC8D380E46B3AF1E83D8AAD55510_3F.WAV</File_Filename4>
+  <File_Filesize0>192765440</File_Filesize0>
+  <File_Filesize1>192765440</File_Filesize1>
+  <File_OnAirFile>2,3,4</File_OnAirFile>
+  <File_PrimFilename>1</File_PrimFilename>
+  <FileState>Mirrored</FileState>
+  <FORARCHIVE>0</FORARCHIVE>
+  <GENERATION>2</GENERATION>
+  <GROWING>0</GROWING>
+  <GUID>{08EB1505-EA28-4C1D-8C28-7A9236987A1A}</GUID>
+  <ID>00000066</ID>
+  <ImportedBy>BUS\\FlexIE.dll\\DigaSQL.dll</ImportedBy>
+  <INVALID>0</INVALID>
+  <KEYFRAMEEXISTS>0</KEYFRAMEEXISTS>
+  <LASTSENDTIME>00:00:00</LASTSENDTIME>
+  <Loc_FCTS>2019-11-13 11:58:40.905</Loc_FCTS>
+  <LOWRESEXISTS>0</LOWRESEXISTS>
+  <MediaType>Audio</MediaType>
+  <MEDIUM.FILE1.FILEREF>\\\\wnycdavidmedia\\media$\\Music_Catalog_Valid\\SB8-PROG-DAW_1BE2BC8D380E46B3AF1E83D8AAD55510.DBX</MEDIUM.FILE1.FILEREF>
+  <MEDIUM.FILE1.TITLE>SB8-PROG-DAW_1BE2BC8D380E46B3AF1E83D8AAD55510.DBX</MEDIUM.FILE1.TITLE>
+  <MEDIUM.FILE1.TYPE>Data.DB-Info</MEDIUM.FILE1.TYPE>
+  <Music_Album>Panorama | George Frideric Handel</Music_Album>
+  <Music_CDID>469145</Music_CDID>
+  <Music_Composer>George Frederick Handel</Music_Composer>
+  <Music_Loop>0</Music_Loop>
+  <Music_MusicID>113265</Music_MusicID>
+  <Music_Texter>MUSICTMP</Music_Texter>
+  <NEW>0</NEW>
+  <News_Author>MUSICTMP</News_Author>
+  <News_Editor>MUSICTMP</News_Editor>
+  <NODELETE>0</NODELETE>
+  <OnAirPlayedBySta>MGMT_WS1</OnAirPlayedBySta>
+  <OnAirPlayedByUsr>TURBO</OnAirPlayedByUsr>
+  <OnAirPlayedOnAir>1</OnAirPlayedOnAir>
+  <PD_LastChangeTime_Hi>30776033</PD_LastChangeTime_Hi>
+  <PD_LastChangeTime_Lo>951663232</PD_LastChangeTime_Lo>
+  <PERFECT>0</PERFECT>
+  <PERSONALRADIO>0</PERSONALRADIO>
+  <READY>0</READY>
+  <REQUESTDEARCHIVE>0</REQUESTDEARCHIVE>
+  <Reserve>No</Reserve>
+  <ROYALTIES>0</ROYALTIES>
+  <SendState>Sent</SendState>
+  <Source>Digas</Source>
+  <Time_DoNotUse>0</Time_DoNotUse>
+  <Time_Duration>1088518</Time_Duration>
+  <Time_DurationMode>1</Time_DurationMode>
+  <Time_FixedDuration>0</Time_FixedDuration>
+  <Time_IIRS>0</Time_IIRS>
+  <Time_Joined>0</Time_Joined>
+  <Time_MarkDuration>1088512</Time_MarkDuration>
+  <Time_MarkStart>2019-11-14 11:28:50.381</Time_MarkStart>
+  <Time_MarkStop>2019-11-14 11:46:58.893</Time_MarkStop>
+  <Time_OnAirStartMode></Time_OnAirStartMode>
+  <Time_OnAirStartType></Time_OnAirStartType>
+  <Time_Overlaid>0</Time_Overlaid>
+  <Time_RealDuration>1088512</Time_RealDuration>
+  <Time_RealStart>2019-11-14 11:28:50.381</Time_RealStart>
+  <Time_RealStop>2019-11-14 11:46:58.893</Time_RealStop>
+  <Time_RecStart>2019-11-14 11:28:50.381</Time_RecStart>
+  <Time_RecStop>2019-11-14 11:46:58.893</Time_RecStop>
+  <Time_Scheduled>12:12:34</Time_Scheduled>
+  <Time_Start>2019-11-14 11:28:16.688</Time_Start>
+  <Time_StartMode>Manual</Time_StartMode>
+  <Time_StartTimeOffset>0</Time_StartTimeOffset>
+  <Time_StartType>Floating</Time_StartType>
+  <Time_Stop>2019-11-14 11:46:25.200</Time_Stop>
+  <Time_TakeDuration>1088518</Time_TakeDuration>
+  <Time_TextDuration>0</Time_TextDuration>
+  <Title>Concerto &quot;a due cori&quot; No. 3 in F, HWV 334</Title>
+  <USA.WNYC.CONDUCTOR>Trevor Pinnock, conductor</USA.WNYC.CONDUCTOR>
+  <USA.WNYC.ORCHESTRA>The English Concert</USA.WNYC.ORCHESTRA>
+  <USA.WNYC.SONGID>113265</USA.WNYC.SONGID>
+  <USA.WNYC.VOCAL>0</USA.WNYC.VOCAL>
+ </item>
+ <item sequence="past">
+  <ARCHIVED>0</ARCHIVED>
+  <ARCHIVING>0</ARCHIVING>
+  <Audio_Bitrate>1411</Audio_Bitrate>
+  <Audio_Filetype>WAV</Audio_Filetype>
+  <Audio_Format>LINEAR</Audio_Format>
+  <Audio_Mode>STEREO</Audio_Mode>
+  <Audio_Resolution>16</Audio_Resolution>
+  <Audio_Samplerate>44100</Audio_Samplerate>
+  <BROADCASTINGS>21</BROADCASTINGS>
+  <BufferFlag>0</BufferFlag>
+  <CDINFO.LABEL>Deutsche Grammophon</CDINFO.LABEL>
+  <Class>Music</Class>
+  <Create_ChangeTime>2012-04-23 14:54:34</Create_ChangeTime>
+  <Create_ChangeUser>MUSICTMP</Create_ChangeUser>
+  <Create_CreateTime>2012-04-23 14:53:57</Create_CreateTime>
+  <Create_Creator>MUSICTMP</Create_Creator>
+  <Create_Generator>EasyTrack</Create_Generator>
+  <DBRef>DigaSystem\\Music_Catalog_Valid\\127390</DBRef>
+  <Fade_DefaultMarkIn>0</Fade_DefaultMarkIn>
+  <Fade_DefaultMarkOut>224053</Fade_DefaultMarkOut>
+  <Fade_LinkIn>0</Fade_LinkIn>
+  <Fade_LinkOut>0</Fade_LinkOut>
+  <Fade_MarkIn>0</Fade_MarkIn>
+  <Fade_MarkOut>224053</Fade_MarkOut>
+  <FCTS>2019-11-13 11:55:51.908</FCTS>
+  <File_Converted>1</File_Converted>
+  <File_Filename1>\\\\wnycdavidmedia\\media$\\Media Directories\\WQXR_FM\\FM 105.9\\20191114\\WQXRMUSIC-PRO_C3E99B5226F846E49ADBE8A92A9B6825_1P.WAV</File_Filename1>
+  <File_Filename2>\\\\nydavidoa01\\d$\\Media_Directories\\WQXR\\20191114\\WQXRMUSIC-PRO_C3E99B5226F846E49ADBE8A92A9B6825_1P.WAV</File_Filename2>
+  <File_Filename3>\\\\nydavidoancr5\\d$\\Media_Directories\\WQXR\\20191114\\WQXRMUSIC-PRO_C3E99B5226F846E49ADBE8A92A9B6825_1P.WAV</File_Filename3>
+  <File_Filename4>\\\\wnycdavidoan1\\f$\\Media_Directories\\WQXR\\20191114\\WQXRMUSIC-PRO_C3E99B5226F846E49ADBE8A92A9B6825_1N.WAV</File_Filename4>
+  <File_Filesize1>39523804</File_Filesize1>
+  <File_OnAirFile>2,3,4</File_OnAirFile>
+  <File_PrimFilename>1</File_PrimFilename>
+  <FileState>Mirrored</FileState>
+  <FORARCHIVE>0</FORARCHIVE>
+  <GENERATION>2</GENERATION>
+  <GROWING>0</GROWING>
+  <GUID>{313C3F91-08C7-4B0B-A0C2-A0AE3C967010}</GUID>
+  <ID>00000064</ID>
+  <ImportedBy>BUS\\FlexIE.dll\\DigaSQL.dll</ImportedBy>
+  <INVALID>0</INVALID>
+  <KEYFRAMEEXISTS>0</KEYFRAMEEXISTS>
+  <LASTSENDTIME>00:00:00</LASTSENDTIME>
+  <Loc_FCTS>2019-11-13 12:42:33.626</Loc_FCTS>
+  <LOWRESEXISTS>0</LOWRESEXISTS>
+  <MediaType>Audio</MediaType>
+  <MEDIUM.FILE1.FILEREF>\\\\wnycdavidmedia\\media$\\Music_Catalog_Valid\\WQXRMUSIC-PRO_C3E99B5226F846E49ADBE8A92A9B6825.DBX</MEDIUM.FILE1.FILEREF>
+  <MEDIUM.FILE1.TITLE>WQXRMUSIC-PRO_C3E99B5226F846E49ADBE8A92A9B6825.DBX</MEDIUM.FILE1.TITLE>
+  <MEDIUM.FILE1.TYPE>Data.DB-Info</MEDIUM.FILE1.TYPE>
+  <Music_Album>Yuja Wang | Fantasia</Music_Album>
+  <Music_CDID>16606</Music_CDID>
+  <Music_Composer>Frederic Chopin</Music_Composer>
+  <Music_Loop>0</Music_Loop>
+  <Music_MusicID>127390</Music_MusicID>
+  <Music_Texter>MUSICTMP</Music_Texter>
+  <NEW>0</NEW>
+  <News_Author>MUSICTMP</News_Author>
+  <News_Editor>MUSICTMP</News_Editor>
+  <NODELETE>0</NODELETE>
+  <OnAirPlayedBySta>MGMT_WS1</OnAirPlayedBySta>
+  <OnAirPlayedByUsr>TURBO</OnAirPlayedByUsr>
+  <OnAirPlayedOnAir>1</OnAirPlayedOnAir>
+  <PD_LastChangeTime_Hi>30776033</PD_LastChangeTime_Hi>
+  <PD_LastChangeTime_Lo>3551723232</PD_LastChangeTime_Lo>
+  <PERFECT>0</PERFECT>
+  <PERSONALRADIO>0</PERSONALRADIO>
+  <READY>0</READY>
+  <REQUESTDEARCHIVE>0</REQUESTDEARCHIVE>
+  <Reserve>No</Reserve>
+  <ROYALTIES>0</ROYALTIES>
+  <SendState>Sent</SendState>
+  <Source>Digas</Source>
+  <Time_DoNotUse>0</Time_DoNotUse>
+  <Time_Duration>224053</Time_Duration>
+  <Time_DurationMode>1</Time_DurationMode>
+  <Time_FixedDuration>0</Time_FixedDuration>
+  <Time_IIRS>0</Time_IIRS>
+  <Time_Joined>0</Time_Joined>
+  <Time_MarkDuration>224046</Time_MarkDuration>
+  <Time_MarkStart>2019-11-14 11:47:34.857</Time_MarkStart>
+  <Time_MarkStop>2019-11-14 11:51:18.903</Time_MarkStop>
+  <Time_OnAirStartMode></Time_OnAirStartMode>
+  <Time_OnAirStartType></Time_OnAirStartType>
+  <Time_Overlaid>0</Time_Overlaid>
+  <Time_RealDuration>224046</Time_RealDuration>
+  <Time_RealStart>2019-11-14 11:47:34.857</Time_RealStart>
+  <Time_RealStop>2019-11-14 11:51:18.903</Time_RealStop>
+  <Time_RecStart>2019-11-14 11:47:34.857</Time_RecStart>
+  <Time_RecStop>2019-11-14 11:51:18.903</Time_RecStop>
+  <Time_Scheduled>14:53:57</Time_Scheduled>
+  <Time_Start>2019-11-14 11:46:58.893</Time_Start>
+  <Time_StartMode>Manual</Time_StartMode>
+  <Time_StartTimeOffset>0</Time_StartTimeOffset>
+  <Time_StartType>Floating</Time_StartType>
+  <Time_Stop>2019-11-14 11:50:42.939</Time_Stop>
+  <Time_TakeDuration>224053</Time_TakeDuration>
+  <Time_TextDuration>0</Time_TextDuration>
+  <Title>Waltz in C-sharp Minor, Op. 64/2</Title>
+  <USA.WNYC.SOLOIST1>Yuja Wang, piano</USA.WNYC.SOLOIST1>
+  <USA.WNYC.SONGID>127390</USA.WNYC.SONGID>
+  <USA.WNYC.VOCAL>0</USA.WNYC.VOCAL>
+ </item>
+ <item sequence="present">
+  <ARCHIVED>0</ARCHIVED>
+  <ARCHIVING>0</ARCHIVING>
+  <Audio_Bitrate>1411</Audio_Bitrate>
+  <Audio_Filetype>WAV</Audio_Filetype>
+  <Audio_Format>LINEAR</Audio_Format>
+  <Audio_Mode>STEREO</Audio_Mode>
+  <Audio_Resolution>16</Audio_Resolution>
+  <Audio_Samplerate>44100</Audio_Samplerate>
+  <BROADCASTINGS>7</BROADCASTINGS>
+  <BufferFlag>0</BufferFlag>
+  <CDINFO.LABEL>Naxos</CDINFO.LABEL>
+  <Class>Music</Class>
+  <Create_ChangeTime>2019-02-20 12:15:56</Create_ChangeTime>
+  <Create_ChangeUser>ZKANE</Create_ChangeUser>
+  <Create_CreateTime>2019-02-06 16:12:38</Create_CreateTime>
+  <Create_Creator>ZKANE</Create_Creator>
+  <Create_Generator>EasyTrack</Create_Generator>
+  <DBRef>DigaSystem\\Music_Catalog_Valid\\154557</DBRef>
+  <Fade_DefaultMarkIn>0</Fade_DefaultMarkIn>
+  <Fade_DefaultMarkOut>408602</Fade_DefaultMarkOut>
+  <Fade_LinkIn>0</Fade_LinkIn>
+  <Fade_LinkOut>0</Fade_LinkOut>
+  <Fade_MarkIn>0</Fade_MarkIn>
+  <Fade_MarkOut>408602</Fade_MarkOut>
+  <FCTS>2019-11-13 11:55:54.353</FCTS>
+  <File_Converted>1</File_Converted>
+  <File_Filename1>\\\\wnycdavidmedia\\media$\\Media Directories\\WQXR_FM\\FM 105.9\\20191114\\WQXR-D09-P8_E638AB0C43F348CCA7896653AC9EB84B_1Q.WAV</File_Filename1>
+  <File_Filename2>\\\\nydavidoa01\\d$\\Media_Directories\\WQXR\\20191114\\WQXR-D09-P8_E638AB0C43F348CCA7896653AC9EB84B_1Q.WAV</File_Filename2>
+  <File_Filename3>\\\\nydavidoancr5\\d$\\Media_Directories\\WQXR\\20191114\\WQXR-D09-P8_E638AB0C43F348CCA7896653AC9EB84B_1Q.WAV</File_Filename3>
+  <File_Filename4>\\\\wnycdavidoan1\\f$\\Media_Directories\\WQXR\\20191114\\WQXR-D09-P8_E638AB0C43F348CCA7896653AC9EB84B_1O.WAV</File_Filename4>
+  <File_Filesize1>72078248</File_Filesize1>
+  <File_OnAirFile>2,3,4</File_OnAirFile>
+  <File_PrimFilename>1</File_PrimFilename>
+  <FileState>Mirrored</FileState>
+  <FORARCHIVE>0</FORARCHIVE>
+  <GENERATION>2</GENERATION>
+  <GROWING>0</GROWING>
+  <GUID>{712BA32D-FCA5-4B1E-8F50-F5870C9EE3AA}</GUID>
+  <ID>00000065</ID>
+  <ImportedBy>BUS\\FlexIE.dll\\DigaSQL.dll</ImportedBy>
+  <INVALID>0</INVALID>
+  <KEYFRAMEEXISTS>0</KEYFRAMEEXISTS>
+  <LASTSENDTIME>00:00:00</LASTSENDTIME>
+  <Loc_FCTS>2019-11-13 12:43:28.416</Loc_FCTS>
+  <LOWRESEXISTS>0</LOWRESEXISTS>
+  <MediaType>Audio</MediaType>
+  <MEDIUM.FILE1.FILEREF>\\\\wnycdavidmedia\\media$\\Music_Catalog_Valid\\WQXR-D09-P8_E638AB0C43F348CCA7896653AC9EB84B.DBX</MEDIUM.FILE1.FILEREF>
+  <MEDIUM.FILE1.TITLE>WQXR-D09-P8_E638AB0C43F348CCA7896653AC9EB84B.DBX</MEDIUM.FILE1.TITLE>
+  <MEDIUM.FILE1.TYPE>Data.DB-Info</MEDIUM.FILE1.TYPE>
+  <Music_Album>Lambert | Piano Works</Music_Album>
+  <Music_CDID>8559037</Music_CDID>
+  <Music_Composer>Lucien-LÃ©on-Guillaume Lambert</Music_Composer>
+  <Music_Loop>0</Music_Loop>
+  <Music_MusicID>154557</Music_MusicID>
+  <Music_Texter>ZKANE</Music_Texter>
+  <NEW>0</NEW>
+  <News_Author>ZKANE</News_Author>
+  <News_Editor>ZKANE</News_Editor>
+  <NODELETE>0</NODELETE>
+  <OnAirPlayedBySta>MGMT_WS1</OnAirPlayedBySta>
+  <OnAirPlayedByUsr>TURBO</OnAirPlayedByUsr>
+  <OnAirPlayedOnAir>1</OnAirPlayedOnAir>
+  <PD_LastChangeTime_Hi>30776034</PD_LastChangeTime_Hi>
+  <PD_LastChangeTime_Lo>175365936</PD_LastChangeTime_Lo>
+  <PERFECT>0</PERFECT>
+  <PERSONALRADIO>0</PERSONALRADIO>
+  <READY>0</READY>
+  <REQUESTDEARCHIVE>0</REQUESTDEARCHIVE>
+  <Reserve>No</Reserve>
+  <ROYALTIES>0</ROYALTIES>
+  <SendState>Sending</SendState>
+  <Source>Digas</Source>
+  <Time_DoNotUse>0</Time_DoNotUse>
+  <Time_Duration>408602</Time_Duration>
+  <Time_DurationMode>1</Time_DurationMode>
+  <Time_FixedDuration>0</Time_FixedDuration>
+  <Time_IIRS>0</Time_IIRS>
+  <Time_Joined>0</Time_Joined>
+  <Time_MarkDuration>408602</Time_MarkDuration>
+  <Time_MarkStart>2019-11-14 11:52:50.761</Time_MarkStart>
+  <Time_MarkStop>2019-11-14 11:59:39.363</Time_MarkStop>
+  <Time_OnAirStartMode></Time_OnAirStartMode>
+  <Time_OnAirStartType></Time_OnAirStartType>
+  <Time_Overlaid>0</Time_Overlaid>
+  <Time_RealDuration>408602</Time_RealDuration>
+  <Time_RealStart>2019-11-14 11:52:50.761</Time_RealStart>
+  <Time_RealStop>2019-11-14 11:59:39.363</Time_RealStop>
+  <Time_RecStart>2019-11-14 11:52:50.761</Time_RecStart>
+  <Time_RecStop>2019-11-14 11:59:39.363</Time_RecStop>
+  <Time_Scheduled>16:12:38</Time_Scheduled>
+  <Time_Start>2019-11-14 11:51:18.903</Time_Start>
+  <Time_StartMode>Manual</Time_StartMode>
+  <Time_StartTimeOffset>0</Time_StartTimeOffset>
+  <Time_StartType>Floating</Time_StartType>
+  <Time_Stop>2019-11-14 11:58:07.505</Time_Stop>
+  <Time_TakeDuration>408602</Time_TakeDuration>
+  <Time_TextDuration>0</Time_TextDuration>
+  <Title>Broceliande: Overture</Title>
+  <USA.WNYC.CONDUCTOR>Richard Rosenberg, conductor</USA.WNYC.CONDUCTOR>
+  <USA.WNYC.ORCHESTRA>Hot Springs Festival Symphony Orchestra</USA.WNYC.ORCHESTRA>
+  <USA.WNYC.SONGID>154557</USA.WNYC.SONGID>
+  <USA.WNYC.VOCAL>0</USA.WNYC.VOCAL>
+ </item>
+ <item sequence="future">
+  <ARCHIVED>0</ARCHIVED>
+  <ARCHIVING>0</ARCHIVING>
+  <Audio_Bitrate>1411</Audio_Bitrate>
+  <Audio_Filetype>WAV</Audio_Filetype>
+  <Audio_Format>LINEAR</Audio_Format>
+  <Audio_Mode>STEREO</Audio_Mode>
+  <Audio_Resolution>16</Audio_Resolution>
+  <Audio_Samplerate>44100</Audio_Samplerate>
+  <BROADCASTINGS>35</BROADCASTINGS>
+  <BufferFlag>0</BufferFlag>
+  <CDINFO.LABEL>CPO</CDINFO.LABEL>
+  <Class>Music</Class>
+  <Create_ChangeTime>2013-11-15 09:56:43</Create_ChangeTime>
+  <Create_ChangeUser>MIYAN</Create_ChangeUser>
+  <Create_CreateTime>2013-11-15 09:55:14</Create_CreateTime>
+  <Create_Creator>MIYAN</Create_Creator>
+  <Create_Generator>EasyTrack</Create_Generator>
+  <DBRef>DigaSystem\\Music_Catalog_Valid\\135959</DBRef>
+  <Fade_DefaultMarkIn>0</Fade_DefaultMarkIn>
+  <Fade_DefaultMarkOut>555729</Fade_DefaultMarkOut>
+  <Fade_LinkIn>0</Fade_LinkIn>
+  <Fade_LinkOut>0</Fade_LinkOut>
+  <Fade_MarkIn>0</Fade_MarkIn>
+  <Fade_MarkOut>555729</Fade_MarkOut>
+  <FCTS>2019-11-13 11:55:57.880</FCTS>
+  <File_Converted>1</File_Converted>
+  <File_Filename1>\\\\wnycdavidmedia\\media$\\Media Directories\\WQXR_FM\\FM 105.9\\20191114\\PB8-MLIB-DAW_422EC224CC3B463BA33AC737DD9359DB_1R.WAV</File_Filename1>
+  <File_Filename2>\\\\nydavidoa01\\d$\\Media_Directories\\WQXR\\20191114\\PB8-MLIB-DAW_422EC224CC3B463BA33AC737DD9359DB_1R.WAV</File_Filename2>
+  <File_Filename3>\\\\nydavidoancr5\\d$\\Media_Directories\\WQXR\\20191114\\PB8-MLIB-DAW_422EC224CC3B463BA33AC737DD9359DB_1R.WAV</File_Filename3>
+  <File_Filename4>\\\\wnycdavidoan1\\f$\\Media_Directories\\WQXR\\20191114\\PB8-MLIB-DAW_422EC224CC3B463BA33AC737DD9359DB_1P.WAV</File_Filename4>
+  <File_Filesize1>98031276</File_Filesize1>
+  <File_OnAirFile>2,3,4</File_OnAirFile>
+  <File_PrimFilename>1</File_PrimFilename>
+  <FileState>Mirrored</FileState>
+  <FORARCHIVE>0</FORARCHIVE>
+  <GENERATION>2</GENERATION>
+  <GROWING>0</GROWING>
+  <GUID>{1F609EAA-4103-457E-9417-9A66D9696411}</GUID>
+  <ID>00000064</ID>
+  <ImportedBy>BUS\\FlexIE.dll\\DigaSQL.dll</ImportedBy>
+  <INVALID>0</INVALID>
+  <KEYFRAMEEXISTS>0</KEYFRAMEEXISTS>
+  <LASTSENDTIME>00:00:00</LASTSENDTIME>
+  <Loc_FCTS>2019-11-13 12:44:45.262</Loc_FCTS>
+  <LOWRESEXISTS>0</LOWRESEXISTS>
+  <MediaType>Audio</MediaType>
+  <MEDIUM.FILE1.FILEREF>\\\\wnycdavidmedia\\media$\\Music_Catalog_Valid\\PB8-MLIB-DAW_422EC224CC3B463BA33AC737DD9359DB.DBX</MEDIUM.FILE1.FILEREF>
+  <MEDIUM.FILE1.TITLE>PB8-MLIB-DAW_422EC224CC3B463BA33AC737DD9359DB.DBX</MEDIUM.FILE1.TITLE>
+  <MEDIUM.FILE1.TYPE>Data.DB-Info</MEDIUM.FILE1.TYPE>
+  <Music_Album>Leopold Mozart 7 Symphonies</Music_Album>
+  <Music_CDID>999144</Music_CDID>
+  <Music_Composer>Leopold Mozart</Music_Composer>
+  <Music_Loop>0</Music_Loop>
+  <Music_MusicID>135959</Music_MusicID>
+  <Music_Texter>MIYAN</Music_Texter>
+  <NEW>0</NEW>
+  <News_Author>MIYAN</News_Author>
+  <News_Editor>MIYAN</News_Editor>
+  <NODELETE>0</NODELETE>
+  <PD_LastChangeTime_Hi>30775872</PD_LastChangeTime_Hi>
+  <PD_LastChangeTime_Lo>887347888</PD_LastChangeTime_Lo>
+  <PERFECT>0</PERFECT>
+  <PERSONALRADIO>0</PERSONALRADIO>
+  <READY>0</READY>
+  <REQUESTDEARCHIVE>0</REQUESTDEARCHIVE>
+  <Reserve>No</Reserve>
+  <ROYALTIES>0</ROYALTIES>
+  <SendState>Planned</SendState>
+  <Source>Digas</Source>
+  <Time_DoNotUse>0</Time_DoNotUse>
+  <Time_Duration>555729</Time_Duration>
+  <Time_DurationMode>1</Time_DurationMode>
+  <Time_FixedDuration>0</Time_FixedDuration>
+  <Time_IIRS>0</Time_IIRS>
+  <Time_Joined>0</Time_Joined>
+  <Time_MarkDuration>555729</Time_MarkDuration>
+  <Time_MarkStart>2019-11-14 12:00:00.000</Time_MarkStart>
+  <Time_MarkStop>2019-11-14 12:09:15.729</Time_MarkStop>
+  <Time_Overlaid>0</Time_Overlaid>
+  <Time_Scheduled>09:55:14</Time_Scheduled>
+  <Time_Start>2019-11-14 12:00:00.000</Time_Start>
+  <Time_StartMode>Manual</Time_StartMode>
+  <Time_StartTimeOffset>0</Time_StartTimeOffset>
+  <Time_StartType>Floating</Time_StartType>
+  <Time_Stop>2019-11-14 12:09:15.729</Time_Stop>
+  <Time_TakeDuration>555729</Time_TakeDuration>
+  <Time_TextDuration>0</Time_TextDuration>
+  <Title>Symphony in F Major</Title>
+  <USA.WNYC.CONDUCTOR>Bohdan Warchal, conductor</USA.WNYC.CONDUCTOR>
+  <USA.WNYC.ORCHESTRA>Slovak Chamber Orchestra</USA.WNYC.ORCHESTRA>
+  <USA.WNYC.SONGID>135959</USA.WNYC.SONGID>
+  <USA.WNYC.VOCAL>0</USA.WNYC.VOCAL>
+ </item>
+ <item sequence="future">
+  <Advert_Motive>004691</Advert_Motive>
+  <ARCHIVED>0</ARCHIVED>
+  <ARCHIVING>0</ARCHIVING>
+  <Audio_Bitrate>1411</Audio_Bitrate>
+  <Audio_DBTP>-9.8</Audio_DBTP>
+  <Audio_Filetype>WAV</Audio_Filetype>
+  <Audio_Format>LINEAR</Audio_Format>
+  <Audio_ILK>-24.0</Audio_ILK>
+  <Audio_LRA>1.6</Audio_LRA>
+  <Audio_MAXML>-20.1</Audio_MAXML>
+  <Audio_MAXSL>-22.6</Audio_MAXSL>
+  <Audio_Mode>STEREO</Audio_Mode>
+  <Audio_Resolution>16</Audio_Resolution>
+  <Audio_Samplerate>44100</Audio_Samplerate>
+  <BROADCASTINGS>0</BROADCASTINGS>
+  <BufferFlag>0</BufferFlag>
+  <Class>Cart</Class>
+  <Create_ChangeTime>2019-11-08 17:16:14</Create_ChangeTime>
+  <Create_ChangeUser>ROBW</Create_ChangeUser>
+  <Create_CreateTime>2019-11-08 17:15:46</Create_CreateTime>
+  <Create_Creator>ROBW</Create_Creator>
+  <Create_Generator>EasyTrack</Create_Generator>
+  <DBRef>DigaSystem\\WQXR_Promos\\20757</DBRef>
+  <Fade_DefaultMarkIn>0</Fade_DefaultMarkIn>
+  <Fade_DefaultMarkOut>29467</Fade_DefaultMarkOut>
+  <Fade_LinkIn>0</Fade_LinkIn>
+  <Fade_LinkOut>0</Fade_LinkOut>
+  <Fade_MarkIn>0</Fade_MarkIn>
+  <Fade_MarkOut>29467</Fade_MarkOut>
+  <FCTS>2019-11-13 11:55:58.007</FCTS>
+  <File_Converted>1</File_Converted>
+  <File_Filename1>\\\\wnycdavidmedia\\media$\\Media Directories\\WQXR_FM\\FM 105.9\\20191114\\PCRE-DAW-S9_2B3B5512960F4EC4B0162975B01B58C4_1S.WAV</File_Filename1>
+  <File_Filename2>\\\\nydavidoa01\\d$\\Media_Directories\\WQXR\\20191114\\PCRE-DAW-S9_2B3B5512960F4EC4B0162975B01B58C4_1S.WAV</File_Filename2>
+  <File_Filename3>\\\\nydavidoancr5\\d$\\Media_Directories\\WQXR\\20191114\\PCRE-DAW-S9_2B3B5512960F4EC4B0162975B01B58C4_1S.WAV</File_Filename3>
+  <File_Filename4>\\\\wnycdavidoan1\\f$\\Media_Directories\\WQXR\\20191114\\PCRE-DAW-S9_2B3B5512960F4EC4B0162975B01B58C4_1Q.WAV</File_Filename4>
+  <File_Filesize1>5198760</File_Filesize1>
+  <File_OnAirFile>2,3,4</File_OnAirFile>
+  <File_PrimFilename>1</File_PrimFilename>
+  <FileState>Mirrored</FileState>
+  <FORARCHIVE>0</FORARCHIVE>
+  <GENERATION>2</GENERATION>
+  <GROWING>0</GROWING>
+  <GUID>{A1ABBE1C-5623-4E79-9857-CFB5CCB0D14F}</GUID>
+  <ID>00000064</ID>
+  <ImportedBy>BUS\\FlexIE.dll\\DigaSQL.dll</ImportedBy>
+  <INVALID>0</INVALID>
+  <KEYFRAMEEXISTS>0</KEYFRAMEEXISTS>
+  <LASTSENDTIME>00:00:00</LASTSENDTIME>
+  <Loc_FCTS>2019-11-13 12:44:50.769</Loc_FCTS>
+  <LOWRESEXISTS>0</LOWRESEXISTS>
+  <MediaType>Audio</MediaType>
+  <MEDIUM.FILE1.FILEREF>\\\\wnycdavidmedia\\media$\\WQXR_Promos\\PCRE-DAW-S9_2B3B5512960F4EC4B0162975B01B58C4.DBX</MEDIUM.FILE1.FILEREF>
+  <MEDIUM.FILE1.TITLE>PCRE-DAW-S9_2B3B5512960F4EC4B0162975B01B58C4.DBX</MEDIUM.FILE1.TITLE>
+  <MEDIUM.FILE1.TYPE>Data.DB-Info</MEDIUM.FILE1.TYPE>
+  <Music_Loop>0</Music_Loop>
+  <Music_Texter>ROBW</Music_Texter>
+  <NEW>0</NEW>
+  <News_Author>ROBW</News_Author>
+  <News_Editor>ROBW</News_Editor>
+  <NODELETE>0</NODELETE>
+  <PD_LastChangeTime_Hi>30775872</PD_LastChangeTime_Hi>
+  <PD_LastChangeTime_Lo>912597888</PD_LastChangeTime_Lo>
+  <PERFECT>0</PERFECT>
+  <PERSONALRADIO>0</PERSONALRADIO>
+  <READY>0</READY>
+  <REQUESTDEARCHIVE>0</REQUESTDEARCHIVE>
+  <Reserve>No</Reserve>
+  <ROYALTIES>0</ROYALTIES>
+  <SendState>Planned</SendState>
+  <Source>Digas</Source>
+  <Time_DoNotUse>0</Time_DoNotUse>
+  <Time_Duration>29467</Time_Duration>
+  <Time_DurationMode>1</Time_DurationMode>
+  <Time_FixedDuration>0</Time_FixedDuration>
+  <Time_IIRS>0</Time_IIRS>
+  <Time_Joined>0</Time_Joined>
+  <Time_MarkDuration>29467</Time_MarkDuration>
+  <Time_MarkStart>2019-11-14 12:09:15.729</Time_MarkStart>
+  <Time_MarkStop>2019-11-14 12:09:45.196</Time_MarkStop>
+  <Time_Overlaid>0</Time_Overlaid>
+  <Time_Scheduled>17:15:46</Time_Scheduled>
+  <Time_Start>2019-11-14 12:09:15.729</Time_Start>
+  <Time_StartMode>Manual</Time_StartMode>
+  <Time_StartTimeOffset>0</Time_StartTimeOffset>
+  <Time_StartType>Floating</Time_StartType>
+  <Time_Stop>2019-11-14 12:09:45.196</Time_Stop>
+  <Time_TakeDuration>29467</Time_TakeDuration>
+  <Time_TextDuration>0</Time_TextDuration>
+  <Title>CHL: Chicago Symphony Orchestra (tomorrow @ 8:00 pm) (11/14)</Title>
+ </item>
+ <item sequence="future">
+  <ARCHIVED>0</ARCHIVED>
+  <ARCHIVING>0</ARCHIVING>
+  <Audio_Bitrate>1411</Audio_Bitrate>
+  <Audio_Filetype>WAV</Audio_Filetype>
+  <Audio_Format>LINEAR</Audio_Format>
+  <Audio_Mode>STEREO</Audio_Mode>
+  <Audio_Resolution>16</Audio_Resolution>
+  <Audio_Samplerate>44100</Audio_Samplerate>
+  <BROADCASTINGS>57</BROADCASTINGS>
+  <BufferFlag>0</BufferFlag>
+  <CDINFO.LABEL>Supraphon</CDINFO.LABEL>
+  <Class>Music</Class>
+  <Create_ChangeTime>2010-10-19 13:20:40</Create_ChangeTime>
+  <Create_ChangeUser>MUSICTMP</Create_ChangeUser>
+  <Create_CreateTime>2009-09-17 13:08:17</Create_CreateTime>
+  <Create_Creator>MUSICTMP</Create_Creator>
+  <Create_Generator>EasyTrack</Create_Generator>
+  <DBRef>DigaSystem\\Music_Catalog_Valid\\110186</DBRef>
+  <Fade_DefaultMarkIn>0</Fade_DefaultMarkIn>
+  <Fade_DefaultMarkOut>1765001</Fade_DefaultMarkOut>
+  <Fade_LinkIn>0</Fade_LinkIn>
+  <Fade_LinkOut>0</Fade_LinkOut>
+  <Fade_MarkIn>0</Fade_MarkIn>
+  <Fade_MarkOut>1765001</Fade_MarkOut>
+  <FCTS>2019-11-13 11:43:25.338</FCTS>
+  <File_Converted>0</File_Converted>
+  <File_Filename0>\\\\wnycdavidmedia\\media$\\Music_Catalog_Valid\\PB8-MCUL-PRO1_3BF4E4F18B194D8B9C62EF4E538C6797.WAV</File_Filename0>
+  <File_Filename1>\\\\wnycdavidmedia\\media$\\Media Directories\\WQXR_FM\\FM 105.9\\20191114\\PB8-MCUL-PRO1_3BF4E4F18B194D8B9C62EF4E538C6797_48.WAV</File_Filename1>
+  <File_Filename2>\\\\nydavidoa01\\d$\\Media_Directories\\WQXR\\20191114\\PB8-MCUL-PRO1_3BF4E4F18B194D8B9C62EF4E538C6797_48.WAV</File_Filename2>
+  <File_Filename3>\\\\nydavidoancr5\\d$\\Media_Directories\\WQXR\\20191114\\PB8-MCUL-PRO1_3BF4E4F18B194D8B9C62EF4E538C6797_3I.WAV</File_Filename3>
+  <File_Filename4>\\\\wnycdavidoan1\\f$\\Media_Directories\\WQXR\\20191114\\PB8-MCUL-PRO1_3BF4E4F18B194D8B9C62EF4E538C6797_3G.WAV</File_Filename4>
+  <File_Filesize0>312563300</File_Filesize0>
+  <File_Filesize1>312563300</File_Filesize1>
+  <File_OnAirFile>2,3,4</File_OnAirFile>
+  <File_PrimFilename>1</File_PrimFilename>
+  <FileState>Mirrored</FileState>
+  <FORARCHIVE>0</FORARCHIVE>
+  <GENERATION>2</GENERATION>
+  <GROWING>0</GROWING>
+  <GUID>{FA5FAA75-BC90-472C-A50E-592CBB322F81}</GUID>
+  <ID>00000066</ID>
+  <ImportedBy>BUS\\FlexIE.dll\\DigaSQL.dll</ImportedBy>
+  <INVALID>0</INVALID>
+  <KEYFRAMEEXISTS>0</KEYFRAMEEXISTS>
+  <LASTSENDTIME>00:00:00</LASTSENDTIME>
+  <Loc_FCTS>2019-11-13 11:58:43.417</Loc_FCTS>
+  <LOWRESEXISTS>0</LOWRESEXISTS>
+  <MediaType>Audio</MediaType>
+  <MEDIUM.FILE1.FILEREF>\\\\wnycdavidmedia\\media$\\Music_Catalog_Valid\\PB8-MCUL-PRO1_3BF4E4F18B194D8B9C62EF4E538C6797.DBX</MEDIUM.FILE1.FILEREF>
+  <MEDIUM.FILE1.TITLE>PB8-MCUL-PRO1_3BF4E4F18B194D8B9C62EF4E538C6797.DBX</MEDIUM.FILE1.TITLE>
+  <MEDIUM.FILE1.TYPE>Data.DB-Info</MEDIUM.FILE1.TYPE>
+  <Music_CDID>110649</Music_CDID>
+  <Music_Composer>Antonin Dvorak</Music_Composer>
+  <Music_Loop>0</Music_Loop>
+  <Music_MusicID>110186</Music_MusicID>
+  <Music_Texter>MUSICTMP</Music_Texter>
+  <NEW>0</NEW>
+  <News_Author>MUSICTMP</News_Author>
+  <News_Editor>MUSICTMP</News_Editor>
+  <NODELETE>0</NODELETE>
+  <PD_LastChangeTime_Hi>30775880</PD_LastChangeTime_Hi>
+  <PD_LastChangeTime_Lo>2516879520</PD_LastChangeTime_Lo>
+  <PERFECT>0</PERFECT>
+  <PERSONALRADIO>0</PERSONALRADIO>
+  <READY>0</READY>
+  <REQUESTDEARCHIVE>0</REQUESTDEARCHIVE>
+  <Reserve>No</Reserve>
+  <ROYALTIES>0</ROYALTIES>
+  <SendState>Planned</SendState>
+  <Source>Digas</Source>
+  <Time_DoNotUse>0</Time_DoNotUse>
+  <Time_Duration>1765001</Time_Duration>
+  <Time_DurationMode>1</Time_DurationMode>
+  <Time_FixedDuration>0</Time_FixedDuration>
+  <Time_IIRS>0</Time_IIRS>
+  <Time_Joined>0</Time_Joined>
+  <Time_MarkDuration>1765001</Time_MarkDuration>
+  <Time_MarkStart>2019-11-14 12:09:45.196</Time_MarkStart>
+  <Time_MarkStop>2019-11-14 12:39:10.197</Time_MarkStop>
+  <Time_Overlaid>0</Time_Overlaid>
+  <Time_Scheduled>13:08:17</Time_Scheduled>
+  <Time_Start>2019-11-14 12:09:45.196</Time_Start>
+  <Time_StartMode>Manual</Time_StartMode>
+  <Time_StartTimeOffset>0</Time_StartTimeOffset>
+  <Time_StartType>Floating</Time_StartType>
+  <Time_Stop>2019-11-14 12:39:10.197</Time_Stop>
+  <Time_TakeDuration>1765001</Time_TakeDuration>
+  <Time_TextDuration>0</Time_TextDuration>
+  <Title>Serenade in E, Op. 22</Title>
+  <USA.WNYC.ORCHESTRA>Prague Chamber Orchestra</USA.WNYC.ORCHESTRA>
+  <USA.WNYC.SONGID>110186</USA.WNYC.SONGID>
+  <USA.WNYC.VOCAL>0</USA.WNYC.VOCAL>
+ </item>
+ <item sequence="future">
+  <ARCHIVED>0</ARCHIVED>
+  <ARCHIVING>0</ARCHIVING>
+  <Audio_Bitrate>1411</Audio_Bitrate>
+  <Audio_Filetype>WAV</Audio_Filetype>
+  <Audio_Format>LINEAR</Audio_Format>
+  <Audio_Mode>STEREO</Audio_Mode>
+  <Audio_Resolution>16</Audio_Resolution>
+  <Audio_Samplerate>44100</Audio_Samplerate>
+  <BROADCASTINGS>8</BROADCASTINGS>
+  <BufferFlag>0</BufferFlag>
+  <CDINFO.LABEL>Oehms</CDINFO.LABEL>
+  <Class>Music</Class>
+  <Create_ChangeTime>2018-03-07 10:38:54</Create_ChangeTime>
+  <Create_ChangeUser>ZKANE</Create_ChangeUser>
+  <Create_CreateTime>2018-03-07 10:37:31</Create_CreateTime>
+  <Create_Creator>ZKANE</Create_Creator>
+  <Create_Generator>EasyTrack</Create_Generator>
+  <DBRef>DigaSystem\\Music_Catalog_Valid\\151429</DBRef>
+  <Fade_DefaultMarkIn>0</Fade_DefaultMarkIn>
+  <Fade_DefaultMarkOut>705949</Fade_DefaultMarkOut>
+  <Fade_LinkIn>0</Fade_LinkIn>
+  <Fade_LinkOut>0</Fade_LinkOut>
+  <Fade_MarkIn>0</Fade_MarkIn>
+  <Fade_MarkOut>705949</Fade_MarkOut>
+  <FCTS>2019-11-13 11:56:01.037</FCTS>
+  <File_Converted>1</File_Converted>
+  <File_Filename1>\\\\wnycdavidmedia\\media$\\Media Directories\\WQXR_FM\\FM 105.9\\20191114\\WQXR-D09-P8_243AAF7A6DF649A7A25C02DF3EB3C8E2_1T.WAV</File_Filename1>
+  <File_Filename2>\\\\nydavidoa01\\d$\\Media_Directories\\WQXR\\20191114\\WQXR-D09-P8_243AAF7A6DF649A7A25C02DF3EB3C8E2_1T.WAV</File_Filename2>
+  <File_Filename3>\\\\nydavidoancr5\\d$\\Media_Directories\\WQXR\\20191114\\WQXR-D09-P8_243AAF7A6DF649A7A25C02DF3EB3C8E2_1T.WAV</File_Filename3>
+  <File_Filename4>\\\\wnycdavidoan1\\f$\\Media_Directories\\WQXR\\20191114\\WQXR-D09-P8_243AAF7A6DF649A7A25C02DF3EB3C8E2_1R.WAV</File_Filename4>
+  <File_Filesize1>124530084</File_Filesize1>
+  <File_OnAirFile>2,3,4</File_OnAirFile>
+  <File_PrimFilename>1</File_PrimFilename>
+  <FileState>Mirrored</FileState>
+  <FORARCHIVE>0</FORARCHIVE>
+  <GENERATION>2</GENERATION>
+  <GROWING>0</GROWING>
+  <GUID>{6425A38D-7295-441E-B661-9D0013000FAD}</GUID>
+  <ID>00000064</ID>
+  <ImportedBy>BUS\\FlexIE.dll\\DigaSQL.dll</ImportedBy>
+  <Info>&quot;From Italy&quot;</Info>
+  <INVALID>0</INVALID>
+  <KEYFRAMEEXISTS>0</KEYFRAMEEXISTS>
+  <LASTSENDTIME>00:00:00</LASTSENDTIME>
+  <Loc_FCTS>2019-11-13 12:46:28.801</Loc_FCTS>
+  <LOWRESEXISTS>0</LOWRESEXISTS>
+  <MediaType>Audio</MediaType>
+  <MEDIUM.FILE1.FILEREF>\\\\wnycdavidmedia\\media$\\Music_Catalog_Valid\\WQXR-D09-P8_243AAF7A6DF649A7A25C02DF3EB3C8E2.DBX</MEDIUM.FILE1.FILEREF>
+  <MEDIUM.FILE1.TITLE>WQXR-D09-P8_243AAF7A6DF649A7A25C02DF3EB3C8E2.DBX</MEDIUM.FILE1.TITLE>
+  <MEDIUM.FILE1.TYPE>Data.DB-Info</MEDIUM.FILE1.TYPE>
+  <Music_Album>Richard Strauss | Aus Italien | Death and Transformation</Music_Album>
+  <Music_CDID>892</Music_CDID>
+  <Music_Composer>Richard Strauss</Music_Composer>
+  <Music_Loop>0</Music_Loop>
+  <Music_MusicID>151429</Music_MusicID>
+  <Music_Texter>ZKANE</Music_Texter>
+  <NEW>0</NEW>
+  <News_Author>ZKANE</News_Author>
+  <News_Editor>ZKANE</News_Editor>
+  <NODELETE>0</NODELETE>
+  <PD_LastChangeTime_Hi>30775872</PD_LastChangeTime_Hi>
+  <PD_LastChangeTime_Lo>1924767888</PD_LastChangeTime_Lo>
+  <PERFECT>0</PERFECT>
+  <PERSONALRADIO>0</PERSONALRADIO>
+  <READY>0</READY>
+  <REQUESTDEARCHIVE>0</REQUESTDEARCHIVE>
+  <Reserve>No</Reserve>
+  <ROYALTIES>0</ROYALTIES>
+  <SendState>Planned</SendState>
+  <Source>Digas</Source>
+  <Time_DoNotUse>0</Time_DoNotUse>
+  <Time_Duration>705949</Time_Duration>
+  <Time_DurationMode>1</Time_DurationMode>
+  <Time_FixedDuration>0</Time_FixedDuration>
+  <Time_IIRS>0</Time_IIRS>
+  <Time_Joined>0</Time_Joined>
+  <Time_MarkDuration>705949</Time_MarkDuration>
+  <Time_MarkStart>2019-11-14 12:39:10.197</Time_MarkStart>
+  <Time_MarkStop>2019-11-14 12:50:56.146</Time_MarkStop>
+  <Time_Overlaid>0</Time_Overlaid>
+  <Time_Scheduled>10:37:31</Time_Scheduled>
+  <Time_Start>2019-11-14 12:39:10.197</Time_Start>
+  <Time_StartMode>Manual</Time_StartMode>
+  <Time_StartTimeOffset>0</Time_StartTimeOffset>
+  <Time_StartType>Floating</Time_StartType>
+  <Time_Stop>2019-11-14 12:50:56.146</Time_Stop>
+  <Time_TakeDuration>705949</Time_TakeDuration>
+  <Time_TextDuration>0</Time_TextDuration>
+  <Title>Aus Italien, Op. 16: In Rome&apos;s Ruins</Title>
+  <USA.WNYC.CONDUCTOR>Sebastian Weigle, conductor</USA.WNYC.CONDUCTOR>
+  <USA.WNYC.ORCHESTRA>Frankfurt Opera and Museum Orchestra</USA.WNYC.ORCHESTRA>
+  <USA.WNYC.SONGID>151429</USA.WNYC.SONGID>
+  <USA.WNYC.VOCAL>0</USA.WNYC.VOCAL>
+ </item>
+ <item sequence="future">
+  <ARCHIVED>0</ARCHIVED>
+  <ARCHIVING>0</ARCHIVING>
+  <Audio_Bitrate>1411</Audio_Bitrate>
+  <Audio_Filetype>WAV</Audio_Filetype>
+  <Audio_Format>LINEAR</Audio_Format>
+  <Audio_Mode>STEREO</Audio_Mode>
+  <Audio_Resolution>16</Audio_Resolution>
+  <Audio_Samplerate>44100</Audio_Samplerate>
+  <BROADCASTINGS>32</BROADCASTINGS>
+  <BufferFlag>0</BufferFlag>
+  <CDINFO.LABEL>Emi Classics</CDINFO.LABEL>
+  <Class>Music</Class>
+  <Create_ChangeTime>2012-10-10 11:19:37</Create_ChangeTime>
+  <Create_ChangeUser>RLOHR</Create_ChangeUser>
+  <Create_CreateTime>2012-10-10 11:19:01</Create_CreateTime>
+  <Create_Creator>RLOHR</Create_Creator>
+  <Create_Generator>EasyTrack</Create_Generator>
+  <DBRef>DigaSystem\\Music_Catalog_Valid\\130445</DBRef>
+  <Fade_DefaultMarkIn>0</Fade_DefaultMarkIn>
+  <Fade_DefaultMarkOut>274553</Fade_DefaultMarkOut>
+  <Fade_LinkIn>0</Fade_LinkIn>
+  <Fade_LinkOut>0</Fade_LinkOut>
+  <Fade_MarkIn>0</Fade_MarkIn>
+  <Fade_MarkOut>274553</Fade_MarkOut>
+  <FCTS>2019-11-13 11:56:02.557</FCTS>
+  <File_Converted>1</File_Converted>
+  <File_Filename1>\\\\wnycdavidmedia\\media$\\Media Directories\\WQXR_FM\\FM 105.9\\20191114\\WQXRMUSIC-PRO_E579AEECEB8A4F28BAD43942FDC86CDD_1U.WAV</File_Filename1>
+  <File_Filename2>\\\\nydavidoa01\\d$\\Media_Directories\\WQXR\\20191114\\WQXRMUSIC-PRO_E579AEECEB8A4F28BAD43942FDC86CDD_1U.WAV</File_Filename2>
+  <File_Filename3>\\\\nydavidoancr5\\d$\\Media_Directories\\WQXR\\20191114\\WQXRMUSIC-PRO_E579AEECEB8A4F28BAD43942FDC86CDD_1U.WAV</File_Filename3>
+  <File_Filename4>\\\\wnycdavidoan1\\f$\\Media_Directories\\WQXR\\20191114\\WQXRMUSIC-PRO_E579AEECEB8A4F28BAD43942FDC86CDD_1S.WAV</File_Filename4>
+  <File_Filesize1>48432004</File_Filesize1>
+  <File_OnAirFile>2,3,4</File_OnAirFile>
+  <File_PrimFilename>1</File_PrimFilename>
+  <FileState>Mirrored</FileState>
+  <FORARCHIVE>0</FORARCHIVE>
+  <GENERATION>2</GENERATION>
+  <GROWING>0</GROWING>
+  <GUID>{156EECD6-50E6-48C3-8066-70C39D0CEA46}</GUID>
+  <ID>00000066</ID>
+  <ImportedBy>BUS\\FlexIE.dll\\DigaSQL.dll</ImportedBy>
+  <Info>From &quot;Was mir behagt, ist nur die muntre Jagd!</Info>
+  <INVALID>0</INVALID>
+  <KEYFRAMEEXISTS>0</KEYFRAMEEXISTS>
+  <LASTSENDTIME>00:00:00</LASTSENDTIME>
+  <Loc_FCTS>2019-11-13 12:47:07.210</Loc_FCTS>
+  <LOWRESEXISTS>0</LOWRESEXISTS>
+  <MediaType>Audio</MediaType>
+  <MEDIUM.FILE1.FILEREF>\\\\wnycdavidmedia\\media$\\Music_Catalog_Valid\\WQXRMUSIC-PRO_E579AEECEB8A4F28BAD43942FDC86CDD.DBX</MEDIUM.FILE1.FILEREF>
+  <MEDIUM.FILE1.TITLE>WQXRMUSIC-PRO_E579AEECEB8A4F28BAD43942FDC86CDD.DBX</MEDIUM.FILE1.TITLE>
+  <MEDIUM.FILE1.TYPE>Data.DB-Info</MEDIUM.FILE1.TYPE>
+  <Music_Album>Essential Bach</Music_Album>
+  <Music_CDID>95424</Music_CDID>
+  <Music_Composer>Johann Sebastian Bach</Music_Composer>
+  <Music_Loop>0</Music_Loop>
+  <Music_MusicID>130445</Music_MusicID>
+  <Music_Texter>RLOHR</Music_Texter>
+  <NEW>0</NEW>
+  <News_Author>RLOHR</News_Author>
+  <News_Editor>RLOHR</News_Editor>
+  <NODELETE>0</NODELETE>
+  <PD_LastChangeTime_Hi>30775872</PD_LastChangeTime_Hi>
+  <PD_LastChangeTime_Lo>2305287888</PD_LastChangeTime_Lo>
+  <PERFECT>0</PERFECT>
+  <PERSONALRADIO>0</PERSONALRADIO>
+  <READY>0</READY>
+  <REQUESTDEARCHIVE>0</REQUESTDEARCHIVE>
+  <Reserve>No</Reserve>
+  <ROYALTIES>0</ROYALTIES>
+  <SendState>Planned</SendState>
+  <Source>Digas</Source>
+  <Time_DoNotUse>0</Time_DoNotUse>
+  <Time_Duration>274553</Time_Duration>
+  <Time_DurationMode>1</Time_DurationMode>
+  <Time_FixedDuration>0</Time_FixedDuration>
+  <Time_IIRS>0</Time_IIRS>
+  <Time_Joined>0</Time_Joined>
+  <Time_MarkDuration>274553</Time_MarkDuration>
+  <Time_MarkStart>2019-11-14 12:50:56.146</Time_MarkStart>
+  <Time_MarkStop>2019-11-14 12:55:30.699</Time_MarkStop>
+  <Time_Overlaid>0</Time_Overlaid>
+  <Time_Scheduled>11:19:01</Time_Scheduled>
+  <Time_Start>2019-11-14 12:50:56.146</Time_Start>
+  <Time_StartMode>Manual</Time_StartMode>
+  <Time_StartTimeOffset>0</Time_StartTimeOffset>
+  <Time_StartType>Floating</Time_StartType>
+  <Time_Stop>2019-11-14 12:55:30.699</Time_Stop>
+  <Time_TakeDuration>274553</Time_TakeDuration>
+  <Time_TextDuration>0</Time_TextDuration>
+  <Title>Cantata BWV 208: Sheep May Safely Graze</Title>
+  <USA.WNYC.ARRANGER>Sir Neville Marriner</USA.WNYC.ARRANGER>
+  <USA.WNYC.CONDUCTOR>Sir Neville Marriner, conductor</USA.WNYC.CONDUCTOR>
+  <USA.WNYC.ORCHESTRA>Academy of St. Martin in the Fields</USA.WNYC.ORCHESTRA>
+  <USA.WNYC.SONGID>130445</USA.WNYC.SONGID>
+  <USA.WNYC.VOCAL>0</USA.WNYC.VOCAL>
+ </item>
+</wddxPacket>
