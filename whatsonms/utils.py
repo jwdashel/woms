@@ -41,7 +41,7 @@ class Response(dict):
 def sanitize_cdata(xmlstr: str) -> str:
     """
     Some xml strings come from david with double escaped cdata (see
-    david_weird_cdata.xml for an example. The closing double tag has
+    david_weird_cdata.xml for an example). The closing double tag has
     to be deleted in order for xmltodict to be able to parse.
     Args:
         xmlstr: An unparsed xml string from david
