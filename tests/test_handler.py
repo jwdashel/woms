@@ -144,8 +144,6 @@ class TestHandler:
         whats_on_body = self.clean_json_from_str(whats_on['body'])
         assert whats_on_body['data']['attributes']['Item']['metadata']['air_break'] is True
 
-        assert whats_on_body['data']['attributes']['Item']['metadata']['air_break'] is True
-
     def test_time_stamp_converted_to_unix_time_david(self, mocker, mock_david):
         mocker.patch('whatsonms.utils.broadcast',
                      return_value=Response(200, message='mock response'))
