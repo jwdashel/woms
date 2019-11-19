@@ -37,7 +37,7 @@ class Response(dict):
         dict.__init__(self, **response)
 
 
-def jsonify_body(message, data):
+def jsonify_body(message: str, data: dict) -> str:
     """
     Formats the response body to the JSONAPI spec for easy consumption by
     Ember clients.
@@ -52,7 +52,7 @@ def jsonify_body(message, data):
     return json.dumps(metadata)
 
 
-def convert_time(time_str):
+def convert_time(time_str: str) -> int:
     """
     Convert (david fmt) datetime str to Epoch time.
 
@@ -76,7 +76,7 @@ def convert_time(time_str):
     return epoch_time
 
 
-def convert_date_time(date_, time_):
+def convert_date_time(date_: str, time_: str) -> int:
     """
     Convert (nexgen fmt) date str and time str to Epoch time.
 
