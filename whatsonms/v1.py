@@ -54,18 +54,18 @@ NEXGEN_MUSIC_ELEMS = (
 )
 
 
-def air_break():
+def air_break() -> dict:
     return {"air_break": True}
 
 
-def normalize_david_dict(present_track_info):
+def normalize_david_dict(present_track_info: dict) -> dict:
     normalized = {v: present_track_info.get(k) for k, v in DAVID_MUSIC_ELEMS if k in present_track_info}
     normalized['epoch_start_time'] = convert_time(normalized['start_time'])
     normalized['epoch_real_start_time'] = convert_time(normalized['real_start_time'])
     return normalized
 
 
-def normalize_encodings(present_track_info):
+def normalize_encodings(present_track_info: dict) -> dict:
     for key in present_track_info.keys():
         if present_track_info[key]:
             present_track_info[key] = convert_encoding(present_track_info[key])
