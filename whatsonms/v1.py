@@ -1,7 +1,7 @@
 import logging
 from typing import Dict
 
-from whatsonms.utils import convert_time, convert_date_time, convert_encoding
+import whatsonms.utils as utils
 
 import xmltodict
 
@@ -60,15 +60,15 @@ def air_break() -> dict:
 
 def normalize_david_dict(present_track_info: dict) -> dict:
     normalized = {v: present_track_info.get(k) for k, v in DAVID_MUSIC_ELEMS if k in present_track_info}
-    normalized['epoch_start_time'] = convert_time(normalized['start_time'])
-    normalized['epoch_real_start_time'] = convert_time(normalized['real_start_time'])
+    normalized['epoch_start_time'] = utils.convert_time(normalized['start_time'])
+    normalized['epoch_real_start_time'] = utils.convert_time(normalized['real_start_time'])
     return normalized
 
 
 def normalize_encodings(present_track_info: dict) -> dict:
     for key in present_track_info.keys():
         if present_track_info[key]:
-            present_track_info[key] = convert_encoding(present_track_info[key])
+            present_track_info[key] = utils.convert_encoding(present_track_info[key])
     return present_track_info
 
 
@@ -82,8 +82,8 @@ def parse_metadata_nexgen(event: Dict) -> Dict:
         normalized = {
             v: xmldict['audio'].get(k) for k, v in NEXGEN_MUSIC_ELEMS if k in xmldict['audio']
         }
-        normalized['epoch_start_time'] = convert_date_time(normalized['start_date'],
-                                                           normalized['start_time'])
+        normalized['epoch_start_time'] = utils.convert_date_time(normalized['start_date'],
+                                                                 normalized['start_time'])
         return normalized
 
 
@@ -93,6 +93,7 @@ def parse_metadata_david(event: Dict) -> Dict:
     """
     xml = event.get('body')
     if xml:
+        xml = utils.sanitize_cdata(xml)
         xmldict = xmltodict.parse(xml)
         try:
             present, = (x for x in xmldict['wddxPacket']['item']

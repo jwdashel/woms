@@ -5,6 +5,7 @@ from typing import List
 
 import pytz
 import math
+import re
 from datetime import datetime
 
 from whatsonms import config
@@ -35,6 +36,22 @@ class Response(dict):
             "body": body,
         }
         dict.__init__(self, **response)
+
+
+def sanitize_cdata(xmlstr: str) -> str:
+    """
+    Some xml strings come from david with double escaped cdata (see
+    david_weird_cdata.xml for an example). The closing double tag has
+    to be deleted in order for xmltodict to be able to parse.
+    Args:
+        xmlstr: An unparsed xml string from david
+    Returns: xmlstr to be parsed without cdata
+    """
+    CDATA_REGEX = re.compile(r'<!\[CDATA\[.*\]\]>', re.MULTILINE)
+
+    xstr = xmlstr.read().decode('utf8')
+    sanitized_str = CDATA_REGEX.sub(' ', xstr)
+    return sanitized_str
 
 
 def jsonify_body(message: str, data: dict) -> str:

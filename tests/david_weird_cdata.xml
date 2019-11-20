@@ -1,0 +1,1015 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wddxPacket version="1.0">
+ <item sequence="past">
+  <ARCHIVED>0</ARCHIVED>
+  <ARCHIVING>0</ARCHIVING>
+  <Audio_Bitrate>1411</Audio_Bitrate>
+  <Audio_Filetype>WAV</Audio_Filetype>
+  <Audio_Format>LINEAR</Audio_Format>
+  <Audio_Mode>STEREO</Audio_Mode>
+  <Audio_Resolution>16</Audio_Resolution>
+  <Audio_Samplerate>44100</Audio_Samplerate>
+  <BROADCASTINGS>0</BROADCASTINGS>
+  <BufferFlag>0</BufferFlag>
+  <Class>Audio</Class>
+  <Create_ChangeTime>2019-11-08 16:58:46</Create_ChangeTime>
+  <Create_ChangeUser>MUSICTMP</Create_ChangeUser>
+  <Create_CreateTime>2019-11-08 16:58:09</Create_CreateTime>
+  <Create_Creator>MUSICTMP</Create_Creator>
+  <Create_Generator>EasyTrack</Create_Generator>
+  <DBRef>DigaSystem\\WQXR_Productions\\42836</DBRef>
+  <Fade_DefaultMarkIn>0</Fade_DefaultMarkIn>
+  <Fade_DefaultMarkOut>3599588</Fade_DefaultMarkOut>
+  <Fade_LinkIn>0</Fade_LinkIn>
+  <Fade_LinkOut>0</Fade_LinkOut>
+  <Fade_MarkIn>0</Fade_MarkIn>
+  <Fade_MarkOut>3599588</Fade_MarkOut>
+  <FCTS>2019-11-08 18:32:51.288</FCTS>
+  <File_Converted>1</File_Converted>
+  <File_Filename1>\\\\wnycdavidmedia\\media$\\Media Directories\\WQXR_FM\\FM 105.9\\20191110\\WQXR-A07-S8_C8724FC2248E4562AF893EF95E271F2C_4H.WAV</File_Filename1>
+  <File_Filename2>\\\\nydavidoa01\\d$\\Media_Directories\\WQXR\\20191110\\WQXR-A07-S8_C8724FC2248E4562AF893EF95E271F2C_2N.WAV</File_Filename2>
+  <File_Filename3>\\\\nydavidoancr5\\d$\\Media_Directories\\WQXR\\20191110\\WQXR-A07-S8_C8724FC2248E4562AF893EF95E271F2C_2N.WAV</File_Filename3>
+  <File_Filename4>\\\\wnycdavidoan1\\f$\\Media_Directories\\WQXR\\20191110\\WQXR-A07-S8_C8724FC2248E4562AF893EF95E271F2C_2N.WAV</File_Filename4>
+  <File_Filesize1>634968088</File_Filesize1>
+  <File_OnAirFile>2,3,4</File_OnAirFile>
+  <File_PrimFilename>1</File_PrimFilename>
+  <FileState>Mirrored</FileState>
+  <FORARCHIVE>0</FORARCHIVE>
+  <GENERATION>2</GENERATION>
+  <GROWING>0</GROWING>
+  <GUID>{12F5F41F-AED6-4DBC-8E99-3BF425EC0932}</GUID>
+  <ID>00000064</ID>
+  <INVALID>0</INVALID>
+  <KEYFRAMEEXISTS>0</KEYFRAMEEXISTS>
+  <Loc_FCTS>2019-11-08 18:32:55.966</Loc_FCTS>
+  <LOWRESEXISTS>0</LOWRESEXISTS>
+  <MediaType>Audio</MediaType>
+  <MEDIUM.FILE1.FILEREF>\\\\wnycdavidmedia\\media$\\WQXR_Productions\\WQXR-A07-S8_C8724FC2248E4562AF893EF95E271F2C.DBX</MEDIUM.FILE1.FILEREF>
+  <MEDIUM.FILE1.TITLE>WQXR-A07-S8_C8724FC2248E4562AF893EF95E271F2C.DBX</MEDIUM.FILE1.TITLE>
+  <MEDIUM.FILE1.TYPE>Data.DB-Info</MEDIUM.FILE1.TYPE>
+  <Music_Loop>0</Music_Loop>
+  <Music_Texter>MUSICTMP</Music_Texter>
+  <NEW>0</NEW>
+  <News_Author>MUSICTMP</News_Author>
+  <News_Editor>MUSICTMP</News_Editor>
+  <NODELETE>0</NODELETE>
+  <OnAirPlayedBySta>MGMT_WS1</OnAirPlayedBySta>
+  <OnAirPlayedByUsr>TURBO</OnAirPlayedByUsr>
+  <OnAirPlayedOnAir>1</OnAirPlayedOnAir>
+  <PD_LastChangeTime_Hi>30775188</PD_LastChangeTime_Hi>
+  <PD_LastChangeTime_Lo>2008078352</PD_LastChangeTime_Lo>
+  <PERFECT>0</PERFECT>
+  <PERSONALRADIO>0</PERSONALRADIO>
+  <READY>0</READY>
+  <REQUESTDEARCHIVE>0</REQUESTDEARCHIVE>
+  <Reserve>No</Reserve>
+  <ROYALTIES>0</ROYALTIES>
+  <SendState>Sent</SendState>
+  <Source>Digas</Source>
+  <Time_DoNotUse>0</Time_DoNotUse>
+  <Time_Duration>3599588</Time_Duration>
+  <Time_DurationMode>1</Time_DurationMode>
+  <Time_FixedDuration>0</Time_FixedDuration>
+  <Time_IIRS>0</Time_IIRS>
+  <Time_Joined>0</Time_Joined>
+  <Time_MarkDuration>3599659</Time_MarkDuration>
+  <Time_MarkStart>2019-11-10 06:00:00.002</Time_MarkStart>
+  <Time_MarkStop>2019-11-10 06:59:59.661</Time_MarkStop>
+  <Time_Overlaid>0</Time_Overlaid>
+  <Time_RealDuration>3599659</Time_RealDuration>
+  <Time_RealStart>2019-11-10 06:00:00.002</Time_RealStart>
+  <Time_RealStop>2019-11-10 06:59:59.661</Time_RealStop>
+  <Time_RecStart>2019-11-10 06:00:00.002</Time_RecStart>
+  <Time_RecStop>2019-11-10 06:59:59.661</Time_RecStop>
+  <Time_Scheduled>16:58:09</Time_Scheduled>
+  <Time_Start>2019-11-10 06:00:00.000</Time_Start>
+  <Time_StartMode>StartOnTime</Time_StartMode>
+  <Time_StartTimeOffset>0</Time_StartTimeOffset>
+  <Time_StartType>FixedStart</Time_StartType>
+  <Time_Stop>2019-11-10 06:59:59.659</Time_Stop>
+  <Time_TakeDuration>3599588</Time_TakeDuration>
+  <Time_TextDuration>0</Time_TextDuration>
+  <Title>WQXR Capitol press Room 191108</Title>
+  <VoiceOverFlag>N</VoiceOverFlag>
+ </item>
+ <item sequence="past">
+  <ARCHIVED>0</ARCHIVED>
+  <ARCHIVING>0</ARCHIVING>
+  <Audio_Bitrate>1411</Audio_Bitrate>
+  <Audio_Filetype>WAV</Audio_Filetype>
+  <Audio_Format>LINEAR</Audio_Format>
+  <Audio_Mode>STEREO</Audio_Mode>
+  <Audio_Resolution>16</Audio_Resolution>
+  <Audio_Samplerate>44100</Audio_Samplerate>
+  <BROADCASTINGS>0</BROADCASTINGS>
+  <BufferFlag>0</BufferFlag>
+  <CD.FIRSTUSETIME>06:00:00</CD.FIRSTUSETIME>
+  <CD.LASTUSETIME>12:00:00</CD.LASTUSETIME>
+  <CD.PAD><![CDATA[<![CDATA[<program-associated-data>\n  <property name="OwnerIdentifier" value="ContentDepot"/>\n  <property name="Identifier" value="001"/>\n  <property name="Title" value="Talk about ContentDepot"/>\n  <property name="Artist" value="PRSS"/>\n  <property name="Album" value="ContentDepot Test Program"/>\n  <property name="Genre" value="101"/>");\n  <property name="CommentTitle" value="This is a comment"/>\n  <property name="Comment" value="These are test and placeholder fields for ContentDepot PAD support in files. They are currently generated from static fields in the ContentDepot Portal database. Send email to prssplanning@npr.org if you have questions."/>\n  </program-associated-data>]]>]]></CD.PAD>
+  <CD.PAD_ALBUM>ContentDepot Test Program</CD.PAD_ALBUM>
+  <CD.PAD_ARTIST>PRSS</CD.PAD_ARTIST>
+  <CD.PAD_COMMENT>These are test and placeholder fields for ContentDepot PAD support in files. They are currently generated from static fields in the ContentDepot Portal database. Send email to prssplanning@npr.org if you have questions.</CD.PAD_COMMENT>
+  <CD.PAD_COMMENTTITLE>This is a comment</CD.PAD_COMMENTTITLE>
+  <CD.PAD_GENRE>101</CD.PAD_GENRE>
+  <CD.PAD_IDENTIFIER>001</CD.PAD_IDENTIFIER>
+  <CD.PAD_OWNERIDENTIFIER>ContentDepot</CD.PAD_OWNERIDENTIFIER>
+  <CD.PAD_TITLE>Talk about ContentDepot</CD.PAD_TITLE>
+  <Class>Audio</Class>
+  <Create_ChangeTime>2019-11-08 06:27:21</Create_ChangeTime>
+  <Create_ChangeUser>ADMIN</Create_ChangeUser>
+  <Create_CreateTime>2019-11-07 19:39:57</Create_CreateTime>
+  <Create_Creator>ADMIN</Create_Creator>
+  <DBRef>DigaSystem\\Content_Depot\\422698</DBRef>
+  <Fade_DefaultMarkIn>0</Fade_DefaultMarkIn>
+  <Fade_DefaultMarkOut>60029</Fade_DefaultMarkOut>
+  <Fade_LinkIn>0</Fade_LinkIn>
+  <Fade_LinkOut>0</Fade_LinkOut>
+  <Fade_MarkIn>0</Fade_MarkIn>
+  <Fade_MarkOut>60029</Fade_MarkOut>
+  <FCTS>2019-11-08 07:13:50.463</FCTS>
+  <File_Converted>1</File_Converted>
+  <File_Filename1>\\\\wnycdavidmedia\\media$\\Media Directories\\WQXR_FM\\FM 105.9\\20191110\\cd_Perfor18_672_SGMT09_2ea62baf210b45b09f1d0aa0c933e339_1J.WAV</File_Filename1>
+  <File_Filename2>\\\\nydavidoa01\\d$\\Media_Directories\\WQXR\\20191110\\cd_Perfor18_672_SGMT09_2ea62baf210b45b09f1d0aa0c933e339_1.WAV</File_Filename2>
+  <File_Filename3>\\\\nydavidoancr5\\d$\\Media_Directories\\WQXR\\20191110\\cd_Perfor18_672_SGMT09_2ea62baf210b45b09f1d0aa0c933e339_1.WAV</File_Filename3>
+  <File_Filename4>\\\\wnycdavidoan1\\f$\\Media_Directories\\WQXR\\20191110\\cd_Perfor18_672_SGMT09_2ea62baf210b45b09f1d0aa0c933e339_1.WAV</File_Filename4>
+  <File_Filesize1>10592608</File_Filesize1>
+  <File_OnAirFile>2,3,4</File_OnAirFile>
+  <File_PrimFilename>1</File_PrimFilename>
+  <FileState>Mirrored</FileState>
+  <FIRSTUSEDATE>2019-11-08</FIRSTUSEDATE>
+  <FORARCHIVE>0</FORARCHIVE>
+  <GROWING>0</GROWING>
+  <GUID>{91509B90-AF58-47CB-835C-FB4382F98640}</GUID>
+  <ID>00000064</ID>
+  <ImportedBy>BUS\\AutoReplace</ImportedBy>
+  <INVALID>0</INVALID>
+  <KEYFRAMEEXISTS>0</KEYFRAMEEXISTS>
+  <LASTUSEDATE>2019-11-11</LASTUSEDATE>
+  <Loc_FCTS>2019-11-08 07:14:03.154</Loc_FCTS>
+  <LOWRESEXISTS>0</LOWRESEXISTS>
+  <MediaType>Audio</MediaType>
+  <MEDIUM.FILE1.FILEREF>\\\\wnycdavidmedia\\media$\\Content Depot\\cd_Perfor18_672_SGMT09_2ea62baf210b45b09f1d0aa0c933e339.DBX</MEDIUM.FILE1.FILEREF>
+  <MEDIUM.FILE1.TITLE>cd_Perfor18_672_SGMT09_2ea62baf210b45b09f1d0aa0c933e339.DBX</MEDIUM.FILE1.TITLE>
+  <MEDIUM.FILE1.TYPE>Data.DB-Info</MEDIUM.FILE1.TYPE>
+  <Music_CDID>70200</Music_CDID>
+  <Music_Loop>0</Music_Loop>
+  <Music_MusicID>70200</Music_MusicID>
+  <Music_Singer>Fred Child</Music_Singer>
+  <NEW>0</NEW>
+  <News_Correspondent>Fred Child</News_Correspondent>
+  <News_Editor>Fred Child</News_Editor>
+  <News_Source>Content Depot</News_Source>
+  <NODELETE>0</NODELETE>
+  <OnAirPlayedBySta>MGMT_WS1</OnAirPlayedBySta>
+  <OnAirPlayedByUsr>TURBO</OnAirPlayedByUsr>
+  <OnAirPlayedOnAir>1</OnAirPlayedOnAir>
+  <PD_LastChangeTime_Hi>30775188</PD_LastChangeTime_Hi>
+  <PD_LastChangeTime_Lo>2611648352</PD_LastChangeTime_Lo>
+  <PERFECT>0</PERFECT>
+  <PERSONALRADIO>0</PERSONALRADIO>
+  <READY>0</READY>
+  <REGISTRATION>70200</REGISTRATION>
+  <REQUESTDEARCHIVE>0</REQUESTDEARCHIVE>
+  <Reserve>No</Reserve>
+  <ROYALTIES>0</ROYALTIES>
+  <SendState>Sent</SendState>
+  <Source>Digas</Source>
+  <Time_DoNotUse>0</Time_DoNotUse>
+  <Time_Duration>60029</Time_Duration>
+  <Time_DurationMode>1</Time_DurationMode>
+  <Time_FixedDuration>0</Time_FixedDuration>
+  <Time_IIRS>0</Time_IIRS>
+  <Time_Joined>0</Time_Joined>
+  <Time_MarkDuration>60014</Time_MarkDuration>
+  <Time_MarkStart>2019-11-10 07:00:00.003</Time_MarkStart>
+  <Time_MarkStop>2019-11-10 07:01:00.017</Time_MarkStop>
+  <Time_OnAirStartMode></Time_OnAirStartMode>
+  <Time_OnAirStartType></Time_OnAirStartType>
+  <Time_Overlaid>0</Time_Overlaid>
+  <Time_RealDuration>60014</Time_RealDuration>
+  <Time_RealStart>2019-11-10 07:00:00.003</Time_RealStart>
+  <Time_RealStop>2019-11-10 07:01:00.017</Time_RealStop>
+  <Time_RecStart>2019-11-10 07:00:00.003</Time_RecStart>
+  <Time_RecStop>2019-11-10 07:01:00.017</Time_RecStop>
+  <Time_Scheduled>19:39:57</Time_Scheduled>
+  <Time_Start>2019-11-10 07:00:00.000</Time_Start>
+  <Time_StartMode>StartOnTime</Time_StartMode>
+  <Time_StartTimeOffset>0</Time_StartTimeOffset>
+  <Time_StartType>FixedStart</Time_StartType>
+  <Time_Stop>2019-11-10 07:01:00.014</Time_Stop>
+  <Time_TakeDuration>60029</Time_TakeDuration>
+  <Time_TextDuration>0</Time_TextDuration>
+  <Title>Perfor18 191108 SGMT 09 Billboard Performance Today Weekend</Title>
+ </item>
+ <item sequence="past">
+  <ARCHIVED>0</ARCHIVED>
+  <ARCHIVING>0</ARCHIVING>
+  <Audio_Bitrate>1411</Audio_Bitrate>
+  <Audio_Filetype>WAV</Audio_Filetype>
+  <Audio_Format>LINEAR</Audio_Format>
+  <Audio_Mode>STEREO</Audio_Mode>
+  <Audio_Resolution>16</Audio_Resolution>
+  <Audio_Samplerate>44100</Audio_Samplerate>
+  <BROADCASTINGS>0</BROADCASTINGS>
+  <BufferFlag>0</BufferFlag>
+  <CD.FIRSTUSETIME>06:00:00</CD.FIRSTUSETIME>
+  <CD.LASTUSETIME>12:00:00</CD.LASTUSETIME>
+  <CD.PAD><![CDATA[<![CDATA[<program-associated-data>\n  <property name="OwnerIdentifier" value="ContentDepot"/>\n  <property name="Identifier" value="001"/>\n  <property name="Title" value="Talk about ContentDepot"/>\n  <property name="Artist" value="PRSS"/>\n  <property name="Album" value="ContentDepot Test Program"/>\n  <property name="Genre" value="101"/>");\n  <property name="CommentTitle" value="This is a comment"/>\n  <property name="Comment" value="These are test and placeholder fields for ContentDepot PAD support in files. They are currently generated from static fields in the ContentDepot Portal database. Send email to prssplanning@npr.org if you have questions."/>\n  </program-associated-data>]]>]]></CD.PAD>
+  <CD.PAD_ALBUM>ContentDepot Test Program</CD.PAD_ALBUM>
+  <CD.PAD_ARTIST>PRSS</CD.PAD_ARTIST>
+  <CD.PAD_COMMENT>These are test and placeholder fields for ContentDepot PAD support in files. They are currently generated from static fields in the ContentDepot Portal database. Send email to prssplanning@npr.org if you have questions.</CD.PAD_COMMENT>
+  <CD.PAD_COMMENTTITLE>This is a comment</CD.PAD_COMMENTTITLE>
+  <CD.PAD_GENRE>101</CD.PAD_GENRE>
+  <CD.PAD_IDENTIFIER>001</CD.PAD_IDENTIFIER>
+  <CD.PAD_OWNERIDENTIFIER>ContentDepot</CD.PAD_OWNERIDENTIFIER>
+  <CD.PAD_TITLE>Talk about ContentDepot</CD.PAD_TITLE>
+  <Class>Audio</Class>
+  <Create_ChangeTime>2019-11-08 06:27:23</Create_ChangeTime>
+  <Create_ChangeUser>ADMIN</Create_ChangeUser>
+  <Create_CreateTime>2019-11-07 19:43:29</Create_CreateTime>
+  <Create_Creator>ADMIN</Create_Creator>
+  <DBRef>DigaSystem\\Content_Depot\\422699</DBRef>
+  <Fade_DefaultMarkIn>0</Fade_DefaultMarkIn>
+  <Fade_DefaultMarkOut>300042</Fade_DefaultMarkOut>
+  <Fade_LinkIn>0</Fade_LinkIn>
+  <Fade_LinkOut>0</Fade_LinkOut>
+  <Fade_MarkIn>0</Fade_MarkIn>
+  <Fade_MarkOut>300042</Fade_MarkOut>
+  <FCTS>2019-11-08 07:13:52.357</FCTS>
+  <File_Converted>1</File_Converted>
+  <File_Filename1>\\\\wnycdavidmedia\\media$\\Media Directories\\WQXR_FM\\FM 105.9\\20191110\\cd_Perfor18_672_SGMT10_f76b157b3a3a498db8caa2dc57213a63_1K.WAV</File_Filename1>
+  <File_Filename2>\\\\nydavidoa01\\d$\\Media_Directories\\WQXR\\20191110\\cd_Perfor18_672_SGMT10_f76b157b3a3a498db8caa2dc57213a63_2.WAV</File_Filename2>
+  <File_Filename3>\\\\nydavidoancr5\\d$\\Media_Directories\\WQXR\\20191110\\cd_Perfor18_672_SGMT10_f76b157b3a3a498db8caa2dc57213a63_2.WAV</File_Filename3>
+  <File_Filename4>\\\\wnycdavidoan1\\f$\\Media_Directories\\WQXR\\20191110\\cd_Perfor18_672_SGMT10_f76b157b3a3a498db8caa2dc57213a63_2.WAV</File_Filename4>
+  <File_Filesize1>52930912</File_Filesize1>
+  <File_OnAirFile>2,3,4</File_OnAirFile>
+  <File_PrimFilename>1</File_PrimFilename>
+  <FileState>Mirrored</FileState>
+  <FIRSTUSEDATE>2019-11-08</FIRSTUSEDATE>
+  <FORARCHIVE>0</FORARCHIVE>
+  <GROWING>0</GROWING>
+  <GUID>{D3966DAB-6954-4943-AE64-28E69362C8FF}</GUID>
+  <ID>00000065</ID>
+  <ImportedBy>BUS\\AutoReplace</ImportedBy>
+  <INVALID>0</INVALID>
+  <KEYFRAMEEXISTS>0</KEYFRAMEEXISTS>
+  <LASTUSEDATE>2019-11-11</LASTUSEDATE>
+  <Loc_FCTS>2019-11-08 07:14:44.471</Loc_FCTS>
+  <LOWRESEXISTS>0</LOWRESEXISTS>
+  <MediaType>Audio</MediaType>
+  <MEDIUM.FILE1.FILEREF>\\\\wnycdavidmedia\\media$\\Content Depot\\cd_Perfor18_672_SGMT10_f76b157b3a3a498db8caa2dc57213a63.DBX</MEDIUM.FILE1.FILEREF>
+  <MEDIUM.FILE1.TITLE>cd_Perfor18_672_SGMT10_f76b157b3a3a498db8caa2dc57213a63.DBX</MEDIUM.FILE1.TITLE>
+  <MEDIUM.FILE1.TYPE>Data.DB-Info</MEDIUM.FILE1.TYPE>
+  <Music_CDID>70201</Music_CDID>
+  <Music_Loop>0</Music_Loop>
+  <Music_MusicID>70201</Music_MusicID>
+  <Music_Singer>Fred Child</Music_Singer>
+  <NEW>0</NEW>
+  <News_Correspondent>Fred Child</News_Correspondent>
+  <News_Editor>Fred Child</News_Editor>
+  <News_Source>Content Depot</News_Source>
+  <NODELETE>0</NODELETE>
+  <OnAirPlayedBySta>MGMT_WS1</OnAirPlayedBySta>
+  <OnAirPlayedByUsr>TURBO</OnAirPlayedByUsr>
+  <OnAirPlayedOnAir>1</OnAirPlayedOnAir>
+  <PD_LastChangeTime_Hi>30775189</PD_LastChangeTime_Hi>
+  <PD_LastChangeTime_Lo>1317431056</PD_LastChangeTime_Lo>
+  <PERFECT>0</PERFECT>
+  <PERSONALRADIO>0</PERSONALRADIO>
+  <READY>0</READY>
+  <REGISTRATION>70201</REGISTRATION>
+  <REQUESTDEARCHIVE>0</REQUESTDEARCHIVE>
+  <Reserve>No</Reserve>
+  <ROYALTIES>0</ROYALTIES>
+  <SendState>Sent</SendState>
+  <Source>Digas</Source>
+  <Time_DoNotUse>0</Time_DoNotUse>
+  <Time_Duration>300042</Time_Duration>
+  <Time_DurationMode>1</Time_DurationMode>
+  <Time_FixedDuration>0</Time_FixedDuration>
+  <Time_IIRS>0</Time_IIRS>
+  <Time_Joined>0</Time_Joined>
+  <Time_MarkDuration>300046</Time_MarkDuration>
+  <Time_MarkStart>2019-11-10 07:01:00.033</Time_MarkStart>
+  <Time_MarkStop>2019-11-10 07:06:00.079</Time_MarkStop>
+  <Time_OnAirStartMode></Time_OnAirStartMode>
+  <Time_OnAirStartType></Time_OnAirStartType>
+  <Time_Overlaid>0</Time_Overlaid>
+  <Time_RealDuration>300046</Time_RealDuration>
+  <Time_RealStart>2019-11-10 07:01:00.033</Time_RealStart>
+  <Time_RealStop>2019-11-10 07:06:00.079</Time_RealStop>
+  <Time_RecStart>2019-11-10 07:01:00.033</Time_RecStart>
+  <Time_RecStop>2019-11-10 07:06:00.079</Time_RecStop>
+  <Time_Scheduled>19:43:29</Time_Scheduled>
+  <Time_Start>2019-11-10 07:01:00.017</Time_Start>
+  <Time_StartMode>Sequenced</Time_StartMode>
+  <Time_StartTimeOffset>0</Time_StartTimeOffset>
+  <Time_StartType>Floating</Time_StartType>
+  <Time_Stop>2019-11-10 07:06:00.063</Time_Stop>
+  <Time_TakeDuration>300042</Time_TakeDuration>
+  <Time_TextDuration>0</Time_TextDuration>
+  <Title>Perfor18 191108 SGMT 10 Newscast Cutaway Performance Today Weeke</Title>
+ </item>
+ <item sequence="past">
+  <ARCHIVED>0</ARCHIVED>
+  <ARCHIVING>0</ARCHIVING>
+  <Audio_Bitrate>1411</Audio_Bitrate>
+  <Audio_Filetype>WAV</Audio_Filetype>
+  <Audio_Format>LINEAR</Audio_Format>
+  <Audio_Mode>STEREO</Audio_Mode>
+  <Audio_Resolution>16</Audio_Resolution>
+  <Audio_Samplerate>44100</Audio_Samplerate>
+  <BROADCASTINGS>0</BROADCASTINGS>
+  <BufferFlag>0</BufferFlag>
+  <CD.FIRSTUSETIME>06:00:00</CD.FIRSTUSETIME>
+  <CD.LASTUSETIME>12:00:00</CD.LASTUSETIME>
+  <CD.PAD><![CDATA[<![CDATA[<program-associated-data>\n  <property name="OwnerIdentifier" value="ContentDepot"/>\n  <property name="Identifier" value="001"/>\n  <property name="Title" value="Talk about ContentDepot"/>\n  <property name="Artist" value="PRSS"/>\n  <property name="Album" value="ContentDepot Test Program"/>\n  <property name="Genre" value="101"/>");\n  <property name="CommentTitle" value="This is a comment"/>\n  <property name="Comment" value="These are test and placeholder fields for ContentDepot PAD support in files. They are currently generated from static fields in the ContentDepot Portal database. Send email to prssplanning@npr.org if you have questions."/>\n  </program-associated-data>]]>]]></CD.PAD>
+  <CD.PAD_ALBUM>ContentDepot Test Program</CD.PAD_ALBUM>
+  <CD.PAD_ARTIST>PRSS</CD.PAD_ARTIST>
+  <CD.PAD_COMMENT>These are test and placeholder fields for ContentDepot PAD support in files. They are currently generated from static fields in the ContentDepot Portal database. Send email to prssplanning@npr.org if you have questions.</CD.PAD_COMMENT>
+  <CD.PAD_COMMENTTITLE>This is a comment</CD.PAD_COMMENTTITLE>
+  <CD.PAD_GENRE>101</CD.PAD_GENRE>
+  <CD.PAD_IDENTIFIER>001</CD.PAD_IDENTIFIER>
+  <CD.PAD_OWNERIDENTIFIER>ContentDepot</CD.PAD_OWNERIDENTIFIER>
+  <CD.PAD_TITLE>Talk about ContentDepot</CD.PAD_TITLE>
+  <Class>Audio</Class>
+  <Create_ChangeTime>2019-11-08 06:27:25</Create_ChangeTime>
+  <Create_ChangeUser>ADMIN</Create_ChangeUser>
+  <Create_CreateTime>2019-11-07 20:04:02</Create_CreateTime>
+  <Create_Creator>ADMIN</Create_Creator>
+  <DBRef>DigaSystem\\Content_Depot\\422709</DBRef>
+  <Fade_DefaultMarkIn>0</Fade_DefaultMarkIn>
+  <Fade_DefaultMarkOut>795036</Fade_DefaultMarkOut>
+  <Fade_LinkIn>0</Fade_LinkIn>
+  <Fade_LinkOut>0</Fade_LinkOut>
+  <Fade_MarkIn>0</Fade_MarkIn>
+  <Fade_MarkOut>795036</Fade_MarkOut>
+  <FCTS>2019-11-08 07:13:55.390</FCTS>
+  <File_Converted>1</File_Converted>
+  <File_Filename1>\\\\wnycdavidmedia\\media$\\Media Directories\\WQXR_FM\\FM 105.9\\20191110\\cd_Perfor18_672_SGMT11_9e5dd023c9004a7e9dbd1263eab6af2a_1L.WAV</File_Filename1>
+  <File_Filename2>\\\\nydavidoa01\\d$\\Media_Directories\\WQXR\\20191110\\cd_Perfor18_672_SGMT11_9e5dd023c9004a7e9dbd1263eab6af2a_3.WAV</File_Filename2>
+  <File_Filename3>\\\\nydavidoancr5\\d$\\Media_Directories\\WQXR\\20191110\\cd_Perfor18_672_SGMT11_9e5dd023c9004a7e9dbd1263eab6af2a_3.WAV</File_Filename3>
+  <File_Filename4>\\\\wnycdavidoan1\\f$\\Media_Directories\\WQXR\\20191110\\cd_Perfor18_672_SGMT11_9e5dd023c9004a7e9dbd1263eab6af2a_3.WAV</File_Filename4>
+  <File_Filesize1>140247904</File_Filesize1>
+  <File_OnAirFile>2,3,4</File_OnAirFile>
+  <File_PrimFilename>1</File_PrimFilename>
+  <FileState>Mirrored</FileState>
+  <FIRSTUSEDATE>2019-11-08</FIRSTUSEDATE>
+  <FORARCHIVE>0</FORARCHIVE>
+  <GROWING>0</GROWING>
+  <GUID>{7F27D983-C185-422A-8A43-F1843ACEC5B0}</GUID>
+  <ID>00000066</ID>
+  <ImportedBy>BUS\\AutoReplace</ImportedBy>
+  <INVALID>0</INVALID>
+  <KEYFRAMEEXISTS>0</KEYFRAMEEXISTS>
+  <LASTUSEDATE>2019-11-11</LASTUSEDATE>
+  <Loc_FCTS>2019-11-08 07:16:39.978</Loc_FCTS>
+  <LOWRESEXISTS>0</LOWRESEXISTS>
+  <MediaType>Audio</MediaType>
+  <MEDIUM.FILE1.FILEREF>\\\\wnycdavidmedia\\media$\\Content Depot\\cd_Perfor18_672_SGMT11_9e5dd023c9004a7e9dbd1263eab6af2a.DBX</MEDIUM.FILE1.FILEREF>
+  <MEDIUM.FILE1.TITLE>cd_Perfor18_672_SGMT11_9e5dd023c9004a7e9dbd1263eab6af2a.DBX</MEDIUM.FILE1.TITLE>
+  <MEDIUM.FILE1.TYPE>Data.DB-Info</MEDIUM.FILE1.TYPE>
+  <Music_CDID>70202</Music_CDID>
+  <Music_Loop>0</Music_Loop>
+  <Music_MusicID>70202</Music_MusicID>
+  <Music_Singer>Fred Child</Music_Singer>
+  <NEW>0</NEW>
+  <News_Correspondent>Fred Child</News_Correspondent>
+  <News_Editor>Fred Child</News_Editor>
+  <News_Source>Content Depot</News_Source>
+  <NODELETE>0</NODELETE>
+  <OnAirPlayedBySta>MGMT_WS1</OnAirPlayedBySta>
+  <OnAirPlayedByUsr>TURBO</OnAirPlayedByUsr>
+  <OnAirPlayedOnAir>1</OnAirPlayedOnAir>
+  <PD_LastChangeTime_Hi>30775191</PD_LastChangeTime_Hi>
+  <PD_LastChangeTime_Lo>677516464</PD_LastChangeTime_Lo>
+  <PERFECT>0</PERFECT>
+  <PERSONALRADIO>0</PERSONALRADIO>
+  <READY>0</READY>
+  <REGISTRATION>70202</REGISTRATION>
+  <REQUESTDEARCHIVE>0</REQUESTDEARCHIVE>
+  <Reserve>No</Reserve>
+  <ROYALTIES>0</ROYALTIES>
+  <SendState>Sent</SendState>
+  <Source>Digas</Source>
+  <Time_DoNotUse>0</Time_DoNotUse>
+  <Time_Duration>795036</Time_Duration>
+  <Time_DurationMode>1</Time_DurationMode>
+  <Time_FixedDuration>0</Time_FixedDuration>
+  <Time_IIRS>0</Time_IIRS>
+  <Time_Joined>0</Time_Joined>
+  <Time_MarkDuration>795027</Time_MarkDuration>
+  <Time_MarkStart>2019-11-10 07:06:00.076</Time_MarkStart>
+  <Time_MarkStop>2019-11-10 07:19:15.103</Time_MarkStop>
+  <Time_OnAirStartMode></Time_OnAirStartMode>
+  <Time_OnAirStartType></Time_OnAirStartType>
+  <Time_Overlaid>0</Time_Overlaid>
+  <Time_RealDuration>795027</Time_RealDuration>
+  <Time_RealStart>2019-11-10 07:06:00.076</Time_RealStart>
+  <Time_RealStop>2019-11-10 07:19:15.103</Time_RealStop>
+  <Time_RecStart>2019-11-10 07:06:00.076</Time_RecStart>
+  <Time_RecStop>2019-11-10 07:19:15.103</Time_RecStop>
+  <Time_Scheduled>20:04:02</Time_Scheduled>
+  <Time_Start>2019-11-10 07:06:00.075</Time_Start>
+  <Time_StartMode>Sequenced</Time_StartMode>
+  <Time_StartTimeOffset>0</Time_StartTimeOffset>
+  <Time_StartType>Floating</Time_StartType>
+  <Time_Stop>2019-11-10 07:19:15.102</Time_Stop>
+  <Time_TakeDuration>795036</Time_TakeDuration>
+  <Time_TextDuration>0</Time_TextDuration>
+  <Title>Perfor18 191108 SGMT 11 Part 4 Performance Today Weekend</Title>
+ </item>
+ <item sequence="present">
+  <ARCHIVED>0</ARCHIVED>
+  <ARCHIVING>0</ARCHIVING>
+  <Audio_Bitrate>1411</Audio_Bitrate>
+  <Audio_Filetype>WAV</Audio_Filetype>
+  <Audio_Format>LINEAR</Audio_Format>
+  <Audio_Mode>STEREO</Audio_Mode>
+  <Audio_Resolution>16</Audio_Resolution>
+  <Audio_Samplerate>44100</Audio_Samplerate>
+  <BROADCASTINGS>0</BROADCASTINGS>
+  <BufferFlag>0</BufferFlag>
+  <CD.FIRSTUSETIME>06:00:00</CD.FIRSTUSETIME>
+  <CD.LASTUSETIME>12:00:00</CD.LASTUSETIME>
+  <CD.PAD><![CDATA[<![CDATA[<program-associated-data>\n  <property name="OwnerIdentifier" value="ContentDepot"/>\n  <property name="Identifier" value="001"/>\n  <property name="Title" value="Talk about ContentDepot"/>\n  <property name="Artist" value="PRSS"/>\n  <property name="Album" value="ContentDepot Test Program"/>\n  <property name="Genre" value="101"/>");\n  <property name="CommentTitle" value="This is a comment"/>\n  <property name="Comment" value="These are test and placeholder fields for ContentDepot PAD support in files. They are currently generated from static fields in the ContentDepot Portal database. Send email to prssplanning@npr.org if you have questions."/>\n  </program-associated-data>]]>]]></CD.PAD>
+  <CD.PAD_ALBUM>ContentDepot Test Program</CD.PAD_ALBUM>
+  <CD.PAD_ARTIST>PRSS</CD.PAD_ARTIST>
+  <CD.PAD_COMMENT>These are test and placeholder fields for ContentDepot PAD support in files. They are currently generated from static fields in the ContentDepot Portal database. Send email to prssplanning@npr.org if you have questions.</CD.PAD_COMMENT>
+  <CD.PAD_COMMENTTITLE>This is a comment</CD.PAD_COMMENTTITLE>
+  <CD.PAD_GENRE>101</CD.PAD_GENRE>
+  <CD.PAD_IDENTIFIER>001</CD.PAD_IDENTIFIER>
+  <CD.PAD_OWNERIDENTIFIER>ContentDepot</CD.PAD_OWNERIDENTIFIER>
+  <CD.PAD_TITLE>Talk about ContentDepot</CD.PAD_TITLE>
+  <Class>Audio</Class>
+  <Create_ChangeTime>2019-11-08 06:27:28</Create_ChangeTime>
+  <Create_ChangeUser>ADMIN</Create_ChangeUser>
+  <Create_CreateTime>2019-11-07 19:56:24</Create_CreateTime>
+  <Create_Creator>ADMIN</Create_Creator>
+  <DBRef>DigaSystem\\Content_Depot\\422704</DBRef>
+  <Fade_DefaultMarkIn>0</Fade_DefaultMarkIn>
+  <Fade_DefaultMarkOut>60029</Fade_DefaultMarkOut>
+  <Fade_LinkIn>0</Fade_LinkIn>
+  <Fade_LinkOut>0</Fade_LinkOut>
+  <Fade_MarkIn>0</Fade_MarkIn>
+  <Fade_MarkOut>60029</Fade_MarkOut>
+  <FCTS>2019-11-08 07:19:28.758</FCTS>
+  <File_Converted>1</File_Converted>
+  <File_Filename1>\\\\wnycdavidmedia\\media$\\Media Directories\\WQXR_FM\\FM 105.9\\20191110\\cd_Perfor18_672_SGMT12_7de38561b3404296b41d089b7251ef6b_1M.WAV</File_Filename1>
+  <File_Filename2>\\\\nydavidoa01\\d$\\Media_Directories\\WQXR\\20191110\\cd_Perfor18_672_SGMT12_7de38561b3404296b41d089b7251ef6b_4.WAV</File_Filename2>
+  <File_Filename3>\\\\nydavidoancr5\\d$\\Media_Directories\\WQXR\\20191110\\cd_Perfor18_672_SGMT12_7de38561b3404296b41d089b7251ef6b_4.WAV</File_Filename3>
+  <File_Filename4>\\\\wnycdavidoan1\\f$\\Media_Directories\\WQXR\\20191110\\cd_Perfor18_672_SGMT12_7de38561b3404296b41d089b7251ef6b_4.WAV</File_Filename4>
+  <File_Filesize1>10592608</File_Filesize1>
+  <File_OnAirFile>2,3,4</File_OnAirFile>
+  <File_PrimFilename>1</File_PrimFilename>
+  <FileState>Mirrored</FileState>
+  <FIRSTUSEDATE>2019-11-08</FIRSTUSEDATE>
+  <FORARCHIVE>0</FORARCHIVE>
+  <GROWING>0</GROWING>
+  <GUID>{E3B975B5-452B-463B-AC25-1FF984F4B485}</GUID>
+  <ID>00000067</ID>
+  <ImportedBy>BUS\\AutoReplace</ImportedBy>
+  <INVALID>0</INVALID>
+  <KEYFRAMEEXISTS>0</KEYFRAMEEXISTS>
+  <LASTUSEDATE>2019-11-11</LASTUSEDATE>
+  <Loc_FCTS>2019-11-08 07:19:30.479</Loc_FCTS>
+  <LOWRESEXISTS>0</LOWRESEXISTS>
+  <MediaType>Audio</MediaType>
+  <MEDIUM.FILE1.FILEREF>\\\\wnycdavidmedia\\media$\\Content Depot\\cd_Perfor18_672_SGMT12_7de38561b3404296b41d089b7251ef6b.DBX</MEDIUM.FILE1.FILEREF>
+  <MEDIUM.FILE1.TITLE>cd_Perfor18_672_SGMT12_7de38561b3404296b41d089b7251ef6b.DBX</MEDIUM.FILE1.TITLE>
+  <MEDIUM.FILE1.TYPE>Data.DB-Info</MEDIUM.FILE1.TYPE>
+  <Music_CDID>70203</Music_CDID>
+  <Music_Loop>0</Music_Loop>
+  <Music_MusicID>70203</Music_MusicID>
+  <Music_Singer>Fred Child</Music_Singer>
+  <NEW>0</NEW>
+  <News_Correspondent>Fred Child</News_Correspondent>
+  <News_Editor>Fred Child</News_Editor>
+  <News_Source>Content Depot</News_Source>
+  <NODELETE>0</NODELETE>
+  <OnAirPlayedBySta>MGMT_WS1</OnAirPlayedBySta>
+  <OnAirPlayedByUsr>TURBO</OnAirPlayedByUsr>
+  <OnAirPlayedOnAir>1</OnAirPlayedOnAir>
+  <PD_LastChangeTime_Hi>30775191</PD_LastChangeTime_Hi>
+  <PD_LastChangeTime_Lo>677686464</PD_LastChangeTime_Lo>
+  <PERFECT>0</PERFECT>
+  <PERSONALRADIO>0</PERSONALRADIO>
+  <READY>0</READY>
+  <REGISTRATION>70203</REGISTRATION>
+  <REQUESTDEARCHIVE>0</REQUESTDEARCHIVE>
+  <Reserve>No</Reserve>
+  <ROYALTIES>0</ROYALTIES>
+  <SendState>Sending</SendState>
+  <Source>Digas</Source>
+  <Time_DoNotUse>0</Time_DoNotUse>
+  <Time_Duration>60029</Time_Duration>
+  <Time_DurationMode>1</Time_DurationMode>
+  <Time_FixedDuration>0</Time_FixedDuration>
+  <Time_IIRS>0</Time_IIRS>
+  <Time_Joined>0</Time_Joined>
+  <Time_MarkDuration>60029</Time_MarkDuration>
+  <Time_MarkStart>2019-11-10 07:19:15.114</Time_MarkStart>
+  <Time_MarkStop>2019-11-10 07:20:15.143</Time_MarkStop>
+  <Time_OnAirStartMode></Time_OnAirStartMode>
+  <Time_OnAirStartType></Time_OnAirStartType>
+  <Time_Overlaid>0</Time_Overlaid>
+  <Time_RealDuration>60029</Time_RealDuration>
+  <Time_RealStart>2019-11-10 07:19:15.114</Time_RealStart>
+  <Time_RealStop>2019-11-10 07:20:15.143</Time_RealStop>
+  <Time_RecStart>2019-11-10 07:19:15.114</Time_RecStart>
+  <Time_RecStop>2019-11-10 07:20:15.143</Time_RecStop>
+  <Time_Scheduled>19:56:24</Time_Scheduled>
+  <Time_Start>2019-11-10 07:19:15.103</Time_Start>
+  <Time_StartMode>Sequenced</Time_StartMode>
+  <Time_StartTimeOffset>0</Time_StartTimeOffset>
+  <Time_StartType>Floating</Time_StartType>
+  <Time_Stop>2019-11-10 07:20:15.132</Time_Stop>
+  <Time_TakeDuration>60029</Time_TakeDuration>
+  <Time_TextDuration>0</Time_TextDuration>
+  <Title>Perfor18 191108 SGMT 12 ID Break 4 Performance Today Weekend</Title>
+ </item>
+ <item sequence="future">
+  <ARCHIVED>0</ARCHIVED>
+  <ARCHIVING>0</ARCHIVING>
+  <Audio_Bitrate>1411</Audio_Bitrate>
+  <Audio_Filetype>WAV</Audio_Filetype>
+  <Audio_Format>LINEAR</Audio_Format>
+  <Audio_Mode>STEREO</Audio_Mode>
+  <Audio_Resolution>16</Audio_Resolution>
+  <Audio_Samplerate>44100</Audio_Samplerate>
+  <BROADCASTINGS>0</BROADCASTINGS>
+  <BufferFlag>0</BufferFlag>
+  <CD.FIRSTUSETIME>06:00:00</CD.FIRSTUSETIME>
+  <CD.LASTUSETIME>12:00:00</CD.LASTUSETIME>
+  <CD.PAD><![CDATA[<![CDATA[<program-associated-data>\n  <property name="OwnerIdentifier" value="ContentDepot"/>\n  <property name="Identifier" value="001"/>\n  <property name="Title" value="Talk about ContentDepot"/>\n  <property name="Artist" value="PRSS"/>\n  <property name="Album" value="ContentDepot Test Program"/>\n  <property name="Genre" value="101"/>");\n  <property name="CommentTitle" value="This is a comment"/>\n  <property name="Comment" value="These are test and placeholder fields for ContentDepot PAD support in files. They are currently generated from static fields in the ContentDepot Portal database. Send email to prssplanning@npr.org if you have questions."/>\n  </program-associated-data>]]>]]></CD.PAD>
+  <CD.PAD_ALBUM>ContentDepot Test Program</CD.PAD_ALBUM>
+  <CD.PAD_ARTIST>PRSS</CD.PAD_ARTIST>
+  <CD.PAD_COMMENT>These are test and placeholder fields for ContentDepot PAD support in files. They are currently generated from static fields in the ContentDepot Portal database. Send email to prssplanning@npr.org if you have questions.</CD.PAD_COMMENT>
+  <CD.PAD_COMMENTTITLE>This is a comment</CD.PAD_COMMENTTITLE>
+  <CD.PAD_GENRE>101</CD.PAD_GENRE>
+  <CD.PAD_IDENTIFIER>001</CD.PAD_IDENTIFIER>
+  <CD.PAD_OWNERIDENTIFIER>ContentDepot</CD.PAD_OWNERIDENTIFIER>
+  <CD.PAD_TITLE>Talk about ContentDepot</CD.PAD_TITLE>
+  <Class>Audio</Class>
+  <Create_ChangeTime>2019-11-08 06:27:30</Create_ChangeTime>
+  <Create_ChangeUser>ADMIN</Create_ChangeUser>
+  <Create_CreateTime>2019-11-07 20:01:00</Create_CreateTime>
+  <Create_Creator>ADMIN</Create_Creator>
+  <DBRef>DigaSystem\\Content_Depot\\422706</DBRef>
+  <Fade_DefaultMarkIn>0</Fade_DefaultMarkIn>
+  <Fade_DefaultMarkOut>585038</Fade_DefaultMarkOut>
+  <Fade_LinkIn>0</Fade_LinkIn>
+  <Fade_LinkOut>0</Fade_LinkOut>
+  <Fade_MarkIn>0</Fade_MarkIn>
+  <Fade_MarkOut>585038</Fade_MarkOut>
+  <FCTS>2019-11-08 07:22:04.854</FCTS>
+  <File_Converted>1</File_Converted>
+  <File_Filename1>\\\\wnycdavidmedia\\media$\\Media Directories\\WQXR_FM\\FM 105.9\\20191110\\cd_Perfor18_672_SGMT13_8786674f9ecf47959a0945723c2a7669_1N.WAV</File_Filename1>
+  <File_Filename2>\\\\nydavidoa01\\d$\\Media_Directories\\WQXR\\20191110\\cd_Perfor18_672_SGMT13_8786674f9ecf47959a0945723c2a7669_5.WAV</File_Filename2>
+  <File_Filename3>\\\\nydavidoancr5\\d$\\Media_Directories\\WQXR\\20191110\\cd_Perfor18_672_SGMT13_8786674f9ecf47959a0945723c2a7669_5.WAV</File_Filename3>
+  <File_Filename4>\\\\wnycdavidoan1\\f$\\Media_Directories\\WQXR\\20191110\\cd_Perfor18_672_SGMT13_8786674f9ecf47959a0945723c2a7669_5.WAV</File_Filename4>
+  <File_Filesize1>103204192</File_Filesize1>
+  <File_OnAirFile>2,3,4</File_OnAirFile>
+  <File_PrimFilename>1</File_PrimFilename>
+  <FileState>Mirrored</FileState>
+  <FIRSTUSEDATE>2019-11-08</FIRSTUSEDATE>
+  <FORARCHIVE>0</FORARCHIVE>
+  <GROWING>0</GROWING>
+  <GUID>{1C4E15A1-95F5-4E59-AD1C-28AC9512BB77}</GUID>
+  <ID>00000068</ID>
+  <ImportedBy>BUS\\AutoReplace</ImportedBy>
+  <INVALID>0</INVALID>
+  <KEYFRAMEEXISTS>0</KEYFRAMEEXISTS>
+  <LASTUSEDATE>2019-11-11</LASTUSEDATE>
+  <Loc_FCTS>2019-11-08 07:23:37.895</Loc_FCTS>
+  <LOWRESEXISTS>0</LOWRESEXISTS>
+  <MediaType>Audio</MediaType>
+  <MEDIUM.FILE1.FILEREF>\\\\wnycdavidmedia\\media$\\Content Depot\\cd_Perfor18_672_SGMT13_8786674f9ecf47959a0945723c2a7669.DBX</MEDIUM.FILE1.FILEREF>
+  <MEDIUM.FILE1.TITLE>cd_Perfor18_672_SGMT13_8786674f9ecf47959a0945723c2a7669.DBX</MEDIUM.FILE1.TITLE>
+  <MEDIUM.FILE1.TYPE>Data.DB-Info</MEDIUM.FILE1.TYPE>
+  <Music_CDID>70204</Music_CDID>
+  <Music_Loop>0</Music_Loop>
+  <Music_MusicID>70204</Music_MusicID>
+  <Music_Singer>Fred Child</Music_Singer>
+  <NEW>0</NEW>
+  <News_Correspondent>Fred Child</News_Correspondent>
+  <News_Editor>Fred Child</News_Editor>
+  <News_Source>Content Depot</News_Source>
+  <NODELETE>0</NODELETE>
+  <PD_LastChangeTime_Hi>30774789</PD_LastChangeTime_Hi>
+  <PD_LastChangeTime_Lo>3686859456</PD_LastChangeTime_Lo>
+  <PERFECT>0</PERFECT>
+  <PERSONALRADIO>0</PERSONALRADIO>
+  <READY>0</READY>
+  <REGISTRATION>70204</REGISTRATION>
+  <REQUESTDEARCHIVE>0</REQUESTDEARCHIVE>
+  <Reserve>No</Reserve>
+  <ROYALTIES>0</ROYALTIES>
+  <SendState>Planned</SendState>
+  <Source>Digas</Source>
+  <Time_DoNotUse>0</Time_DoNotUse>
+  <Time_Duration>585038</Time_Duration>
+  <Time_DurationMode>1</Time_DurationMode>
+  <Time_FixedDuration>0</Time_FixedDuration>
+  <Time_IIRS>0</Time_IIRS>
+  <Time_Joined>0</Time_Joined>
+  <Time_OnAirStartMode></Time_OnAirStartMode>
+  <Time_OnAirStartType></Time_OnAirStartType>
+  <Time_Overlaid>0</Time_Overlaid>
+  <Time_RealDuration></Time_RealDuration>
+  <Time_RealStart></Time_RealStart>
+  <Time_RealStop></Time_RealStop>
+  <Time_Scheduled>20:01:00</Time_Scheduled>
+  <Time_Start>2019-11-10 07:20:15.143</Time_Start>
+  <Time_StartMode>Sequenced</Time_StartMode>
+  <Time_StartTimeOffset>0</Time_StartTimeOffset>
+  <Time_StartType>Floating</Time_StartType>
+  <Time_Stop>2019-11-10 07:30:00.181</Time_Stop>
+  <Time_TakeDuration>585038</Time_TakeDuration>
+  <Time_TextDuration>0</Time_TextDuration>
+  <Title>Perfor18 191108 SGMT 13 Part 5 Performance Today Weekend</Title>
+ </item>
+ <item sequence="future">
+  <Advert_Motive>003212</Advert_Motive>
+  <ARCHIVED>0</ARCHIVED>
+  <ARCHIVING>0</ARCHIVING>
+  <Audio_Bitrate>1411</Audio_Bitrate>
+  <Audio_Filetype>WAV</Audio_Filetype>
+  <Audio_Format>LINEAR</Audio_Format>
+  <Audio_Mode>STEREO</Audio_Mode>
+  <Audio_Resolution>16</Audio_Resolution>
+  <Audio_Samplerate>44100</Audio_Samplerate>
+  <BROADCASTINGS>205</BROADCASTINGS>
+  <BufferFlag>0</BufferFlag>
+  <Class>Cart</Class>
+  <Create_ChangeTime>2017-12-28 16:36:32</Create_ChangeTime>
+  <Create_ChangeUser>ESMERLIN</Create_ChangeUser>
+  <Create_CreateTime>2017-09-02 16:29:39</Create_CreateTime>
+  <Create_Creator>ESMERLIN</Create_Creator>
+  <Create_Generator>DBM</Create_Generator>
+  <DBRef>DigaSystem\\WQXR_Promos\\15516</DBRef>
+  <Fade_DefaultMarkIn>0</Fade_DefaultMarkIn>
+  <Fade_DefaultMarkOut>9586</Fade_DefaultMarkOut>
+  <Fade_LinkIn>0</Fade_LinkIn>
+  <Fade_LinkOut>0</Fade_LinkOut>
+  <Fade_MarkIn>0</Fade_MarkIn>
+  <Fade_MarkOut>9586</Fade_MarkOut>
+  <FCTS>2019-11-08 07:26:35.682</FCTS>
+  <File_Converted>1</File_Converted>
+  <File_Filename1>\\\\wnycdavidmedia\\media$\\Media Directories\\WQXR_FM\\FM 105.9\\20191110\\WQXR-C08-S8_A3398A73844D47518E797F345C1EA43C_1O.WAV</File_Filename1>
+  <File_Filename2>\\\\nydavidoa01\\d$\\Media_Directories\\WQXR\\20191110\\WQXR-C08-S8_A3398A73844D47518E797F345C1EA43C_6.WAV</File_Filename2>
+  <File_Filename3>\\\\nydavidoancr5\\d$\\Media_Directories\\WQXR\\20191110\\WQXR-C08-S8_A3398A73844D47518E797F345C1EA43C_6.WAV</File_Filename3>
+  <File_Filename4>\\\\wnycdavidoan1\\f$\\Media_Directories\\WQXR\\20191110\\WQXR-C08-S8_A3398A73844D47518E797F345C1EA43C_6.WAV</File_Filename4>
+  <File_Filesize1>1692038</File_Filesize1>
+  <File_OnAirFile>2,3,4</File_OnAirFile>
+  <File_PrimFilename>1</File_PrimFilename>
+  <FileState>Mirrored</FileState>
+  <FORARCHIVE>0</FORARCHIVE>
+  <GROWING>0</GROWING>
+  <GUID>{57EC4337-64F7-4547-95DA-D98CC20F4581}</GUID>
+  <ID>00000069</ID>
+  <ImportedBy>BUS\\FlexIE.dll\\DigaSQL.dll</ImportedBy>
+  <INVALID>0</INVALID>
+  <KEYFRAMEEXISTS>0</KEYFRAMEEXISTS>
+  <LASTSENDTIME>00:00:00</LASTSENDTIME>
+  <Loc_FCTS>2019-11-08 07:26:36.701</Loc_FCTS>
+  <LOWRESEXISTS>0</LOWRESEXISTS>
+  <MediaType>Audio</MediaType>
+  <MEDIUM.FILE1.FILEREF>\\\\wnycdavidmedia\\media$\\WQXR_Promos\\WQXR-C08-S8_A3398A73844D47518E797F345C1EA43C.DBX</MEDIUM.FILE1.FILEREF>
+  <MEDIUM.FILE1.TITLE>WQXR-C08-S8_AC8136FE31D048BFB189DAA6C3BCC420.DBX</MEDIUM.FILE1.TITLE>
+  <MEDIUM.FILE1.TYPE>Data.DB-Info</MEDIUM.FILE1.TYPE>
+  <Music_Loop>0</Music_Loop>
+  <Music_Texter>ESMERLIN</Music_Texter>
+  <NEW>0</NEW>
+  <News_Author>ESMERLIN</News_Author>
+  <News_Editor>ESMERLIN</News_Editor>
+  <NODELETE>0</NODELETE>
+  <PD_LastChangeTime_Hi>30774790</PD_LastChangeTime_Hi>
+  <PD_LastChangeTime_Lo>1799742160</PD_LastChangeTime_Lo>
+  <PERFECT>0</PERFECT>
+  <PERSONALRADIO>0</PERSONALRADIO>
+  <READY>0</READY>
+  <REQUESTDEARCHIVE>0</REQUESTDEARCHIVE>
+  <Reserve>No</Reserve>
+  <ROYALTIES>0</ROYALTIES>
+  <SendState>Planned</SendState>
+  <Source>Digas</Source>
+  <Time_DoNotUse>0</Time_DoNotUse>
+  <Time_Duration>9586</Time_Duration>
+  <Time_DurationMode>1</Time_DurationMode>
+  <Time_FixedDuration>0</Time_FixedDuration>
+  <Time_IIRS>0</Time_IIRS>
+  <Time_Joined>0</Time_Joined>
+  <Time_OnAirStartMode></Time_OnAirStartMode>
+  <Time_OnAirStartType></Time_OnAirStartType>
+  <Time_Overlaid>0</Time_Overlaid>
+  <Time_RealDuration></Time_RealDuration>
+  <Time_RealStart></Time_RealStart>
+  <Time_RealStop></Time_RealStop>
+  <Time_Scheduled>16:29:39</Time_Scheduled>
+  <Time_Start>2019-11-10 07:30:00.181</Time_Start>
+  <Time_StartMode>Sequenced</Time_StartMode>
+  <Time_StartTimeOffset>0</Time_StartTimeOffset>
+  <Time_StartType>Floating</Time_StartType>
+  <Time_Stop>2019-11-10 07:30:09.767</Time_Stop>
+  <Time_TakeDuration>9586</Time_TakeDuration>
+  <Time_TextDuration>0</Time_TextDuration>
+  <Title>SWEEPER - Your Home C (Short)</Title>
+ </item>
+ <item sequence="future">
+  <Advert_Motive>004191</Advert_Motive>
+  <ARCHIVED>0</ARCHIVED>
+  <ARCHIVING>0</ARCHIVING>
+  <Audio_Bitrate>1411</Audio_Bitrate>
+  <Audio_DBTP>-7.6</Audio_DBTP>
+  <Audio_Filetype>WAV</Audio_Filetype>
+  <Audio_Format>LINEAR</Audio_Format>
+  <Audio_ILK>-24.0</Audio_ILK>
+  <Audio_LRA>3.5</Audio_LRA>
+  <Audio_MAXML>-18.4</Audio_MAXML>
+  <Audio_MAXSL>-22.2</Audio_MAXSL>
+  <Audio_Mode>STEREO</Audio_Mode>
+  <Audio_Resolution>16</Audio_Resolution>
+  <Audio_Samplerate>44100</Audio_Samplerate>
+  <BROADCASTINGS>0</BROADCASTINGS>
+  <BufferFlag>0</BufferFlag>
+  <Class>Cart</Class>
+  <Create_ChangeTime>2019-11-07 14:55:34</Create_ChangeTime>
+  <Create_ChangeUser>ROBW</Create_ChangeUser>
+  <Create_CreateTime>2019-11-07 14:54:49</Create_CreateTime>
+  <Create_Creator>ROBW</Create_Creator>
+  <Create_Generator>EasyTrack</Create_Generator>
+  <DBRef>DigaSystem\\WQXR_Promos\\20716</DBRef>
+  <Fade_DefaultMarkIn>0</Fade_DefaultMarkIn>
+  <Fade_DefaultMarkOut>35500</Fade_DefaultMarkOut>
+  <Fade_LinkIn>0</Fade_LinkIn>
+  <Fade_LinkOut>0</Fade_LinkOut>
+  <Fade_MarkIn>0</Fade_MarkIn>
+  <Fade_MarkOut>35500</Fade_MarkOut>
+  <FCTS>2019-11-08 07:26:36.179</FCTS>
+  <File_Converted>1</File_Converted>
+  <File_Filename1>\\\\wnycdavidmedia\\media$\\Media Directories\\WQXR_FM\\FM 105.9\\20191110\\PCRE-DAW-S9_7393E427FEF848EF9E762340E0C3808D_1Q.WAV</File_Filename1>
+  <File_Filename2>\\\\nydavidoa01\\d$\\Media_Directories\\WQXR\\20191110\\PCRE-DAW-S9_7393E427FEF848EF9E762340E0C3808D_8.WAV</File_Filename2>
+  <File_Filename3>\\\\nydavidoancr5\\d$\\Media_Directories\\WQXR\\20191110\\PCRE-DAW-S9_7393E427FEF848EF9E762340E0C3808D_8.WAV</File_Filename3>
+  <File_Filename4>\\\\wnycdavidoan1\\f$\\Media_Directories\\WQXR\\20191110\\PCRE-DAW-S9_7393E427FEF848EF9E762340E0C3808D_8.WAV</File_Filename4>
+  <File_Filesize1>6263704</File_Filesize1>
+  <File_OnAirFile>2,3,4</File_OnAirFile>
+  <File_PrimFilename>1</File_PrimFilename>
+  <FileState>Mirrored</FileState>
+  <FORARCHIVE>0</FORARCHIVE>
+  <GENERATION>2</GENERATION>
+  <GROWING>0</GROWING>
+  <GUID>{1B29FAC0-3DA5-4BCB-8513-F68C59066031}</GUID>
+  <ID>0000006B</ID>
+  <ImportedBy>BUS\\AutoReplace</ImportedBy>
+  <INVALID>0</INVALID>
+  <KEYFRAMEEXISTS>0</KEYFRAMEEXISTS>
+  <LASTSENDTIME>00:00:00</LASTSENDTIME>
+  <Loc_FCTS>2019-11-08 07:26:36.741</Loc_FCTS>
+  <LOWRESEXISTS>0</LOWRESEXISTS>
+  <MediaType>Audio</MediaType>
+  <MEDIUM.FILE1.FILEREF>\\\\wnycdavidmedia\\media$\\WQXR_Promos\\PCRE-DAW-S9_7393E427FEF848EF9E762340E0C3808D.DBX</MEDIUM.FILE1.FILEREF>
+  <MEDIUM.FILE1.TITLE>PCRE-DAW-S9_7393E427FEF848EF9E762340E0C3808D.DBX</MEDIUM.FILE1.TITLE>
+  <MEDIUM.FILE1.TYPE>Data.DB-Info</MEDIUM.FILE1.TYPE>
+  <Music_Loop>0</Music_Loop>
+  <Music_Texter>ROBW</Music_Texter>
+  <NEW>0</NEW>
+  <News_Author>ROBW</News_Author>
+  <News_Editor>ROBW</News_Editor>
+  <NODELETE>0</NODELETE>
+  <PD_LastChangeTime_Hi>30774790</PD_LastChangeTime_Hi>
+  <PD_LastChangeTime_Lo>1982992160</PD_LastChangeTime_Lo>
+  <PERFECT>0</PERFECT>
+  <PERSONALRADIO>0</PERSONALRADIO>
+  <READY>0</READY>
+  <REQUESTDEARCHIVE>0</REQUESTDEARCHIVE>
+  <Reserve>No</Reserve>
+  <ROYALTIES>0</ROYALTIES>
+  <SendState>Planned</SendState>
+  <Source>Digas</Source>
+  <Time_DoNotUse>0</Time_DoNotUse>
+  <Time_Duration>35500</Time_Duration>
+  <Time_DurationMode>1</Time_DurationMode>
+  <Time_FixedDuration>0</Time_FixedDuration>
+  <Time_IIRS>0</Time_IIRS>
+  <Time_Joined>0</Time_Joined>
+  <Time_OnAirStartMode></Time_OnAirStartMode>
+  <Time_OnAirStartType></Time_OnAirStartType>
+  <Time_Overlaid>0</Time_Overlaid>
+  <Time_RealDuration></Time_RealDuration>
+  <Time_RealStart></Time_RealStart>
+  <Time_RealStop></Time_RealStop>
+  <Time_Scheduled>14:54:49</Time_Scheduled>
+  <Time_Start>2019-11-10 07:30:09.767</Time_Start>
+  <Time_StartMode>Sequenced</Time_StartMode>
+  <Time_StartTimeOffset>0</Time_StartTimeOffset>
+  <Time_StartType>Floating</Time_StartType>
+  <Time_Stop>2019-11-10 07:30:45.267</Time_Stop>
+  <Time_TakeDuration>35500</Time_TakeDuration>
+  <Time_TextDuration>0</Time_TextDuration>
+  <Title>Together We Sing TGS tix (Monday 11/18) (11/1-11/11) [Clemency]</Title>
+ </item>
+ <item sequence="future">
+  <ARCHIVED>0</ARCHIVED>
+  <ARCHIVING>0</ARCHIVING>
+  <Audio_Bitrate>1411</Audio_Bitrate>
+  <Audio_Filetype>WAV</Audio_Filetype>
+  <Audio_Format>LINEAR</Audio_Format>
+  <Audio_Mode>STEREO</Audio_Mode>
+  <Audio_Resolution>16</Audio_Resolution>
+  <Audio_Samplerate>44100</Audio_Samplerate>
+  <BROADCASTINGS>0</BROADCASTINGS>
+  <BufferFlag>0</BufferFlag>
+  <CD.FIRSTUSETIME>06:00:00</CD.FIRSTUSETIME>
+  <CD.LASTUSETIME>12:00:00</CD.LASTUSETIME>
+  <CD.PAD><![CDATA[<![CDATA[<program-associated-data>\n  <property name="OwnerIdentifier" value="ContentDepot"/>\n  <property name="Identifier" value="001"/>\n  <property name="Title" value="Talk about ContentDepot"/>\n  <property name="Artist" value="PRSS"/>\n  <property name="Album" value="ContentDepot Test Program"/>\n  <property name="Genre" value="101"/>");\n  <property name="CommentTitle" value="This is a comment"/>\n  <property name="Comment" value="These are test and placeholder fields for ContentDepot PAD support in files. They are currently generated from static fields in the ContentDepot Portal database. Send email to prssplanning@npr.org if you have questions."/>\n  </program-associated-data>]]>]]></CD.PAD>
+  <CD.PAD_ALBUM>ContentDepot Test Program</CD.PAD_ALBUM>
+  <CD.PAD_ARTIST>PRSS</CD.PAD_ARTIST>
+  <CD.PAD_COMMENT>These are test and placeholder fields for ContentDepot PAD support in files. They are currently generated from static fields in the ContentDepot Portal database. Send email to prssplanning@npr.org if you have questions.</CD.PAD_COMMENT>
+  <CD.PAD_COMMENTTITLE>This is a comment</CD.PAD_COMMENTTITLE>
+  <CD.PAD_GENRE>101</CD.PAD_GENRE>
+  <CD.PAD_IDENTIFIER>001</CD.PAD_IDENTIFIER>
+  <CD.PAD_OWNERIDENTIFIER>ContentDepot</CD.PAD_OWNERIDENTIFIER>
+  <CD.PAD_TITLE>Talk about ContentDepot</CD.PAD_TITLE>
+  <Class>Audio</Class>
+  <Create_ChangeTime>2019-11-08 06:27:32</Create_ChangeTime>
+  <Create_ChangeUser>ADMIN</Create_ChangeUser>
+  <Create_CreateTime>2019-11-07 19:55:55</Create_CreateTime>
+  <Create_Creator>ADMIN</Create_Creator>
+  <DBRef>DigaSystem\\Content_Depot\\422703</DBRef>
+  <Fade_DefaultMarkIn>0</Fade_DefaultMarkIn>
+  <Fade_DefaultMarkOut>60029</Fade_DefaultMarkOut>
+  <Fade_LinkIn>0</Fade_LinkIn>
+  <Fade_LinkOut>0</Fade_LinkOut>
+  <Fade_MarkIn>0</Fade_MarkIn>
+  <Fade_MarkOut>60029</Fade_MarkOut>
+  <FCTS>2019-11-08 07:26:36.921</FCTS>
+  <File_Converted>1</File_Converted>
+  <File_Filename1>\\\\wnycdavidmedia\\media$\\Media Directories\\WQXR_FM\\FM 105.9\\20191110\\cd_Perfor18_672_SGMT14_5918fc9244464eaf92935925508e03ae_1R.WAV</File_Filename1>
+  <File_Filename2>\\\\nydavidoa01\\d$\\Media_Directories\\WQXR\\20191110\\cd_Perfor18_672_SGMT14_5918fc9244464eaf92935925508e03ae_9.WAV</File_Filename2>
+  <File_Filename3>\\\\nydavidoancr5\\d$\\Media_Directories\\WQXR\\20191110\\cd_Perfor18_672_SGMT14_5918fc9244464eaf92935925508e03ae_9.WAV</File_Filename3>
+  <File_Filename4>\\\\wnycdavidoan1\\f$\\Media_Directories\\WQXR\\20191110\\cd_Perfor18_672_SGMT14_5918fc9244464eaf92935925508e03ae_9.WAV</File_Filename4>
+  <File_Filesize1>10592608</File_Filesize1>
+  <File_OnAirFile>2,3,4</File_OnAirFile>
+  <File_PrimFilename>1</File_PrimFilename>
+  <FileState>Mirrored</FileState>
+  <FIRSTUSEDATE>2019-11-08</FIRSTUSEDATE>
+  <FORARCHIVE>0</FORARCHIVE>
+  <GROWING>0</GROWING>
+  <GUID>{5CB1D5B2-12EE-46BB-8957-F09FB6359611}</GUID>
+  <ID>0000006C</ID>
+  <ImportedBy>BUS\\AutoReplace</ImportedBy>
+  <INVALID>0</INVALID>
+  <KEYFRAMEEXISTS>0</KEYFRAMEEXISTS>
+  <LASTUSEDATE>2019-11-11</LASTUSEDATE>
+  <Loc_FCTS>2019-11-08 07:27:05.239</Loc_FCTS>
+  <LOWRESEXISTS>0</LOWRESEXISTS>
+  <MediaType>Audio</MediaType>
+  <MEDIUM.FILE1.FILEREF>\\\\wnycdavidmedia\\media$\\Content Depot\\cd_Perfor18_672_SGMT14_5918fc9244464eaf92935925508e03ae.DBX</MEDIUM.FILE1.FILEREF>
+  <MEDIUM.FILE1.TITLE>cd_Perfor18_672_SGMT14_5918fc9244464eaf92935925508e03ae.DBX</MEDIUM.FILE1.TITLE>
+  <MEDIUM.FILE1.TYPE>Data.DB-Info</MEDIUM.FILE1.TYPE>
+  <Music_CDID>70205</Music_CDID>
+  <Music_Loop>0</Music_Loop>
+  <Music_MusicID>70205</Music_MusicID>
+  <Music_Singer>Fred Child</Music_Singer>
+  <NEW>0</NEW>
+  <News_Correspondent>Fred Child</News_Correspondent>
+  <News_Editor>Fred Child</News_Editor>
+  <News_Source>Content Depot</News_Source>
+  <NODELETE>0</NODELETE>
+  <PD_LastChangeTime_Hi>30774790</PD_LastChangeTime_Hi>
+  <PD_LastChangeTime_Lo>2459102160</PD_LastChangeTime_Lo>
+  <PERFECT>0</PERFECT>
+  <PERSONALRADIO>0</PERSONALRADIO>
+  <READY>0</READY>
+  <REGISTRATION>70205</REGISTRATION>
+  <REQUESTDEARCHIVE>0</REQUESTDEARCHIVE>
+  <Reserve>No</Reserve>
+  <ROYALTIES>0</ROYALTIES>
+  <SendState>Planned</SendState>
+  <Source>Digas</Source>
+  <Time_DoNotUse>0</Time_DoNotUse>
+  <Time_Duration>60029</Time_Duration>
+  <Time_DurationMode>1</Time_DurationMode>
+  <Time_FixedDuration>0</Time_FixedDuration>
+  <Time_IIRS>0</Time_IIRS>
+  <Time_Joined>0</Time_Joined>
+  <Time_OnAirStartMode></Time_OnAirStartMode>
+  <Time_OnAirStartType></Time_OnAirStartType>
+  <Time_Overlaid>0</Time_Overlaid>
+  <Time_RealDuration></Time_RealDuration>
+  <Time_RealStart></Time_RealStart>
+  <Time_RealStop></Time_RealStop>
+  <Time_Scheduled>19:55:55</Time_Scheduled>
+  <Time_Start>2019-11-10 07:30:45.267</Time_Start>
+  <Time_StartMode>Sequenced</Time_StartMode>
+  <Time_StartTimeOffset>0</Time_StartTimeOffset>
+  <Time_StartType>Floating</Time_StartType>
+  <Time_Stop>2019-11-10 07:31:45.296</Time_Stop>
+  <Time_TakeDuration>60029</Time_TakeDuration>
+  <Time_TextDuration>0</Time_TextDuration>
+  <Title>Perfor18 191108 SGMT 14 ID Break 5 Performance Today Weekend</Title>
+ </item>
+ <item sequence="future">
+  <ARCHIVED>0</ARCHIVED>
+  <ARCHIVING>0</ARCHIVING>
+  <Audio_Bitrate>1411</Audio_Bitrate>
+  <Audio_Filetype>WAV</Audio_Filetype>
+  <Audio_Format>LINEAR</Audio_Format>
+  <Audio_Mode>STEREO</Audio_Mode>
+  <Audio_Resolution>16</Audio_Resolution>
+  <Audio_Samplerate>44100</Audio_Samplerate>
+  <BROADCASTINGS>0</BROADCASTINGS>
+  <BufferFlag>0</BufferFlag>
+  <CD.FIRSTUSETIME>06:00:00</CD.FIRSTUSETIME>
+  <CD.LASTUSETIME>12:00:00</CD.LASTUSETIME>
+  <CD.PAD><![CDATA[<![CDATA[<program-associated-data>\n  <property name="OwnerIdentifier" value="ContentDepot"/>\n  <property name="Identifier" value="001"/>\n  <property name="Title" value="Talk about ContentDepot"/>\n  <property name="Artist" value="PRSS"/>\n  <property name="Album" value="ContentDepot Test Program"/>\n  <property name="Genre" value="101"/>");\n  <property name="CommentTitle" value="This is a comment"/>\n  <property name="Comment" value="These are test and placeholder fields for ContentDepot PAD support in files. They are currently generated from static fields in the ContentDepot Portal database. Send email to prssplanning@npr.org if you have questions."/>\n  </program-associated-data>]]>]]></CD.PAD>
+  <CD.PAD_ALBUM>ContentDepot Test Program</CD.PAD_ALBUM>
+  <CD.PAD_ARTIST>PRSS</CD.PAD_ARTIST>
+  <CD.PAD_COMMENT>These are test and placeholder fields for ContentDepot PAD support in files. They are currently generated from static fields in the ContentDepot Portal database. Send email to prssplanning@npr.org if you have questions.</CD.PAD_COMMENT>
+  <CD.PAD_COMMENTTITLE>This is a comment</CD.PAD_COMMENTTITLE>
+  <CD.PAD_GENRE>101</CD.PAD_GENRE>
+  <CD.PAD_IDENTIFIER>001</CD.PAD_IDENTIFIER>
+  <CD.PAD_OWNERIDENTIFIER>ContentDepot</CD.PAD_OWNERIDENTIFIER>
+  <CD.PAD_TITLE>Talk about ContentDepot</CD.PAD_TITLE>
+  <Class>Audio</Class>
+  <Create_ChangeTime>2019-11-08 06:27:35</Create_ChangeTime>
+  <Create_ChangeUser>ADMIN</Create_ChangeUser>
+  <Create_CreateTime>2019-11-07 20:09:40</Create_CreateTime>
+  <Create_Creator>ADMIN</Create_Creator>
+  <DBRef>DigaSystem\\Content_Depot\\422711</DBRef>
+  <Fade_DefaultMarkIn>0</Fade_DefaultMarkIn>
+  <Fade_DefaultMarkOut>1680039</Fade_DefaultMarkOut>
+  <Fade_LinkIn>0</Fade_LinkIn>
+  <Fade_LinkOut>0</Fade_LinkOut>
+  <Fade_MarkIn>0</Fade_MarkIn>
+  <Fade_MarkOut>1680039</Fade_MarkOut>
+  <FCTS>2019-11-08 07:26:42.662</FCTS>
+  <File_Converted>1</File_Converted>
+  <File_Filename1>\\\\wnycdavidmedia\\media$\\Media Directories\\WQXR_FM\\FM 105.9\\20191110\\cd_Perfor18_672_SGMT15_c9a0629bd36040d483b2c5e02d7c1924_1S.WAV</File_Filename1>
+  <File_Filename2>\\\\nydavidoa01\\d$\\Media_Directories\\WQXR\\20191110\\cd_Perfor18_672_SGMT15_c9a0629bd36040d483b2c5e02d7c1924_A.WAV</File_Filename2>
+  <File_Filename3>\\\\nydavidoancr5\\d$\\Media_Directories\\WQXR\\20191110\\cd_Perfor18_672_SGMT15_c9a0629bd36040d483b2c5e02d7c1924_A.WAV</File_Filename3>
+  <File_Filename4>\\\\wnycdavidoan1\\f$\\Media_Directories\\WQXR\\20191110\\cd_Perfor18_672_SGMT15_c9a0629bd36040d483b2c5e02d7c1924_A.WAV</File_Filename4>
+  <File_Filesize1>296362336</File_Filesize1>
+  <File_OnAirFile>2,3,4</File_OnAirFile>
+  <File_PrimFilename>1</File_PrimFilename>
+  <FileState>Mirrored</FileState>
+  <FIRSTUSEDATE>2019-11-08</FIRSTUSEDATE>
+  <FORARCHIVE>0</FORARCHIVE>
+  <GROWING>0</GROWING>
+  <GUID>{FC34DE8F-E720-4F3B-96F1-144423AD7D38}</GUID>
+  <ID>0000006D</ID>
+  <ImportedBy>BUS\\AutoReplace</ImportedBy>
+  <INVALID>0</INVALID>
+  <KEYFRAMEEXISTS>0</KEYFRAMEEXISTS>
+  <LASTUSEDATE>2019-11-11</LASTUSEDATE>
+  <Loc_FCTS>2019-11-08 07:31:46.409</Loc_FCTS>
+  <LOWRESEXISTS>0</LOWRESEXISTS>
+  <MediaType>Audio</MediaType>
+  <MEDIUM.FILE1.FILEREF>\\\\wnycdavidmedia\\media$\\Content Depot\\cd_Perfor18_672_SGMT15_c9a0629bd36040d483b2c5e02d7c1924.DBX</MEDIUM.FILE1.FILEREF>
+  <MEDIUM.FILE1.TITLE>cd_Perfor18_672_SGMT15_c9a0629bd36040d483b2c5e02d7c1924.DBX</MEDIUM.FILE1.TITLE>
+  <MEDIUM.FILE1.TYPE>Data.DB-Info</MEDIUM.FILE1.TYPE>
+  <Music_CDID>70206</Music_CDID>
+  <Music_Loop>0</Music_Loop>
+  <Music_MusicID>70206</Music_MusicID>
+  <Music_Singer>Fred Child</Music_Singer>
+  <NEW>0</NEW>
+  <News_Correspondent>Fred Child</News_Correspondent>
+  <News_Editor>Fred Child</News_Editor>
+  <News_Source>Content Depot</News_Source>
+  <NODELETE>0</NODELETE>
+  <PD_LastChangeTime_Hi>30774791</PD_LastChangeTime_Hi>
+  <PD_LastChangeTime_Lo>2976804864</PD_LastChangeTime_Lo>
+  <PERFECT>0</PERFECT>
+  <PERSONALRADIO>0</PERSONALRADIO>
+  <READY>0</READY>
+  <REGISTRATION>70206</REGISTRATION>
+  <REQUESTDEARCHIVE>0</REQUESTDEARCHIVE>
+  <Reserve>No</Reserve>
+  <ROYALTIES>0</ROYALTIES>
+  <SendState>Planned</SendState>
+  <Source>Digas</Source>
+  <Time_DoNotUse>0</Time_DoNotUse>
+  <Time_Duration>1680039</Time_Duration>
+  <Time_DurationMode>1</Time_DurationMode>
+  <Time_FixedDuration>0</Time_FixedDuration>
+  <Time_IIRS>0</Time_IIRS>
+  <Time_Joined>0</Time_Joined>
+  <Time_OnAirStartMode></Time_OnAirStartMode>
+  <Time_OnAirStartType></Time_OnAirStartType>
+  <Time_Overlaid>0</Time_Overlaid>
+  <Time_RealDuration></Time_RealDuration>
+  <Time_RealStart></Time_RealStart>
+  <Time_RealStop></Time_RealStop>
+  <Time_Scheduled>20:09:40</Time_Scheduled>
+  <Time_Start>2019-11-10 07:31:45.296</Time_Start>
+  <Time_StartMode>Sequenced</Time_StartMode>
+  <Time_StartTimeOffset>0</Time_StartTimeOffset>
+  <Time_StartType>Floating</Time_StartType>
+  <Time_Stop>2019-11-10 07:59:45.335</Time_Stop>
+  <Time_TakeDuration>1680039</Time_TakeDuration>
+  <Time_TextDuration>0</Time_TextDuration>
+  <Title>Perfor18 191108 SGMT 15 Part 6 Performance Today Weekend</Title>
+ </item>
+</wddxPacket>
+
