@@ -99,7 +99,7 @@ def parse_metadata_david(event: Dict) -> Dict:
             present, = (x for x in xmldict['wddxPacket']['item']
                         if x['@sequence'] == 'present')
 
-            if present['Class'] == "Audio":
+            if present['Class'] != "Music":
                 return air_break()
 
             present = normalize_encodings(present)
