@@ -1,5 +1,6 @@
 import simplejson as json
 import urllib.parse
+from _io import BufferedReader
 
 import pytest
 from moto import mock_dynamodb2
@@ -23,6 +24,8 @@ def handler(mocker):
 def mock_david(handler):
 
     def event_dict(body):
+        if isinstance(body, BufferedReader):
+            body = body.read().decode('utf8')
         return {
             'body': body,
             'httpMethod': 'POST',

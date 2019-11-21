@@ -49,8 +49,7 @@ def sanitize_cdata(xmlstr: str) -> str:
     """
     CDATA_REGEX = re.compile(r'<!\[CDATA\[.*\]\]>', re.MULTILINE)
 
-    xstr = xmlstr.read().decode('utf8')
-    sanitized_str = CDATA_REGEX.sub(' ', xstr)
+    sanitized_str = CDATA_REGEX.sub(' ', xmlstr)
     return sanitized_str
 
 
