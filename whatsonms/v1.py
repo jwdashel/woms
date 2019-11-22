@@ -1,5 +1,6 @@
 import logging
 from typing import Dict
+from datetime import datetime
 
 import whatsonms.utils as utils
 
@@ -82,8 +83,14 @@ def parse_metadata_nexgen(event: Dict) -> Dict:
         normalized = {
             v: xmldict['audio'].get(k) for k, v in NEXGEN_MUSIC_ELEMS if k in xmldict['audio']
         }
+        if "start_date" not in normalized: 
+            import pdb; pdb.set_trace()
+            normalized["start_date"] = "4/20/2069"
+            datetime.today()
+
         normalized['epoch_start_time'] = utils.convert_date_time(normalized['start_date'],
                                                                  normalized['start_time'])
+  
         return normalized
 
 
