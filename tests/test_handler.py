@@ -1,6 +1,8 @@
 import simplejson as json
 import pytest
 from urllib import parse
+from datetime import datetime
+from unittest.mock import MagicMock
 
 from whatsonms.utils import Response
 from whatsonms import v1
@@ -61,163 +63,169 @@ class TestHandler:
         resp = mock_david(body=body)
         assert resp['statusCode'] == 404
 
-    # def test_valid_request_nexgen(self, mocker, mock_nexgen):
-    #     mocker.patch('whatsonms.utils.broadcast',
-    #                  return_value=Response(200, message='mock response'))
-    #     mock_update = mock_nexgen(NEXGEN_SAMPLE_QS)
-    #     mock_update_body = self.clean_json_from_str(mock_update['body'])
-    #     metadata = mock_update_body['data']['attributes']['Item']['metadata']
-    #     expected_response = '978416'
-    #     assert metadata['mm_uid'] == expected_response
+    def test_valid_request_nexgen(self, mocker, mock_nexgen):
+        mocker.patch('whatsonms.utils.broadcast',
+                     return_value=Response(200, message='mock response'))
+        mock_update = mock_nexgen(NEXGEN_SAMPLE_QS)
+        mock_update_body = self.clean_json_from_str(mock_update['body'])
+        metadata = mock_update_body['data']['attributes']['Item']['metadata']
+        expected_response = '978416'
+        assert metadata['mm_uid'] == expected_response
 
     def test_no_date_nexgen(self, mocker, mock_nexgen):
         # When NEXGEN sends XML without play date field 
         mocker.patch('whatsonms.utils.broadcast',
                      return_value=Response(200, message='mock response'))
+        mocker.patch('whatsonms.v1.datetime')
+
+        expected_date = datetime(2018, 9, 13)
+        expected_return_date = "09/13/2018"
+        v1.datetime.today = MagicMock(return_value=expected_date)
+
         mock_update = mock_nexgen(NEXGEN_NODATE_QS)
         response_body = mock_update["body"]
         mock_update_body = self.clean_json_from_str(response_body)
         metadata = mock_update_body['data']['attributes']['Item']['metadata']
         assert "start_date" in metadata
 
-        mocker.patch('whatsonms.v1.datetime.datetime.today')
-        v1.datetime.datetime.today.assert_called_once()
+        v1.datetime.today.assert_called_once()
+        assert metadata["start_date"] == expected_return_date
 
 
-    # def test_valid_request_david(self, mocker, mock_david):
-    #     mocker.patch('whatsonms.utils.broadcast',
-    #                  return_value=Response(200, message='mock response'))
-    #     mock_update = mock_david(sample_file=DAVID_SAMPLE)
-    #     mock_update_body = self.clean_json_from_str(mock_update['body'])
-    #     metadata = mock_update_body['data']['attributes']['Item']['metadata']
-    #     expected_response = '126753'
-    #     assert metadata['mm_uid'] == expected_response
+    def test_valid_request_david(self, mocker, mock_david):
+        mocker.patch('whatsonms.utils.broadcast',
+                     return_value=Response(200, message='mock response'))
+        mock_update = mock_david(sample_file=DAVID_SAMPLE)
+        mock_update_body = self.clean_json_from_str(mock_update['body'])
+        metadata = mock_update_body['data']['attributes']['Item']['metadata']
+        expected_response = '126753'
+        assert metadata['mm_uid'] == expected_response
 
-    # def test_air_break_response_from_david__no_present_track_element(self, mocker, mock_david,
-    #                                                                  mock_web_client):
-    #     mocker.patch('whatsonms.utils.broadcast',
-    #                  return_value=Response(200, message='mock response'))
-    #     mock_david(sample_file=DAVID_NO_PRESENT_TRACK)
-    #     whats_on = mock_web_client()
-    #     whats_on_body = self.clean_json_from_str(whats_on['body'])
-    #     assert whats_on_body['data']['attributes']['Item']['metadata']['air_break'] is True
+    def test_air_break_response_from_david__no_present_track_element(self, mocker, mock_david,
+                                                                     mock_web_client):
+        mocker.patch('whatsonms.utils.broadcast',
+                     return_value=Response(200, message='mock response'))
+        mock_david(sample_file=DAVID_NO_PRESENT_TRACK)
+        whats_on = mock_web_client()
+        whats_on_body = self.clean_json_from_str(whats_on['body'])
+        assert whats_on_body['data']['attributes']['Item']['metadata']['air_break'] is True
 
-    # def test_air_break_response_from_david__nonmusic_metadata(self, mocker, mock_david,
-    #                                                           mock_web_client):
-    #     mocker.patch('whatsonms.utils.broadcast',
-    #                  return_value=Response(200, message='mock response'))
-    #     mock_david(sample_file=DAVID_NON_MUSIC_METADATA)
-    #     whats_on = mock_web_client()
-    #     whats_on_body = self.clean_json_from_str(whats_on['body'])
-    #     assert whats_on_body['data']['attributes']['Item']['metadata']['air_break'] is True
+    def test_air_break_response_from_david__nonmusic_metadata(self, mocker, mock_david,
+                                                              mock_web_client):
+        mocker.patch('whatsonms.utils.broadcast',
+                     return_value=Response(200, message='mock response'))
+        mock_david(sample_file=DAVID_NON_MUSIC_METADATA)
+        whats_on = mock_web_client()
+        whats_on_body = self.clean_json_from_str(whats_on['body'])
+        assert whats_on_body['data']['attributes']['Item']['metadata']['air_break'] is True
 
-    # def test_invalid_request_web_client(self, mock_web_client):
-    #     resp = mock_web_client(stream_slug='foobar')
-    #     resp_body = self.clean_json_from_str(resp['body'])
-    #     metadata = resp_body['data'].get('metadata', None)
-    #     # assert resp['statusCode'] == 404
-    #     #
-    #     # TODO: figure out why mock_dynamodb2 is sending back a different
-    #     # response than real dynamodb does from db.get_metadata. This
-    #     # tricks http.get() into thinking there is metadata and sends
-    #     # back a 200 Response, when actually there isn't metadata in the
-    #     # resp_body. Ideally we would assert the statusCode is 404, not
-    #     # that metadata is None.
-    #     assert metadata is None
+    def test_invalid_request_web_client(self, mock_web_client):
+        resp = mock_web_client(stream_slug='foobar')
+        resp_body = self.clean_json_from_str(resp['body'])
+        metadata = resp_body['data'].get('metadata', None)
+        # assert resp['statusCode'] == 404
+        #
+        # TODO: figure out why mock_dynamodb2 is sending back a different
+        # response than real dynamodb does from db.get_metadata. This
+        # tricks http.get() into thinking there is metadata and sends
+        # back a 200 Response, when actually there isn't metadata in the
+        # resp_body. Ideally we would assert the statusCode is 404, not
+        # that metadata is None.
+        assert metadata is None
 
-    # def test_valid_request_web_client(self, mocker, mock_david,
-    #                                   mock_web_client):
-    #     mocker.patch('whatsonms.utils.broadcast',
-    #                  return_value=Response(200, message='mock response'))
-    #     mock_update = mock_david(sample_file=DAVID_SAMPLE)
-    #     mock_update_body = self.clean_json_from_str(mock_update['body'])
-    #     whats_on = mock_web_client()
-    #     whats_on_body = self.clean_json_from_str(whats_on['body'])
-    #     assert whats_on_body['data']['attributes']['Item'] == \
-    #         mock_update_body['data']['attributes']['Item']
+    def test_valid_request_web_client(self, mocker, mock_david,
+                                      mock_web_client):
+        mocker.patch('whatsonms.utils.broadcast',
+                     return_value=Response(200, message='mock response'))
+        mock_update = mock_david(sample_file=DAVID_SAMPLE)
+        mock_update_body = self.clean_json_from_str(mock_update['body'])
+        whats_on = mock_web_client()
+        whats_on_body = self.clean_json_from_str(whats_on['body'])
+        assert whats_on_body['data']['attributes']['Item'] == \
+            mock_update_body['data']['attributes']['Item']
 
-    # def test_valid_request_web_client_2(self, mocker, mock_nexgen,
-    #                                     mock_web_client):
-    #     mocker.patch('whatsonms.utils.broadcast',
-    #                  return_value=Response(200, message='mock response'))
-    #     mock_update = mock_nexgen(NEXGEN_SAMPLE_QS)
-    #     mock_update_body = self.clean_json_from_str(mock_update['body'])
+    def test_valid_request_web_client_2(self, mocker, mock_nexgen,
+                                        mock_web_client):
+        mocker.patch('whatsonms.utils.broadcast',
+                     return_value=Response(200, message='mock response'))
+        mock_update = mock_nexgen(NEXGEN_SAMPLE_QS)
+        mock_update_body = self.clean_json_from_str(mock_update['body'])
 
-    #     whats_on = mock_web_client()
-    #     whats_on_body = self.clean_json_from_str(whats_on['body'])
+        whats_on = mock_web_client()
+        whats_on_body = self.clean_json_from_str(whats_on['body'])
 
-    #     assert whats_on_body['data']['attributes']['Item'] == \
-    #         mock_update_body['data']['attributes']['Item']
+        assert whats_on_body['data']['attributes']['Item'] == \
+            mock_update_body['data']['attributes']['Item']
 
-    # def test_normalized_keys(self, mocker, mock_david, mock_nexgen):
-    #     mocker.patch('whatsonms.utils.broadcast',
-    #                  return_value=Response(200, message='mock response'))
-    #     mock_update_david = mock_david(sample_file=DAVID_SAMPLE)
-    #     mock_update_david_body = self.clean_json_from_str(mock_update_david['body'])
-    #     data_david = mock_update_david_body['data']['attributes']['Item']
+    def test_normalized_keys(self, mocker, mock_david, mock_nexgen):
+        mocker.patch('whatsonms.utils.broadcast',
+                     return_value=Response(200, message='mock response'))
+        mock_update_david = mock_david(sample_file=DAVID_SAMPLE)
+        mock_update_david_body = self.clean_json_from_str(mock_update_david['body'])
+        data_david = mock_update_david_body['data']['attributes']['Item']
 
-    #     mock_update_nexgen = mock_nexgen(NEXGEN_SAMPLE_QS)
-    #     mock_update_nexgen_body = self.clean_json_from_str(mock_update_nexgen['body'])
-    #     data_nexgen = mock_update_nexgen_body['data']['attributes']['Item']
+        mock_update_nexgen = mock_nexgen(NEXGEN_SAMPLE_QS)
+        mock_update_nexgen_body = self.clean_json_from_str(mock_update_nexgen['body'])
+        data_nexgen = mock_update_nexgen_body['data']['attributes']['Item']
 
-    #     assert [*data_david] == [*data_nexgen]
+        assert [*data_david] == [*data_nexgen]
 
-    # def test_weird_david_cdata(self, mocker, mock_david, mock_web_client):
-    #     # sometimes (on the weekend) we get xml with double escaped CDATA
-    #     # blocks. xmltodict chokes on these. gotta be able to handle it.
-    #     mocker.patch('whatsonms.utils.broadcast',
-    #                  return_value=Response(200, message='mock response'))
-    #     mock_david(sample_file=DAVID_WEIRD_CDATA)
-    #     whats_on = mock_web_client()
-    #     whats_on_body = self.clean_json_from_str(whats_on['body'])
-    #     assert whats_on_body['data']['attributes']['Item']['metadata']['air_break'] is True
+    def test_weird_david_cdata(self, mocker, mock_david, mock_web_client):
+        # sometimes (on the weekend) we get xml with double escaped CDATA
+        # blocks. xmltodict chokes on these. gotta be able to handle it.
+        mocker.patch('whatsonms.utils.broadcast',
+                     return_value=Response(200, message='mock response'))
+        mock_david(sample_file=DAVID_WEIRD_CDATA)
+        whats_on = mock_web_client()
+        whats_on_body = self.clean_json_from_str(whats_on['body'])
+        assert whats_on_body['data']['attributes']['Item']['metadata']['air_break'] is True
 
-    # def test_time_stamp_converted_to_unix_time_david(self, mocker, mock_david):
-    #     mocker.patch('whatsonms.utils.broadcast',
-    #                  return_value=Response(200, message='mock response'))
-    #     mock_update_david = mock_david(sample_file=DAVID_SAMPLE)
-    #     mock_update_david_body = self.clean_json_from_str(mock_update_david['body'])
-    #     # ASSUME david Start_Time = 2013-04-11 18:19:07.986
-    #     assert mock_update_david_body['data']['attributes']['Item']['metadata']['epoch_start_time'] \
-    #         == 1365718747
-    #     # ASSUME david Real_Start_Time = 2013-04-11 18:19:20.111
-    #     assert mock_update_david_body['data']['attributes']['Item']['metadata']['epoch_real_start_time'] \
-    #         == 1365718760
+    def test_time_stamp_converted_to_unix_time_david(self, mocker, mock_david):
+        mocker.patch('whatsonms.utils.broadcast',
+                     return_value=Response(200, message='mock response'))
+        mock_update_david = mock_david(sample_file=DAVID_SAMPLE)
+        mock_update_david_body = self.clean_json_from_str(mock_update_david['body'])
+        # ASSUME david Start_Time = 2013-04-11 18:19:07.986
+        assert mock_update_david_body['data']['attributes']['Item']['metadata']['epoch_start_time'] \
+            == 1365718747
+        # ASSUME david Real_Start_Time = 2013-04-11 18:19:20.111
+        assert mock_update_david_body['data']['attributes']['Item']['metadata']['epoch_real_start_time'] \
+            == 1365718760
 
-    # def test_composer_name_correctly_displayed(self, mocker, mock_david):
-    #     # So...
-    #     # The composer/pianist Lucien-Léon-Guillaume Lambert is displaying as
-    #     # Lucien-LÃ©on-Guillaume Lambert ... because that's how it comes from DAVID
-    #     # Turns out publisher is using trusty windows-1252 encoding
-    #     mock_update_david = mock_david(sample_file=DAVID_SPECIAL_CHARS)
-    #     mock_update_david_body = self.clean_json_from_str(mock_update_david['body'])
-    #     assert mock_update_david_body['data']['attributes']['Item']['metadata']['mm_composer1'] == \
-    #         'Lucien-Léon-Guillaume Lambert'
+    def test_composer_name_correctly_displayed(self, mocker, mock_david):
+        # So...
+        # The composer/pianist Lucien-Léon-Guillaume Lambert is displaying as
+        # Lucien-LÃ©on-Guillaume Lambert ... because that's how it comes from DAVID
+        # Turns out publisher is using trusty windows-1252 encoding
+        mock_update_david = mock_david(sample_file=DAVID_SPECIAL_CHARS)
+        mock_update_david_body = self.clean_json_from_str(mock_update_david['body'])
+        assert mock_update_david_body['data']['attributes']['Item']['metadata']['mm_composer1'] == \
+            'Lucien-Léon-Guillaume Lambert'
 
-    # def test_time_stamp_converted_to_unix_time_nexgen(self, mocker, mock_nexgen):
-    #     mocker.patch('whatsonms.utils.broadcast',
-    #                  return_value=Response(200, message='mock response'))
-    #     mock_update_nexgen = mock_nexgen(NEXGEN_SAMPLE_QS)
-    #     mock_update_nexgen_body = self.clean_json_from_str(mock_update_nexgen['body'])
-    #     # ASSUME nexgen played_date = 11/06/2018
-    #     #               played_time = 15:48:40
-    #     assert mock_update_nexgen_body['data']['attributes']['Item']['metadata']['epoch_start_time'] \
-    #         == 1541537320
+    def test_time_stamp_converted_to_unix_time_nexgen(self, mocker, mock_nexgen):
+        mocker.patch('whatsonms.utils.broadcast',
+                     return_value=Response(200, message='mock response'))
+        mock_update_nexgen = mock_nexgen(NEXGEN_SAMPLE_QS)
+        mock_update_nexgen_body = self.clean_json_from_str(mock_update_nexgen['body'])
+        # ASSUME nexgen played_date = 11/06/2018
+        #               played_time = 15:48:40
+        assert mock_update_nexgen_body['data']['attributes']['Item']['metadata']['epoch_start_time'] \
+            == 1541537320
 
-    # def test_invalid_metadata_no_overwrite(self, mocker, mock_nexgen,
-    #                                        mock_web_client):
-    #     """
-    #     Tests that providing invalid metadata does not result in valid
-    #     data being overwritten.
-    #     """
-    #     mocker.patch('whatsonms.utils.broadcast',
-    #                  return_value=Response(200, message='mock response'))
-    #     resp_1 = mock_nexgen(NEXGEN_SAMPLE_QS)
-    #     resp_1_body = self.clean_json_from_str(resp_1['body'])
+    def test_invalid_metadata_no_overwrite(self, mocker, mock_nexgen,
+                                           mock_web_client):
+        """
+        Tests that providing invalid metadata does not result in valid
+        data being overwritten.
+        """
+        mocker.patch('whatsonms.utils.broadcast',
+                     return_value=Response(200, message='mock response'))
+        resp_1 = mock_nexgen(NEXGEN_SAMPLE_QS)
+        resp_1_body = self.clean_json_from_str(resp_1['body'])
 
-    #     mock_nexgen('')
-    #     resp_2 = mock_web_client()
-    #     resp_2_body = self.clean_json_from_str(resp_2['body'])
+        mock_nexgen('')
+        resp_2 = mock_web_client()
+        resp_2_body = self.clean_json_from_str(resp_2['body'])
 
-    #     assert resp_1_body['data']['attributes']['Item'] == \
-    #         resp_2_body['data']['attributes']['Item']
+        assert resp_1_body['data']['attributes']['Item'] == \
+            resp_2_body['data']['attributes']['Item']

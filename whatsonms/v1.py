@@ -72,7 +72,6 @@ def normalize_encodings(present_track_info: dict) -> dict:
             present_track_info[key] = utils.convert_encoding(present_track_info[key])
     return present_track_info
 
-
 def parse_metadata_nexgen(event: Dict) -> Dict:
     """
     Parse new metadata from NexGen -- format it as JSON and return it.
@@ -84,10 +83,7 @@ def parse_metadata_nexgen(event: Dict) -> Dict:
             v: xmldict['audio'].get(k) for k, v in NEXGEN_MUSIC_ELEMS if k in xmldict['audio']
         }
         if "start_date" not in normalized: 
-            import pdb; pdb.set_trace()
-            normalized["start_date"] = "4/20/2069"
-            datetime.today()
-
+            normalized["start_date"] = datetime.today().strftime('%m/%d/%Y')
         normalized['epoch_start_time'] = utils.convert_date_time(normalized['start_date'],
                                                                  normalized['start_time'])
   
