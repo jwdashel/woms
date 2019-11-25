@@ -72,6 +72,7 @@ def normalize_encodings(present_track_info: dict) -> dict:
             present_track_info[key] = utils.convert_encoding(present_track_info[key])
     return present_track_info
 
+
 def parse_metadata_nexgen(event: Dict) -> Dict:
     """
     Parse new metadata from NexGen -- format it as JSON and return it.

@@ -39,7 +39,6 @@ NEXGEN_SAMPLE_QS = parse.quote(NEXGEN_SAMPLE_XML, safe=())
 NEXGEN_NODATE_QS = parse.quote(NEXGEN_NODATE_XML, safe=())
 
 
-
 class TestHandler:
     def clean_json_from_str(self, json_str: str):
         """
@@ -73,7 +72,7 @@ class TestHandler:
         assert metadata['mm_uid'] == expected_response
 
     def test_no_date_nexgen(self, mocker, mock_nexgen):
-        # When NEXGEN sends XML without play date field 
+        # When NEXGEN sends XML without play date field
         mocker.patch('whatsonms.utils.broadcast',
                      return_value=Response(200, message='mock response'))
         mocker.patch('whatsonms.v1.datetime')
@@ -90,7 +89,6 @@ class TestHandler:
 
         v1.datetime.today.assert_called_once()
         assert metadata["start_date"] == expected_return_date
-
 
     def test_valid_request_david(self, mocker, mock_david):
         mocker.patch('whatsonms.utils.broadcast',
