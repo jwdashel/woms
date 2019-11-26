@@ -83,7 +83,7 @@ def parse_metadata_nexgen(event: Dict) -> Dict:
         normalized = {
             v: xmldict['audio'].get(k) for k, v in NEXGEN_MUSIC_ELEMS if k in xmldict['audio']
         }
-        if "start_date" not in normalized: 
+        if "start_date" not in normalized:
             normalized["start_date"] = datetime.today().strftime('%m/%d/%Y')
         normalized['epoch_start_time'] = utils.convert_date_time(normalized['start_date'],
                                                                  normalized['start_time'])
