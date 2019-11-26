@@ -112,4 +112,3 @@ def parse_metadata_david(event: Dict) -> Dict:
         except ValueError:
             # ValueError thrown if no 'present' track in xmldict
             return air_break()
-            
