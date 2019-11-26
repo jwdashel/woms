@@ -1,8 +1,11 @@
 import simplejson as json
 import pytest
 from urllib import parse
+from datetime import datetime
+from unittest.mock import MagicMock
 
 from whatsonms.utils import Response
+from whatsonms import v1
 
 DAVID_SAMPLE = './tests/david_archive_sample.xml'
 DAVID_NO_PRESENT_TRACK = './tests/david_archive_sample__no_present_track.xml'
@@ -21,7 +24,19 @@ NEXGEN_SAMPLE_XML = """
 <number>978416</number>
 </audio>
 """
+NEXGEN_NODATE_XML = """
+<audio ID="id_3189206699_30701071">
+<type>Song</type>
+<status>None</status>
+<played_time>15:48:40</played_time>
+<length>00:03:31</length>
+<title>I Concentrate On You</title>
+<composer>Steve Lawrence</composer>
+<number>978416</number>
+</audio>
+"""
 NEXGEN_SAMPLE_QS = parse.quote(NEXGEN_SAMPLE_XML, safe=())
+NEXGEN_NODATE_QS = parse.quote(NEXGEN_NODATE_XML, safe=())
 
 
 class TestHandler:
@@ -55,6 +70,25 @@ class TestHandler:
         metadata = mock_update_body['data']['attributes']['Item']['metadata']
         expected_response = '978416'
         assert metadata['mm_uid'] == expected_response
+
+    def test_no_date_nexgen(self, mocker, mock_nexgen):
+        # When NEXGEN sends XML without play date field
+        mocker.patch('whatsonms.utils.broadcast',
+                     return_value=Response(200, message='mock response'))
+        mocker.patch('whatsonms.v1.datetime')
+
+        expected_date = datetime(2018, 9, 13)
+        expected_return_date = "09/13/2018"
+        v1.datetime.today = MagicMock(return_value=expected_date)
+
+        mock_update = mock_nexgen(NEXGEN_NODATE_QS)
+        response_body = mock_update["body"]
+        mock_update_body = self.clean_json_from_str(response_body)
+        metadata = mock_update_body['data']['attributes']['Item']['metadata']
+        assert "start_date" in metadata
+
+        v1.datetime.today.assert_called_once()
+        assert metadata["start_date"] == expected_return_date
 
     def test_valid_request_david(self, mocker, mock_david):
         mocker.patch('whatsonms.utils.broadcast',
