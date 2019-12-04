@@ -1,8 +1,7 @@
 import logging
-from functools import wraps
-from typing import Callable, Dict
-from raven import Client
+from typing import Dict
 
+from whatsonms.sentry import sentry
 from whatsonms import config
 from whatsonms.http import HttpRouter
 from whatsonms.utils import Response
@@ -22,19 +21,6 @@ def normalize_request_path(path: str) -> str:
         The path with trailing slash and URL_PREFIX removed.
     """
     return path.rstrip('/').replace(config.URL_PREFIX, '', 1)
-
-
-def sentry(func: Callable) -> Callable:
-    """
-    Decorator that will forward exceptions + traces to sentry when the
-    SENTRY_DSN environment variable is set.
-    """
-    @wraps(func)
-    def wrapped(*args, **kwargs):
-        sentry = Client(environment=config.ENV, release=config.RELEASE)
-        with sentry.capture_exceptions():
-            return func(*args, **kwargs)
-    return wrapped
 
 
 @sentry
