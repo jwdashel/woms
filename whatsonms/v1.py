@@ -60,6 +60,10 @@ class DavidDataException(Exception):
     def __init__(self, *args, **kwargs):
         Exception.__init__(self, *args, **kwargs)
 
+class NexgenDataException(Exception):
+    def __init__(self, *args, **kwargs):
+        Exception.__init__(self, *args, **kwargs)
+
 
 def air_break() -> dict:
     return {"air_break": True}
@@ -93,6 +97,15 @@ def parse_metadata_nexgen(event: Dict) -> Dict:
             normalized["start_date"] = datetime.today().strftime('%m/%d/%Y')
         normalized['epoch_start_time'] = utils.convert_date_time(normalized['start_date'],
                                                                  normalized['start_time'])
+        try:
+            if 'title' not in normalized or not normalized['title']:
+                raise NexgenDataException('nexgen missing title ' + str(normalized))
+            if 'mm_composer1' not in normalized or not normalized['mm_composer1']:
+                raise NexgenDataException('nexgen missing composer ' + str(normalized))
+        finally:
+            # there is a lot of nexgen data that seems to be missing this data.
+            # want to still return _something_ so that jukeboxes doesn't choke.
+            return normalized
 
         return normalized
 
