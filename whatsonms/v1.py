@@ -117,9 +117,9 @@ def parse_metadata_david(event: Dict) -> Dict:
             present = normalize_david_dict(present)
 
             if 'title' not in present or not present['title']:
-                raise DavidDataException('david missing title ' + present)
+                raise DavidDataException('david missing title ' + str(present))
             if 'mm_composer1' not in present or not present['mm_composer1']:
-                raise DavidDataException('david missing composer ' + present)
+                raise DavidDataException('david missing composer ' + str(present))
 
             return present
         except ValueError:
