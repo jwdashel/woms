@@ -14,6 +14,9 @@ from whatsonms.dynamodb import subdb, metadb
 # TIMESTAMP_FMT = "2013-04-11 18:19:07.986"
 TIMESTAMP_FMT = "%Y-%m-%d %H:%M:%S.%f"
 
+UTC_TIMEZONE = pytz.UTC
+EST_TIMEZONE = pytz.timezone('America/New_York')
+
 
 class Response(dict):
     """
@@ -78,18 +81,27 @@ def convert_time(time_str: str) -> int:
     """
     track_time = datetime.strptime(time_str, TIMESTAMP_FMT)
 
-    est = pytz.timezone('America/New_York')
-    utc = pytz.UTC
-
-    track_time = est.localize(track_time)
-    track_time = track_time.astimezone(utc)
+    track_time = EST_TIMEZONE.localize(track_time)
+    track_time = track_time.astimezone(UTC_TIMEZONE)
 
     epoch = datetime(1970, 1, 1)
-    epoch = utc.localize(epoch)
+    epoch = UTC_TIMEZONE.localize(epoch)
 
     epoch_time = math.floor((track_time - epoch).total_seconds())
 
     return epoch_time
+
+
+def convert_time_to_iso(epoch_timestamp: int) -> str:
+    """
+    Args: epoch: Required.
+    Returns: ISO 8601 date and time.
+    """
+    utc_time = datetime.utcfromtimestamp(epoch_timestamp)
+    localized_utc_time = UTC_TIMEZONE.localize(utc_time)
+    iso_utc_time = localized_utc_time.isoformat()
+
+    return iso_utc_time
 
 
 def convert_date_time(date_: str, time_: str) -> int:

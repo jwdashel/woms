@@ -87,6 +87,8 @@ def parse_metadata_nexgen(event: Dict) -> Dict:
             normalized["start_date"] = datetime.today().strftime('%m/%d/%Y')
         normalized['epoch_start_time'] = utils.convert_date_time(normalized['start_date'],
                                                                  normalized['start_time'])
+        if "iso_start_time" not in normalized:
+            normalized["iso_start_time"] = utils.convert_time_to_iso(normalized['epoch_start_time'])
 
         return normalized
 
@@ -105,9 +107,12 @@ def parse_metadata_david(event: Dict) -> Dict:
 
             if present['Class'] != "Music":
                 return air_break()
-
             present = normalize_encodings(present)
             present = normalize_david_dict(present)
+            if 'iso_real_start_time' not in present:
+                present['iso_real_start_time'] = utils.convert_time_to_iso(present['epoch_real_start_time'])
+            if 'iso_start_time' not in present:
+                present['iso_start_time'] = utils.convert_time_to_iso(present['epoch_start_time'])
             return present
         except ValueError:
             # ValueError thrown if no 'present' track in xmldict

@@ -195,12 +195,13 @@ class TestHandler:
                      return_value=Response(200, message='mock response'))
         mock_update_david = mock_david(sample_file=DAVID_SAMPLE)
         mock_update_david_body = self.clean_json_from_str(mock_update_david['body'])
+        assert 'iso_real_start_time' in mock_update_david_body['data']['attributes']['Item']['metadata']
         # ASSUME david Start_Time = 2013-04-11 18:19:07.986
         assert mock_update_david_body['data']['attributes']['Item']['metadata']['iso_start_time'] \
-            == "2013-04-11T22:19:07Z"
+            == "2013-04-11T22:19:07+00:00"
         # ASSUME david Real_Start_Time = 2013-04-11 18:19:20.111
         assert mock_update_david_body['data']['attributes']['Item']['metadata']['iso_real_start_time'] \
-            == "2013-04-11T22:19:20Z"
+            == "2013-04-11T22:19:20+00:00"
 
     def test_composer_name_correctly_displayed(self, mocker, mock_david):
         # So...
@@ -230,7 +231,7 @@ class TestHandler:
         # ASSUME nexgen played_date = 11/06/2018
         #               played_time = 15:48:40
         assert mock_update_nexgen_body['data']['attributes']['Item']['metadata']['iso_start_time'] \
-            == "2018-11-06T20:48:40Z"
+            == "2018-11-06T20:48:40+00:00"
 
     def test_invalid_metadata_no_overwrite(self, mocker, mock_nexgen,
                                            mock_web_client):
