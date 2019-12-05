@@ -84,6 +84,7 @@ def normalize_encodings(present_track_info: dict) -> dict:
     return present_track_info
 
 
+@sentry
 def parse_metadata_nexgen(event: Dict) -> Dict:
     """
     Parse new metadata from NexGen -- format it as JSON and return it.
