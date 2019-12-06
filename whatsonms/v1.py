@@ -64,7 +64,7 @@ def normalize_david_dict(present_track_info: dict) -> dict:
     return normalized
 
 
-def standardize_timestamps(track_info):
+def standardize_timestamps(track_info: dict) -> dict:
     if 'start_date' in track_info:
         # NEXGEN
         track_info['epoch_start_time'] = utils.convert_date_time(track_info['start_date'], track_info['start_time'])
