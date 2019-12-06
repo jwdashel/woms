@@ -61,9 +61,24 @@ def air_break() -> dict:
 
 def normalize_david_dict(present_track_info: dict) -> dict:
     normalized = {v: present_track_info.get(k) for k, v in DAVID_MUSIC_ELEMS if k in present_track_info}
-    normalized['epoch_start_time'] = utils.convert_time(normalized['start_time'])
-    normalized['epoch_real_start_time'] = utils.convert_time(normalized['real_start_time'])
     return normalized
+
+
+def standardize_timestamps(track_info: dict) -> dict:
+    if 'start_date' in track_info:
+        # NEXGEN
+        track_info['epoch_start_time'] = utils.convert_date_time(track_info['start_date'], track_info['start_time'])
+    else:
+        # DAVID
+        track_info['epoch_start_time'] = utils.convert_time(track_info['start_time'])
+
+    track_info['iso_start_time'] = utils.convert_time_to_iso(track_info['epoch_start_time'])
+
+    if 'real_start_time' in track_info:
+        track_info['epoch_real_start_time'] = utils.convert_time(track_info['real_start_time'])
+        track_info['iso_real_start_time'] = utils.convert_time_to_iso(track_info['epoch_real_start_time'])
+
+    return track_info
 
 
 def normalize_encodings(present_track_info: dict) -> dict:
@@ -85,8 +100,8 @@ def parse_metadata_nexgen(event: Dict) -> Dict:
         }
         if "start_date" not in normalized:
             normalized["start_date"] = datetime.today().strftime('%m/%d/%Y')
-        normalized['epoch_start_time'] = utils.convert_date_time(normalized['start_date'],
-                                                                 normalized['start_time'])
+
+        normalized = standardize_timestamps(normalized)
 
         return normalized
 
@@ -105,9 +120,9 @@ def parse_metadata_david(event: Dict) -> Dict:
 
             if present['Class'] != "Music":
                 return air_break()
-
             present = normalize_encodings(present)
             present = normalize_david_dict(present)
+            present = standardize_timestamps(present)
             return present
         except ValueError:
             # ValueError thrown if no 'present' track in xmldict

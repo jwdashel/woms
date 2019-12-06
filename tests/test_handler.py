@@ -190,6 +190,19 @@ class TestHandler:
         assert mock_update_david_body['data']['attributes']['Item']['metadata']['epoch_real_start_time'] \
             == 1365718760
 
+    def test_time_stamp_converted_to_iso_time_david(self, mocker, mock_david):
+        mocker.patch('whatsonms.utils.broadcast',
+                     return_value=Response(200, message='mock response'))
+        mock_update_david = mock_david(sample_file=DAVID_SAMPLE)
+        mock_update_david_body = self.clean_json_from_str(mock_update_david['body'])
+        assert 'iso_real_start_time' in mock_update_david_body['data']['attributes']['Item']['metadata']
+        # ASSUME david Start_Time = 2013-04-11 18:19:07.986
+        assert mock_update_david_body['data']['attributes']['Item']['metadata']['iso_start_time'] \
+            == "2013-04-11T22:19:07+00:00"
+        # ASSUME david Real_Start_Time = 2013-04-11 18:19:20.111
+        assert mock_update_david_body['data']['attributes']['Item']['metadata']['iso_real_start_time'] \
+            == "2013-04-11T22:19:20+00:00"
+
     def test_composer_name_correctly_displayed(self, mocker, mock_david):
         # So...
         # The composer/pianist Lucien-Léon-Guillaume Lambert is displaying as
@@ -209,6 +222,16 @@ class TestHandler:
         #               played_time = 15:48:40
         assert mock_update_nexgen_body['data']['attributes']['Item']['metadata']['epoch_start_time'] \
             == 1541537320
+
+    def test_time_stamp_converted_to_iso_time_nexgen(self, mocker, mock_nexgen):
+        mocker.patch('whatsonms.utils.broadcast',
+                     return_value=Response(200, message='mock response'))
+        mock_update_nexgen = mock_nexgen(NEXGEN_SAMPLE_QS)
+        mock_update_nexgen_body = self.clean_json_from_str(mock_update_nexgen['body'])
+        # ASSUME nexgen played_date = 11/06/2018
+        #               played_time = 15:48:40
+        assert mock_update_nexgen_body['data']['attributes']['Item']['metadata']['iso_start_time'] \
+            == "2018-11-06T20:48:40+00:00"
 
     def test_invalid_metadata_no_overwrite(self, mocker, mock_nexgen,
                                            mock_web_client):
