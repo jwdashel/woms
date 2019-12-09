@@ -12,6 +12,8 @@ DAVID_NO_PRESENT_TRACK = './tests/david_archive_sample__no_present_track.xml'
 DAVID_NON_MUSIC_METADATA = './tests/david_non_music_metadata.xml'
 DAVID_SPECIAL_CHARS = './tests/david_special_chars.xml'
 DAVID_WEIRD_CDATA = './tests/david_weird_cdata.xml'
+DAVID_NO_COMPOSER = './tests/david_no_composer.xml'
+DAVID_NO_TITLE = './tests/david_no_title.xml'
 NEXGEN_SAMPLE_XML = """
 <audio ID="id_3189206699_30701071">
 <type>Song</type>
@@ -35,8 +37,20 @@ NEXGEN_NODATE_XML = """
 <number>978416</number>
 </audio>
 """
+NEXGEN_NOTITLE_XML = """
+<audio ID="id_3189206699_30701071">
+<type>Song</type>
+<status>None</status>
+<played_time>15:48:40</played_time>
+<length>00:03:31</length>
+<title></title>
+<composer>Steve Lawrence</composer>
+<number>978416</number>
+</audio>
+"""
 NEXGEN_SAMPLE_QS = parse.quote(NEXGEN_SAMPLE_XML, safe=())
 NEXGEN_NODATE_QS = parse.quote(NEXGEN_NODATE_XML, safe=())
+NEXGEN_NOTITLE_QS = parse.quote(NEXGEN_NOTITLE_XML, safe=())
 
 
 class TestHandler:
@@ -250,3 +264,17 @@ class TestHandler:
 
         assert resp_1_body['data']['attributes']['Item'] == \
             resp_2_body['data']['attributes']['Item']
+
+    def test_notitle_nexgen_raises_exception(self, mocker, mock_nexgen):
+        mocker.patch('whatsonms.utils.broadcast',
+                     return_value=Response(200, message='mock response'))
+        with pytest.raises(v1.NexgenDataException):
+            mock_nexgen(NEXGEN_NOTITLE_QS)
+
+    def test_nocomposer_david_raises_exception(self, mocker, mock_david):
+        with pytest.raises(v1.DavidDataException):
+            mock_david(sample_file=DAVID_NO_COMPOSER)
+
+    def test_notitle_david_raises_exception(self, mocker, mock_david):
+        with pytest.raises(v1.DavidDataException):
+            mock_david(sample_file=DAVID_NO_TITLE)
