@@ -110,8 +110,12 @@ def parse_metadata_nexgen(event: Dict) -> Dict:
         normalized = {
             v: xmldict['audio'].get(k) for k, v in NEXGEN_MUSIC_ELEMS if k in xmldict['audio']
         }
+
         if "start_date" not in normalized:
             normalized["start_date"] = datetime.today().strftime('%m/%d/%Y')
+
+        if 'title' not in normalized or not normalized['title']:
+            raise NexgenDataException('nexgen missing title ' + str(normalized))
 
         normalized = standardize_timestamps(normalized)
 
@@ -134,8 +138,14 @@ def parse_metadata_david(event: Dict) -> Dict:
             if present['Class'] != "Music":
                 return air_break()
 
-            present = normalize_encodings(present)
             present = normalize_david_dict(present)
+
+            if 'title' not in present or not present['title']:
+                raise DavidDataException('david missing title ' + str(present))
+            if 'mm_composer1' not in present or not present['mm_composer1']:
+                raise DavidDataException('david missing composer ' + str(present))
+
+            present = normalize_encodings(present)
             present = standardize_timestamps(present)
 
             return present
