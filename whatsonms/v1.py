@@ -112,7 +112,7 @@ def parse_metadata_nexgen(event: Dict) -> Dict:
         }
         if "start_date" not in normalized:
             normalized["start_date"] = datetime.today().strftime('%m/%d/%Y')
-            
+
         normalized = standardize_timestamps(normalized)
 
         return normalized
@@ -133,7 +133,7 @@ def parse_metadata_david(event: Dict) -> Dict:
 
             if present['Class'] != "Music":
                 return air_break()
-              
+
             present = normalize_encodings(present)
             present = normalize_david_dict(present)
             present = standardize_timestamps(present)
