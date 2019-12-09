@@ -3,6 +3,7 @@ from typing import Dict
 from datetime import datetime
 
 import whatsonms.utils as utils
+from whatsonms.sentry import sentry
 
 import xmltodict
 
@@ -55,6 +56,16 @@ NEXGEN_MUSIC_ELEMS = (
 )
 
 
+class DavidDataException(Exception):
+    def __init__(self, *args, **kwargs):
+        Exception.__init__(self, *args, **kwargs)
+
+
+class NexgenDataException(Exception):
+    def __init__(self, *args, **kwargs):
+        Exception.__init__(self, *args, **kwargs)
+
+
 def air_break() -> dict:
     return {"air_break": True}
 
@@ -88,6 +99,7 @@ def normalize_encodings(present_track_info: dict) -> dict:
     return present_track_info
 
 
+@sentry
 def parse_metadata_nexgen(event: Dict) -> Dict:
     """
     Parse new metadata from NexGen -- format it as JSON and return it.
@@ -106,6 +118,7 @@ def parse_metadata_nexgen(event: Dict) -> Dict:
         return normalized
 
 
+@sentry
 def parse_metadata_david(event: Dict) -> Dict:
     """
     Parse new metadata from DAVID -- format it as JSON and return it.
@@ -120,9 +133,11 @@ def parse_metadata_david(event: Dict) -> Dict:
 
             if present['Class'] != "Music":
                 return air_break()
+
             present = normalize_encodings(present)
             present = normalize_david_dict(present)
             present = standardize_timestamps(present)
+
             return present
         except ValueError:
             # ValueError thrown if no 'present' track in xmldict
