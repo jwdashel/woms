@@ -197,11 +197,8 @@ class TestHandler:
                      return_value=Response(200, message='mock response'))
         mock_update_david = mock_david(sample_file=DAVID_SAMPLE)
         mock_update_david_body = self.clean_json_from_str(mock_update_david['body'])
-        # ASSUME david Start_Time = 2013-04-11 18:19:07.986
-        assert mock_update_david_body['data']['attributes']['Item']['metadata']['epoch_start_time'] \
-            == 1365718747
         # ASSUME david Real_Start_Time = 2013-04-11 18:19:20.111
-        assert mock_update_david_body['data']['attributes']['Item']['metadata']['epoch_real_start_time'] \
+        assert mock_update_david_body['data']['attributes']['Item']['metadata']['epoch_start_time'] \
             == 1365718760
 
     def test_time_stamp_converted_to_iso_time_david(self, mocker, mock_david):
@@ -209,12 +206,10 @@ class TestHandler:
                      return_value=Response(200, message='mock response'))
         mock_update_david = mock_david(sample_file=DAVID_SAMPLE)
         mock_update_david_body = self.clean_json_from_str(mock_update_david['body'])
-        assert 'iso_real_start_time' in mock_update_david_body['data']['attributes']['Item']['metadata']
-        # ASSUME david Start_Time = 2013-04-11 18:19:07.986
-        assert mock_update_david_body['data']['attributes']['Item']['metadata']['iso_start_time'] \
-            == "2013-04-11T22:19:07+00:00"
+
+        assert 'iso_start_time' in mock_update_david_body['data']['attributes']['Item']['metadata']
         # ASSUME david Real_Start_Time = 2013-04-11 18:19:20.111
-        assert mock_update_david_body['data']['attributes']['Item']['metadata']['iso_real_start_time'] \
+        assert mock_update_david_body['data']['attributes']['Item']['metadata']['iso_start_time'] \
             == "2013-04-11T22:19:20+00:00"
 
     def test_composer_name_correctly_displayed(self, mocker, mock_david):
