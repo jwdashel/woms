@@ -27,9 +27,9 @@ DAVID_MUSIC_ELEMS = (
     ('USA.WNYC.SOLOIST5', 'mm_soloist5'),
     ('USA.WNYC.SOLOIST6', 'mm_soloist6'),
     ('Music_MusicID', 'mm_uid'),
-    # MAP DAVID's Time_RealStart to start_time 
-    # Front end consumes `start_time` 
-    # Populate `start_time` with `Time_RealStart` for accurate 
+    # MAP DAVID's Time_RealStart to start_time
+    # Front end consumes `start_time`
+    # Populate `start_time` with `Time_RealStart` for accurate
     # representation of when track starts (DSODA-315) -- ss
     ('Time_RealStart', 'start_time'),
     # ('Time_Start', 'start_time'),
