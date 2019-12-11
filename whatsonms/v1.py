@@ -89,10 +89,6 @@ def standardize_timestamps(track_info: dict) -> dict:
 
     track_info['iso_start_time'] = utils.convert_time_to_iso(track_info['epoch_start_time'])
 
-    if 'real_start_time' in track_info:
-        track_info['epoch_real_start_time'] = utils.convert_time(track_info['real_start_time'])
-        track_info['iso_real_start_time'] = utils.convert_time_to_iso(track_info['epoch_real_start_time'])
-
     return track_info
 
 
