@@ -3,7 +3,6 @@ from typing import Dict
 from datetime import datetime
 
 import whatsonms.utils as utils
-from whatsonms.sentry import sentry
 
 import xmltodict
 
@@ -99,7 +98,6 @@ def normalize_encodings(present_track_info: dict) -> dict:
     return present_track_info
 
 
-@sentry
 def parse_metadata_nexgen(event: Dict) -> Dict:
     """
     Parse new metadata from NexGen -- format it as JSON and return it.
@@ -114,15 +112,11 @@ def parse_metadata_nexgen(event: Dict) -> Dict:
         if "start_date" not in normalized:
             normalized["start_date"] = datetime.today().strftime('%m/%d/%Y')
 
-        if 'title' not in normalized or not normalized['title']:
-            raise NexgenDataException('nexgen missing title ' + str(normalized))
-
         normalized = standardize_timestamps(normalized)
 
         return normalized
 
 
-@sentry
 def parse_metadata_david(event: Dict) -> Dict:
     """
     Parse new metadata from DAVID -- format it as JSON and return it.
@@ -139,12 +133,6 @@ def parse_metadata_david(event: Dict) -> Dict:
                 return air_break()
 
             present = normalize_david_dict(present)
-
-            if 'title' not in present or not present['title']:
-                raise DavidDataException('david missing title ' + str(present))
-            if 'mm_composer1' not in present or not present['mm_composer1']:
-                raise DavidDataException('david missing composer ' + str(present))
-
             present = normalize_encodings(present)
             present = standardize_timestamps(present)
 

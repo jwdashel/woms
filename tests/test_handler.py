@@ -264,17 +264,3 @@ class TestHandler:
 
         assert resp_1_body['data']['attributes']['Item'] == \
             resp_2_body['data']['attributes']['Item']
-
-    def test_notitle_nexgen_raises_exception(self, mocker, mock_nexgen):
-        mocker.patch('whatsonms.utils.broadcast',
-                     return_value=Response(200, message='mock response'))
-        with pytest.raises(v1.NexgenDataException):
-            mock_nexgen(NEXGEN_NOTITLE_QS)
-
-    def test_nocomposer_david_raises_exception(self, mocker, mock_david):
-        with pytest.raises(v1.DavidDataException):
-            mock_david(sample_file=DAVID_NO_COMPOSER)
-
-    def test_notitle_david_raises_exception(self, mocker, mock_david):
-        with pytest.raises(v1.DavidDataException):
-            mock_david(sample_file=DAVID_NO_TITLE)
