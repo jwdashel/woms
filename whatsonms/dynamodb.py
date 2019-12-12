@@ -61,6 +61,7 @@ class MetadataDB(DB):
             # return metadata attribute only:
             ProjectionExpression=self.metadata_key
         )
+        print("METADATA JD " + str(metadata))
         return metadata if metadata else {}
 
     def set_metadata(self, stream: str, metadata: Dict) -> Dict:
