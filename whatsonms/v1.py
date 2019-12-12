@@ -26,9 +26,13 @@ DAVID_MUSIC_ELEMS = (
     ('USA.WNYC.SOLOIST5', 'mm_soloist5'),
     ('USA.WNYC.SOLOIST6', 'mm_soloist6'),
     ('Music_MusicID', 'mm_uid'),
-    ('Time_RealStart', 'real_start_time'),
+    # MAP DAVID's Time_RealStart to start_time
+    # Front end consumes `start_time`
+    # Populate `start_time` with `Time_RealStart` for accurate
+    # representation of when track starts (DSODA-315) -- ss
+    ('Time_RealStart', 'start_time'),
+    # ('Time_Start', 'start_time'),
     ('', 'start_date'),
-    ('Time_Start', 'start_time'),
     ('Title', 'title'),
 )
 
@@ -83,10 +87,6 @@ def standardize_timestamps(track_info: dict) -> dict:
         track_info['epoch_start_time'] = utils.convert_time(track_info['start_time'])
 
     track_info['iso_start_time'] = utils.convert_time_to_iso(track_info['epoch_start_time'])
-
-    if 'real_start_time' in track_info:
-        track_info['epoch_real_start_time'] = utils.convert_time(track_info['real_start_time'])
-        track_info['iso_real_start_time'] = utils.convert_time_to_iso(track_info['epoch_real_start_time'])
 
     return track_info
 
