@@ -4,7 +4,7 @@ from functools import lru_cache, wraps
 from typing import Callable, Dict
 
 import whatsonms.utils
-from whatsonms import v1
+from whatsonms import v1, php
 from whatsonms.dynamodb import metadb
 
 
@@ -89,6 +89,7 @@ class HttpRouter:
         """
         stream = params.get('stream')
         metadata = v1.parse_metadata_david(event, stream)
+        metadata['playlist_hist_preview'] = php.next_playlist_history_preview(stream)
         return _update(metadata, params)
 
     @staticmethod
