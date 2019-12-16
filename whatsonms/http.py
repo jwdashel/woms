@@ -87,7 +87,8 @@ class HttpRouter:
         Handles updates from DAVID, which are received via POST requests
         with the data in the request body.
         """
-        metadata = v1.parse_metadata_david(event)
+        stream = params.get('stream')
+        metadata = v1.parse_metadata_david(event, stream)
         return _update(metadata, params)
 
     @staticmethod
