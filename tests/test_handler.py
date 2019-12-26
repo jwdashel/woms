@@ -54,9 +54,6 @@ NEXGEN_NOTITLE_QS = parse.quote(NEXGEN_NOTITLE_XML, safe=())
 
 
 class TestHandler:
-
-    pytestmark = pytest.mark.skip("all tests still WIP")
-
     def clean_json_from_str(self, json_str: str):
         """
         Cleans up the escaped-single-quote json that AWS produces.
@@ -75,7 +72,7 @@ class TestHandler:
         assert resp['statusCode'] == 404
 
     @pytest.mark.parametrize('body', [{}])
-    def test_invalid_request_david(self, body, mock_david):
+    def test_invalid_request_david(self, body, mock_david, mock_next_php):
         resp = mock_david(body=body)
         assert resp['statusCode'] == 404
 
@@ -107,7 +104,7 @@ class TestHandler:
         v1.datetime.today.assert_called_once()
         assert metadata["start_date"] == expected_return_date
 
-    def test_valid_request_david(self, mocker, mock_david):
+    def test_valid_request_david(self, mocker, mock_david, mock_next_php):
         mocker.patch('whatsonms.utils.broadcast',
                      return_value=Response(200, message='mock response'))
         mock_update = mock_david(sample_file=DAVID_SAMPLE)
@@ -117,7 +114,7 @@ class TestHandler:
         assert metadata['mm_uid'] == expected_response
 
     def test_air_break_response_from_david__no_present_track_element(self, mocker, mock_david,
-                                                                     mock_web_client):
+                                                                     mock_web_client, mock_next_php):
         mocker.patch('whatsonms.utils.broadcast',
                      return_value=Response(200, message='mock response'))
         mocker.patch('whatsonms.php.playlist_history_preview', return_value=[])
@@ -127,7 +124,7 @@ class TestHandler:
         assert whats_on_body['data']['attributes']['Item']['metadata']['air_break'] is True
 
     def test_air_break_response_from_david__nonmusic_metadata(self, mocker, mock_david,
-                                                              mock_web_client):
+                                                              mock_web_client, mock_next_php):
         mocker.patch('whatsonms.utils.broadcast',
                      return_value=Response(200, message='mock response'))
         mocker.patch('whatsonms.php.playlist_history_preview', return_value=[])
@@ -151,7 +148,7 @@ class TestHandler:
         assert metadata is None
 
     def test_valid_request_web_client(self, mocker, mock_david,
-                                      mock_web_client):
+                                      mock_web_client, mock_next_php):
         mocker.patch('whatsonms.utils.broadcast',
                      return_value=Response(200, message='mock response'))
         mock_update = mock_david(sample_file=DAVID_SAMPLE)
@@ -174,7 +171,7 @@ class TestHandler:
         assert whats_on_body['data']['attributes']['Item'] == \
             mock_update_body['data']['attributes']['Item']
 
-    def test_normalized_keys(self, mocker, mock_david, mock_nexgen):
+    def test_normalized_keys(self, mocker, mock_david, mock_nexgen, mock_next_php):
         mocker.patch('whatsonms.utils.broadcast',
                      return_value=Response(200, message='mock response'))
         mock_update_david = mock_david(sample_file=DAVID_SAMPLE)
@@ -187,7 +184,8 @@ class TestHandler:
 
         assert [*data_david] == [*data_nexgen]
 
-    def test_weird_david_cdata(self, mocker, mock_david, mock_web_client):
+    def test_weird_david_cdata(self, mocker, mock_david,
+                               mock_web_client, mock_php, mock_next_php):
         # sometimes (on the weekend) we get xml with double escaped CDATA
         # blocks. xmltodict chokes on these. gotta be able to handle it.
         mocker.patch('whatsonms.utils.broadcast',
@@ -197,7 +195,7 @@ class TestHandler:
         whats_on_body = self.clean_json_from_str(whats_on['body'])
         assert whats_on_body['data']['attributes']['Item']['metadata']['air_break'] is True
 
-    def test_time_stamp_converted_to_unix_time_david(self, mocker, mock_david):
+    def test_time_stamp_converted_to_unix_time_david(self, mocker, mock_david, mock_next_php):
         mocker.patch('whatsonms.utils.broadcast',
                      return_value=Response(200, message='mock response'))
         mock_update_david = mock_david(sample_file=DAVID_SAMPLE)
@@ -206,7 +204,7 @@ class TestHandler:
         assert mock_update_david_body['data']['attributes']['Item']['metadata']['epoch_start_time'] \
             == 1365718760
 
-    def test_time_stamp_converted_to_iso_time_david(self, mocker, mock_david):
+    def test_time_stamp_converted_to_iso_time_david(self, mocker, mock_david, mock_next_php):
         mocker.patch('whatsonms.utils.broadcast',
                      return_value=Response(200, message='mock response'))
         mock_update_david = mock_david(sample_file=DAVID_SAMPLE)
@@ -217,7 +215,7 @@ class TestHandler:
         assert mock_update_david_body['data']['attributes']['Item']['metadata']['iso_start_time'] \
             == "2013-04-11T22:19:20+00:00"
 
-    def test_composer_name_correctly_displayed(self, mocker, mock_david):
+    def test_composer_name_correctly_displayed(self, mocker, mock_david, mock_next_php):
         # So...
         # The composer/pianist Lucien-Léon-Guillaume Lambert is displaying as
         # Lucien-LÃ©on-Guillaume Lambert ... because that's how it comes from DAVID

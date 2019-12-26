@@ -77,8 +77,9 @@ class HttpRouter:
         Handles updates from NexGen, which are received via GET requests
         with the data in the params.
         """
+        stream = params.get('stream')
         metadata = v1.parse_metadata_nexgen(event)
-        return _update(metadata, params)
+        return _update(metadata, stream)
 
     @staticmethod
     @route('POST', '/v1/update')
@@ -89,8 +90,9 @@ class HttpRouter:
         """
         stream = params.get('stream')
         metadata = v1.parse_metadata_david(event, stream)
-        metadata['playlist_hist_preview'] = php.next_playlist_history_preview(stream)
-        return _update(metadata, params)
+        if metadata:
+            metadata['playlist_hist_preview'] = php.next_playlist_history_preview(stream)
+        return _update(metadata, stream)
 
     @staticmethod
     @route('GET', '/v1/whats-on')
@@ -106,8 +108,7 @@ class HttpRouter:
         return whatsonms.utils.Response(404, message='No metadata found')
 
 
-def _update(metadata: dict, params: dict) -> whatsonms.utils.Response:
-    stream = params.get('stream')
+def _update(metadata: dict, stream: str) -> whatsonms.utils.Response:
     if not metadata:
         print("No metadata found")
         return whatsonms.utils.Response(404, message='No metadata found')
