@@ -79,6 +79,8 @@ class HttpRouter:
         """
         stream = params.get('stream')
         metadata = v1.parse_metadata_nexgen(event)
+        if metadata:
+            metadata['playlist_hist_preview'] = php.next_playlist_history_preview(stream)
         return _update(metadata, stream)
 
     @staticmethod
