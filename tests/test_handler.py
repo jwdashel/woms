@@ -126,6 +126,18 @@ class TestHandler:
         expected_response = '126753'
         assert metadata['mm_uid'] == expected_response
 
+    def test_david_has_php(self, mocker, mock_david):
+        playlist_history = ['dr', 'funkenstein']
+        mocker.patch('whatsonms.utils.broadcast',
+                     return_value=Response(200, message='mock response'))
+        mocker.patch('whatsonms.php.next_playlist_history_preview', return_value=playlist_history)
+        mock_update = mock_david(sample_file=DAVID_SAMPLE)
+        mock_update_body = self.clean_json_from_str(mock_update['body'])
+        metadata = mock_update_body['data']['attributes']['Item']['metadata']
+        assert 'playlist_hist_preview' in metadata
+        php.next_playlist_history_preview.assert_called_once()
+        assert metadata['playlist_hist_preview'] == playlist_history
+
     def test_air_break_response_from_david__no_present_track_element(self, mocker, mock_david,
                                                                      mock_web_client, mock_next_php):
         mocker.patch('whatsonms.utils.broadcast',
