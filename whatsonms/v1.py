@@ -70,7 +70,7 @@ class NexgenDataException(Exception):
         Exception.__init__(self, *args, **kwargs)
 
 
-def air_break(stream) -> dict:
+def air_break(stream: str) -> dict:
     playlist_hist = php.playlist_history_preview(stream)
     return {"air_break": True, "playlist_hist_preview": playlist_hist}
 

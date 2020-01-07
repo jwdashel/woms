@@ -1,13 +1,14 @@
 from whatsonms.dynamodb import metadb
+from typing import List
 
 
-def playlist_history_preview(stream):
+def playlist_history_preview(stream: str) -> List[dict]:
     metadata = metadb.get_metadata(stream)['Item']['metadata']
     php = metadata['playlist_hist_preview'] if 'playlist_hist_preview' in metadata else []
     return php
 
 
-def next_playlist_history_preview(stream):
+def next_playlist_history_preview(stream: str) -> List[dict]:
     metadata = metadb.get_metadata(stream)
     metadata = metadata['Item']['metadata']
 
