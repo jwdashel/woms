@@ -5,6 +5,8 @@ from _io import BufferedReader
 import pytest
 from moto import mock_dynamodb2
 
+import whatsonms.php as php
+
 from whatsonms.config import TABLE_METADATA, TABLE_SUBSCRIBERS, URL_PREFIX
 
 WQXR_STREAM_SLUG = 'wqxr'
@@ -21,8 +23,85 @@ def handler(mocker):
 
 
 @pytest.fixture
-def mock_david(handler):
+def mock_php(monkeypatch):
+    def mock_php_data(*args, **kwargs):
+        return [
+            {
+                "iso_start_time": "2019-12-12T16:35:53+00:00",
+                "start_time": "11:35:53",
+                "epoch_start_time": "1576172152",
+                "length": "00:03:25",
+                "mm_soloist1": "Dustin Hoffman",
+                "mm_uid": "983817",
+                "title": "If u were the second boy in the world",
+                "start_date": "12/12/2019",
+            },
+            {
+                "iso_start_time": "2019-12-12T15:35:53+00:00",
+                "start_time": "10:35:53",
+                "epoch_start_time": "1576172151",
+                "length": "00:03:25",
+                "mm_soloist1": "Ben Stiller",
+                "mm_uid": "983817",
+                "title": "If u were the third boy in the world",
+                "start_date": "12/12/2019",
+            },
+            {
+                "iso_start_time": "2019-12-12T14:35:53+00:00",
+                "start_time": "09:35:53",
+                "epoch_start_time": "1576172150",
+                "length": "00:03:25",
+                "mm_soloist1": "Blythe Danner",
+                "mm_uid": "983817",
+                "title": "If u were the only girl in the world",
+                "start_date": "12/12/2019",
+            }
+        ]
 
+    monkeypatch.setattr(php, "playlist_history_preview", mock_php_data)
+
+
+@pytest.fixture
+def mock_next_php(monkeypatch):
+    def mock_next_php_data(*args, **kwargs):
+        return [
+            {
+                "iso_start_time": "2019-12-12T16:35:53+00:00",
+                "start_time": "11:35:53",
+                "epoch_start_time": "1576172152",
+                "length": "00:03:25",
+                "mm_soloist1": "Dustin Hoffman",
+                "mm_uid": "983817",
+                "title": "If u were the second boy in the world",
+                "start_date": "12/12/2019",
+            },
+            {
+                "iso_start_time": "2019-12-12T15:35:53+00:00",
+                "start_time": "10:35:53",
+                "epoch_start_time": "1576172151",
+                "length": "00:03:25",
+                "mm_soloist1": "Ben Stiller",
+                "mm_uid": "983817",
+                "title": "If u were the third boy in the world",
+                "start_date": "12/12/2019",
+            },
+            {
+                "iso_start_time": "2019-12-12T14:35:53+00:00",
+                "start_time": "09:35:53",
+                "epoch_start_time": "1576172150",
+                "length": "00:03:25",
+                "mm_soloist1": "Blythe Danner",
+                "mm_uid": "983817",
+                "title": "If u were the only girl in the world",
+                "start_date": "12/12/2019",
+            }
+        ]
+
+    monkeypatch.setattr(php, "next_playlist_history_preview", mock_next_php_data)
+
+
+@pytest.fixture
+def mock_david(handler):
     def event_dict(body):
         if isinstance(body, BufferedReader):
             body = body.read().decode('utf8')

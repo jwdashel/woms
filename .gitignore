@@ -31,3 +31,4 @@ test_images/
 test-results/
 
 deploy_demo.sh
+.mypy_cache/

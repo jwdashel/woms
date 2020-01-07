@@ -3,6 +3,7 @@ from typing import Dict
 from datetime import datetime
 
 import whatsonms.utils as utils
+import whatsonms.php as php
 
 import xmltodict
 
@@ -69,8 +70,9 @@ class NexgenDataException(Exception):
         Exception.__init__(self, *args, **kwargs)
 
 
-def air_break() -> dict:
-    return {"air_break": True}
+def air_break(stream: str) -> dict:
+    playlist_hist = php.playlist_history_preview(stream)
+    return {"air_break": True, "playlist_hist_preview": playlist_hist}
 
 
 def normalize_david_dict(present_track_info: dict) -> dict:
@@ -117,7 +119,7 @@ def parse_metadata_nexgen(event: Dict) -> Dict:
         return normalized
 
 
-def parse_metadata_david(event: Dict) -> Dict:
+def parse_metadata_david(event: Dict, stream) -> Dict:
     """
     Parse new metadata from DAVID -- format it as JSON and return it.
     """
@@ -130,7 +132,7 @@ def parse_metadata_david(event: Dict) -> Dict:
                         if x['@sequence'] == 'present')
 
             if present['Class'] != "Music":
-                return air_break()
+                return air_break(stream)
 
             present = normalize_david_dict(present)
             present = normalize_encodings(present)
@@ -139,4 +141,4 @@ def parse_metadata_david(event: Dict) -> Dict:
             return present
         except ValueError:
             # ValueError thrown if no 'present' track in xmldict
-            return air_break()
+            return air_break(stream)

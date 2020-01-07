@@ -59,6 +59,7 @@ jobs:
           name: Build Lambda
           command: |
             mkdir -p workspace/pkg
+            pip install -U git+https://github.com/nypublicradio/nyprsetuptools.git --user
             pip install . -t workspace/pkg
       - persist_to_workspace:
           root: workspace

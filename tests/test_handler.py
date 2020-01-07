@@ -6,6 +6,7 @@ from unittest.mock import MagicMock
 
 from whatsonms.utils import Response
 from whatsonms import v1
+from whatsonms import php
 
 DAVID_SAMPLE = './tests/david_archive_sample.xml'
 DAVID_NO_PRESENT_TRACK = './tests/david_archive_sample__no_present_track.xml'
@@ -67,16 +68,16 @@ class TestHandler:
         return json.loads(json_str)
 
     @pytest.mark.parametrize('qs_parameters', [''])
-    def test_invalid_request_nexgen(self, qs_parameters, mock_nexgen):
+    def test_invalid_request_nexgen(self, qs_parameters, mock_nexgen, mock_next_php):
         resp = mock_nexgen(qs_parameters)
         assert resp['statusCode'] == 404
 
     @pytest.mark.parametrize('body', [{}])
-    def test_invalid_request_david(self, body, mock_david):
+    def test_invalid_request_david(self, body, mock_david, mock_next_php):
         resp = mock_david(body=body)
         assert resp['statusCode'] == 404
 
-    def test_valid_request_nexgen(self, mocker, mock_nexgen):
+    def test_valid_request_nexgen(self, mocker, mock_nexgen, mock_next_php):
         mocker.patch('whatsonms.utils.broadcast',
                      return_value=Response(200, message='mock response'))
         mock_update = mock_nexgen(NEXGEN_SAMPLE_QS)
@@ -85,7 +86,19 @@ class TestHandler:
         expected_response = '978416'
         assert metadata['mm_uid'] == expected_response
 
-    def test_no_date_nexgen(self, mocker, mock_nexgen):
+    def test_nexgen_has_php(self, mocker, mock_nexgen):
+        playlist_history = ['aint', 'that', 'easy']
+        mocker.patch('whatsonms.utils.broadcast',
+                     return_value=Response(200, message='mock response'))
+        mocker.patch('whatsonms.php.next_playlist_history_preview', return_value=playlist_history)
+        mock_update = mock_nexgen(NEXGEN_SAMPLE_QS)
+        mock_update_body = self.clean_json_from_str(mock_update['body'])
+        metadata = mock_update_body['data']['attributes']['Item']['metadata']
+        assert 'playlist_hist_preview' in metadata
+        php.next_playlist_history_preview.assert_called_once()
+        assert metadata['playlist_hist_preview'] == playlist_history
+
+    def test_no_date_nexgen(self, mocker, mock_nexgen, mock_next_php):
         # When NEXGEN sends XML without play date field
         mocker.patch('whatsonms.utils.broadcast',
                      return_value=Response(200, message='mock response'))
@@ -104,7 +117,7 @@ class TestHandler:
         v1.datetime.today.assert_called_once()
         assert metadata["start_date"] == expected_return_date
 
-    def test_valid_request_david(self, mocker, mock_david):
+    def test_valid_request_david(self, mocker, mock_david, mock_next_php):
         mocker.patch('whatsonms.utils.broadcast',
                      return_value=Response(200, message='mock response'))
         mock_update = mock_david(sample_file=DAVID_SAMPLE)
@@ -113,19 +126,33 @@ class TestHandler:
         expected_response = '126753'
         assert metadata['mm_uid'] == expected_response
 
-    def test_air_break_response_from_david__no_present_track_element(self, mocker, mock_david,
-                                                                     mock_web_client):
+    def test_david_has_php(self, mocker, mock_david):
+        playlist_history = ['dr', 'funkenstein']
         mocker.patch('whatsonms.utils.broadcast',
                      return_value=Response(200, message='mock response'))
+        mocker.patch('whatsonms.php.next_playlist_history_preview', return_value=playlist_history)
+        mock_update = mock_david(sample_file=DAVID_SAMPLE)
+        mock_update_body = self.clean_json_from_str(mock_update['body'])
+        metadata = mock_update_body['data']['attributes']['Item']['metadata']
+        assert 'playlist_hist_preview' in metadata
+        php.next_playlist_history_preview.assert_called_once()
+        assert metadata['playlist_hist_preview'] == playlist_history
+
+    def test_air_break_response_from_david__no_present_track_element(self, mocker, mock_david,
+                                                                     mock_web_client, mock_next_php):
+        mocker.patch('whatsonms.utils.broadcast',
+                     return_value=Response(200, message='mock response'))
+        mocker.patch('whatsonms.php.playlist_history_preview', return_value=[])
         mock_david(sample_file=DAVID_NO_PRESENT_TRACK)
         whats_on = mock_web_client()
         whats_on_body = self.clean_json_from_str(whats_on['body'])
         assert whats_on_body['data']['attributes']['Item']['metadata']['air_break'] is True
 
     def test_air_break_response_from_david__nonmusic_metadata(self, mocker, mock_david,
-                                                              mock_web_client):
+                                                              mock_web_client, mock_next_php):
         mocker.patch('whatsonms.utils.broadcast',
                      return_value=Response(200, message='mock response'))
+        mocker.patch('whatsonms.php.playlist_history_preview', return_value=[])
         mock_david(sample_file=DAVID_NON_MUSIC_METADATA)
         whats_on = mock_web_client()
         whats_on_body = self.clean_json_from_str(whats_on['body'])
@@ -146,7 +173,7 @@ class TestHandler:
         assert metadata is None
 
     def test_valid_request_web_client(self, mocker, mock_david,
-                                      mock_web_client):
+                                      mock_web_client, mock_next_php):
         mocker.patch('whatsonms.utils.broadcast',
                      return_value=Response(200, message='mock response'))
         mock_update = mock_david(sample_file=DAVID_SAMPLE)
@@ -156,7 +183,7 @@ class TestHandler:
         assert whats_on_body['data']['attributes']['Item'] == \
             mock_update_body['data']['attributes']['Item']
 
-    def test_valid_request_web_client_2(self, mocker, mock_nexgen,
+    def test_valid_request_web_client_2(self, mocker, mock_nexgen, mock_next_php,
                                         mock_web_client):
         mocker.patch('whatsonms.utils.broadcast',
                      return_value=Response(200, message='mock response'))
@@ -169,7 +196,7 @@ class TestHandler:
         assert whats_on_body['data']['attributes']['Item'] == \
             mock_update_body['data']['attributes']['Item']
 
-    def test_normalized_keys(self, mocker, mock_david, mock_nexgen):
+    def test_normalized_keys(self, mocker, mock_david, mock_nexgen, mock_next_php):
         mocker.patch('whatsonms.utils.broadcast',
                      return_value=Response(200, message='mock response'))
         mock_update_david = mock_david(sample_file=DAVID_SAMPLE)
@@ -182,7 +209,8 @@ class TestHandler:
 
         assert [*data_david] == [*data_nexgen]
 
-    def test_weird_david_cdata(self, mocker, mock_david, mock_web_client):
+    def test_weird_david_cdata(self, mocker, mock_david,
+                               mock_web_client, mock_php, mock_next_php):
         # sometimes (on the weekend) we get xml with double escaped CDATA
         # blocks. xmltodict chokes on these. gotta be able to handle it.
         mocker.patch('whatsonms.utils.broadcast',
@@ -192,7 +220,7 @@ class TestHandler:
         whats_on_body = self.clean_json_from_str(whats_on['body'])
         assert whats_on_body['data']['attributes']['Item']['metadata']['air_break'] is True
 
-    def test_time_stamp_converted_to_unix_time_david(self, mocker, mock_david):
+    def test_time_stamp_converted_to_unix_time_david(self, mocker, mock_david, mock_next_php):
         mocker.patch('whatsonms.utils.broadcast',
                      return_value=Response(200, message='mock response'))
         mock_update_david = mock_david(sample_file=DAVID_SAMPLE)
@@ -201,7 +229,7 @@ class TestHandler:
         assert mock_update_david_body['data']['attributes']['Item']['metadata']['epoch_start_time'] \
             == 1365718760
 
-    def test_time_stamp_converted_to_iso_time_david(self, mocker, mock_david):
+    def test_time_stamp_converted_to_iso_time_david(self, mocker, mock_david, mock_next_php):
         mocker.patch('whatsonms.utils.broadcast',
                      return_value=Response(200, message='mock response'))
         mock_update_david = mock_david(sample_file=DAVID_SAMPLE)
@@ -212,7 +240,7 @@ class TestHandler:
         assert mock_update_david_body['data']['attributes']['Item']['metadata']['iso_start_time'] \
             == "2013-04-11T22:19:20+00:00"
 
-    def test_composer_name_correctly_displayed(self, mocker, mock_david):
+    def test_composer_name_correctly_displayed(self, mocker, mock_david, mock_next_php):
         # So...
         # The composer/pianist Lucien-Léon-Guillaume Lambert is displaying as
         # Lucien-LÃ©on-Guillaume Lambert ... because that's how it comes from DAVID
@@ -222,7 +250,7 @@ class TestHandler:
         assert mock_update_david_body['data']['attributes']['Item']['metadata']['mm_composer1'] == \
             'Lucien-Léon-Guillaume Lambert'
 
-    def test_time_stamp_converted_to_unix_time_nexgen(self, mocker, mock_nexgen):
+    def test_time_stamp_converted_to_unix_time_nexgen(self, mocker, mock_nexgen, mock_next_php):
         mocker.patch('whatsonms.utils.broadcast',
                      return_value=Response(200, message='mock response'))
         mock_update_nexgen = mock_nexgen(NEXGEN_SAMPLE_QS)
@@ -232,7 +260,7 @@ class TestHandler:
         assert mock_update_nexgen_body['data']['attributes']['Item']['metadata']['epoch_start_time'] \
             == 1541537320
 
-    def test_time_stamp_converted_to_iso_time_nexgen(self, mocker, mock_nexgen):
+    def test_time_stamp_converted_to_iso_time_nexgen(self, mocker, mock_nexgen, mock_next_php):
         mocker.patch('whatsonms.utils.broadcast',
                      return_value=Response(200, message='mock response'))
         mock_update_nexgen = mock_nexgen(NEXGEN_SAMPLE_QS)
@@ -242,7 +270,7 @@ class TestHandler:
         assert mock_update_nexgen_body['data']['attributes']['Item']['metadata']['iso_start_time'] \
             == "2018-11-06T20:48:40+00:00"
 
-    def test_invalid_metadata_no_overwrite(self, mocker, mock_nexgen,
+    def test_invalid_metadata_no_overwrite(self, mocker, mock_nexgen, mock_next_php,
                                            mock_web_client):
         """
         Tests that providing invalid metadata does not result in valid
