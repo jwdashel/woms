@@ -82,7 +82,7 @@ class TestHandler:
                      return_value=Response(200, message='mock response'))
         mock_update = mock_nexgen(NEXGEN_SAMPLE_QS)
         mock_update_body = self.clean_json_from_str(mock_update['body'])
-        metadata = mock_update_body['data']['attributes']['Item']['metadata']
+        metadata = mock_update_body['data']['attributes']
         expected_response = '978416'
         assert metadata['mm_uid'] == expected_response
 
@@ -93,7 +93,7 @@ class TestHandler:
         mocker.patch('whatsonms.php.next_playlist_history_preview', return_value=playlist_history)
         mock_update = mock_nexgen(NEXGEN_SAMPLE_QS)
         mock_update_body = self.clean_json_from_str(mock_update['body'])
-        metadata = mock_update_body['data']['attributes']['Item']['metadata']
+        metadata = mock_update_body['data']['attributes']
         assert 'playlist_hist_preview' in metadata
         php.next_playlist_history_preview.assert_called_once()
         assert metadata['playlist_hist_preview'] == playlist_history
@@ -111,7 +111,7 @@ class TestHandler:
         mock_update = mock_nexgen(NEXGEN_NODATE_QS)
         response_body = mock_update["body"]
         mock_update_body = self.clean_json_from_str(response_body)
-        metadata = mock_update_body['data']['attributes']['Item']['metadata']
+        metadata = mock_update_body['data']['attributes']
         assert "start_date" in metadata
 
         v1.datetime.today.assert_called_once()
@@ -122,7 +122,7 @@ class TestHandler:
                      return_value=Response(200, message='mock response'))
         mock_update = mock_david(sample_file=DAVID_SAMPLE)
         mock_update_body = self.clean_json_from_str(mock_update['body'])
-        metadata = mock_update_body['data']['attributes']['Item']['metadata']
+        metadata = mock_update_body['data']['attributes']
         expected_response = '126753'
         assert metadata['mm_uid'] == expected_response
 
@@ -133,7 +133,7 @@ class TestHandler:
         mocker.patch('whatsonms.php.next_playlist_history_preview', return_value=playlist_history)
         mock_update = mock_david(sample_file=DAVID_SAMPLE)
         mock_update_body = self.clean_json_from_str(mock_update['body'])
-        metadata = mock_update_body['data']['attributes']['Item']['metadata']
+        metadata = mock_update_body['data']['attributes']
         assert 'playlist_hist_preview' in metadata
         php.next_playlist_history_preview.assert_called_once()
         assert metadata['playlist_hist_preview'] == playlist_history
@@ -146,7 +146,7 @@ class TestHandler:
         mock_david(sample_file=DAVID_NO_PRESENT_TRACK)
         whats_on = mock_web_client()
         whats_on_body = self.clean_json_from_str(whats_on['body'])
-        assert whats_on_body['data']['attributes']['Item']['metadata']['air_break'] is True
+        assert whats_on_body['data']['attributes']['air_break'] is True
 
     def test_air_break_response_from_david__nonmusic_metadata(self, mocker, mock_david,
                                                               mock_web_client, mock_next_php):
@@ -156,7 +156,7 @@ class TestHandler:
         mock_david(sample_file=DAVID_NON_MUSIC_METADATA)
         whats_on = mock_web_client()
         whats_on_body = self.clean_json_from_str(whats_on['body'])
-        assert whats_on_body['data']['attributes']['Item']['metadata']['air_break'] is True
+        assert whats_on_body['data']['attributes']['air_break'] is True
 
     def test_invalid_request_web_client(self, mock_web_client):
         resp = mock_web_client(stream_slug='foobar')
@@ -201,12 +201,15 @@ class TestHandler:
                      return_value=Response(200, message='mock response'))
         mock_update_david = mock_david(sample_file=DAVID_SAMPLE)
         mock_update_david_body = self.clean_json_from_str(mock_update_david['body'])
-        data_david = mock_update_david_body['data']['attributes']['Item']
+        data_david = mock_update_david_body['data']['attributes']
 
         mock_update_nexgen = mock_nexgen(NEXGEN_SAMPLE_QS)
         mock_update_nexgen_body = self.clean_json_from_str(mock_update_nexgen['body'])
-        data_nexgen = mock_update_nexgen_body['data']['attributes']['Item']
+        data_nexgen = mock_update_nexgen_body['data']['attributes']
 
+    #fake news
+        # if [*data_david] != [*data_nexgen]:
+        # assert [*data_david] == [*data_nexgen]
         assert [*data_david] == [*data_nexgen]
 
     def test_weird_david_cdata(self, mocker, mock_david,
@@ -218,7 +221,7 @@ class TestHandler:
         mock_david(sample_file=DAVID_WEIRD_CDATA)
         whats_on = mock_web_client()
         whats_on_body = self.clean_json_from_str(whats_on['body'])
-        assert whats_on_body['data']['attributes']['Item']['metadata']['air_break'] is True
+        assert whats_on_body['data']['attributes']['air_break'] is True
 
     def test_time_stamp_converted_to_unix_time_david(self, mocker, mock_david, mock_next_php):
         mocker.patch('whatsonms.utils.broadcast',
@@ -226,7 +229,7 @@ class TestHandler:
         mock_update_david = mock_david(sample_file=DAVID_SAMPLE)
         mock_update_david_body = self.clean_json_from_str(mock_update_david['body'])
         # ASSUME david Real_Start_Time = 2013-04-11 18:19:20.111
-        assert mock_update_david_body['data']['attributes']['Item']['metadata']['epoch_start_time'] \
+        assert mock_update_david_body['data']['attributes']['epoch_start_time'] \
             == 1365718760
 
     def test_time_stamp_converted_to_iso_time_david(self, mocker, mock_david, mock_next_php):
@@ -235,9 +238,9 @@ class TestHandler:
         mock_update_david = mock_david(sample_file=DAVID_SAMPLE)
         mock_update_david_body = self.clean_json_from_str(mock_update_david['body'])
 
-        assert 'iso_start_time' in mock_update_david_body['data']['attributes']['Item']['metadata']
+        assert 'iso_start_time' in mock_update_david_body['data']['attributes']
         # ASSUME david Real_Start_Time = 2013-04-11 18:19:20.111
-        assert mock_update_david_body['data']['attributes']['Item']['metadata']['iso_start_time'] \
+        assert mock_update_david_body['data']['attributes']['iso_start_time'] \
             == "2013-04-11T22:19:20+00:00"
 
     def test_composer_name_correctly_displayed(self, mocker, mock_david, mock_next_php):
@@ -247,7 +250,7 @@ class TestHandler:
         # Turns out publisher is using trusty windows-1252 encoding
         mock_update_david = mock_david(sample_file=DAVID_SPECIAL_CHARS)
         mock_update_david_body = self.clean_json_from_str(mock_update_david['body'])
-        assert mock_update_david_body['data']['attributes']['Item']['metadata']['mm_composer1'] == \
+        assert mock_update_david_body['data']['attributes']['mm_composer1'] == \
             'Lucien-Léon-Guillaume Lambert'
 
     def test_time_stamp_converted_to_unix_time_nexgen(self, mocker, mock_nexgen, mock_next_php):
@@ -257,7 +260,7 @@ class TestHandler:
         mock_update_nexgen_body = self.clean_json_from_str(mock_update_nexgen['body'])
         # ASSUME nexgen played_date = 11/06/2018
         #               played_time = 15:48:40
-        assert mock_update_nexgen_body['data']['attributes']['Item']['metadata']['epoch_start_time'] \
+        assert mock_update_nexgen_body['data']['attributes']['epoch_start_time'] \
             == 1541537320
 
     def test_time_stamp_converted_to_iso_time_nexgen(self, mocker, mock_nexgen, mock_next_php):
@@ -267,7 +270,7 @@ class TestHandler:
         mock_update_nexgen_body = self.clean_json_from_str(mock_update_nexgen['body'])
         # ASSUME nexgen played_date = 11/06/2018
         #               played_time = 15:48:40
-        assert mock_update_nexgen_body['data']['attributes']['Item']['metadata']['iso_start_time'] \
+        assert mock_update_nexgen_body['data']['attributes']['iso_start_time'] \
             == "2018-11-06T20:48:40+00:00"
 
     def test_invalid_metadata_no_overwrite(self, mocker, mock_nexgen, mock_next_php,
@@ -285,5 +288,5 @@ class TestHandler:
         resp_2 = mock_web_client()
         resp_2_body = self.clean_json_from_str(resp_2['body'])
 
-        assert resp_1_body['data']['attributes']['Item'] == \
-            resp_2_body['data']['attributes']['Item']
+        assert resp_1_body['data']['attributes'] == \
+            resp_2_body['data']['attributes']
