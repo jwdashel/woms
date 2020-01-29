@@ -78,6 +78,7 @@ NORMALIZED_KEY_NAMES = [
     'iso_start_time'
 ]
 
+
 class TestHandler:
     def clean_json_from_str(self, json_str: str):
         """
@@ -114,7 +115,8 @@ class TestHandler:
         playlist_history = ['aint', 'that', 'easy']
         mocker.patch('whatsonms.utils.broadcast',
                      return_value=Response(200, message='mock response'))
-        mocker.patch('whatsonms.php.next_playlist_history_preview', return_value=playlist_history)
+        mocker.patch('whatsonms.php.next_playlist_history_preview',
+                     return_value=playlist_history)
         mock_update = mock_nexgen(NEXGEN_SAMPLE_QS)
         mock_update_body = self.clean_json_from_str(mock_update['body'])
         metadata = mock_update_body['data']['attributes']
@@ -154,7 +156,8 @@ class TestHandler:
         playlist_history = ['dr', 'funkenstein']
         mocker.patch('whatsonms.utils.broadcast',
                      return_value=Response(200, message='mock response'))
-        mocker.patch('whatsonms.php.next_playlist_history_preview', return_value=playlist_history)
+        mocker.patch('whatsonms.php.next_playlist_history_preview',
+                     return_value=playlist_history)
         mock_update = mock_david(sample_file=DAVID_SAMPLE)
         mock_update_body = self.clean_json_from_str(mock_update['body'])
         metadata = mock_update_body['data']['attributes']
@@ -222,19 +225,21 @@ class TestHandler:
 
     def test_normalize_david_keys(self, mocker, mock_david, mock_next_php):
         mocker.patch('whatsonms.utils.broadcast',
-                        return_value=Response(200, message='mock response'))
+                     return_value=Response(200, message='mock response'))
         mock_update_david = mock_david(sample_file=DAVID_SAMPLE)
-        mock_update_david_body = self.clean_json_from_str(mock_update_david['body'])
+        mock_update_david_body = self.clean_json_from_str(
+            mock_update_david['body'])
         data_david = mock_update_david_body['data']['attributes']
 
         for k in [*data_david]:
             assert k in NORMALIZED_KEY_NAMES
 
-    def test_normalize_nexgen_keys(self, mocker, mock_nexgen, mock_next_php): 
+    def test_normalize_nexgen_keys(self, mocker, mock_nexgen, mock_next_php):
         mocker.patch('whatsonms.utils.broadcast',
-                        return_value=Response(200, message='mock response'))
+                     return_value=Response(200, message='mock response'))
         mock_update_nexgen = mock_nexgen(NEXGEN_SAMPLE_QS)
-        mock_update_nexgen_body = self.clean_json_from_str(mock_update_nexgen['body'])
+        mock_update_nexgen_body = self.clean_json_from_str(
+            mock_update_nexgen['body'])
         data_nexgen = mock_update_nexgen_body['data']['attributes']
 
         for k in [*data_nexgen]:
@@ -255,7 +260,8 @@ class TestHandler:
         mocker.patch('whatsonms.utils.broadcast',
                      return_value=Response(200, message='mock response'))
         mock_update_david = mock_david(sample_file=DAVID_SAMPLE)
-        mock_update_david_body = self.clean_json_from_str(mock_update_david['body'])
+        mock_update_david_body = self.clean_json_from_str(
+            mock_update_david['body'])
         # ASSUME david Real_Start_Time = 2013-04-11 18:19:20.111
         assert mock_update_david_body['data']['attributes']['epoch_start_time'] \
             == 1365718760
@@ -264,7 +270,8 @@ class TestHandler:
         mocker.patch('whatsonms.utils.broadcast',
                      return_value=Response(200, message='mock response'))
         mock_update_david = mock_david(sample_file=DAVID_SAMPLE)
-        mock_update_david_body = self.clean_json_from_str(mock_update_david['body'])
+        mock_update_david_body = self.clean_json_from_str(
+            mock_update_david['body'])
 
         assert 'iso_start_time' in mock_update_david_body['data']['attributes']
         # ASSUME david Real_Start_Time = 2013-04-11 18:19:20.111
@@ -277,7 +284,8 @@ class TestHandler:
         # Lucien-LÃ©on-Guillaume Lambert ... because that's how it comes from DAVID
         # Turns out publisher is using trusty windows-1252 encoding
         mock_update_david = mock_david(sample_file=DAVID_SPECIAL_CHARS)
-        mock_update_david_body = self.clean_json_from_str(mock_update_david['body'])
+        mock_update_david_body = self.clean_json_from_str(
+            mock_update_david['body'])
         assert mock_update_david_body['data']['attributes']['mm_composer1'] == \
             'Lucien-Léon-Guillaume Lambert'
 
@@ -285,7 +293,8 @@ class TestHandler:
         mocker.patch('whatsonms.utils.broadcast',
                      return_value=Response(200, message='mock response'))
         mock_update_nexgen = mock_nexgen(NEXGEN_SAMPLE_QS)
-        mock_update_nexgen_body = self.clean_json_from_str(mock_update_nexgen['body'])
+        mock_update_nexgen_body = self.clean_json_from_str(
+            mock_update_nexgen['body'])
         # ASSUME nexgen played_date = 11/06/2018
         #               played_time = 15:48:40
         assert mock_update_nexgen_body['data']['attributes']['epoch_start_time'] \
@@ -295,7 +304,8 @@ class TestHandler:
         mocker.patch('whatsonms.utils.broadcast',
                      return_value=Response(200, message='mock response'))
         mock_update_nexgen = mock_nexgen(NEXGEN_SAMPLE_QS)
-        mock_update_nexgen_body = self.clean_json_from_str(mock_update_nexgen['body'])
+        mock_update_nexgen_body = self.clean_json_from_str(
+            mock_update_nexgen['body'])
         # ASSUME nexgen played_date = 11/06/2018
         #               played_time = 15:48:40
         assert mock_update_nexgen_body['data']['attributes']['iso_start_time'] \

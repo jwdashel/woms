@@ -65,7 +65,6 @@ class MetadataDB(DB):
             return metadata['Item']['metadata']
         except KeyError:
             return {}
-        #return metadata['Item']['metadata'] if metadata else {}
 
     def set_metadata(self, stream: str, metadata: Dict) -> Dict:
         """

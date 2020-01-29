@@ -10,11 +10,6 @@ def playlist_history_preview(stream: str) -> List[dict]:
 
 def next_playlist_history_preview(stream: str) -> List[dict]:
     metadata = metadb.get_metadata(stream)
-    #Item{
-    # metadata{
-    # epcoh
-    # iso
-    # lenghth }}
 
     if 'playlist_hist_preview' in metadata:
         php = metadata['playlist_hist_preview']
