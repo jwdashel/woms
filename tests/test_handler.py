@@ -49,9 +49,22 @@ NEXGEN_NOTITLE_XML = """
 <number>978416</number>
 </audio>
 """
+NEXGEN_AIRBREAK_XML = """
+<audio ID="id_2926362004_30792815">
+<type>Alternate Text</type>
+<status>Playing</status>
+<number>0</number>
+<length>00:00:00</length>
+<played_time>00:00:00</played_time>
+<title>WNYC2 New York Public Radio</title>
+<artist></artist>
+<composer></composer>
+</audio>
+"""
 NEXGEN_SAMPLE_QS = parse.quote(NEXGEN_SAMPLE_XML, safe=())
 NEXGEN_NODATE_QS = parse.quote(NEXGEN_NODATE_XML, safe=())
 NEXGEN_NOTITLE_QS = parse.quote(NEXGEN_NOTITLE_XML, safe=())
+NEXGEN_AIRBREAK_QS = parse.quote(NEXGEN_AIRBREAK_XML, safe=())
 
 
 class TestHandler:
@@ -116,6 +129,19 @@ class TestHandler:
 
         v1.datetime.today.assert_called_once()
         assert metadata["start_date"] == expected_return_date
+
+    def test_airbreak_nexgen(self, mocker, mock_nexgen, mock_next_php):
+        mocker.patch('whatsonms.utils.broadcast',
+                     return_value=Response(200, message='mock response'))
+        mocker.patch('whatsonms.v1.datetime')
+
+        mock_update = mock_nexgen(NEXGEN_AIRBREAK_QS)
+        response_body = mock_update["body"]
+        mock_update_body = self.clean_json_from_str(response_body)
+        metadata = mock_update_body['data']['attributes']['Item']['metadata']
+
+        assert type(metadata['air_break']) is bool
+        assert metadata['air_break']
 
     def test_valid_request_david(self, mocker, mock_david, mock_next_php):
         mocker.patch('whatsonms.utils.broadcast',
