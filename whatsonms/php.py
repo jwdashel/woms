@@ -3,14 +3,13 @@ from typing import List
 
 
 def playlist_history_preview(stream: str) -> List[dict]:
-    metadata = metadb.get_metadata(stream)['Item']['metadata']
+    metadata = metadb.get_metadata(stream)
     php = metadata['playlist_hist_preview'] if 'playlist_hist_preview' in metadata else []
     return php
 
 
 def next_playlist_history_preview(stream: str) -> List[dict]:
     metadata = metadb.get_metadata(stream)
-    metadata = metadata['Item']['metadata']
 
     if 'playlist_hist_preview' in metadata:
         php = metadata['playlist_hist_preview']
