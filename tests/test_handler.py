@@ -140,6 +140,7 @@ class TestHandler:
         mock_update_body = self.clean_json_from_str(response_body)
         metadata = mock_update_body['data']['attributes']['Item']['metadata']
 
+        import pdb; pdb.set_trace();
         assert type(metadata['air_break']) is bool
         assert metadata['air_break']
 
