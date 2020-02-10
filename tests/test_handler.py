@@ -159,7 +159,6 @@ class TestHandler:
     def test_airbreak_nexgen(self, mocker, mock_nexgen, mock_next_php):
         mocker.patch('whatsonms.utils.broadcast',
                      return_value=Response(200, message='mock response'))
-        mocker.patch('whatsonms.v1.datetime')
 
         mock_update = mock_nexgen(NEXGEN_AIRBREAK_QS)
         response_body = mock_update["body"]

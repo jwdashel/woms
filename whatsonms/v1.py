@@ -114,6 +114,9 @@ def parse_metadata_nexgen(event: Dict) -> Dict:
         if "start_date" not in normalized:
             normalized["start_date"] = datetime.today().strftime('%m/%d/%Y')
 
+        if int(normalized["mm_uid"]) == 0:
+            return air_break('wqxr')
+
         normalized = standardize_timestamps(normalized)
 
         return normalized
