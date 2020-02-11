@@ -1,6 +1,7 @@
 import logging
 from typing import Dict
 from datetime import datetime
+from whatsonms.dynamodb import metadb
 
 import whatsonms.utils as utils
 import whatsonms.php as php
@@ -145,3 +146,29 @@ def parse_metadata_david(event: Dict, stream) -> Dict:
         except ValueError:
             # ValueError thrown if no 'present' track in xmldict
             return air_break(stream)
+
+def just_print():
+    print('just things')
+
+def airbreak_nexgen(event: Dict, stream) -> Dict:
+    print("hello world")
+    # metadata = metadb.get_metadata(stream)
+    # metadata = metadata['Item']['metadata']
+    xml = event.get('queryStringParameters', {}).get('xml_contents')
+    print('hello', xml)
+   # print('hello', metadata)
+
+    
+
+    # if metadata['mm_uid'] == 0:
+    #     return 'lol hi'
+        #return ['airbreak']
+
+    # mock_update = mock_nexgen(NEXGEN_AIRBREAK_QS)
+    #     response_body = mock_update["body"]
+    #     mock_update_body = self.clean_json_from_str(response_body)
+    #     metadata = mock_update_body['data']['attributes']['Item']['metadata']
+
+    #     assert type(metadata['air_break']) is bool
+    #     assert metadata['air_break']
+
