@@ -100,7 +100,7 @@ def normalize_encodings(present_track_info: dict) -> dict:
     return present_track_info
 
 
-def parse_metadata_nexgen(event: Dict) -> Dict:
+def parse_metadata_nexgen(event: Dict, stream) -> Dict:
     """
     Parse new metadata from NexGen -- format it as JSON and return it.
     """
@@ -115,7 +115,7 @@ def parse_metadata_nexgen(event: Dict) -> Dict:
             normalized["start_date"] = datetime.today().strftime('%m/%d/%Y')
 
         if int(normalized["mm_uid"]) == 0:
-            return air_break('wqxr')
+            return air_break(stream)
 
         normalized = standardize_timestamps(normalized)
 

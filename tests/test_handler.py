@@ -163,7 +163,7 @@ class TestHandler:
         mock_update = mock_nexgen(NEXGEN_AIRBREAK_QS)
         response_body = mock_update["body"]
         mock_update_body = self.clean_json_from_str(response_body)
-        metadata = mock_update_body['data']['attributes']['Item']['metadata']
+        metadata = mock_update_body['data']['attributes']
 
         assert type(metadata['air_break']) is bool
         assert metadata['air_break']
