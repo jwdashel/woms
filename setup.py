@@ -49,6 +49,7 @@ setup(
         'pytest-flake8',
         'pytest-mock',
         'pytest-sugar',
+        'request',
     ],
     url='https://github.com/nypublicradio/whats-on-microservice',
     version='0.0.0',

@@ -150,3 +150,71 @@ def ddb_metadata_no_hist():
         "title": "If You Were The Only Boy In The World",
         "start_date": "12/12/2019",
     }
+
+
+def nexgen_sample():
+    return """
+<audio ID="id_3189206699_30701071">
+<type>Song</type>
+<status>None</status>
+<played_date>11/06/2018</played_date>
+<played_time>15:48:40</played_time>
+<length>00:03:31</length>
+<title>One Nation Under a Groove</title>
+<comment1>Funkadelic</comment1>
+<number>978416</number>
+</audio>
+"""
+
+
+def nexgen_sample_2():
+    return """
+<audio ID="id_3189206699_30701071">
+<type>Song</type>
+<status>None</status>
+<played_date>11/06/2018</played_date>
+<played_time>16:48:40</played_time>
+<length>00:03:31</length>
+<title>Ruby, My Dear</title>
+<comment1>Thelonius Monk</comment1>
+<number>101017</number>
+</audio>
+"""
+
+
+def nexgen_nodate():
+    return """
+<audio ID="id_3189206699_30701071">
+<type>Song</type>
+<status>None</status>
+<played_time>15:48:40</played_time>
+<length>00:03:31</length>
+<title>One Nation Under a Groove</title>
+<composer>Funkadelic</composer>
+<number>978416</number>
+</audio>
+"""
+
+
+def nexgen_notitle():
+    return """
+<audio ID="id_3189206699_30701071">
+<type>Song</type>
+<status>None</status>
+<played_time>15:48:40</played_time>
+<length>00:03:31</length>
+<title></title>
+<composer>Funkadelic</composer>
+<number>978416</number>
+</audio>
+"""
+
+
+def david_sample(ver=0):
+    '''
+    Gives a DAViD update body.
+    Args:
+        ver: david samples with different content (currently supporting [0..0])
+    '''
+    with open(f'tests/david_xmls/david_sample_{ver}.xml') as f:
+        return f.read()

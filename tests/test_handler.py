@@ -8,6 +8,8 @@ from whatsonms.utils import Response
 from whatsonms import v1
 from whatsonms import php
 
+import tests.test_data as test_data
+
 DAVID_SAMPLE = './tests/david_archive_sample.xml'
 DAVID_NO_PRESENT_TRACK = './tests/david_archive_sample__no_present_track.xml'
 DAVID_NON_MUSIC_METADATA = './tests/david_non_music_metadata.xml'
@@ -15,40 +17,10 @@ DAVID_SPECIAL_CHARS = './tests/david_special_chars.xml'
 DAVID_WEIRD_CDATA = './tests/david_weird_cdata.xml'
 DAVID_NO_COMPOSER = './tests/david_no_composer.xml'
 DAVID_NO_TITLE = './tests/david_no_title.xml'
-NEXGEN_SAMPLE_XML = """
-<audio ID="id_3189206699_30701071">
-<type>Song</type>
-<status>None</status>
-<played_date>11/06/2018</played_date>
-<played_time>15:48:40</played_time>
-<length>00:03:31</length>
-<title>I Concentrate On You</title>
-<composer>Steve Lawrence</composer>
-<number>978416</number>
-</audio>
-"""
-NEXGEN_NODATE_XML = """
-<audio ID="id_3189206699_30701071">
-<type>Song</type>
-<status>None</status>
-<played_time>15:48:40</played_time>
-<length>00:03:31</length>
-<title>I Concentrate On You</title>
-<composer>Steve Lawrence</composer>
-<number>978416</number>
-</audio>
-"""
-NEXGEN_NOTITLE_XML = """
-<audio ID="id_3189206699_30701071">
-<type>Song</type>
-<status>None</status>
-<played_time>15:48:40</played_time>
-<length>00:03:31</length>
-<title></title>
-<composer>Steve Lawrence</composer>
-<number>978416</number>
-</audio>
-"""
+
+NEXGEN_SAMPLE_XML = test_data.nexgen_sample()
+NEXGEN_NODATE_XML = test_data.nexgen_nodate()
+NEXGEN_NOTITLE_XML = test_data.nexgen_notitle()
 NEXGEN_SAMPLE_QS = parse.quote(NEXGEN_SAMPLE_XML, safe=())
 NEXGEN_NODATE_QS = parse.quote(NEXGEN_NODATE_XML, safe=())
 NEXGEN_NOTITLE_QS = parse.quote(NEXGEN_NOTITLE_XML, safe=())
