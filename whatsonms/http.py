@@ -79,7 +79,6 @@ class HttpRouter:
         """
         stream = params.get('stream')
         metadata = v1.parse_metadata_nexgen(event)
-        v1.airbreak_nexgen(event, stream)
         if metadata:
             metadata['playlist_hist_preview'] = php.next_playlist_history_preview(stream)
         return _update(metadata, stream)
@@ -93,7 +92,6 @@ class HttpRouter:
         """
         stream = params.get('stream')
         metadata = v1.parse_metadata_david(event, stream)
-        v1.just_print()
         if metadata:
             metadata['playlist_hist_preview'] = php.next_playlist_history_preview(stream)
         return _update(metadata, stream)
