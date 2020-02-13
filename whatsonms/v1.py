@@ -1,7 +1,6 @@
 import logging
 from typing import Dict
 from datetime import datetime
-from whatsonms.dynamodb import metadb
 
 import whatsonms.utils as utils
 import whatsonms.php as php
