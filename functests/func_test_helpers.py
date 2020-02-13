@@ -1,25 +1,22 @@
 offset = "\t\t"
+woms_keys = {
+    "title": "title",
+    "composer": "mm_composer1",
+    "mm_uid": "mm_uid"
+}
+
 def assert_and_report(element, one, another):
     print(f"{offset}  asserting that {element} is {one} ...")
     assert one == another
     print(f"{offset}\u2713 {one} is {element}!")
 
+#TODO: report a failure gracefully
 
-def send_track(playout_system):
-    for sample_input in playout_system.sample_inputs():
+assert_same_title = lambda test_case_name, whatson, playout, system: assert_and_report(test_case_name,
+        whatson.get(woms_keys["title"]), playout.get(system.norm_keys["title"]))
 
-        print("\tsending new track to woms ...", end=' ')
+assert_same_composer = lambda test_case_name, whatson, playout, system: assert_and_report(test_case_name,
+        whatson.get(woms_keys["composer"]), playout.get(system.norm_keys["composer"]))
 
-        r = playout_system.update_track(sample_input)
-        print(f"{r.status_code}\n")
-        assert r.status_code == 200
-
-        print("\tasserting WOMs knows what's on ...", end=' ')
-
-        r = requests.get(woms_whatson)
-        print(f"{r.status_code}")
-        assert r.status_code == 200
-
-        whats_on = ast.literal_eval(r.text)['data']['attributes']
-
-        yield whats_on, playout_system.reference_track(sample_input)
+assert_same_id = lambda test_case_name, whatson, playout, system: assert_and_report(test_case_name,
+        whatson.get(woms_keys["mm_uid"]), playout.get(system.norm_keys["mm_uid"]))
