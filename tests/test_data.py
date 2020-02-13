@@ -210,7 +210,8 @@ def nexgen_notitle():
 """
 
 
-def nexgen_airbreak = """
+def nexgen_airbreak():
+    return """
 <audio ID="id_2926362004_30792815">
 <type>Alternate Text</type>
 <status>Playing</status>
