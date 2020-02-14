@@ -157,8 +157,6 @@ def broadcast(stream: str, recipient_ids: List = [],
     data_in_bytes = bytes(json.dumps(data), 'utf-8')
 
     if recipient_ids:
-        print('****** RECIPIENT IDS found ******* ', recipient_ids)
-
         with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
             future_to_connex_id = {
                 executor.submit(_send_message, ws_client, connex_id,
@@ -172,6 +170,7 @@ def broadcast(stream: str, recipient_ids: List = [],
             except Exception as e:
                 print('{} threw an exception: {}'.format(connex_id, e))
 
+        print(f"SENDING UPDATE TO {recipient_ids}: " + str(data))
         return Response(200, message="Broadcast sent to %s subscribers" % stream)
 
     else:
