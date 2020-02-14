@@ -1,3 +1,5 @@
+import sys
+
 offset = "\t\t"
 woms_keys = {
     "title": "title",
@@ -7,8 +9,11 @@ woms_keys = {
 
 def assert_and_report(element, one, another):
     print(f"{offset}  asserting that {element} is {one} ...")
-    assert one == another
-    print(f"{offset}\u2713 {one} is {element}!")
+    try:
+        assert one == another
+        print(f"{offset}\u2713 {one} is {element}!")
+    except AssertionError as e:
+        sys.exit(f"\nERROR: {element} {one} does not equal {another}!")
 
 #TODO: report a failure gracefully
 

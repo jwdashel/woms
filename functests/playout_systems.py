@@ -24,7 +24,9 @@ class David(PlayoutSystem):
     name = "DAViD"
     inputs = [
         test_data.david_sample(0),
-        test_data.david_sample(1)
+        test_data.david_sample(1),
+        test_data.david_airbreak(),
+        test_data.david_sample(0)
     ]
     norm_keys = {
         "title": "Title",
@@ -45,7 +47,9 @@ class NexGen(PlayoutSystem):
     # TODO: readjust input index
     inputs = [
         test_data.nexgen_sample(),
-        test_data.nexgen_sample_2()
+        test_data.nexgen_sample_2(),
+        test_data.nexgen_airbreak(),
+        test_data.nexgen_sample()
     ]
     norm_keys = {
         "title": "title",
@@ -77,6 +81,7 @@ def send_track(playout_system):
         print(f"{r.status_code}")
         assert r.status_code == 200
 
-        whats_on = ast.literal_eval(r.text)['data']['attributes']
+        # replace json's true with python's True
+        whats_on = ast.literal_eval(r.text.replace("true", "True"))['data']['attributes']
 
         yield whats_on, playout_system.reference_track(sample_input)

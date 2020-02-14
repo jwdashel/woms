@@ -32,5 +32,19 @@ for playout_system in [NexGen(), David()]:
     helpers.assert_same_composer("current track composer", whats_on_next, what_should_be_on_next, playout_system)
     helpers.assert_same_id("current track id", whats_on_next, what_should_be_on_next, playout_system)
 
+    print()
+    airbreak, _ = next(playout)
+    helpers.assert_and_report("air break", True, airbreak['air_break'])
+
+    after_airbreak_track, expected_after_airbreak_track = next(playout)
+
+    php = after_airbreak_track['playlist_hist_preview']
+    pre_airbreak_track = php[0]
+
+    helpers.assert_same_title("pre-airbreak track title", pre_airbreak_track, what_should_be_on_next, playout_system)
+    helpers.assert_same_title("post-airbreak track title", after_airbreak_track, expected_after_airbreak_track, playout_system)
+
     print("\n")
+
+print("wham, bam, thank you, ma'am")
 
