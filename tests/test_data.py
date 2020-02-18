@@ -153,6 +153,10 @@ def ddb_metadata_no_hist():
 
 
 def nexgen_sample():
+    return nexgen_sample_0()
+
+
+def nexgen_sample_0():
     return """
 <audio ID="id_3189206699_30701071">
 <type>Song</type>
@@ -167,7 +171,7 @@ def nexgen_sample():
 """
 
 
-def nexgen_sample_2():
+def nexgen_sample_1():
     return """
 <audio ID="id_3189206699_30701071">
 <type>Song</type>
@@ -229,7 +233,7 @@ def david_sample(ver=0):
     '''
     Gives a DAViD update body.
     Args:
-        ver: david samples with different content (currently supporting [0..0])
+        ver: david samples with different content (currently supporting [0..1])
     '''
     with open(f'tests/david_xmls/david_sample_{ver}.xml') as f:
         return f.read()

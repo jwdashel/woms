@@ -42,7 +42,6 @@ class David(PlayoutSystem):
 
 class NexGen(PlayoutSystem):
     name = "NexGen"
-    # TODO: readjust input index
     norm_keys = {
         "title": "title",
         "composer": "comment1",
@@ -57,7 +56,6 @@ class NexGen(PlayoutSystem):
     def reference_track(self, sample_input):
         return dict(dict(xmltodict.parse(sample_input))['audio'])
 
-#TODO: method of playoutsystem?
 def send_track(playout_system):
     for sample_input in playout_system.sample_inputs():
 

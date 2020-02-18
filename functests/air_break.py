@@ -9,9 +9,9 @@ david_inputs = [
     test_data.david_sample(1)
 ]
 nexgen_inputs = [
-    test_data.nexgen_sample(),
+    test_data.nexgen_sample_0(),
     test_data.nexgen_airbreak(),
-    test_data.nexgen_sample_2(),
+    test_data.nexgen_sample_1(),
 ]
 
 
