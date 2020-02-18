@@ -18,11 +18,31 @@ class PlayoutSystem(object):
     def update_track(self, sample_input):
         raise NotImplementedError()
 
-    def update_track(self, sample_input):
+    def reference_track(self, sample_input):
         raise NotImplementedError()
 
     def __str__(self):
         return self.name
+
+    def queue_tracks(self):
+        for sample_input in self.sample_inputs():
+
+            print("\tsending new track to WOMs ...", end=' ')
+
+            r = self.update_track(sample_input)
+            print(f"{r.status_code}\n")
+            assert r.status_code == 200
+
+            print("\tasserting WOMs knows what's on ...", end=' ')
+
+            r = requests.get(woms_whatson)
+            print(f"{r.status_code}")
+            assert r.status_code == 200
+
+            # replace json's true with python's True
+            whats_on = ast.literal_eval(r.text.replace("true", "True"))['data']['attributes']
+
+            yield whats_on, self.reference_track(sample_input)
 
 class David(PlayoutSystem):
     name = "DAViD"
@@ -56,22 +76,3 @@ class NexGen(PlayoutSystem):
     def reference_track(self, sample_input):
         return dict(dict(xmltodict.parse(sample_input))['audio'])
 
-def send_track(playout_system):
-    for sample_input in playout_system.sample_inputs():
-
-        print("\tsending new track to woms ...", end=' ')
-
-        r = playout_system.update_track(sample_input)
-        print(f"{r.status_code}\n")
-        assert r.status_code == 200
-
-        print("\tasserting WOMs knows what's on ...", end=' ')
-
-        r = requests.get(woms_whatson)
-        print(f"{r.status_code}")
-        assert r.status_code == 200
-
-        # replace json's true with python's True
-        whats_on = ast.literal_eval(r.text.replace("true", "True"))['data']['attributes']
-
-        yield whats_on, playout_system.reference_track(sample_input)
