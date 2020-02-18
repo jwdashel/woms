@@ -26,7 +26,7 @@ for playout_system in [NexGen(nexgen_inputs), David(david_inputs)]:
     helpers.assert_same_id("id", whats_on, what_should_be_on, playout_system)
 
     airbreak, _ = next(playout)
-    helpers.assert_and_report("air break", True, airbreak['air_break'])
+    helpers.assert_and_report("air break", False, airbreak['air_break'])
 
     after_airbreak_track, expected_after_airbreak_track = next(playout)
 
