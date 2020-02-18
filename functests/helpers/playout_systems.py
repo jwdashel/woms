@@ -7,7 +7,11 @@ import xmltodict
 stream = 'thefunc'
 woms_whatson = f"https://api.demo.nypr.digital/whats-on/v1/whats-on?stream={stream}"
 
+
 class PlayoutSystem(object):
+    def __init__(self, data):
+        self.inputs = data
+
     def sample_inputs(self):
         return self.inputs
 
@@ -22,12 +26,6 @@ class PlayoutSystem(object):
 
 class David(PlayoutSystem):
     name = "DAViD"
-    inputs = [
-        test_data.david_sample(0),
-        test_data.david_sample(1),
-        test_data.david_airbreak(),
-        test_data.david_sample(0)
-    ]
     norm_keys = {
         "title": "Title",
         "composer": "Music_Composer",
@@ -45,12 +43,6 @@ class David(PlayoutSystem):
 class NexGen(PlayoutSystem):
     name = "NexGen"
     # TODO: readjust input index
-    inputs = [
-        test_data.nexgen_sample(),
-        test_data.nexgen_sample_2(),
-        test_data.nexgen_airbreak(),
-        test_data.nexgen_sample()
-    ]
     norm_keys = {
         "title": "title",
         "composer": "comment1",
