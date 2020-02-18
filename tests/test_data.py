@@ -234,6 +234,7 @@ def david_sample(ver=0):
     with open(f'tests/david_xmls/david_sample_{ver}.xml') as f:
         return f.read()
 
+
 def david_airbreak():
     with open('tests/david_non_music_metadata.xml') as f:
         return f.read()
