@@ -39,6 +39,8 @@ jobs:
               --junitxml=test-results/pytest/results.xml \
               --cov-report=xml:coverage.xml
             cc-test-reporter after-build --coverage-input-type coverage.py --exit-code $?
+            # run integration tests
+            for func_test in functests/*.py ; do python $func_test ; done
       - save_cache:
           <<: *cache
           paths:
