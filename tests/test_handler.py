@@ -8,11 +8,7 @@ from whatsonms.response import Response
 from whatsonms import v1
 from whatsonms import php
 
-<<<<<<< HEAD
 import tests.test_data as test_data
-=======
-from tests import test_data
->>>>>>> test fixes
 
 DAVID_SAMPLE = './tests/david_archive_sample.xml'
 DAVID_NO_PRESENT_TRACK = './tests/david_archive_sample__no_present_track.xml'
