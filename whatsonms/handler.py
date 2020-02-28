@@ -4,7 +4,7 @@ from typing import Dict
 from whatsonms.sentry import sentry
 from whatsonms import config
 from whatsonms.http import HttpRouter
-from whatsonms.utils import Response
+from whatsonms.response import Response
 from whatsonms.ws import WebSocketRouter
 
 

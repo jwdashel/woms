@@ -1,3 +1,6 @@
+def stream_name():
+    return "mainstream"
+
 # a well-formed, complete metadata entry
 def ddb_response():
     return {
@@ -242,3 +245,135 @@ def david_sample(ver=0):
 def david_airbreak():
     with open('tests/david_non_music_metadata.xml') as f:
         return f.read()
+
+def parsed_metadata():
+    # Metadata freshly parsed from david or nexgen
+    return {
+        "album": "1000 gecs",
+        "length": "10",
+        "mm_composer1": "100 gecs",
+        "title": "stupid horse",
+        "mm_uid": "10000",
+        "epoch_start_time": 1582755110
+    }
+
+def playlist_hist_preview():
+    return [
+        {
+            "album": "lost time",
+            "length": "873",
+            "mm_composer1": "tacocat",
+            "title": "i hate the weekend",
+            "mm_uid": "98122",
+            "epoch_start_time": 1582755111
+        },
+        {
+            "album": "speak no evil",
+            "length": "912",
+            "mm_composer1": "wayne shorter",
+            "title": "witch hunt",
+            "mm_uid": "1966",
+            "epoch_start_time": 1582755112
+        },
+        {
+            "album": "hounds of love",
+            "length": "123",
+            "mm_composer1": "kate bush",
+            "title": "running up that hill",
+            "mm_uid": "1985",
+            "epoch_start_time": 1582755113
+        }
+    ]
+
+def jsonapi_response():
+     return {
+        "data": {
+            "type": "whats-on",
+            "id": "whats-on",
+            "attributes": {
+                "air-break": False
+            },
+            "meta": {
+                "source": "DAViD"
+            },
+            "relationships": {
+                "track": {
+                    "data": {
+                        "id": f"{stream_name()}_1582755110_10000",
+                        "type": "track"
+                    }
+                },
+                "recent-tracks": {
+                    "data": [
+                        {
+                            "id": f"{stream_name()}_1582755111_98122",
+                            "type": "track"
+                        },
+                        {
+                            "id": f"{stream_name()}_1582755112_1966",
+                            "type": "track"
+                        },
+                        {
+                            "id": f"{stream_name()}_1582755113_1985",
+                            "type": "track"
+                        }
+                    ]
+                }
+            }
+        },
+        "included": [
+            {
+                "id": f"{stream_name()}_1582755110_10000",
+                "type": "track",
+                "attributes": 
+                {
+                    "album": "1000 gecs",
+                    "length": "10",
+                    "mm_composer1": "100 gecs",
+                    "title": "stupid horse",
+                    "mm_uid": "10000",
+                    "epoch_start_time": 1582755110
+                }
+            },
+            {
+                "id": f"{stream_name()}_1582755111_98122",
+                "type": "track",
+                "attributes": 
+                {
+                    "album": "lost time",
+                    "length": "873",
+                    "mm_composer1": "tacocat",
+                    "title": "i hate the weekend",
+                    "mm_uid": "98122",
+                    "epoch_start_time": 1582755111
+                }
+            },
+            {
+                "id": f"{stream_name()}_1582755112_1966",
+                "type": "track",
+                "attributes": 
+                {
+                    "album": "speak no evil",
+                    "length": "912",
+                    "mm_composer1": "wayne shorter",
+                    "title": "witch hunt",
+                    "mm_uid": "1966",
+                    "epoch_start_time": 1582755112
+                }
+            },
+            {
+                "id": f"{stream_name()}_1582755113_1985",
+                "type": "track",
+                "attributes": 
+                {
+                    "album": "hounds of love",
+                    "length": "123",
+                    "mm_composer1": "kate bush",
+                    "title": "running up that hill",
+                    "mm_uid": "1985",
+                    "epoch_start_time": 1582755113
+                }
+            }
+        ]
+    }
+

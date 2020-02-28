@@ -4,11 +4,15 @@ from urllib import parse
 from datetime import datetime
 from unittest.mock import MagicMock
 
-from whatsonms.utils import Response
+from whatsonms.response import Response
 from whatsonms import v1
 from whatsonms import php
 
+<<<<<<< HEAD
 import tests.test_data as test_data
+=======
+from tests import test_data
+>>>>>>> test fixes
 
 DAVID_SAMPLE = './tests/david_archive_sample.xml'
 DAVID_NO_PRESENT_TRACK = './tests/david_archive_sample__no_present_track.xml'
@@ -78,8 +82,9 @@ class TestHandler:
         assert resp['statusCode'] == 404
 
     def test_valid_request_nexgen(self, mocker, mock_nexgen, mock_next_php):
-        mocker.patch('whatsonms.utils.broadcast',
-                     return_value=Response(200, message='mock response'))
+        mocker.patch('whatsonms.response.broadcast',
+                     return_value=Response(test_data.parsed_metadata(), 
+                        test_data.playlist_hist_preview(), test_data.stream_name(), ""))
         mock_update = mock_nexgen(NEXGEN_SAMPLE_QS)
         mock_update_body = self.clean_json_from_str(mock_update['body'])
         metadata = mock_update_body['data']['attributes']
@@ -88,8 +93,9 @@ class TestHandler:
 
     def test_nexgen_has_php(self, mocker, mock_nexgen):
         playlist_history = ['aint', 'that', 'easy']
-        mocker.patch('whatsonms.utils.broadcast',
-                     return_value=Response(200, message='mock response'))
+        mocker.patch('whatsonms.response.broadcast',
+                     return_value=Response(test_data.parsed_metadata(),
+                         test_data.playlist_hist_preview(), test_data.stream_name(), ""))
         mocker.patch('whatsonms.php.next_playlist_history_preview',
                      return_value=playlist_history)
         mock_update = mock_nexgen(NEXGEN_SAMPLE_QS)
@@ -101,8 +107,9 @@ class TestHandler:
 
     def test_no_date_nexgen(self, mocker, mock_nexgen, mock_next_php):
         # When NEXGEN sends XML without play date field
-        mocker.patch('whatsonms.utils.broadcast',
-                     return_value=Response(200, message='mock response'))
+        mocker.patch('whatsonms.response.broadcast',
+                     return_value=Response(test_data.parsed_metadata(),
+                         test_data.playlist_hist_preview(), test_data.stream_name(), ""))
         mocker.patch('whatsonms.v1.datetime')
 
         expected_date = datetime(2018, 9, 13)
@@ -119,8 +126,9 @@ class TestHandler:
         assert metadata["start_date"] == expected_return_date
 
     def test_airbreak_nexgen(self, mocker, mock_nexgen, mock_next_php):
-        mocker.patch('whatsonms.utils.broadcast',
-                     return_value=Response(200, message='mock response'))
+        mocker.patch('whatsonms.response.broadcast',
+                     return_value=Response(test_data.parsed_metadata(),
+                         test_data.playlist_hist_preview(), test_data.stream_name(), ""))
 
         mock_update = mock_nexgen(NEXGEN_AIRBREAK_QS)
         response_body = mock_update["body"]
@@ -131,8 +139,9 @@ class TestHandler:
         assert metadata['air_break']
 
     def test_valid_request_david(self, mocker, mock_david, mock_next_php):
-        mocker.patch('whatsonms.utils.broadcast',
-                     return_value=Response(200, message='mock response'))
+        mocker.patch('whatsonms.response.broadcast',
+                     return_value=Response(test_data.parsed_metadata(),
+                         test_data.playlist_hist_preview(), test_data.stream_name(), ""))
         mock_update = mock_david(sample_file=DAVID_SAMPLE)
         mock_update_body = self.clean_json_from_str(mock_update['body'])
         metadata = mock_update_body['data']['attributes']
@@ -141,8 +150,9 @@ class TestHandler:
 
     def test_david_has_php(self, mocker, mock_david):
         playlist_history = ['dr', 'funkenstein']
-        mocker.patch('whatsonms.utils.broadcast',
-                     return_value=Response(200, message='mock response'))
+        mocker.patch('whatsonms.response.broadcast',
+                     return_value=Response(test_data.parsed_metadata(),
+                         test_data.playlist_hist_preview(), test_data.stream_name(), ""))
         mocker.patch('whatsonms.php.next_playlist_history_preview',
                      return_value=playlist_history)
         mock_update = mock_david(sample_file=DAVID_SAMPLE)
@@ -154,8 +164,9 @@ class TestHandler:
 
     def test_air_break_response_from_david__no_present_track_element(self, mocker, mock_david,
                                                                      mock_web_client, mock_next_php):
-        mocker.patch('whatsonms.utils.broadcast',
-                     return_value=Response(200, message='mock response'))
+        mocker.patch('whatsonms.response.broadcast',
+                     return_value=Response(test_data.parsed_metadata(),
+                         test_data.playlist_hist_preview(), test_data.stream_name(), ""))
         mocker.patch('whatsonms.php.playlist_history_preview', return_value=[])
         mock_david(sample_file=DAVID_NO_PRESENT_TRACK)
         whats_on = mock_web_client()
@@ -164,8 +175,9 @@ class TestHandler:
 
     def test_air_break_response_from_david__nonmusic_metadata(self, mocker, mock_david,
                                                               mock_web_client, mock_next_php):
-        mocker.patch('whatsonms.utils.broadcast',
-                     return_value=Response(200, message='mock response'))
+        mocker.patch('whatsonms.response.broadcast',
+                     return_value=Response(test_data.parsed_metadata(),
+                         test_data.playlist_hist_preview(), test_data.stream_name(), ""))
         mocker.patch('whatsonms.php.playlist_history_preview', return_value=[])
         mock_david(sample_file=DAVID_NON_MUSIC_METADATA)
         whats_on = mock_web_client()
@@ -188,8 +200,9 @@ class TestHandler:
 
     def test_valid_request_web_client(self, mocker, mock_david,
                                       mock_web_client, mock_next_php):
-        mocker.patch('whatsonms.utils.broadcast',
-                     return_value=Response(200, message='mock response'))
+        mocker.patch('whatsonms.response.broadcast',
+                     return_value=Response(test_data.parsed_metadata(),
+                         test_data.playlist_hist_preview(), test_data.stream_name(), ""))
         mock_update = mock_david(sample_file=DAVID_SAMPLE)
         mock_update_body = self.clean_json_from_str(mock_update['body'])
         whats_on = mock_web_client()
@@ -199,8 +212,9 @@ class TestHandler:
 
     def test_valid_request_web_client_2(self, mocker, mock_nexgen, mock_next_php,
                                         mock_web_client):
-        mocker.patch('whatsonms.utils.broadcast',
-                     return_value=Response(200, message='mock response'))
+        mocker.patch('whatsonms.response.broadcast',
+                     return_value=Response(test_data.parsed_metadata(),
+                         test_data.playlist_hist_preview(), test_data.stream_name(), ""))
         mock_update = mock_nexgen(NEXGEN_SAMPLE_QS)
         mock_update_body = self.clean_json_from_str(mock_update['body'])
 
@@ -211,8 +225,9 @@ class TestHandler:
             mock_update_body['data']['attributes']
 
     def test_normalize_david_keys(self, mocker, mock_david, mock_next_php):
-        mocker.patch('whatsonms.utils.broadcast',
-                     return_value=Response(200, message='mock response'))
+        mocker.patch('whatsonms.response.broadcast',
+                     return_value=Response(test_data.parsed_metadata(),
+                         test_data.playlist_hist_preview(), test_data.stream_name(), ""))
         mock_update_david = mock_david(sample_file=DAVID_SAMPLE)
         mock_update_david_body = self.clean_json_from_str(
             mock_update_david['body'])
@@ -222,8 +237,9 @@ class TestHandler:
             assert k in NORMALIZED_KEY_NAMES
 
     def test_normalize_nexgen_keys(self, mocker, mock_nexgen, mock_next_php):
-        mocker.patch('whatsonms.utils.broadcast',
-                     return_value=Response(200, message='mock response'))
+        mocker.patch('whatsonms.response.broadcast',
+                     return_value=Response(test_data.parsed_metadata(),
+                         test_data.playlist_hist_preview(), test_data.stream_name(), ""))
         mock_update_nexgen = mock_nexgen(NEXGEN_SAMPLE_QS)
         mock_update_nexgen_body = self.clean_json_from_str(
             mock_update_nexgen['body'])
@@ -236,16 +252,18 @@ class TestHandler:
                                mock_web_client, mock_php, mock_next_php):
         # sometimes (on the weekend) we get xml with double escaped CDATA
         # blocks. xmltodict chokes on these. gotta be able to handle it.
-        mocker.patch('whatsonms.utils.broadcast',
-                     return_value=Response(200, message='mock response'))
+        mocker.patch('whatsonms.response.broadcast',
+                     return_value=Response(test_data.parsed_metadata(),
+                         test_data.playlist_hist_preview(), test_data.stream_name(), ""))
         mock_david(sample_file=DAVID_WEIRD_CDATA)
         whats_on = mock_web_client()
         whats_on_body = self.clean_json_from_str(whats_on['body'])
         assert whats_on_body['data']['attributes']['air_break'] is True
 
     def test_time_stamp_converted_to_unix_time_david(self, mocker, mock_david, mock_next_php):
-        mocker.patch('whatsonms.utils.broadcast',
-                     return_value=Response(200, message='mock response'))
+        mocker.patch('whatsonms.response.broadcast',
+                     return_value=Response(test_data.parsed_metadata(),
+                         test_data.playlist_hist_preview(), test_data.stream_name(), ""))
         mock_update_david = mock_david(sample_file=DAVID_SAMPLE)
         mock_update_david_body = self.clean_json_from_str(
             mock_update_david['body'])
@@ -254,8 +272,9 @@ class TestHandler:
             == 1365718760
 
     def test_time_stamp_converted_to_iso_time_david(self, mocker, mock_david, mock_next_php):
-        mocker.patch('whatsonms.utils.broadcast',
-                     return_value=Response(200, message='mock response'))
+        mocker.patch('whatsonms.response.broadcast',
+                     return_value=Response(test_data.parsed_metadata(),
+                         test_data.playlist_hist_preview(), test_data.stream_name(), ""))
         mock_update_david = mock_david(sample_file=DAVID_SAMPLE)
         mock_update_david_body = self.clean_json_from_str(
             mock_update_david['body'])
@@ -277,8 +296,9 @@ class TestHandler:
             'Lucien-Léon-Guillaume Lambert'
 
     def test_time_stamp_converted_to_unix_time_nexgen(self, mocker, mock_nexgen, mock_next_php):
-        mocker.patch('whatsonms.utils.broadcast',
-                     return_value=Response(200, message='mock response'))
+        mocker.patch('whatsonms.response.broadcast',
+                     return_value=Response(test_data.parsed_metadata(),
+                         test_data.playlist_hist_preview(), test_data.stream_name(), ""))
         mock_update_nexgen = mock_nexgen(NEXGEN_SAMPLE_QS)
         mock_update_nexgen_body = self.clean_json_from_str(
             mock_update_nexgen['body'])
@@ -288,8 +308,9 @@ class TestHandler:
             == 1541537320
 
     def test_time_stamp_converted_to_iso_time_nexgen(self, mocker, mock_nexgen, mock_next_php):
-        mocker.patch('whatsonms.utils.broadcast',
-                     return_value=Response(200, message='mock response'))
+        mocker.patch('whatsonms.response.broadcast',
+                     return_value=Response(test_data.parsed_metadata(),
+                         test_data.playlist_hist_preview(), test_data.stream_name(), ""))
         mock_update_nexgen = mock_nexgen(NEXGEN_SAMPLE_QS)
         mock_update_nexgen_body = self.clean_json_from_str(
             mock_update_nexgen['body'])
@@ -304,8 +325,9 @@ class TestHandler:
         Tests that providing invalid metadata does not result in valid
         data being overwritten.
         """
-        mocker.patch('whatsonms.utils.broadcast',
-                     return_value=Response(200, message='mock response'))
+        mocker.patch('whatsonms.response.broadcast',
+                     return_value=Response(test_data.parsed_metadata(),
+                         test_data.playlist_hist_preview(), test_data.stream_name(), ""))
         resp_1 = mock_nexgen(NEXGEN_SAMPLE_QS)
         resp_1_body = self.clean_json_from_str(resp_1['body'])
 
