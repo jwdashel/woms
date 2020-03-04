@@ -157,8 +157,6 @@ def broadcast(stream: str, recipient_ids: List = [],
     data_in_bytes = bytes(json.dumps(data), 'utf-8')
 
     if recipient_ids:
-        print('****** RECIPIENT IDS found ******* ', recipient_ids)
-
         with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
             future_to_connex_id = {
                 executor.submit(_send_message, ws_client, connex_id,
