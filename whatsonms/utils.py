@@ -170,7 +170,6 @@ def broadcast(stream: str, recipient_ids: List = [],
             except Exception as e:
                 print('{} threw an exception: {}'.format(connex_id, e))
 
-        print(f"SENDING UPDATE TO {recipient_ids}: " + str(data_in_bytes))
         return Response(200, message="Broadcast sent to %s subscribers" % stream)
 
     else:
