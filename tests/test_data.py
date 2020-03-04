@@ -126,18 +126,54 @@ def air_break_():
                 "start_date": "12/12/2019",
             },
             {
-                "iso_start_time": "2019-12-12T14:35:53+00:00",
+                "iso_start_time": "2019-12-12t14:35:53+00:00",
                 "start_time": "09:35:53",
                 "epoch_start_time": "1576172150",
                 "length": "00:03:25",
-                "mm_soloist1": "Blythe Danner",
+                "mm_soloist1": "blythe danner",
                 "mm_uid": "983817",
-                "title": "If u were the only girl in the world",
+                "title": "if u were the only girl in the world",
                 "start_date": "12/12/2019",
             }
         ]
     }
 
+def playlist_hist():
+    history = [
+        {
+            "album": "Pony",
+            "mm_uid": "863483",
+            "epoch_start_time": "1583264406",
+            "mm_composer": "Orville Peck",
+            "title": "Dead of Night"
+        },
+        {
+            "album": "The Shape of Jazz to Come",
+            "mm_uid": "239487",
+            "epoch_start_time": "1583264407",
+            "mm_composer": "Ornette Coleman",
+            "title": "Eventually"
+        },
+        {
+            "album": "Sometimes I Sit and Think, and Sometimes I Just Sit",
+            "mm_uid": "723409",
+            "epoch_start_time": "1583264408",
+            "mm_composer": "Courtney Barnett",
+            "title": "Pedestrian At Best"
+        },
+        {
+            "album": "Baby on Baby",
+            "mm_uid": "982343",
+            "epoch_start_time": "1583264409",
+            "mm_composer": "DaBaby",
+            "title": "Suge"
+        },
+    ]
+    start, stop = 0, 3
+    while stop <= len(history):
+        yield history[start:stop]
+        start += 1
+        stop += 1
 
 # metadata with no playlist history
 def ddb_metadata_no_hist():
@@ -218,6 +254,8 @@ def nexgen_notitle():
 
 
 def nexgen_airbreak():
+    # `title` is the key field here
+    # its contents indicate air break
     return """
 <audio ID="id_2926362004_30792815">
 <type>Alternate Text</type>
