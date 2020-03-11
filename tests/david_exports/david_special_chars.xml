@@ -604,9 +604,9 @@
   <Time_Stop>2019-11-14 11:58:07.505</Time_Stop>
   <Time_TakeDuration>408602</Time_TakeDuration>
   <Time_TextDuration>0</Time_TextDuration>
-  <Title>Broceliande: Overture</Title>
-  <USA.WNYC.CONDUCTOR>Richard Rosenberg, conductor</USA.WNYC.CONDUCTOR>
-  <USA.WNYC.ORCHESTRA>Hot Springs Festival Symphony Orchestra</USA.WNYC.ORCHESTRA>
+  <Title>special char title</Title>
+  <USA.WNYC.CONDUCTOR>special char conductor</USA.WNYC.CONDUCTOR>
+  <USA.WNYC.ORCHESTRA>special char orchestra</USA.WNYC.ORCHESTRA>
   <USA.WNYC.SONGID>154557</USA.WNYC.SONGID>
   <USA.WNYC.VOCAL>0</USA.WNYC.VOCAL>
  </item>

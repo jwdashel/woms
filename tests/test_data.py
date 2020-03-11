@@ -1,6 +1,22 @@
 def stream_name():
     return "mainstream"
 
+def parsed_metadata():
+    return { 
+        "catno": "25990",
+        "david_guid": "{B8033E5E-4231-4C03-AE34-4FD23D4817DC}",
+        "epoch_start_time": "1583789083",
+        "iso_start_time": "2020-03-09T21:24:43+00:00",
+        "length": "983377",
+        "mm_composer1": "Richard Strauss",
+        "mm_conductor": "Kurt Masur, conductor",
+        "mm_ensemble1": "New York Philharmonic",
+        "mm_reclabel": "Teldec",
+        "mm_uid": "110813",
+        "start_time": "2020-03-09 17:24:43.813",
+        "title": "Don Juan, Op. 20"
+    }
+
 # a well-formed, complete metadata entry
 def ddb_response():
     return {
@@ -201,11 +217,15 @@ def nexgen_sample_0():
 <type>Song</type>
 <status>None</status>
 <played_date>11/06/2018</played_date>
-<played_time>15:48:40</played_time>
+<played_time>16:48:40</played_time>
 <length>00:03:31</length>
-<title>One Nation Under a Groove</title>
-<comment1>Funkadelic</comment1>
-<number>978416</number>
+<title>Ruby, My Dear</title>
+<album_title>Monk's Music</album_title>
+<comment1>Thelonius Monk</comment1>
+<alt_artist>Thelonius Monk Septet</alt_artist>
+<composer>Coleman Hawkins</composer>
+<licensor>Monk</licensor>
+<number>101017</number>
 </audio>
 """
 
@@ -216,11 +236,15 @@ def nexgen_sample_1():
 <type>Song</type>
 <status>None</status>
 <played_date>11/06/2018</played_date>
-<played_time>16:48:40</played_time>
+<played_time>15:48:40</played_time>
 <length>00:03:31</length>
-<title>Ruby, My Dear</title>
-<comment1>Thelonius Monk</comment1>
-<number>101017</number>
+<title>Groovallegiance</title>
+<album_title>One Nation Under a Groove</album_title>
+<composer>George Clinton</composer>
+<alt_artist>P-Funk</alt_artist>
+<licensor>Bootsy Collins</licensor>
+<comment1>Funkadelic</comment1>
+<number>978416</number>
 </audio>
 """
 
@@ -232,22 +256,12 @@ def nexgen_nodate():
 <status>None</status>
 <played_time>15:48:40</played_time>
 <length>00:03:31</length>
-<title>One Nation Under a Groove</title>
-<composer>Funkadelic</composer>
-<number>978416</number>
-</audio>
-"""
-
-
-def nexgen_notitle():
-    return """
-<audio ID="id_3189206699_30701071">
-<type>Song</type>
-<status>None</status>
-<played_time>15:48:40</played_time>
-<length>00:03:31</length>
-<title></title>
-<composer>Funkadelic</composer>
+<title>Bank Account</title>
+<composer>21 Savage</composer>
+<alt_artist>Metro Boomin</alt_artist>
+<licensor>21 Savage</licensor>
+<album_title>Issa Album</album_title>
+<comment1>21 Savage</comment1>
 <number>978416</number>
 </audio>
 """
@@ -283,135 +297,3 @@ def david_sample(ver=0):
 def david_airbreak():
     with open('tests/david_non_music_metadata.xml') as f:
         return f.read()
-
-def parsed_metadata():
-    # Metadata freshly parsed from david or nexgen
-    return {
-        "album": "1000 gecs",
-        "length": "10",
-        "mm_composer1": "100 gecs",
-        "title": "stupid horse",
-        "mm_uid": "10000",
-        "epoch_start_time": 1582755110
-    }
-
-def playlist_hist_preview():
-    return [
-        {
-            "album": "lost time",
-            "length": "873",
-            "mm_composer1": "tacocat",
-            "title": "i hate the weekend",
-            "mm_uid": "98122",
-            "epoch_start_time": 1582755111
-        },
-        {
-            "album": "speak no evil",
-            "length": "912",
-            "mm_composer1": "wayne shorter",
-            "title": "witch hunt",
-            "mm_uid": "1966",
-            "epoch_start_time": 1582755112
-        },
-        {
-            "album": "hounds of love",
-            "length": "123",
-            "mm_composer1": "kate bush",
-            "title": "running up that hill",
-            "mm_uid": "1985",
-            "epoch_start_time": 1582755113
-        }
-    ]
-
-def jsonapi_response():
-     return {
-        "data": {
-            "type": "whats-on",
-            "id": "whats-on",
-            "attributes": {
-                "air-break": False
-            },
-            "meta": {
-                "source": "DAViD"
-            },
-            "relationships": {
-                "track": {
-                    "data": {
-                        "id": f"{stream_name()}_1582755110_10000",
-                        "type": "track"
-                    }
-                },
-                "recent-tracks": {
-                    "data": [
-                        {
-                            "id": f"{stream_name()}_1582755111_98122",
-                            "type": "track"
-                        },
-                        {
-                            "id": f"{stream_name()}_1582755112_1966",
-                            "type": "track"
-                        },
-                        {
-                            "id": f"{stream_name()}_1582755113_1985",
-                            "type": "track"
-                        }
-                    ]
-                }
-            }
-        },
-        "included": [
-            {
-                "id": f"{stream_name()}_1582755110_10000",
-                "type": "track",
-                "attributes": 
-                {
-                    "album": "1000 gecs",
-                    "length": "10",
-                    "mm_composer1": "100 gecs",
-                    "title": "stupid horse",
-                    "mm_uid": "10000",
-                    "epoch_start_time": 1582755110
-                }
-            },
-            {
-                "id": f"{stream_name()}_1582755111_98122",
-                "type": "track",
-                "attributes": 
-                {
-                    "album": "lost time",
-                    "length": "873",
-                    "mm_composer1": "tacocat",
-                    "title": "i hate the weekend",
-                    "mm_uid": "98122",
-                    "epoch_start_time": 1582755111
-                }
-            },
-            {
-                "id": f"{stream_name()}_1582755112_1966",
-                "type": "track",
-                "attributes": 
-                {
-                    "album": "speak no evil",
-                    "length": "912",
-                    "mm_composer1": "wayne shorter",
-                    "title": "witch hunt",
-                    "mm_uid": "1966",
-                    "epoch_start_time": 1582755112
-                }
-            },
-            {
-                "id": f"{stream_name()}_1582755113_1985",
-                "type": "track",
-                "attributes": 
-                {
-                    "album": "hounds of love",
-                    "length": "123",
-                    "mm_composer1": "kate bush",
-                    "title": "running up that hill",
-                    "mm_uid": "1985",
-                    "epoch_start_time": 1582755113
-                }
-            }
-        ]
-    }
-

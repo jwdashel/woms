@@ -1,17 +1,21 @@
 import pytest
+from moto import mock_dynamodb2
 
-from tests.test_data import playlist_hist
+import tests.test_data as test_data
+from whatsonms.config import TABLE_METADATA, TABLE_SUBSCRIBERS, URL_PREFIX
+
+from whatsonms.response import Response
 
 import whatsonms.php
 
 @pytest.fixture
 def patch_playlist_hist(monkeypatch):
     def stub_php(*arg, **kwargs):
-        hist = playlist_hist()
+        hist = test_data.playlist_hist()
         return next(hist)
 
     def stub_next_php(*args, **kwargs):
-        hist = playlist_hist()
+        hist = test_data.playlist_hist()
         next(hist)
         return next(hist)
 
@@ -19,3 +23,17 @@ def patch_playlist_hist(monkeypatch):
     monkeypatch.setattr(whatsonms.php, "next_playlist_history_preview", stub_next_php)
 
 
+@pytest.fixture
+def mock_dynamodb():
+    with mock_dynamodb2():
+        from whatsonms.dynamodb import MetadataDB, SubscriberDB
+        MetadataDB(TABLE_METADATA)
+        SubscriberDB(TABLE_SUBSCRIBERS)
+        yield
+
+@pytest.fixture
+def patch_broadcast(mocker):
+    history = test_data.playlist_hist()
+    mocker.patch('whatsonms.response.broadcast',
+                 return_value=Response(test_data.parsed_metadata(),
+                 next(history), test_data.stream_name(), ""))

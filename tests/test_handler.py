@@ -21,11 +21,9 @@ DAVID_NO_TITLE = './tests/david_no_title.xml'
 NEXGEN_AIRBREAK_XML = test_data.nexgen_airbreak()
 NEXGEN_SAMPLE_XML = test_data.nexgen_sample()
 NEXGEN_NODATE_XML = test_data.nexgen_nodate()
-NEXGEN_NOTITLE_XML = test_data.nexgen_notitle()
 
 NEXGEN_SAMPLE_QS = parse.quote(NEXGEN_SAMPLE_XML, safe=())
 NEXGEN_NODATE_QS = parse.quote(NEXGEN_NODATE_XML, safe=())
-NEXGEN_NOTITLE_QS = parse.quote(NEXGEN_NOTITLE_XML, safe=())
 NEXGEN_AIRBREAK_QS = parse.quote(NEXGEN_AIRBREAK_XML, safe=())
 
 

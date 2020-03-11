@@ -104,23 +104,29 @@ class HttpRouter:
         """
         stream = params.get('stream')
         metadata = metadb.get_metadata(stream)
-        pl_hist = metadata['playlist_hist_preview']
-        del metadata['playlist_hist_preview']
+        if 'playlist_hist_preview' in metadata:
+            pl_hist = metadata['playlist_hist_preview']
+            del metadata['playlist_hist_preview']
         if metadata:
             return response.Response(metadata, pl_hist, stream, "")
         return response.NotFoundResponse()
 
 
 def _update(metadata: dict, playlist_hist_preview: dict, stream: str) -> response.Response:
-    if not metadata:
-        print("No metadata found")
-        return response.NotFoundResponse()
+    # if not metadata:
+    #     print("No metadata found")
+    #     return response.NotFoundResponse()
     if not stream:
         print("Missing required parameter 'stream'")
         return response.ErrorResponse(500, "Missing required parameter 'stream'")
 
-    db_entry = dict(metadata)
-    db_entry['playlist_hist_preview'] = playlist_hist_preview
-    metadb.set_metadata(stream, db_entry)
-    whatsonms.response.broadcast(stream, data=db_entry)
+    broadcast = {}
+    if metadata:
+        broadcast = dict(metadata)
+        broadcast['playlist_hist_preview'] = playlist_hist_preview
+        metadb.set_metadata(stream, broadcast)
+    else:
+        broadcast = {"air_break": True}
+        
+    whatsonms.response.broadcast(stream, data=broadcast)
     return response.Response(metadata, playlist_hist_preview, stream, "")

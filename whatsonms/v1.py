@@ -4,6 +4,8 @@ from datetime import datetime
 
 import whatsonms.utils as utils
 import whatsonms.php as php
+from whatsonms.response import Response
+from whatsonms.playout_systems import DAVID, NEXGEN
 
 import xmltodict
 
@@ -70,9 +72,9 @@ class NexgenDataException(Exception):
         Exception.__init__(self, *args, **kwargs)
 
 
-def air_break(stream: str) -> dict:
+def air_break(stream: str, playout_sys: str) -> dict:
     playlist_hist = php.playlist_history_preview(stream)
-    return {"air_break": True, "playlist_hist_preview": playlist_hist}
+    return Response(None, playlist_hist, stream, playout_sys)
 
 
 def normalize_david_dict(present_track_info: dict) -> dict:
@@ -115,7 +117,7 @@ def parse_metadata_nexgen(event: Dict, stream) -> Dict:
             normalized["start_date"] = datetime.today().strftime('%m/%d/%Y')
 
         if int(normalized["mm_uid"]) == 0:
-            return air_break(stream)
+            return None
 
         normalized = standardize_timestamps(normalized)
 
@@ -135,7 +137,7 @@ def parse_metadata_david(event: Dict, stream) -> Dict:
                         if x['@sequence'] == 'present')
 
             if present['Class'] != "Music":
-                return air_break(stream)
+                return None
 
             present = normalize_david_dict(present)
             present = normalize_encodings(present)
@@ -144,4 +146,4 @@ def parse_metadata_david(event: Dict, stream) -> Dict:
             return present
         except ValueError:
             # ValueError thrown if no 'present' track in xmldict
-            return air_break(stream)
+            return None

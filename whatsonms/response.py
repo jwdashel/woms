@@ -8,42 +8,42 @@ from whatsonms.dynamodb import subdb, metadb
 
 class Response(dict):
     """
-    Simple dictionary class that represents a standard Lambda response
-    structure.
     Args:
-        status: An integer HTTP status code.
-        metadata: A string containing the metadata JSON, default is empty.
-        message: A string containing additional info about the response, default
-             is empty.
+        current_track: dict for whats on now (None for no track)
     """
 
     def __init__(self, current_track, playlist_history, stream, playout_system):
+        track = { "data": {
+            "id": generate_id(current_track, stream),
+            "type": "track"
+        }} if current_track else {}
+        
+        all_tracks = [current_track] + playlist_history
+        all_tracks = list(filter(lambda x: x is not None, all_tracks))
+
+        
         response = {
             "data": {
                 "type": "whats-on",
                 "id": "whats-on",
                 "attributes": {
-                    "air-break": False
+                    "air-break": not current_track
                 },
                 "meta": {
                     "source": str(playout_system)
                 },
                 "relationships": {
-                    "track": {
-                        "data": {
-                            "id": generate_id(current_track, stream),
-                            "type": "track"
-                        }
-                    },
+                    "track": track,
                     "recent-tracks": {
                         "data": [
-                            { "id": generate_id(track, stream), "type": "track" } for track in playlist_history 
+                            { "id": generate_id(track, stream), "type": "track" } for track in playlist_history if playlist_history
                         ]
                     }
                 }
             },
             "included": [
-                { "id": generate_id(track, stream), "type": "track", "attributes": track} for track in [current_track] + playlist_history
+                { "id": generate_id(track, stream), "type": "track", 
+                  "attributes": track} for track in all_tracks if all_tracks
             ]
         }
 
