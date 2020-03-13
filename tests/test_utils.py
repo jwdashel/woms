@@ -3,16 +3,17 @@ from unittest.mock import patch
 import whatsonms.utils as utils
 import whatsonms.response as response
 import tests.test_data as test_data
+from whatsonms.playout_systems import DAVID
 
 
 class TestBroadcast:
-    def test_broadcast(self):
+    def test_broadcast(self, mock_dynamodb_tables):
         resp = response.broadcast('wqxr', [], {})
         assert resp['message'] == 'No subscribers'
         assert resp['subscribers'] == []
         assert resp['stream'] == 'wqxr'
 
-    def test_broadcast_with_subscribers(self):
+    def test_broadcast_with_subscribers(self, mock_dynamodb_tables):
         subs = [123, 456, 789]
         resp = response.broadcast('wqxr', subs, {})
         assert resp['message'] == 'Broadcast sent to subscribers'
@@ -26,7 +27,7 @@ class TestBroadcast:
     def test_broadcast_notifies_ws_connections(self, boto):
         conn_id = 7779311
         data = {'meta': 'data'}
-        resp = response.broadcast('wqxr', [conn_id], data)
+        response.broadcast('wqxr', [conn_id], data)
         boto.Session().client().post_to_connection.assert_called()
         boto.Session().client().post_to_connection.assert_called_with(
                 Data=bytes(json.dumps(data), 'utf-8'),
@@ -39,7 +40,7 @@ class TestBroadcast:
         boto.Session().client().post_to_connection.side_effect = side_effect
         conn_id = 7779311
         data = {'meta': 'data'}
-        resp = response.broadcast('wqxr', [conn_id], data)
+        response.broadcast('wqxr', [conn_id], data)
         subscriptiondb.unsubscribe.assert_called_with(conn_id)
 
 
@@ -69,14 +70,15 @@ class TestDateTimeOperations:
 class TestWOMsResponse:
     def test_response(self):
         expected_resp = test_data.jsonapi_response()
+        playlist_hist = next(test_data.playlist_hist())
         resp = response.Response(
-            test_data.parsed_metadata(), 
-            test_data.playlist_hist_preview(), 
+            test_data.parsed_metadata(),
+            playlist_hist,
             "mainstream",
-            "DAViD")
+            DAVID)
         assert list(resp.keys()) == list(expected_resp.keys())
         assert resp == expected_resp
 
     def test_id_generator(self):
         id_ = response.generate_id(test_data.parsed_metadata(), "wqxr")
-        assert id_ == "wqxr_1582755110_10000"
+        assert id_ == "wqxr_1583789083_110813"

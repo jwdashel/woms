@@ -6,6 +6,7 @@ import simplejson as json
 
 from whatsonms.dynamodb import subdb, metadb
 
+
 class Response(dict):
     """
     Args:
@@ -13,15 +14,14 @@ class Response(dict):
     """
 
     def __init__(self, current_track, playlist_history, stream, playout_system):
-        track = { "data": {
+        track = {"data": {
             "id": generate_id(current_track, stream),
             "type": "track"
         }} if current_track else {}
-        
+
         all_tracks = [current_track] + playlist_history
         all_tracks = list(filter(lambda x: x is not None, all_tracks))
 
-        
         response = {
             "data": {
                 "type": "whats-on",
@@ -33,37 +33,61 @@ class Response(dict):
                     "source": str(playout_system)
                 },
                 "relationships": {
-                    "track": track,
+                    "current-track": track,
                     "recent-tracks": {
                         "data": [
-                            { "id": generate_id(track, stream), "type": "track" } for track in playlist_history if playlist_history
+                            {"id": generate_id(track, stream), "type": "track"} for track in playlist_history if playlist_history
                         ]
                     }
                 }
             },
             "included": [
-                { "id": generate_id(track, stream), "type": "track", 
-                  "attributes": track} for track in all_tracks if all_tracks
+                {"id": generate_id(track, stream), "type": "track",
+                 "attributes": track} for track in all_tracks if all_tracks
             ]
         }
 
+        response = Response.dashify_response(response)
 
         dict.__init__(self, **response)
+
+    def dashify_response(response):
+        """
+        The front end likes to have dashed-dict-values for their json. Python of
+        course likes underscored_dict_values. This goes through and replaces all
+        the keys with a dashified version.
+        """
+
+        new_response = {}
+        for key in response.keys():
+            new_key = key.replace('_', '-')
+            if type(response[key]) is dict:
+                new_response[new_key] = Response.dashify_response(response[key])
+            elif type(response[key]) is list:
+                new_response[new_key] = [Response.dashify_response(item) if type(item) is dict else item
+                                         for item in response[key]]
+            else:
+                new_response[new_key] = response[key]
+        return new_response
+
 
 class NotFoundResponse(dict):
     def __init__(self):
         response = {"status": 404, "message": "no metadata found"}
         dict.__init__(self, **response)
 
+
 class ErrorResponse(dict):
     def __init__(self, error_code, error_message):
         response = {"status": error_code, "message": error_message}
         dict.__init__(self, **response)
 
+
 class BroadcastResponse(dict):
     def __init__(self, message, subscribers, current_track, stream):
-        response = { "message": message, "subscribers": subscribers, "current_track": current_track, "stream": stream }
+        response = {"message": message, "subscribers": subscribers, "current_track": current_track, "stream": stream}
         dict.__init__(self, **response)
+
 
 def generate_id(track, stream):
     return f"{stream}_{track['epoch_start_time']}_{track['mm_uid']}"

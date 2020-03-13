@@ -5,7 +5,6 @@ from datetime import datetime
 import whatsonms.utils as utils
 import whatsonms.php as php
 from whatsonms.response import Response
-from whatsonms.playout_systems import DAVID, NEXGEN
 
 import xmltodict
 
@@ -18,16 +17,16 @@ DAVID_MUSIC_ELEMS = (
     ('Music_CDID', 'catno'),
     ('GUID', 'david_guid'),
     ('Time_Duration', 'length'),
-    ('Music_Composer', 'mm_composer1'),
-    ('USA.WNYC.CONDUCTOR', 'mm_conductor'),
-    ('USA.WNYC.ORCHESTRA', 'mm_ensemble1'),
-    ('CDINFO.LABEL', 'mm_reclabel'),
-    ('USA.WNYC.SOLOIST1', 'mm_soloist1'),
-    ('USA.WNYC.SOLOIST2', 'mm_soloist2'),
-    ('USA.WNYC.SOLOIST3', 'mm_soloist3'),
-    ('USA.WNYC.SOLOIST4', 'mm_soloist4'),
-    ('USA.WNYC.SOLOIST5', 'mm_soloist5'),
-    ('USA.WNYC.SOLOIST6', 'mm_soloist6'),
+    ('Music_Composer', 'composer1'),
+    ('USA.WNYC.CONDUCTOR', 'conductor'),
+    ('USA.WNYC.ORCHESTRA', 'ensemble1'),
+    ('CDINFO.LABEL', 'reclabel'),
+    ('USA.WNYC.SOLOIST1', 'soloist1'),
+    ('USA.WNYC.SOLOIST2', 'soloist2'),
+    ('USA.WNYC.SOLOIST3', 'soloist3'),
+    ('USA.WNYC.SOLOIST4', 'soloist4'),
+    ('USA.WNYC.SOLOIST5', 'soloist5'),
+    ('USA.WNYC.SOLOIST6', 'soloist6'),
     ('Music_MusicID', 'mm_uid'),
     # MAP DAVID's Time_RealStart to start_time
     # Front end consumes `start_time`
@@ -44,16 +43,16 @@ NEXGEN_MUSIC_ELEMS = (
     ('', 'catno'),
     ('', 'david_guid'),
     ('length', 'length'),
-    ('comment1', 'mm_composer1'),
-    ('', 'mm_conductor'),
-    ('alt_artist', 'mm_ensemble1'),
-    ('', 'mm_reclabel'),
-    ('composer', 'mm_soloist1'),
-    ('licensor', 'mm_soloist2'),
-    ('', 'mm_soloist3'),
-    ('', 'mm_soloist4'),
-    ('', 'mm_soloist5'),
-    ('', 'mm_soloist6'),
+    ('comment1', 'composer1'),
+    ('', 'conductor'),
+    ('alt_artist', 'ensemble1'),
+    ('', 'reclabel'),
+    ('composer', 'soloist1'),
+    ('licensor', 'soloist2'),
+    ('', 'soloist3'),
+    ('', 'soloist4'),
+    ('', 'soloist5'),
+    ('', 'soloist6'),
     ('number', 'mm_uid'),
     ('', 'real_start_time'),
     ('played_date', 'start_date'),

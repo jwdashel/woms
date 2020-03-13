@@ -1,2 +1,2 @@
-DAVID  = "DAViD"
+DAVID = "DAViD"
 NEXGEN = "NexGen"

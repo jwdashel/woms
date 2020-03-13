@@ -3,13 +3,13 @@ from whatsonms import config
 
 
 class TestMetadataDDB:
-    def test_connect_to_metadata_table(self):
+    def test_connect_to_metadata_table(self, mock_thin_ddb):
         table_name = config.TABLE_METADATA
         metadatabase = MetadataDB(table_name)
         md = metadatabase.get_metadata('wqxr')
         assert not md
 
-    def test_set_and_get_metadata(self):
+    def test_set_and_get_metadata(self, mock_thin_ddb):
         slug = 'wqxr'
         metadata = {'Artist': 'Soccer Mommy'}
         metadatabase = MetadataDB(config.TABLE_METADATA)
@@ -19,13 +19,13 @@ class TestMetadataDDB:
 
 
 class TestSubscribersDDB:
-    def test_connect_to_subscriber_table(self):
+    def test_connect_to_subscriber_table(self, mock_thin_ddb):
         table_name = config.TABLE_SUBSCRIBERS
         subdb = SubscriberDB(table_name)
         md = subdb.get_subscribers('wqxr')
         assert md == []
 
-    def test_add_and_get_subscriber_in_table(self):
+    def test_add_and_get_subscriber_in_table(self, mock_thin_ddb):
         slug = 'wqxr'
         my_id = 'jordan is cool'
         subdb = SubscriberDB(config.TABLE_SUBSCRIBERS)
@@ -34,7 +34,7 @@ class TestSubscribersDDB:
         subs = subdb.get_subscribers(slug)
         assert my_id in subs
 
-    def test_add_and_remove_subscriber_from_table(self):
+    def test_add_and_remove_subscriber_from_table(self, mock_thin_ddb):
         slug = 'wqxr'
         my_id = 'jordan is cool'
         subdb = SubscriberDB(config.TABLE_SUBSCRIBERS)

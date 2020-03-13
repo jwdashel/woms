@@ -1,21 +1,129 @@
+from whatsonms.playout_systems import DAVID
+
+
 def stream_name():
     return "mainstream"
 
+
 def parsed_metadata():
-    return { 
+    return {
         "catno": "25990",
         "david_guid": "{B8033E5E-4231-4C03-AE34-4FD23D4817DC}",
         "epoch_start_time": "1583789083",
         "iso_start_time": "2020-03-09T21:24:43+00:00",
         "length": "983377",
-        "mm_composer1": "Richard Strauss",
-        "mm_conductor": "Kurt Masur, conductor",
-        "mm_ensemble1": "New York Philharmonic",
-        "mm_reclabel": "Teldec",
+        "composer1": "FKA Twigs",
+        "conductor": "Nicolas Jaar",
+        "ensemble1": "Future",
+        "reclabel": "Young Turks",
         "mm_uid": "110813",
-        "start_time": "2020-03-09 17:24:43.813",
-        "title": "Don Juan, Op. 20"
+        "start_time": "2020-03-09 17:24:43.000",
+        "title": "holy terrain",
+        "album": "MAGDALENE"
     }
+
+
+def jsonapi_response():
+    """
+    sample response sent to the FE.
+    NOTE: var names are dashed, not underscored
+    """
+    return {"data": {
+        "type": "whats-on",
+        "id": "whats-on",
+        "attributes": {
+            "air-break": False
+        },
+        "meta": {
+            "source": DAVID
+        },
+        "relationships": {
+            "current-track": {
+                "data": {
+                    "id": "mainstream_1583789083_110813",
+                    "type": "track"
+                    }
+                },
+            "recent-tracks": {
+                "data": [
+                    {
+                        "id": "mainstream_1583264406_863483",
+                        "type": "track"
+                        },
+                    {
+                        "id": "mainstream_1583264407_239487",
+                        "type": "track"
+                        },
+                    {
+                        "id": "mainstream_1583264408_723409",
+                        "type": "track"
+                        }
+                    ]
+                }
+            }
+        },
+        "included": [
+            {
+                "id": "mainstream_1583789083_110813",
+                "type": "track",
+                "attributes": {
+                    "album": "MAGDALENE",
+                    "catno": "25990",
+                    "composer1": "FKA Twigs",
+                    "conductor": "Nicolas Jaar",
+                    "david-guid": "{B8033E5E-4231-4C03-AE34-4FD23D4817DC}",
+                    "ensemble1": "Future",
+                    "length": "983377",
+                    "epoch-start-time": "1583789083",
+                    "mm-uid": "110813",
+                    "reclabel": "Young Turks",
+                    "iso-start-time": "2020-03-09T21:24:43+00:00",
+                    "start-time": "2020-03-09 17:24:43.000",
+                    "title": "holy terrain"
+                    }
+                },
+            {
+                "id": "mainstream_1583264406_863483",
+                "type": "track",
+                "attributes": {
+                    "album": "Pony",
+                    "composer1": "Orville Peck",
+                    "length": "123131",
+                    "epoch-start-time": "1583264406",
+                    "title": "Dead of Night",
+                    "start-time": "2020-02-19T15:11:33+00:00",
+                    "mm-uid": "863483"
+                    }
+                },
+            {
+                "id": "mainstream_1583264407_239487",
+                "type": "track",
+                "attributes": {
+                    "album": "The Shape of Jazz to Come",
+                    "composer1": "Ornette Coleman",
+                    "length": "487493",
+                    "epoch-start-time": "1583264407",
+                    "mm-uid": "239487",
+                    "start-time": "2020-02-19T15:03:12+00:00",
+                    "title": "Eventually"
+                    }
+                },
+            {
+                "id": "mainstream_1583264408_723409",
+                "type": "track",
+                "attributes": {
+                    "album": "Sometimes I Sit and Think, and Sometimes I Just Sit",
+                    "composer1": "Courtney Barnett",
+                    "length": "485935",
+                    "epoch-start-time": "1583264408",
+                    "mm-uid": "723409",
+                    "start-time": "2020-02-19T14:51:58+00:00",
+                    "title": "Pedestrian At Best",
+                    }
+                }
+            ]
+        }
+
 
 # a well-formed, complete metadata entry
 def ddb_response():
@@ -26,7 +134,7 @@ def ddb_response():
                 "start_time": "12:35:53",
                 "epoch_start_time": "1576172153",
                 "length": "00:03:25",
-                "mm_soloist1": "Barbra Streisand",
+                "soloist1": "Barbra Streisand",
                 "mm_uid": "983817",
                 "title": "If You Were The Only Boy In The World",
                 "start_date": "12/12/2019",
@@ -36,7 +144,7 @@ def ddb_response():
                         "start_time": "11:35:53",
                         "epoch_start_time": "1576172152",
                         "length": "00:03:25",
-                        "mm_soloist1": "Dustin Hoffman",
+                        "soloist1": "Dustin Hoffman",
                         "mm_uid": "983817",
                         "title": "If u were the second boy in the world",
                         "start_date": "12/12/2019",
@@ -46,7 +154,7 @@ def ddb_response():
                         "start_time": "10:35:53",
                         "epoch_start_time": "1576172151",
                         "length": "00:03:25",
-                        "mm_soloist1": "Ben Stiller",
+                        "soloist1": "Ben Stiller",
                         "mm_uid": "983817",
                         "title": "If u were the third boy in the world",
                         "start_date": "12/12/2019",
@@ -56,7 +164,7 @@ def ddb_response():
                         "start_time": "09:35:53",
                         "epoch_start_time": "1576172150",
                         "length": "00:03:25",
-                        "mm_soloist1": "Blythe Danner",
+                        "soloist1": "Blythe Danner",
                         "mm_uid": "983817",
                         "title": "If u were the only girl in the world",
                         "start_date": "12/12/2019",
@@ -77,7 +185,7 @@ def ddb_metadata():
         "start_time": "12:35:53",
         "epoch_start_time": "1576172153",
         "length": "00:03:25",
-        "mm_soloist1": "Barbra Streisand",
+        "soloist1": "Barbra Streisand",
         "mm_uid": "983817",
         "title": "If You Were The Only Boy In The World",
         "start_date": "12/12/2019",
@@ -87,7 +195,7 @@ def ddb_metadata():
                 "start_time": "11:35:53",
                 "epoch_start_time": "1576172152",
                 "length": "00:03:25",
-                "mm_soloist1": "Dustin Hoffman",
+                "soloist1": "Dustin Hoffman",
                 "mm_uid": "983817",
                 "title": "If u were the second boy in the world",
                 "start_date": "12/12/2019",
@@ -97,7 +205,7 @@ def ddb_metadata():
                 "start_time": "10:35:53",
                 "epoch_start_time": "1576172151",
                 "length": "00:03:25",
-                "mm_soloist1": "Ben Stiller",
+                "soloist1": "Ben Stiller",
                 "mm_uid": "983817",
                 "title": "If u were the third boy in the world",
                 "start_date": "12/12/2019",
@@ -107,7 +215,7 @@ def ddb_metadata():
                 "start_time": "09:35:53",
                 "epoch_start_time": "1576172150",
                 "length": "00:03:25",
-                "mm_soloist1": "Blythe Danner",
+                "soloist1": "Blythe Danner",
                 "mm_uid": "983817",
                 "title": "If u were the only girl in the world",
                 "start_date": "12/12/2019",
@@ -126,7 +234,7 @@ def air_break_():
                 "start_time": "11:35:53",
                 "epoch_start_time": "1576172152",
                 "length": "00:03:25",
-                "mm_soloist1": "Dustin Hoffman",
+                "soloist1": "Dustin Hoffman",
                 "mm_uid": "983817",
                 "title": "If u were the second boy in the world",
                 "start_date": "12/12/2019",
@@ -136,7 +244,7 @@ def air_break_():
                 "start_time": "10:35:53",
                 "epoch_start_time": "1576172151",
                 "length": "00:03:25",
-                "mm_soloist1": "Ben Stiller",
+                "soloist1": "Ben Stiller",
                 "mm_uid": "983817",
                 "title": "If u were the third boy in the world",
                 "start_date": "12/12/2019",
@@ -146,7 +254,7 @@ def air_break_():
                 "start_time": "09:35:53",
                 "epoch_start_time": "1576172150",
                 "length": "00:03:25",
-                "mm_soloist1": "blythe danner",
+                "soloist1": "Blythe Danner",
                 "mm_uid": "983817",
                 "title": "if u were the only girl in the world",
                 "start_date": "12/12/2019",
@@ -154,34 +262,41 @@ def air_break_():
         ]
     }
 
+
 def playlist_hist():
     history = [
         {
             "album": "Pony",
             "mm_uid": "863483",
+            "length": "123131",
             "epoch_start_time": "1583264406",
-            "mm_composer": "Orville Peck",
+            "start_time": "2020-02-19T15:11:33+00:00",
+            "composer1": "Orville Peck",
             "title": "Dead of Night"
         },
         {
             "album": "The Shape of Jazz to Come",
             "mm_uid": "239487",
             "epoch_start_time": "1583264407",
-            "mm_composer": "Ornette Coleman",
+            "length": "487493",
+            "start_time": "2020-02-19T15:03:12+00:00",
+            "composer1": "Ornette Coleman",
             "title": "Eventually"
         },
         {
             "album": "Sometimes I Sit and Think, and Sometimes I Just Sit",
             "mm_uid": "723409",
             "epoch_start_time": "1583264408",
-            "mm_composer": "Courtney Barnett",
+            "length": "485935",
+            "start_time": "2020-02-19T14:51:58+00:00",
+            "composer1": "Courtney Barnett",
             "title": "Pedestrian At Best"
         },
         {
             "album": "Baby on Baby",
             "mm_uid": "982343",
             "epoch_start_time": "1583264409",
-            "mm_composer": "DaBaby",
+            "composer1": "DaBaby",
             "title": "Suge"
         },
     ]
@@ -190,6 +305,7 @@ def playlist_hist():
         yield history[start:stop]
         start += 1
         stop += 1
+
 
 # metadata with no playlist history
 def ddb_metadata_no_hist():
@@ -200,7 +316,7 @@ def ddb_metadata_no_hist():
         "start_time": "12:35:53",
         "epoch_start_time": "1576172153",
         "length": "00:03:25",
-        "mm_soloist1": "Barbra Streisand",
+        "soloist1": "Barbra Streisand",
         "mm_uid": "983817",
         "title": "If You Were The Only Boy In The World",
         "start_date": "12/12/2019",
@@ -213,7 +329,7 @@ def nexgen_sample():
 
 def nexgen_sample_0():
     return """
-<audio ID="id_3189206699_30701071">
+<audio ID="id-3189206699_30701071">
 <type>Song</type>
 <status>None</status>
 <played_date>11/06/2018</played_date>

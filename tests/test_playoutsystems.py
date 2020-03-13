@@ -83,12 +83,13 @@ class TestDavidPlayout(TestPlayout):
     """
     playout_system = DAVID
     generic_test_data = DAVID_SAMPLE_XML
-    metadata_fields = ['album', 'catno', 'david_guid', 'epoch_start_time', 'iso_start_time',
-                       'length', 'mm_composer1', 'mm_conductor', 'mm_ensemble1', 'mm_reclabel',
-                       'mm_uid', 'start_time', 'title']
+    # these metadata fields use dashes bc that's how the Frontend wants it
+    metadata_fields = ['album', 'catno', 'david-guid', 'epoch-start-time', 'iso-start-time',
+                       'length', 'composer1', 'conductor', 'ensemble1', 'reclabel',
+                       'mm-uid', 'start-time', 'title']
 
     @pytest.mark.parametrize('david_sample', [DAVID_SAMPLE, DAVID_SPECIAL_CHARS])
-    def test_david_playout(self, david_sample, patch_broadcast, mock_dynamodb):
+    def test_david_playout(self, david_sample, patch_broadcast, mock_dynamodb_tables):
         lambda_invocation = self.lambda_maker(david_sample)
         whatson_response = whatsonms.handler(lambda_invocation, {})
 
@@ -98,7 +99,7 @@ class TestDavidPlayout(TestPlayout):
     @pytest.mark.parametrize('david_airbreak_sample', [DAVID_NON_MUSIC_METADATA,
                                                        DAVID_WEIRD_CDATA,
                                                        DAVID_NO_PRESENT_TRACK])
-    def test_david_airbreak(self, david_airbreak_sample, patch_broadcast, mock_dynamodb):
+    def test_david_airbreak(self, david_airbreak_sample, patch_broadcast, mock_dynamodb_tables):
         lambda_invocation = self.lambda_maker(david_airbreak_sample)
         whatson_response = whatsonms.handler(lambda_invocation, {})
 
@@ -106,14 +107,14 @@ class TestDavidPlayout(TestPlayout):
 
         assert whatson_response['data']['attributes']['air-break']
 
-    def test_david_handles_special_chars(self, patch_broadcast, mock_dynamodb):
+    def test_david_handles_special_chars(self, patch_broadcast, mock_dynamodb_tables):
         lambda_invocation = self.lambda_maker(DAVID_SPECIAL_CHARS_XML)
         whatson_response = whatsonms.handler(lambda_invocation, {})
 
-        assert whatson_response['included'][0]['attributes']['mm_composer1'] == \
+        assert whatson_response['included'][0]['attributes']['composer1'] == \
             'Lucien-Léon-Guillaume Lambert'
 
-    def test_php(self, patch_broadcast, mock_dynamodb):
+    def test_php(self, patch_broadcast, mock_dynamodb_tables):
         self.php_test()
 
 
@@ -123,28 +124,30 @@ class TestNexGenPlayout(TestPlayout):
     """
     playout_system = NEXGEN
     generic_test_data = NEXGEN_SAMPLE_QS
-    metadata_fields = ['album', 'length', 'mm_composer1', 'mm_ensemble1',
-                       'mm_soloist1', 'mm_soloist2', 'mm_uid', 'start_date',
-                       'start_time', 'title']
+    # these metadata fields use dashes bc that's how the Frontend wants it
+    metadata_fields = ['album', 'length', 'composer1', 'ensemble1',
+                       'soloist1', 'soloist2', 'mm-uid', 'start-date',
+                       'start-time', 'title']
 
     @pytest.mark.parametrize('nexgen_input', [NEXGEN_SAMPLE, NEXGEN_NODATE])
-    def test_nexgen(self, nexgen_input, patch_broadcast, mock_dynamodb):
+    def test_nexgen(self, nexgen_input, patch_broadcast, mock_dynamodb_tables):
         lambda_invocation = self.lambda_maker(nexgen_input)
         whatson_response = whatsonms.handler(lambda_invocation, {})
+
         self.validate_whatson(whatson_response)
 
     @pytest.mark.parametrize('nexgen_input', [NEXGEN_AIRBREAK])
-    def test_nexgen_airbreak(self, nexgen_input, patch_broadcast, mock_dynamodb):
+    def test_nexgen_airbreak(self, nexgen_input, patch_broadcast, mock_dynamodb_tables):
         lambda_invocation = self.lambda_maker(nexgen_input)
         whatson_response = whatsonms.handler(lambda_invocation, {})
 
         assert whatson_response['data']['attributes']['air-break']
 
-    def test_php(self, patch_broadcast, mock_dynamodb):
+    def test_php(self, patch_broadcast, mock_dynamodb_tables):
         self.php_test()
 
     @pytest.mark.parametrize('nexgen_input', [NEXGEN_NODATE])
-    def test_nodate_xml(self, nexgen_input, mocker, patch_broadcast, mock_dynamodb):
+    def test_nodate_xml(self, nexgen_input, mocker, patch_broadcast, mock_dynamodb_tables):
         """
         Sometimes nexgen sends an update with no date in the xml. Let's make sure woms adds one.
         """
@@ -157,4 +160,4 @@ class TestNexGenPlayout(TestPlayout):
         whatson_response = whatsonms.handler(lambda_invocation, {})
 
         v1.datetime.today.assert_called_once()
-        assert whatson_response['included'][0]['attributes']['start_date'] == expected_return_date
+        assert whatson_response['included'][0]['attributes']['start-date'] == expected_return_date

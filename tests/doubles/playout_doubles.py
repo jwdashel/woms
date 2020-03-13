@@ -2,11 +2,12 @@ import pytest
 from moto import mock_dynamodb2
 
 import tests.test_data as test_data
-from whatsonms.config import TABLE_METADATA, TABLE_SUBSCRIBERS, URL_PREFIX
+from whatsonms.config import TABLE_METADATA, TABLE_SUBSCRIBERS
 
 from whatsonms.response import Response
 
 import whatsonms.php
+
 
 @pytest.fixture
 def patch_playlist_hist(monkeypatch):
@@ -24,16 +25,28 @@ def patch_playlist_hist(monkeypatch):
 
 
 @pytest.fixture
-def mock_dynamodb():
+def mock_thin_ddb():
+    """
+    Enables ddb fakes but does not instantiate fake tables.
+    """
+    with mock_dynamodb2():
+        yield
+
+
+@pytest.fixture
+def mock_dynamodb_tables():
+    """
+    Enables ddb fakes and sets up fakes for the DDB tables WOMs uses.
+    """
     with mock_dynamodb2():
         from whatsonms.dynamodb import MetadataDB, SubscriberDB
         MetadataDB(TABLE_METADATA)
         SubscriberDB(TABLE_SUBSCRIBERS)
         yield
 
+
 @pytest.fixture
 def patch_broadcast(mocker):
     history = test_data.playlist_hist()
-    mocker.patch('whatsonms.response.broadcast',
-                 return_value=Response(test_data.parsed_metadata(),
+    mocker.patch('whatsonms.response.broadcast', return_value=Response(test_data.parsed_metadata(),
                  next(history), test_data.stream_name(), ""))

@@ -127,6 +127,6 @@ def _update(metadata: dict, playlist_hist_preview: dict, stream: str) -> respons
         metadb.set_metadata(stream, broadcast)
     else:
         broadcast = {"air_break": True}
-        
+
     whatsonms.response.broadcast(stream, data=broadcast)
     return response.Response(metadata, playlist_hist_preview, stream, "")

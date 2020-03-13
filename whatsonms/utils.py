@@ -3,13 +3,12 @@ import math
 import re
 from datetime import datetime
 
-from whatsonms.dynamodb import subdb, metadb
-
 # TIMESTAMP_FMT = "2013-04-11 18:19:07.986"
 TIMESTAMP_FMT = "%Y-%m-%d %H:%M:%S.%f"
 
 UTC_TIMEZONE = pytz.UTC
 EST_TIMEZONE = pytz.timezone('America/New_York')
+
 
 def sanitize_cdata(xmlstr: str) -> str:
     """
@@ -24,7 +23,6 @@ def sanitize_cdata(xmlstr: str) -> str:
 
     sanitized_str = CDATA_REGEX.sub(' ', xmlstr)
     return sanitized_str
-
 
 
 def convert_time(time_str: str) -> int:
