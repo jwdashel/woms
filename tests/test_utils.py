@@ -80,5 +80,6 @@ class TestWOMsResponse:
         assert resp == expected_resp
 
     def test_id_generator(self):
-        id_ = response.generate_id(test_data.parsed_metadata(), "wqxr")
+        metadata = test_data.parsed_metadata()
+        id_ = response.generate_id(metadata['mm_uid'], metadata['epoch_start_time'], "wqxr")
         assert id_ == "wqxr_1583789083_110813"

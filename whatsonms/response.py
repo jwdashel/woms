@@ -15,7 +15,7 @@ class Response(dict):
 
     def __init__(self, current_track, playlist_history, stream, playout_system):
         track = {"data": {
-            "id": generate_id(current_track, stream),
+            "id": generate_id(current_track['mm_uid'], current_track['epoch_start_time'], stream),
             "type": "track"
         }} if current_track else {}
 
@@ -36,13 +36,14 @@ class Response(dict):
                     "current-track": track,
                     "recent-tracks": {
                         "data": [
-                            {"id": generate_id(track, stream), "type": "track"} for track in playlist_history if playlist_history
+                            {"id": generate_id(track['mm_uid'], track['epoch_start_time'], stream), "type": "track"}
+                            for track in playlist_history if playlist_history
                         ]
                     }
                 }
             },
             "included": [
-                {"id": generate_id(track, stream), "type": "track",
+                {"id": generate_id(track['mm_uid'], track['epoch_start_time'], stream), "type": "track",
                  "attributes": track} for track in all_tracks if all_tracks
             ]
         }
@@ -89,8 +90,8 @@ class BroadcastResponse(dict):
         dict.__init__(self, **response)
 
 
-def generate_id(track, stream):
-    return f"{stream}_{track['epoch_start_time']}_{track['mm_uid']}"
+def generate_id(mm_uid, epoch_start_time, stream):
+    return f"{stream}_{epoch_start_time}_{mm_uid}"
 
 
 def broadcast(stream: str, recipient_ids: List = [],
