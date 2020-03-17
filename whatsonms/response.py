@@ -90,6 +90,18 @@ class BroadcastResponse(dict):
         dict.__init__(self, **response)
 
 
+class WSResponse(dict):
+    def __init__(self, status: int, message: str = '', data: dict = {}):
+        response = {
+            "statusCode": status,
+            "headers": {
+                "Content-Type": "application/vnd.api+json"
+            },
+            "body": data,
+        }
+        dict.__init__(self, **response)
+
+
 def generate_id(mm_uid, epoch_start_time, stream):
     return f"{stream}_{epoch_start_time}_{mm_uid}"
 
