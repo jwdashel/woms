@@ -126,7 +126,8 @@ def _update(metadata: dict, playlist_hist_preview: dict, stream: str) -> respons
         broadcast['playlist_hist_preview'] = playlist_hist_preview
         metadb.set_metadata(stream, broadcast)
     else:
-        broadcast = {"air_break": True}
+        broadcast = {"air_break": True, "playlist_hist_preview": playlist_hist_preview}
 
+    # TODO make the broadcast a response
     whatsonms.response.broadcast(stream, data=broadcast)
     return response.Response(metadata, playlist_hist_preview, stream, "")
