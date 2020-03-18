@@ -91,4 +91,4 @@ class WebSocketRouter:
         stream = body['data']['stream']
         metadata = metadb.get_metadata(stream)
         broadcast(stream, recipient_ids=[connection_id], data=metadata)
-        return Response(200)
+        return WSResponse(200)
