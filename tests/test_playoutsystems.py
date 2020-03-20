@@ -1,4 +1,5 @@
 import pytest
+import json
 from urllib import parse
 from datetime import datetime
 from unittest.mock import MagicMock
@@ -56,6 +57,15 @@ class TestPlayout:
                 },
             }
 
+    def invoke_whatson(self, input_data):
+        """
+        Formats data to Lambda-defined input for woms, then unpacks
+        Lambda-defined output from woms.
+        """
+        lambda_invocation = self.lambda_maker(input_data)
+        whatson_response = whatsonms.handler(lambda_invocation, {})
+        return json.loads(whatson_response['body'])
+
     def validate_whatson(self, whatson_response):
         for item in whatson_response['included']:
             for field in self.metadata_fields:
@@ -65,15 +75,13 @@ class TestPlayout:
     def php_test(self):
         # php will collect last tracks as they play
         for i in range(1, 5):
-            lambda_invocation = self.lambda_maker(self.generic_test_data)
-            whatson_response = whatsonms.handler(lambda_invocation, {})
+            whatson_response = self.invoke_whatson(self.generic_test_data)
             assert len(whatson_response['included']) == i
 
         # php will never have more than 3 tracks
         # so including whats on now, there will never be more than 4 tracks
         for i in range(5, 10):
-            lambda_invocation = self.lambda_maker(self.generic_test_data)
-            whatson_response = whatsonms.handler(lambda_invocation, {})
+            whatson_response = self.invoke_whatson(self.generic_test_data)
             assert len(whatson_response['included']) == 4
 
 
@@ -90,8 +98,7 @@ class TestDavidPlayout(TestPlayout):
 
     @pytest.mark.parametrize('david_sample', [DAVID_SAMPLE, DAVID_SPECIAL_CHARS])
     def test_david_playout(self, david_sample, patch_broadcast, mock_dynamodb_tables):
-        lambda_invocation = self.lambda_maker(david_sample)
-        whatson_response = whatsonms.handler(lambda_invocation, {})
+        whatson_response = self.invoke_whatson(david_sample)
 
         self.validate_whatson(whatson_response)
         assert not whatson_response['data']['attributes']['air-break']
@@ -100,16 +107,14 @@ class TestDavidPlayout(TestPlayout):
                                                        DAVID_WEIRD_CDATA,
                                                        DAVID_NO_PRESENT_TRACK])
     def test_david_airbreak(self, david_airbreak_sample, patch_broadcast, mock_dynamodb_tables):
-        lambda_invocation = self.lambda_maker(david_airbreak_sample)
-        whatson_response = whatsonms.handler(lambda_invocation, {})
+        whatson_response = self.invoke_whatson(david_airbreak_sample)
 
         self.validate_whatson(whatson_response)
 
         assert whatson_response['data']['attributes']['air-break']
 
     def test_david_handles_special_chars(self, patch_broadcast, mock_dynamodb_tables):
-        lambda_invocation = self.lambda_maker(DAVID_SPECIAL_CHARS_XML)
-        whatson_response = whatsonms.handler(lambda_invocation, {})
+        whatson_response = self.invoke_whatson(DAVID_SPECIAL_CHARS_XML)
 
         assert whatson_response['included'][0]['attributes']['composer1'] == \
             'Lucien-Léon-Guillaume Lambert'
@@ -131,15 +136,13 @@ class TestNexGenPlayout(TestPlayout):
 
     @pytest.mark.parametrize('nexgen_input', [NEXGEN_SAMPLE, NEXGEN_NODATE])
     def test_nexgen(self, nexgen_input, patch_broadcast, mock_dynamodb_tables):
-        lambda_invocation = self.lambda_maker(nexgen_input)
-        whatson_response = whatsonms.handler(lambda_invocation, {})
+        whatson_response = self.invoke_whatson(nexgen_input)
 
         self.validate_whatson(whatson_response)
 
     @pytest.mark.parametrize('nexgen_input', [NEXGEN_AIRBREAK])
     def test_nexgen_airbreak(self, nexgen_input, patch_broadcast, mock_dynamodb_tables):
-        lambda_invocation = self.lambda_maker(nexgen_input)
-        whatson_response = whatsonms.handler(lambda_invocation, {})
+        whatson_response = self.invoke_whatson(nexgen_input)
 
         assert whatson_response['data']['attributes']['air-break']
 
@@ -156,8 +159,7 @@ class TestNexGenPlayout(TestPlayout):
         expected_return_date = "09/13/2018"
         v1.datetime.today = MagicMock(return_value=expected_date)
 
-        lambda_invocation = self.lambda_maker(nexgen_input)
-        whatson_response = whatsonms.handler(lambda_invocation, {})
+        whatson_response = self.invoke_whatson(nexgen_input)
 
         v1.datetime.today.assert_called_once()
         assert whatson_response['included'][0]['attributes']['start-date'] == expected_return_date
