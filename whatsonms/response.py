@@ -22,30 +22,41 @@ class Response(dict):
         all_tracks = [current_track] + playlist_history
         all_tracks = list(filter(lambda x: x is not None, all_tracks))
 
-        response = {
-            "data": {
-                "type": "whats-on",
-                "id": "whats-on",
-                "attributes": {
-                    "air-break": not current_track
-                },
-                "meta": {
-                    "source": str(playout_system)
-                },
-                "relationships": {
-                    "current-track": track,
-                    "recent-tracks": {
-                        "data": [
-                            {"id": generate_id(track['mm_uid'], track['epoch_start_time'], stream), "type": "track"}
-                            for track in playlist_history if playlist_history
-                        ]
+
+        body = {
+                "data": {
+                    "type": "whats-on",
+                    "id": "whats-on",
+                    "attributes": {
+                        "air-break": not current_track
+                    },
+                    "meta": {
+                        "source": str(playout_system)
+                    },
+                    "relationships": {
+                        "current-track": track,
+                        "recent-tracks": {
+                            "data": [
+                                {"id": generate_id(track['mm_uid'], track['epoch_start_time'], stream), "type": "track"}
+                                for track in playlist_history if playlist_history
+                            ]
+                        }
                     }
-                }
+                },
+                "included": [
+                    {"id": generate_id(track['mm_uid'], track['epoch_start_time'], stream), "type": "track",
+                     "attributes": track} for track in all_tracks if all_tracks
+                ]
+        }
+
+        response = {
+            "isBase64Encoded": False,
+            "statusCode": 200,
+            "multiValueHeaders": {},
+            "headers": {
+                "Content-Type": "application/vnd.api+json"
             },
-            "included": [
-                {"id": generate_id(track['mm_uid'], track['epoch_start_time'], stream), "type": "track",
-                 "attributes": track} for track in all_tracks if all_tracks
-            ]
+            "body": json.dumps(body)
         }
 
         response = Response.dashify_response(response)
