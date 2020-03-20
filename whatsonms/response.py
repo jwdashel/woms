@@ -22,8 +22,7 @@ class Response(dict):
         all_tracks = [current_track] + playlist_history
         all_tracks = list(filter(lambda x: x is not None, all_tracks))
 
-
-        body = {
+        response = {
                 "data": {
                     "type": "whats-on",
                     "id": "whats-on",
@@ -49,16 +48,6 @@ class Response(dict):
                 ]
         }
 
-        response = {
-            "isBase64Encoded": False,
-            "statusCode": 200,
-            "multiValueHeaders": {},
-            "headers": {
-                "Content-Type": "application/vnd.api+json"
-            },
-            "body": json.dumps(body)
-        }
-
         response = Response.dashify_response(response)
 
         dict.__init__(self, **response)
@@ -81,6 +70,23 @@ class Response(dict):
             else:
                 new_response[new_key] = response[key]
         return new_response
+
+
+class LambdaResponse(dict):
+    """
+    AWS has specific requirements for how a lambda response is formatted.
+    This class accepts a natural response and formats it for use in a lambda.
+    """
+    def __init__(self, body):
+        return {
+            "isBase64Encoded": False,
+            "statusCode": 200,
+            "multiValueHeaders": {},
+            "headers": {
+                "Content-Type": "application/vnd.api+json"
+            },
+            "body": json.dumps(body)
+        }
 
 
 class NotFoundResponse(dict):

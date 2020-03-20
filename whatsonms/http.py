@@ -102,18 +102,15 @@ class HttpRouter:
         Handles a regular HTTP GET request from a client for the current
         metadata for a stream.
         """
-        try:
-            stream = params.get('stream')
-            metadata = metadb.get_metadata(stream)
-            if 'playlist_hist_preview' in metadata:
-                pl_hist = metadata['playlist_hist_preview']
-                del metadata['playlist_hist_preview']
-            if metadata:
-                return response.Response(metadata, pl_hist, stream, "")
-            return response.NotFoundResponse()
-        except Exception as e:
-            print(e)
-            return {"error": "internal server error"}
+        stream = params.get('stream')
+        metadata = metadb.get_metadata(stream)
+        if 'playlist_hist_preview' in metadata:
+            pl_hist = metadata['playlist_hist_preview']
+            del metadata['playlist_hist_preview']
+        if metadata:
+            response = response.Response(metadata, pl_hist, stream, "") 
+            return response.LambdaResponse(response)
+        return response.NotFoundResponse()
 
 
 def _update(metadata: dict, playlist_hist_preview: dict, stream: str) -> response.Response:
