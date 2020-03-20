@@ -4,7 +4,7 @@ from functools import lru_cache, wraps
 from typing import Callable
 
 from whatsonms.dynamodb import metadb, subdb
-from whatsonms.response import broadcast, Response, WSResponse, LambdaResponse
+from whatsonms.response import broadcast, WSResponse, LambdaResponse
 
 
 def route(route_key: str) -> Callable:
