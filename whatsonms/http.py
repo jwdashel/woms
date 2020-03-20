@@ -121,14 +121,14 @@ def _update(metadata: dict, playlist_hist_preview: dict, stream: str) -> respons
         print("Missing required parameter 'stream'")
         return response.ErrorResponse(500, "Missing required parameter 'stream'")
 
-    broadcast = {}
-    if metadata:
-        broadcast = dict(metadata)
-        broadcast['playlist_hist_preview'] = playlist_hist_preview
-        metadb.set_metadata(stream, broadcast)
-    else:
-        broadcast = {"air_break": True, "playlist_hist_preview": playlist_hist_preview}
+    # broadcast = {}
+    # if metadata:
+    #     broadcast = dict(metadata)
+    #     broadcast['playlist_hist_preview'] = playlist_hist_preview
+    #     metadb.set_metadata(stream, broadcast)
+    # else:
+    #     broadcast = {"air_break": True, "playlist_hist_preview": playlist_hist_preview}
 
-    # TODO make the broadcast a response
-    whatsonms.response.broadcast(stream, data=broadcast)
-    return response.Response(metadata, playlist_hist_preview, stream, "")
+    resp = response.Response(metadata, playlist_hist_preview, stream, "")
+    whatsonms.response.broadcast(stream, data=resp)
+    return resp
