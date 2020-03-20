@@ -108,8 +108,8 @@ class HttpRouter:
             pl_hist = metadata['playlist_hist_preview']
             del metadata['playlist_hist_preview']
         if metadata:
-            response = response.Response(metadata, pl_hist, stream, "") 
-            return response.LambdaResponse(response)
+            resp = response.Response(metadata, pl_hist, stream, "")
+            return response.LambdaResponse(resp)
         return response.NotFoundResponse()
 
 
