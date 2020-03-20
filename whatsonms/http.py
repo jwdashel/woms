@@ -81,7 +81,7 @@ class HttpRouter:
         stream = params.get('stream')
         metadata = v1.parse_metadata_nexgen(event, stream)
         pl_hist = php.next_playlist_history_preview(stream)
-        return _update(metadata, pl_hist, stream)
+        return LambdaResponse(_update(metadata, pl_hist, stream))
 
     @staticmethod
     @route('POST', '/v1/update')
@@ -93,7 +93,7 @@ class HttpRouter:
         stream = params.get('stream')
         metadata = v1.parse_metadata_david(event, stream)
         pl_hist = php.next_playlist_history_preview(stream)
-        return _update(metadata, pl_hist, stream)
+        return LambdaResponse(_update(metadata, pl_hist, stream))
 
     @staticmethod
     @route('GET', '/v1/whats-on')
@@ -114,20 +114,9 @@ class HttpRouter:
 
 
 def _update(metadata: dict, playlist_hist_preview: dict, stream: str) -> response.Response:
-    # if not metadata:
-    #     print("No metadata found")
-    #     return response.NotFoundResponse()
     if not stream:
         print("Missing required parameter 'stream'")
         return response.ErrorResponse(500, "Missing required parameter 'stream'")
-
-    # broadcast = {}
-    # if metadata:
-    #     broadcast = dict(metadata)
-    #     broadcast['playlist_hist_preview'] = playlist_hist_preview
-    #     metadb.set_metadata(stream, broadcast)
-    # else:
-    #     broadcast = {"air_break": True, "playlist_hist_preview": playlist_hist_preview}
 
     resp = response.Response(metadata, playlist_hist_preview, stream, "")
     whatsonms.response.broadcast(stream, data=resp)
