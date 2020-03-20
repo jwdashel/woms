@@ -118,6 +118,12 @@ def _update(metadata: dict, playlist_hist_preview: dict, stream: str) -> respons
         print("Missing required parameter 'stream'")
         return response.ErrorResponse(500, "Missing required parameter 'stream'")
 
+    db_update = {}
+    if metadata:
+        db_update = dict(metadata)
+        db_update['playlist_hist_preview'] = playlist_hist_preview
+        metadb.set_metadata(stream, db_update)
+
     resp = response.Response(metadata, playlist_hist_preview, stream, "")
     whatsonms.response.broadcast(stream, data=resp)
     return resp
