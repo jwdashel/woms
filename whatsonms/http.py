@@ -81,7 +81,7 @@ class HttpRouter:
         stream = params.get('stream')
         metadata = v1.parse_metadata_nexgen(event, stream)
         pl_hist = php.next_playlist_history_preview(stream)
-        return LambdaResponse(_update(metadata, pl_hist, stream))
+        return response.LambdaResponse(_update(metadata, pl_hist, stream))
 
     @staticmethod
     @route('POST', '/v1/update')
@@ -93,7 +93,7 @@ class HttpRouter:
         stream = params.get('stream')
         metadata = v1.parse_metadata_david(event, stream)
         pl_hist = php.next_playlist_history_preview(stream)
-        return LambdaResponse(_update(metadata, pl_hist, stream))
+        return response.LambdaResponse(_update(metadata, pl_hist, stream))
 
     @staticmethod
     @route('GET', '/v1/whats-on')
