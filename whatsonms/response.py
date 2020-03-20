@@ -78,7 +78,7 @@ class LambdaResponse(dict):
     This class accepts a natural response and formats it for use in a lambda.
     """
     def __init__(self, body):
-        return {
+        response = {
             "isBase64Encoded": False,
             "statusCode": 200,
             "multiValueHeaders": {},
@@ -87,6 +87,7 @@ class LambdaResponse(dict):
             },
             "body": json.dumps(body)
         }
+        dict.__init__(self, **response)
 
 
 class NotFoundResponse(dict):
