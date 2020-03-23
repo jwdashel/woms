@@ -406,10 +406,10 @@ def david_sample(ver=0):
     Args:
         ver: david samples with different content (currently supporting [0..1])
     '''
-    with open(f'tests/david_xmls/david_sample_{ver}.xml') as f:
+    with open(f'tests/david_exports/david_sample_{ver}.xml') as f:
         return f.read()
 
 
 def david_airbreak():
-    with open('tests/david_non_music_metadata.xml') as f:
+    with open('tests/david_exports/david_non_music_metadata.xml') as f:
         return f.read()
