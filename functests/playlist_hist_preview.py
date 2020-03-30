@@ -17,16 +17,19 @@ for playout_system in [NexGen(nexgen_inputs), David(david_inputs)]:
     print(f"TESTING WOMs PLAYLIST HISTORY WITH {playout_system}")
     playout = playout_system.queue_tracks()
     whats_on, what_should_be_on = next(playout)
+    whats_on = whats_on['included'][0]['attributes']
     
     helpers.assert_same_title("title", whats_on, what_should_be_on, playout_system)
     helpers.assert_same_composer("composer", whats_on, what_should_be_on, playout_system)
     helpers.assert_same_id("id", whats_on, what_should_be_on, playout_system)
 
 
-    whats_on_next, what_should_be_on_next = next(playout)
+    next_whatson, what_should_be_on_next = next(playout)
+    next_whatson = next_whatson['included']
     
-    php = whats_on_next['playlist_hist_preview']
-    last_track = php[0]
+    last_track = next_whatson[1]['attributes']
+    whats_on_next = next_whatson[0]['attributes']
+    
 
     helpers.assert_same_title("last track title", last_track, what_should_be_on, playout_system)
     helpers.assert_same_composer("last track composer", last_track, what_should_be_on, playout_system)

@@ -16,7 +16,7 @@ for playout_system in [NexGen(nexgen_inputs), David(david_inputs)]:
     playout = playout_system.queue_tracks()
     whats_on, what_should_be_on = next(playout)
 
-    whats_on = whats_on['included'][0]
+    whats_on = whats_on['included'][0]['attributes']
     
     helpers.assert_same_title("title", whats_on, what_should_be_on, playout_system)
     helpers.assert_same_composer("composer", whats_on, what_should_be_on, playout_system)

@@ -6,7 +6,7 @@ import json
 import time
 
 stream = 'func_tests'
-woms_whatson = f"https://api.demo.nypr.digital/whats-on/v1/whats-on?stream={stream}"
+woms_whatson = f"https://nla6c7i6p7.execute-api.us-east-1.amazonaws.com/demo/whats-on/v1/whats-on?stream={stream}"
 
 
 class PlayoutSystem(object):
@@ -53,7 +53,7 @@ class David(PlayoutSystem):
     }
 
     def update_track(self, sample_input):
-        woms_update = f"https://api.demo.nypr.digital/whats-on/v1/update?stream={stream}"
+        woms_update = f"https://nla6c7i6p7.execute-api.us-east-1.amazonaws.com/demo/whats-on/v1/update?stream={stream}"
         return requests.post(woms_update, data=sample_input.encode('utf-8'))
 
     def reference_track(self, sample_input):
@@ -70,7 +70,7 @@ class NexGen(PlayoutSystem):
 
     def update_track(self, sample_input):
         nexgendata_encoded = urlencode.quote(sample_input)
-        woms_update = f"https://api.demo.nypr.digital/whats-on/v1/update?stream={stream}&xml_contents={nexgendata_encoded}"
+        woms_update = f"https://nla6c7i6p7.execute-api.us-east-1.amazonaws.com/demo/whats-on/v1/update?stream={stream}&xml_contents={nexgendata_encoded}"
         return requests.get(woms_update)
 
     def reference_track(self, sample_input):
