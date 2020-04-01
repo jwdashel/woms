@@ -5,6 +5,7 @@ from datetime import datetime
 import whatsonms.utils as utils
 import whatsonms.php as php
 from whatsonms.response import Response
+from whatsonms.playout_systems import DAVID, NEXGEN
 
 import xmltodict
 
@@ -77,16 +78,15 @@ def air_break(stream: str, playout_sys: str) -> dict:
 
 
 def normalize_david_dict(present_track_info: dict) -> dict:
-    normalized = {v: present_track_info.get(k) for k, v in DAVID_MUSIC_ELEMS if k in present_track_info}
+    normalized = {v: present_track_info.get(k, None) for k, v in DAVID_MUSIC_ELEMS}
+    normalized['playout_system'] = DAVID
     return normalized
 
 
 def standardize_timestamps(track_info: dict) -> dict:
-    if 'start_date' in track_info:
-        # NEXGEN
+    if track_info['playout_system'] == NEXGEN:
         track_info['epoch_start_time'] = utils.convert_date_time(track_info['start_date'], track_info['start_time'])
-    else:
-        # DAVID
+    elif track_info['playout_system'] == DAVID:
         track_info['epoch_start_time'] = utils.convert_time(track_info['start_time'])
 
     track_info['iso_start_time'] = utils.convert_time_to_iso(track_info['epoch_start_time'])
@@ -101,6 +101,24 @@ def normalize_encodings(present_track_info: dict) -> dict:
     return present_track_info
 
 
+def collapse_soloists(present_track_info: dict) -> dict:
+    """
+    DAVID can provide up to 6 soloists and NEXGEN can provide up to two.
+    They are parsed as soloist1 .. soloist6 (or soloist2 for NG).
+    This squishes them down into one array element for a cleaner client
+    experience.
+    There is probably a way to do this a _bit_ more cleanly than this
+    implementation, but I am going with the Law of Good Enuff here.
+    """
+    soloists = [f'soloist{number}' for number in range(1, 6)]
+    present_track_info['soloists'] = []
+    for soloist in soloists:
+        if present_track_info[soloist]:
+            present_track_info['soloists'].append(present_track_info[soloist])
+        del present_track_info[soloist]
+    return present_track_info
+
+
 def parse_metadata_nexgen(event: Dict, stream) -> Dict:
     """
     Parse new metadata from NexGen -- format it as JSON and return it.
@@ -108,17 +126,17 @@ def parse_metadata_nexgen(event: Dict, stream) -> Dict:
     xml = event.get('queryStringParameters', {}).get('xml_contents')
     if xml:
         xmldict = xmltodict.parse(xml)
-        normalized = {
-            v: xmldict['audio'].get(k) for k, v in NEXGEN_MUSIC_ELEMS if k in xmldict['audio']
-        }
+        normalized = {v: xmldict['audio'].get(k, None) for k, v in NEXGEN_MUSIC_ELEMS}
+        normalized['playout_system'] = NEXGEN
 
-        if "start_date" not in normalized:
+        if not normalized["start_date"]:
             normalized["start_date"] = datetime.today().strftime('%m/%d/%Y')
 
         if int(normalized["mm_uid"]) == 0:
             return None
 
         normalized = standardize_timestamps(normalized)
+        normalized = collapse_soloists(normalized)
 
         return normalized
 
@@ -141,6 +159,7 @@ def parse_metadata_david(event: Dict, stream) -> Dict:
             present = normalize_david_dict(present)
             present = normalize_encodings(present)
             present = standardize_timestamps(present)
+            present = collapse_soloists(present)
 
             return present
         except ValueError:

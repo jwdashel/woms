@@ -34,6 +34,11 @@ NEXGEN_SAMPLE_QS = parse.quote(test_data.nexgen_sample(), safe=())
 
 
 class TestPlayout:
+    # these metadata fields use dashes bc that's how the Frontend wants it
+    response_metadata_fields = ['album', 'catno', 'david-guid', 'epoch-start-time',
+                                'iso-start-time', 'length', 'composer1', 'conductor', 'ensemble1',
+                                'reclabel', 'mm-uid', 'start-time', 'title', 'soloists']
+
     def lambda_maker(self, content):
         if self.playout_system == DAVID:
             with open(content, 'rb') as body:
@@ -68,9 +73,12 @@ class TestPlayout:
 
     def validate_whatson(self, whatson_response):
         for item in whatson_response['included']:
-            for field in self.metadata_fields:
+            for field in self.response_metadata_fields:
                 assert field in item['attributes']
-                assert item['attributes'][field] is not None
+
+    def assert_equal(self, whatson_response, key, value):
+        woms_result = whatson_response['included'][0]['attributes'][key]
+        assert woms_result == value, "whats_on response doesn't contain expected value"
 
     def php_test(self):
         # php will collect last tracks as they play
@@ -91,10 +99,6 @@ class TestDavidPlayout(TestPlayout):
     """
     playout_system = DAVID
     generic_test_data = DAVID_SAMPLE_XML
-    # these metadata fields use dashes bc that's how the Frontend wants it
-    metadata_fields = ['album', 'catno', 'david-guid', 'epoch-start-time', 'iso-start-time',
-                       'length', 'composer1', 'conductor', 'ensemble1', 'reclabel',
-                       'mm-uid', 'start-time', 'title']
 
     @pytest.mark.parametrize('david_sample', [DAVID_SAMPLE, DAVID_SPECIAL_CHARS])
     def test_david_playout(self, david_sample, patch_broadcast, mock_dynamodb_tables):
@@ -113,6 +117,10 @@ class TestDavidPlayout(TestPlayout):
 
         assert whatson_response['data']['attributes']['air-break']
 
+    def test_david_has_soloists(self, patch_broadcast, mock_dynamodb_tables):
+        whatson_response = self.invoke_whatson(DAVID_SAMPLE_XML)
+        self.assert_equal(whatson_response, 'soloists', ['SOLOIST 1', 'SOLOIST 2'])
+
     def test_david_handles_special_chars(self, patch_broadcast, mock_dynamodb_tables):
         whatson_response = self.invoke_whatson(DAVID_SPECIAL_CHARS_XML)
 
@@ -129,10 +137,6 @@ class TestNexGenPlayout(TestPlayout):
     """
     playout_system = NEXGEN
     generic_test_data = NEXGEN_SAMPLE_QS
-    # these metadata fields use dashes bc that's how the Frontend wants it
-    metadata_fields = ['album', 'length', 'composer1', 'ensemble1',
-                       'soloist1', 'soloist2', 'mm-uid', 'start-date',
-                       'start-time', 'title']
 
     @pytest.mark.parametrize('nexgen_input', [NEXGEN_SAMPLE, NEXGEN_NODATE])
     def test_nexgen(self, nexgen_input, patch_broadcast, mock_dynamodb_tables):
