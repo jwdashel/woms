@@ -45,7 +45,7 @@ class PlayoutSystem(object):
             yield whats_on, self.reference_track(sample_input)
 
 class David(PlayoutSystem):
-    name = "DAViD"
+    name = "DAVID"
     norm_keys = {
         "title": "Title",
         "composer": "Music_Composer",
@@ -61,7 +61,7 @@ class David(PlayoutSystem):
         return next(filter(lambda x: x['@sequence'] == 'present', daviddata['wddxPacket']['item']))
 
 class NexGen(PlayoutSystem):
-    name = "NexGen"
+    name = "NEXGEN"
     norm_keys = {
         "title": "title",
         "composer": "comment1",
