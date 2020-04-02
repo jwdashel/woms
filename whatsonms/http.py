@@ -7,6 +7,7 @@ import whatsonms.utils
 import whatsonms.response as response
 from whatsonms import v1, php
 from whatsonms.dynamodb import metadb
+from whatsonms.playout_systems import DAVID, NEXGEN
 
 
 def route(verb: str, path: str) -> Callable:
@@ -81,7 +82,7 @@ class HttpRouter:
         stream = params.get('stream')
         metadata = v1.parse_metadata_nexgen(event, stream)
         pl_hist = php.next_playlist_history_preview(stream)
-        return response.LambdaResponse(_update(metadata, pl_hist, stream))
+        return response.LambdaResponse(_update(metadata, pl_hist, stream, NEXGEN))
 
     @staticmethod
     @route('POST', '/v1/update')
@@ -93,7 +94,7 @@ class HttpRouter:
         stream = params.get('stream')
         metadata = v1.parse_metadata_david(event, stream)
         pl_hist = php.next_playlist_history_preview(stream)
-        return response.LambdaResponse(_update(metadata, pl_hist, stream))
+        return response.LambdaResponse(_update(metadata, pl_hist, stream, DAVID))
 
     @staticmethod
     @route('GET', '/v1/whats-on')
@@ -113,7 +114,7 @@ class HttpRouter:
         return response.NotFoundResponse()
 
 
-def _update(metadata: dict, playlist_hist_preview: dict, stream: str) -> response.Response:
+def _update(metadata: dict, playlist_hist_preview: dict, stream: str, playout_sys: str) -> response.Response:
     if not stream:
         print("Missing required parameter 'stream'")
         return response.ErrorResponse(500, "Missing required parameter 'stream'")
@@ -124,6 +125,6 @@ def _update(metadata: dict, playlist_hist_preview: dict, stream: str) -> respons
         db_update['playlist_hist_preview'] = playlist_hist_preview
         metadb.set_metadata(stream, db_update)
 
-    resp = response.Response(metadata, playlist_hist_preview, stream, "")
+    resp = response.Response(metadata, playlist_hist_preview, stream, playout_sys)
     whatsonms.response.broadcast(stream, data=resp)
     return resp

@@ -18,9 +18,9 @@ DAVID_MUSIC_ELEMS = (
     ('Music_CDID', 'catno'),
     ('GUID', 'david_guid'),
     ('Time_Duration', 'length'),
-    ('Music_Composer', 'composer1'),
+    ('Music_Composer', 'composer'),
     ('USA.WNYC.CONDUCTOR', 'conductor'),
-    ('USA.WNYC.ORCHESTRA', 'ensemble1'),
+    ('USA.WNYC.ORCHESTRA', 'ensemble'),
     ('CDINFO.LABEL', 'reclabel'),
     ('USA.WNYC.SOLOIST1', 'soloist1'),
     ('USA.WNYC.SOLOIST2', 'soloist2'),
@@ -44,9 +44,9 @@ NEXGEN_MUSIC_ELEMS = (
     ('', 'catno'),
     ('', 'david_guid'),
     ('length', 'length'),
-    ('comment1', 'composer1'),
+    ('comment1', 'composer'),
     ('', 'conductor'),
-    ('alt_artist', 'ensemble1'),
+    ('alt_artist', 'ensemble'),
     ('', 'reclabel'),
     ('composer', 'soloist1'),
     ('licensor', 'soloist2'),
@@ -86,10 +86,13 @@ def normalize_david_dict(present_track_info: dict) -> dict:
 def standardize_timestamps(track_info: dict) -> dict:
     if track_info['playout_system'] == NEXGEN:
         track_info['epoch_start_time'] = utils.convert_date_time(track_info['start_date'], track_info['start_time'])
+        del track_info['start_date']
+        del track_info['start_time']
     elif track_info['playout_system'] == DAVID:
         track_info['epoch_start_time'] = utils.convert_time(track_info['start_time'])
+        del track_info['start_time']
 
-    track_info['iso_start_time'] = utils.convert_time_to_iso(track_info['epoch_start_time'])
+    track_info['start_time'] = utils.convert_time_to_iso(track_info['epoch_start_time'])
 
     return track_info
 
@@ -110,7 +113,7 @@ def collapse_soloists(present_track_info: dict) -> dict:
     There is probably a way to do this a _bit_ more cleanly than this
     implementation, but I am going with the Law of Good Enuff here.
     """
-    soloists = [f'soloist{number}' for number in range(1, 6)]
+    soloists = [f'soloist{number}' for number in range(1, 7)]
     present_track_info['soloists'] = []
     for soloist in soloists:
         if present_track_info[soloist]:
@@ -136,7 +139,7 @@ def parse_metadata_nexgen(event: Dict, stream) -> Dict:
             return None
 
         normalized = standardize_timestamps(normalized)
-        normalized = collapse_soloists(normalized)
+        collapse_soloists(normalized)
 
         return normalized
 
@@ -157,9 +160,9 @@ def parse_metadata_david(event: Dict, stream) -> Dict:
                 return None
 
             present = normalize_david_dict(present)
-            present = normalize_encodings(present)
-            present = standardize_timestamps(present)
-            present = collapse_soloists(present)
+            normalize_encodings(present)
+            standardize_timestamps(present)
+            collapse_soloists(present)
 
             return present
         except ValueError:

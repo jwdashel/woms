@@ -35,9 +35,8 @@ NEXGEN_SAMPLE_QS = parse.quote(test_data.nexgen_sample(), safe=())
 
 class TestPlayout:
     # these metadata fields use dashes bc that's how the Frontend wants it
-    response_metadata_fields = ['album', 'catno', 'david-guid', 'epoch-start-time',
-                                'iso-start-time', 'length', 'composer1', 'conductor', 'ensemble1',
-                                'reclabel', 'mm-uid', 'start-time', 'title', 'soloists']
+    response_metadata_fields = ['album', 'catno', 'david-guid', 'length', 'composer', 'conductor',
+                                'ensemble', 'reclabel', 'mm-uid', 'start-time', 'title', 'soloists']
 
     def lambda_maker(self, content):
         if self.playout_system == DAVID:
@@ -124,7 +123,7 @@ class TestDavidPlayout(TestPlayout):
     def test_david_handles_special_chars(self, patch_broadcast, mock_dynamodb_tables):
         whatson_response = self.invoke_whatson(DAVID_SPECIAL_CHARS_XML)
 
-        assert whatson_response['included'][0]['attributes']['composer1'] == \
+        assert whatson_response['included'][0]['attributes']['composer'] == \
             'Lucien-Léon-Guillaume Lambert'
 
     def test_php(self, patch_broadcast, mock_dynamodb_tables):
@@ -160,10 +159,10 @@ class TestNexGenPlayout(TestPlayout):
         """
         mocker.patch('whatsonms.v1.datetime')
         expected_date = datetime(2018, 9, 13)
-        expected_return_date = "09/13/2018"
+        expected_return_date = "2018-09-13T19:48:40+00:00"
         v1.datetime.today = MagicMock(return_value=expected_date)
 
         whatson_response = self.invoke_whatson(nexgen_input)
 
         v1.datetime.today.assert_called_once()
-        assert whatson_response['included'][0]['attributes']['start-date'] == expected_return_date
+        assert whatson_response['included'][0]['attributes']['start-time'] == expected_return_date
