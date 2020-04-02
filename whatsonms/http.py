@@ -105,11 +105,12 @@ class HttpRouter:
         """
         stream = params.get('stream')
         metadata = metadb.get_metadata(stream)
+        playout_system = metadata['playout_system']
         if 'playlist_hist_preview' in metadata:
             pl_hist = metadata['playlist_hist_preview']
             del metadata['playlist_hist_preview']
         if metadata:
-            resp = response.Response(metadata, pl_hist, stream, "")
+            resp = response.Response(metadata, pl_hist, stream, playout_system)
             return response.LambdaResponse(resp)
         return response.NotFoundResponse()
 
