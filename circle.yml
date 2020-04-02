@@ -102,7 +102,7 @@ jobs:
           name: End to End Test
           command: |
             # run integration tests
-            # for func_test in functests/*.py ; do python $func_test ; done
+            for func_test in functests/*.py ; do python $func_test ; done
 
 
 workflows:
