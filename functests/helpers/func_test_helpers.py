@@ -3,7 +3,7 @@ import sys
 offset = "\t\t"
 woms_keys = {
     "title": "title",
-    "composer": "composer1",
+    "composer": "composer",
     "mm_uid": "mm-uid"
 }
 
