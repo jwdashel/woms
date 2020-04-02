@@ -171,6 +171,15 @@ def broadcast(stream: str, recipient_ids: List = [],
         return BroadcastResponse("No subscribers", [], data, stream)
 
 
+def build_whatson_response(stream):
+    metadata = metadb.get_metadata(stream)
+    playout_system = metadata['playout_system']
+    if 'playlist_hist_preview' in metadata:
+        pl_hist = metadata['playlist_hist_preview']
+        del metadata['playlist_hist_preview']
+    return Response(metadata, pl_hist, stream, playout_system)
+
+
 def _send_message(client, connection_id, data):
     """
     Function that sends a WebSocket message to one subscriber.

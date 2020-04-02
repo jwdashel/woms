@@ -104,15 +104,8 @@ class HttpRouter:
         metadata for a stream.
         """
         stream = params.get('stream')
-        metadata = metadb.get_metadata(stream)
-        playout_system = metadata['playout_system']
-        if 'playlist_hist_preview' in metadata:
-            pl_hist = metadata['playlist_hist_preview']
-            del metadata['playlist_hist_preview']
-        if metadata:
-            resp = response.Response(metadata, pl_hist, stream, playout_system)
-            return response.LambdaResponse(resp)
-        return response.NotFoundResponse()
+        resp = response.build_whatson_response(stream)
+        return response.LambdaResponse(resp)
 
 
 def _update(metadata: dict, playlist_hist_preview: dict, stream: str, playout_sys: str) -> response.Response:
