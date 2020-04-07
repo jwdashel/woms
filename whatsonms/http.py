@@ -4,8 +4,10 @@ from functools import lru_cache, wraps
 from typing import Callable, Dict
 
 import whatsonms.utils
+import whatsonms.response as response
 from whatsonms import v1, php
 from whatsonms.dynamodb import metadb
+from whatsonms.playout_systems import DAVID, NEXGEN
 
 
 def route(verb: str, path: str) -> Callable:
@@ -79,9 +81,8 @@ class HttpRouter:
         """
         stream = params.get('stream')
         metadata = v1.parse_metadata_nexgen(event, stream)
-        if metadata:
-            metadata['playlist_hist_preview'] = php.next_playlist_history_preview(stream)
-        return _update(metadata, stream)
+        pl_hist = php.next_playlist_history_preview(stream)
+        return response.LambdaResponse(_update(metadata, pl_hist, stream, NEXGEN))
 
     @staticmethod
     @route('POST', '/v1/update')
@@ -92,9 +93,8 @@ class HttpRouter:
         """
         stream = params.get('stream')
         metadata = v1.parse_metadata_david(event, stream)
-        if metadata:
-            metadata['playlist_hist_preview'] = php.next_playlist_history_preview(stream)
-        return _update(metadata, stream)
+        pl_hist = php.next_playlist_history_preview(stream)
+        return response.LambdaResponse(_update(metadata, pl_hist, stream, DAVID))
 
     @staticmethod
     @route('GET', '/v1/whats-on')
@@ -104,27 +104,21 @@ class HttpRouter:
         metadata for a stream.
         """
         stream = params.get('stream')
-        metadata = metadb.get_metadata(stream)
-        if metadata:
-            return whatsonms.utils.Response(200, data=metadata)
-        return whatsonms.utils.Response(404, message='No metadata found')
+        resp = response.build_whatson_response(stream)
+        return response.LambdaResponse(resp)
 
 
-def _update(metadata: dict, stream: str) -> whatsonms.utils.Response:
-    if not metadata:
-        print("No metadata found")
-        return whatsonms.utils.Response(404, message='No metadata found')
+def _update(metadata: dict, playlist_hist_preview: dict, stream: str, playout_sys: str) -> response.Response:
     if not stream:
         print("Missing required parameter 'stream'")
-        return whatsonms.utils.Response(
-            500,
-            message="Missing required parameter 'stream'"
-        )
+        return response.ErrorResponse(500, "Missing required parameter 'stream'")
 
-    metadata = metadb.set_metadata(stream, metadata)
-    whatsonms.utils.broadcast(stream, data=metadata)
-    return whatsonms.utils.Response(
-        200,
-        data=metadata,
-        message=('Broadcast sent to %s subscribers' % stream)
-    )
+    db_update = {}
+    if metadata:
+        db_update = dict(metadata)
+        db_update['playlist_hist_preview'] = playlist_hist_preview
+        metadb.set_metadata(stream, db_update)
+
+    resp = response.Response(metadata, playlist_hist_preview, stream, playout_sys)
+    whatsonms.response.broadcast(stream, data=resp)
+    return resp

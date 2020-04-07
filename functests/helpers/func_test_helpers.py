@@ -3,8 +3,8 @@ import sys
 offset = "\t\t"
 woms_keys = {
     "title": "title",
-    "composer": "mm_composer1",
-    "mm_uid": "mm_uid"
+    "composer": "composer",
+    "mm_uid": "mm-uid"
 }
 
 def assert_and_report(element, one, another):
@@ -17,11 +17,20 @@ def assert_and_report(element, one, another):
 
 #TODO: report a failure gracefully
 
-assert_same_title = lambda test_case_name, whatson, playout, system: assert_and_report(test_case_name,
-        whatson.get(woms_keys["title"]), playout.get(system.norm_keys["title"]))
+def assert_same_title(test_case_name, whatson, playout, system):
+    response_title = whatson.get(woms_keys["title"])
+    expected_title = playout.get(system.norm_keys["title"])
 
-assert_same_composer = lambda test_case_name, whatson, playout, system: assert_and_report(test_case_name,
-        whatson.get(woms_keys["composer"]), playout.get(system.norm_keys["composer"]))
+    assert_and_report(test_case_name, response_title, expected_title)
 
-assert_same_id = lambda test_case_name, whatson, playout, system: assert_and_report(test_case_name,
-        whatson.get(woms_keys["mm_uid"]), playout.get(system.norm_keys["mm_uid"]))
+def assert_same_composer(test_case_name, whatson, playout, system): 
+    response_composer = whatson.get(woms_keys["composer"])
+    expected_composer = playout.get(system.norm_keys["composer"])
+
+    assert_and_report(test_case_name, response_composer, expected_composer)
+
+def assert_same_id(test_case_name, whatson, playout, system):
+    response_mmid = whatson.get(woms_keys["mm_uid"])
+    expected_mmid = playout.get(system.norm_keys["mm_uid"])
+
+    assert_and_report(test_case_name, response_mmid, expected_mmid)

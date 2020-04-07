@@ -4,7 +4,7 @@ from functools import lru_cache, wraps
 from typing import Callable
 
 from whatsonms.dynamodb import metadb, subdb
-from whatsonms.utils import broadcast, Response
+from whatsonms.response import broadcast, WSResponse, LambdaResponse
 
 
 def route(route_key: str) -> Callable:
@@ -67,7 +67,7 @@ class WebSocketRouter:
         connection_id = event['requestContext']['connectionId']
         stream = event['queryStringParameters']['stream']
         subdb.subscribe(stream, connection_id)
-        return Response(200)
+        return LambdaResponse(WSResponse(200))
 
     @staticmethod
     @route('$disconnect')
@@ -77,7 +77,7 @@ class WebSocketRouter:
         """
         connection_id = event['requestContext']['connectionId']
         subdb.unsubscribe(connection_id)
-        return Response(200)
+        return LambdaResponse(WSResponse(200))
 
     @staticmethod
     @route('$default')
@@ -91,4 +91,4 @@ class WebSocketRouter:
         stream = body['data']['stream']
         metadata = metadb.get_metadata(stream)
         broadcast(stream, recipient_ids=[connection_id], data=metadata)
-        return Response(200)
+        return LambdaResponse(WSResponse(200))

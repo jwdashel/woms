@@ -11,6 +11,9 @@ def playlist_history_preview(stream: str) -> List[dict]:
 def next_playlist_history_preview(stream: str) -> List[dict]:
     metadata = metadb.get_metadata(stream)
 
+    if not metadata:
+        return []
+
     if 'playlist_hist_preview' in metadata:
         php = metadata['playlist_hist_preview']
         del metadata['playlist_hist_preview']

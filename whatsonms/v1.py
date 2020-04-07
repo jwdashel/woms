@@ -4,6 +4,8 @@ from datetime import datetime
 
 import whatsonms.utils as utils
 import whatsonms.php as php
+from whatsonms.response import Response
+from whatsonms.playout_systems import DAVID, NEXGEN
 
 import xmltodict
 
@@ -16,16 +18,16 @@ DAVID_MUSIC_ELEMS = (
     ('Music_CDID', 'catno'),
     ('GUID', 'david_guid'),
     ('Time_Duration', 'length'),
-    ('Music_Composer', 'mm_composer1'),
-    ('USA.WNYC.CONDUCTOR', 'mm_conductor'),
-    ('USA.WNYC.ORCHESTRA', 'mm_ensemble1'),
-    ('CDINFO.LABEL', 'mm_reclabel'),
-    ('USA.WNYC.SOLOIST1', 'mm_soloist1'),
-    ('USA.WNYC.SOLOIST2', 'mm_soloist2'),
-    ('USA.WNYC.SOLOIST3', 'mm_soloist3'),
-    ('USA.WNYC.SOLOIST4', 'mm_soloist4'),
-    ('USA.WNYC.SOLOIST5', 'mm_soloist5'),
-    ('USA.WNYC.SOLOIST6', 'mm_soloist6'),
+    ('Music_Composer', 'composer'),
+    ('USA.WNYC.CONDUCTOR', 'conductor'),
+    ('USA.WNYC.ORCHESTRA', 'ensemble'),
+    ('CDINFO.LABEL', 'reclabel'),
+    ('USA.WNYC.SOLOIST1', 'soloist1'),
+    ('USA.WNYC.SOLOIST2', 'soloist2'),
+    ('USA.WNYC.SOLOIST3', 'soloist3'),
+    ('USA.WNYC.SOLOIST4', 'soloist4'),
+    ('USA.WNYC.SOLOIST5', 'soloist5'),
+    ('USA.WNYC.SOLOIST6', 'soloist6'),
     ('Music_MusicID', 'mm_uid'),
     # MAP DAVID's Time_RealStart to start_time
     # Front end consumes `start_time`
@@ -42,16 +44,16 @@ NEXGEN_MUSIC_ELEMS = (
     ('', 'catno'),
     ('', 'david_guid'),
     ('length', 'length'),
-    ('comment1', 'mm_composer1'),
-    ('', 'mm_conductor'),
-    ('alt_artist', 'mm_ensemble1'),
-    ('', 'mm_reclabel'),
-    ('composer', 'mm_soloist1'),
-    ('licensor', 'mm_soloist2'),
-    ('', 'mm_soloist3'),
-    ('', 'mm_soloist4'),
-    ('', 'mm_soloist5'),
-    ('', 'mm_soloist6'),
+    ('comment1', 'composer'),
+    ('', 'conductor'),
+    ('alt_artist', 'ensemble'),
+    ('', 'reclabel'),
+    ('composer', 'soloist1'),
+    ('licensor', 'soloist2'),
+    ('', 'soloist3'),
+    ('', 'soloist4'),
+    ('', 'soloist5'),
+    ('', 'soloist6'),
     ('number', 'mm_uid'),
     ('', 'real_start_time'),
     ('played_date', 'start_date'),
@@ -70,25 +72,27 @@ class NexgenDataException(Exception):
         Exception.__init__(self, *args, **kwargs)
 
 
-def air_break(stream: str) -> dict:
+def air_break(stream: str, playout_sys: str) -> dict:
     playlist_hist = php.playlist_history_preview(stream)
-    return {"air_break": True, "playlist_hist_preview": playlist_hist}
+    return Response(None, playlist_hist, stream, playout_sys)
 
 
 def normalize_david_dict(present_track_info: dict) -> dict:
-    normalized = {v: present_track_info.get(k) for k, v in DAVID_MUSIC_ELEMS if k in present_track_info}
+    normalized = {v: present_track_info.get(k, None) for k, v in DAVID_MUSIC_ELEMS}
+    normalized['playout_system'] = DAVID
     return normalized
 
 
 def standardize_timestamps(track_info: dict) -> dict:
-    if 'start_date' in track_info:
-        # NEXGEN
+    if track_info['playout_system'] == NEXGEN:
         track_info['epoch_start_time'] = utils.convert_date_time(track_info['start_date'], track_info['start_time'])
-    else:
-        # DAVID
+        del track_info['start_date']
+        del track_info['start_time']
+    elif track_info['playout_system'] == DAVID:
         track_info['epoch_start_time'] = utils.convert_time(track_info['start_time'])
+        del track_info['start_time']
 
-    track_info['iso_start_time'] = utils.convert_time_to_iso(track_info['epoch_start_time'])
+    track_info['start_time'] = utils.convert_time_to_iso(track_info['epoch_start_time'])
 
     return track_info
 
@@ -100,6 +104,24 @@ def normalize_encodings(present_track_info: dict) -> dict:
     return present_track_info
 
 
+def collapse_soloists(present_track_info: dict) -> dict:
+    """
+    DAVID can provide up to 6 soloists and NEXGEN can provide up to two.
+    They are parsed as soloist1 .. soloist6 (or soloist2 for NG).
+    This squishes them down into one array element for a cleaner client
+    experience.
+    There is probably a way to do this a _bit_ more cleanly than this
+    implementation, but I am going with the Law of Good Enuff here.
+    """
+    soloists = [f'soloist{number}' for number in range(1, 7)]
+    present_track_info['soloists'] = []
+    for soloist in soloists:
+        if present_track_info[soloist]:
+            present_track_info['soloists'].append(present_track_info[soloist])
+        del present_track_info[soloist]
+    return present_track_info
+
+
 def parse_metadata_nexgen(event: Dict, stream) -> Dict:
     """
     Parse new metadata from NexGen -- format it as JSON and return it.
@@ -107,17 +129,17 @@ def parse_metadata_nexgen(event: Dict, stream) -> Dict:
     xml = event.get('queryStringParameters', {}).get('xml_contents')
     if xml:
         xmldict = xmltodict.parse(xml)
-        normalized = {
-            v: xmldict['audio'].get(k) for k, v in NEXGEN_MUSIC_ELEMS if k in xmldict['audio']
-        }
+        normalized = {v: xmldict['audio'].get(k, None) for k, v in NEXGEN_MUSIC_ELEMS}
+        normalized['playout_system'] = NEXGEN
 
-        if "start_date" not in normalized:
+        if not normalized["start_date"]:
             normalized["start_date"] = datetime.today().strftime('%m/%d/%Y')
 
         if int(normalized["mm_uid"]) == 0:
-            return air_break(stream)
+            return None
 
         normalized = standardize_timestamps(normalized)
+        collapse_soloists(normalized)
 
         return normalized
 
@@ -135,13 +157,14 @@ def parse_metadata_david(event: Dict, stream) -> Dict:
                         if x['@sequence'] == 'present')
 
             if present['Class'] != "Music":
-                return air_break(stream)
+                return None
 
             present = normalize_david_dict(present)
-            present = normalize_encodings(present)
-            present = standardize_timestamps(present)
+            normalize_encodings(present)
+            standardize_timestamps(present)
+            collapse_soloists(present)
 
             return present
         except ValueError:
             # ValueError thrown if no 'present' track in xmldict
-            return air_break(stream)
+            return None

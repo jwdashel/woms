@@ -1,11 +1,12 @@
 from tests import test_data
 import urllib.parse as urlencode
 import requests
-import ast
 import xmltodict
+import json
+import time
 
-stream = 'thefunc'
-woms_whatson = f"https://api.demo.nypr.digital/whats-on/v1/whats-on?stream={stream}"
+stream = 'func_tests'
+woms_whatson = f"https://nla6c7i6p7.execute-api.us-east-1.amazonaws.com/demo/whats-on/v1/whats-on?stream={stream}"
 
 
 class PlayoutSystem(object):
@@ -39,13 +40,12 @@ class PlayoutSystem(object):
             print(f"{r.status_code}")
             assert r.status_code == 200
 
-            # replace json's true with python's True
-            whats_on = ast.literal_eval(r.text.replace("true", "True"))['data']['attributes']
+            whats_on = json.loads(r.text)
 
             yield whats_on, self.reference_track(sample_input)
 
 class David(PlayoutSystem):
-    name = "DAViD"
+    name = "DAVID"
     norm_keys = {
         "title": "Title",
         "composer": "Music_Composer",
@@ -53,7 +53,7 @@ class David(PlayoutSystem):
     }
 
     def update_track(self, sample_input):
-        woms_update = f"https://api.demo.nypr.digital/whats-on/v1/update?stream={stream}"
+        woms_update = f"https://nla6c7i6p7.execute-api.us-east-1.amazonaws.com/demo/whats-on/v1/update?stream={stream}"
         return requests.post(woms_update, data=sample_input.encode('utf-8'))
 
     def reference_track(self, sample_input):
@@ -61,7 +61,7 @@ class David(PlayoutSystem):
         return next(filter(lambda x: x['@sequence'] == 'present', daviddata['wddxPacket']['item']))
 
 class NexGen(PlayoutSystem):
-    name = "NexGen"
+    name = "NEXGEN"
     norm_keys = {
         "title": "title",
         "composer": "comment1",
@@ -70,7 +70,7 @@ class NexGen(PlayoutSystem):
 
     def update_track(self, sample_input):
         nexgendata_encoded = urlencode.quote(sample_input)
-        woms_update = f"https://api.demo.nypr.digital/whats-on/v1/update?stream={stream}&xml_contents={nexgendata_encoded}"
+        woms_update = f"https://nla6c7i6p7.execute-api.us-east-1.amazonaws.com/demo/whats-on/v1/update?stream={stream}&xml_contents={nexgendata_encoded}"
         return requests.get(woms_update)
 
     def reference_track(self, sample_input):

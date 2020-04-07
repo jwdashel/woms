@@ -571,7 +571,7 @@
   <MEDIUM.FILE1.TYPE>Data.DB-Info</MEDIUM.FILE1.TYPE>
   <Music_Album>GP</Music_Album>
   <Music_CDID>0060</Music_CDID>
-  <Music_Composer>Gram Parsons</Music_Composer>
+  <Music_Composer>sample composer</Music_Composer>
   <Music_Loop>0</Music_Loop>
   <Music_MusicID>140745</Music_MusicID>
   <Music_Texter>MKELLEY</Music_Texter>
@@ -617,10 +617,10 @@
   <Time_Stop>2020-02-12 07:39:40.657</Time_Stop>
   <Time_TakeDuration>343220</Time_TakeDuration>
   <Time_TextDuration>0</Time_TextDuration>
-  <Title>Streets of Baltimore</Title>
-  <USA.WNYC.CONDUCTOR>Michael Tilson Thomas, conductor</USA.WNYC.CONDUCTOR>
-  <USA.WNYC.ORCHESTRA>San Francisco Symphony</USA.WNYC.ORCHESTRA>
-  <USA.WNYC.SOLOIST1>Yuja Wang, piano</USA.WNYC.SOLOIST1>
+  <Title>sample title</Title>
+  <USA.WNYC.CONDUCTOR>sample conductor</USA.WNYC.CONDUCTOR>
+  <USA.WNYC.ORCHESTRA>sample orchestra</USA.WNYC.ORCHESTRA>
+  <USA.WNYC.SOLOIST1>sample soloist</USA.WNYC.SOLOIST1>
   <USA.WNYC.SONGID>140745</USA.WNYC.SONGID>
   <USA.WNYC.VOCAL>0</USA.WNYC.VOCAL>
  </item>

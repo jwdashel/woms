@@ -43,7 +43,7 @@ setup(
     tests_require=[
         'mocket',
         'moto',
-        'pytest',
+        'pytest==5.3.2',
         'pytest-cov',
         'pytest-env',
         'pytest-flake8',

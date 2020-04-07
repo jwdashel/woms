@@ -557,9 +557,9 @@
   <MEDIUM.FILE1.FILEREF>\\wnycdavidmedia\media$\Music_Catalog_Valid\WQXRMUSIC-PRO_7DD565EA8F50456BBFDAF0EE6D95FCCF.DBX</MEDIUM.FILE1.FILEREF>
   <MEDIUM.FILE1.TITLE>WQXRMUSIC-PRO_7DD565EA8F50456BBFDAF0EE6D95FCCF.DBX</MEDIUM.FILE1.TITLE>
   <MEDIUM.FILE1.TYPE>Data.DB-Info</MEDIUM.FILE1.TYPE>
-  <Music_Album>Waldteufel | The Skaters&apos; Waltz | Les Patineurs</Music_Album>
+  <Music_Album>sample album</Music_Album>
   <Music_CDID>5264</Music_CDID>
-  <Music_Composer>Emile Waldteufel</Music_Composer>
+  <Music_Composer>sample composer</Music_Composer>
   <Music_Loop>0</Music_Loop>
   <Music_MusicID>126753</Music_MusicID>
   <Music_Texter>MUSICTMP</Music_Texter>
@@ -602,9 +602,11 @@
   <Time_Stop>2013-04-11 18:28:08.003</Time_Stop>
   <Time_TakeDuration>540017</Time_TakeDuration>
   <Time_TextDuration>0</Time_TextDuration>
-  <Title>Skaters&apos; Waltz</Title>
-  <USA.WNYC.CONDUCTOR>Michael Swierczewski, conductor</USA.WNYC.CONDUCTOR>
-  <USA.WNYC.ORCHESTRA>Gulbenkian Foundation Symphony Orchestra Lisbon</USA.WNYC.ORCHESTRA>
+  <Title>sample title</Title>
+  <USA.WNYC.CONDUCTOR>sample conductor</USA.WNYC.CONDUCTOR>
+  <USA.WNYC.ORCHESTRA>sample orchestra</USA.WNYC.ORCHESTRA>
+  <USA.WNYC.SOLOIST1>SOLOIST 1</USA.WNYC.SOLOIST1>
+  <USA.WNYC.SOLOIST2>SOLOIST 2</USA.WNYC.SOLOIST2>
   <USA.WNYC.SONGID>126753</USA.WNYC.SONGID>
   <USA.WNYC.VOCAL>0</USA.WNYC.VOCAL>
  </item>
