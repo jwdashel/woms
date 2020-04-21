@@ -146,7 +146,7 @@ def broadcast(stream: str, recipient_ids: List = [],
     )
 
     recipient_ids = recipient_ids or subdb.get_subscribers(stream)
-    data = data or metadb.get_metadata(stream)
+    data = build_whatson_response(stream)
     data_in_bytes = bytes(json.dumps(data), 'utf-8')
 
     if recipient_ids:
