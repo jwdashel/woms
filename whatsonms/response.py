@@ -146,7 +146,7 @@ def broadcast(stream: str, recipient_ids: List = [],
     )
 
     recipient_ids = recipient_ids or subdb.get_subscribers(stream)
-    data = data or metadb.get_metadata(stream)
+    data = build_whatson_response(stream)
     data_in_bytes = bytes(json.dumps(data), 'utf-8')
 
     if recipient_ids:
@@ -173,9 +173,10 @@ def broadcast(stream: str, recipient_ids: List = [],
 
 def build_whatson_response(stream):
     metadata = metadb.get_metadata(stream)
-    playout_system = metadata['playout_system']
+    pl_hist = []
+    playout_system = metadata.get('playout_system', '')
     if 'playlist_hist_preview' in metadata:
-        pl_hist = metadata['playlist_hist_preview']
+        pl_hist = metadata.get('playlist_hist_preview', [])
         del metadata['playlist_hist_preview']
     return Response(metadata, pl_hist, stream, playout_system)
 
