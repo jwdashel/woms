@@ -80,7 +80,7 @@ jobs:
       - run:
           name: Deploy Lambda
           command: |
-            if [[ "${CIRCLE_BRANCH}" == "master" ]] || [[ "${CIRCLE_TAG}" == "demo" ]]; then
+            if [[ "${CIRCLE_BRANCH}" == "main" ]] || [[ "${CIRCLE_TAG}" == "demo" ]]; then
               export ENV=demo
               export TAG=demo
               export DEMO_RELEASE=$CIRCLE_SHA1
@@ -130,11 +130,11 @@ workflows:
                 - /^v[0-9]+\.[0-9]+\.[0-9]+/
                 - demo
             branches:
-              only: master
+              only: main
 
 
 experimental:
   notify:
     branches:
       only:
-        - master
+        - main
