@@ -6,9 +6,6 @@ from setuptools import setup
 setup(
     author='NYPR Digital',
     author_email='digitalops@nypublicradio.org',
-    dependency_links=[
-        'https://github.com/nypublicradio/nyprsetuptools/tarball/master#egg=nyprsetuptools'
-    ],
     description=__doc__,
     entry_points={
         'distutils.commands': [
@@ -38,7 +35,7 @@ setup(
     packages=['whatsonms'],
     scripts=[],
     setup_requires=[
-        'nyprsetuptools'
+        'nyprsetuptools@https://github.com/nypublicradio/nyprsetuptools/tarball/master#egg=nyprsetuptools'
     ],
     tests_require=[
         'mocket',
