@@ -10,7 +10,7 @@ jobs:
   test:
     working_directory: ~/whats-on-microservice
     docker:
-      - image: circleci/python:3.6
+      - image: circleci/python:3.7
     environment:
       CC_REPORTER: https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64
     steps:
@@ -52,7 +52,7 @@ jobs:
   build_lambda:
     working_directory: ~/whats-on-microservice
     docker:
-      - image: circleci/python:3.6
+      - image: circleci/python:3.7
     steps:
       - checkout
       - run:
@@ -70,7 +70,7 @@ jobs:
   deploy_lambda:
     working_directory: ~/whats-on-microservice
     docker:
-      - image: circleci/python:3.6
+      - image: circleci/python:3.7
     steps:
       - checkout
       - attach_workspace:
