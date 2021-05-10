@@ -35,7 +35,7 @@ setup(
     packages=['whatsonms'],
     scripts=[],
     setup_requires=[
-        'nyprsetuptools@https://github.com/nypublicradio/nyprsetuptools/tarball/master#egg=nyprsetuptools'
+        'nyprsetuptools@https://github.com/nypublicradio/nyprsetuptools/tarball/master'
     ],
     tests_require=[
         'mocket',
